@@ -1,0 +1,126 @@
+%{
+if (!_page) {
+    _page = _caller.page
+}
+if (_url) {
+    _url += _url.contains("?") ? "&" : "?"
+}
+nbPages = _page.totalPage
+}%
+
+<p class="crudCount">
+总计${_page.totalCount}
+</p>
+
+#{if nbPages > 1}
+<p class="crudPages">
+
+%{
+    limit = (_limit != null ? _limit : 10)
+    start = _page.page - (int)(limit/2) + (limit % 2 ? 0 : 1)
+    end = _page.page + (int)(limit/2)
+
+    if(start < 1){
+    extra = 1 - start
+    end = (end + extra < nbPages ? end + extra : nbPages)
+    start = 1
+    }else if(end > nbPages){
+    extra = end - nbPages
+    start = (start - extra > 1 ? start - extra : 1)
+    end = nbPages
+    }
+}%
+
+    #{if start > 1}
+        <span class="first">
+            %{
+                if (_url) {
+            }%
+                <a href="${_url}page=1&pageSize=${_page.pageSize}">首页</a>
+            %{
+                } else {
+            }%
+                *{#{a @list().add('page', 1).add('pageSize', _page.pageSize)}首页#{/a}}*
+            %{
+                }
+            }%
+        </span>
+    #{/if}
+
+    #{if _page.page > 1}
+        <span class="previous">
+
+            %{
+                if (_url) {
+            }%
+                 <a href="${_url}page=${_page.page-1}&pageSize=${_page.pageSize}">前一页</a>
+             %{
+                } else {
+            }%
+                *{ #{a @list().add('page', _page.page-1).add('pageSize', _page.pageSize)}前一页#{/a}}*
+             %{
+                }
+            }%
+
+        </span>
+    #{/if}
+
+
+%{ for (i in start..end) { }%
+    <span class="page">
+                #{if _page.page == i}
+                    <strong>${i}</strong>
+                #{/if}
+        #{else}
+            %{
+                if (_url) {
+            }%
+            <a href="${_url}page=${i}&pageSize=${_page.pageSize}">${i}</a>
+            %{
+                } else {
+            }%
+            *{ #{a @list().add('page', i).add('pageSize', _page.pageSize)}${i}#{/a} }*
+            %{
+                }
+            }%
+        #{/else}
+            </span>
+%{ } }%
+
+    #{if _page.page < nbPages}
+        <span class="next">
+            %{
+                if (_url) {
+            }%
+                <a href="${_url}page=${_page.page+1}&pageSize=${_page.pageSize}">下一页</a>
+            %{
+                } else {
+            }%
+                *{ #{a @list().add('page', _page.page+1).add('pageSize', _page.pageSize)}下一页#{/a} }*
+            %{
+                }
+            }%
+
+        </span>
+    #{/if}
+
+    #{if end < nbPages}
+        <span class="last">
+            %{
+                if (_url) {
+            }%
+                <a href="${_url}page=${nbPages}&pageSize=${_page.pageSize}">尾页</a>
+            %{
+                } else {
+            }%
+                *{ #{a @list().add('page', nbPages).add('pageSize', _page.pageSize)}尾页#{/a} }*
+            %{
+                }
+            }%
+        </span>
+    #{/if}
+
+
+
+</p>
+#{/if}

@@ -1,0 +1,21 @@
+<ul>
+#{list page.data,as : 'data'}
+    <li>
+        <div class="desc_other_l">
+            <p><img src="/public/images/touxiang_m.gif"></p>
+            <p class="desc_other_name">${data.userBase.nickName}</p>
+            <p>(${data.userBase.province})</p>
+        </div>
+        <div class="desc_other_r">
+            <div class="desc_other_con">
+                <p class="desc_other_time">[${data.createTime.format("yyyy-MM-dd HH:mm")}]</p>
+                <p>${data.content}</p>
+            </div>
+        </div>
+    </li>
+#{/list}
+</ul>
+
+<div style="text-align: center">
+#{page1 page:page,url:'/Resources/show',paramIds:'resourceId flag',isAjax:'true'/}
+</div>

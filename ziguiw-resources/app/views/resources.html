@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>#{get 'title' /}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #{stylesheet src:"header_footer.css" /}
+    #{stylesheet src:"source.css" /}
+    #{get 'moreStyles' /}
+    #{script src:"jquery-1.6.4.min.js" /}
+    #{script src:"lavalamp.min.js" /}
+    #{script src:"xixi.js" /}
+    #{get 'moreScripts' /}
+</head>
+<body>
+<div class="main">
+<!--toolbar B-->
+    <div class="toolbar">
+        <div class="tit">
+            欢迎来到子贵网！
+        </div>
+        <div id="loginbar" class="subNav">
+        #{if !username}
+            <a href="${play.configuration['cas.loginUrl']}">登录</a>
+            <a href="${play.configuration['portal.domain']}/UserBases/registerUI">注册</a>
+            <script src="@{'/public/javascripts/user.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{/if}
+        </div>
+        *{<a href="" title="手机版" target="_blank">手机版</a>}*
+        <a href="javascript:setHome(window.location);" target="_self">设为首页</a>
+        <a href="javascript:addFavorite(window.location, document.title)" target="_self">加入收藏</a>
+        <script src="@{'/public/javascripts/base.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    </div>
+<!--toolbar E-->
+
+<!--header  B-->
+    <div class="new_header">
+        <a class="logo" href="http://new.ziguiw.com" title=""><img src="/public/images/logo.jpg" alt=""></a>
+        <div class="nav">
+            <div id="wrapper">
+            <ul class="lavaLamp">
+                <li ><a href="${play.configuration['portal.domain']}" target="_self">首   页</a></li>
+                <li ><a href="${play.configuration['portal.domain']}/newses/index"  target="_blank">教育在线</a></li>
+                <li ><a href="${play.configuration['portal.domain']}/knowledges/index" target="_blank">教育知识</a></li>
+                <li ><a href="/" target="_self">教育资源</a></li>
+                <li ><a href="${play.configuration['portal.domain']}/boards/index" target="_blank">互动社区</a></li>
+                <li ><a href="${play.configuration['portal.domain']}/myhomes/index" target="_blank">空间</a></li>
+            </ul>
+             </div>
+            <div class="nav_sub_tit">
+            <ul >
+                <li>
+
+                    <a href="${play.configuration['portal.domain']}/newses/list?id=1">焦点话题</a>
+                    <a  href="${play.configuration['schoolsite.domain']}">
+                        <div class="znzbtn">校园站内站</div>
+                    </a>
+                    <a href="${play.configuration['portal.domain']}/newses/list?id=2">校园新闻</a>
+                    <a  href="${play.configuration['portal.domain']}/newses/list?id=3">考试升学</a>
+                </li>
+                <li>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=1" title="幼儿期" >幼儿期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=2" title="少儿期" >少儿期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=3" title="青年期" >青年期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=4" title="心理咨询" >心理咨询</a>
+                    <a href="${play.configuration['portal.domain']}/questions/list?status=0" title="育儿问答" >育儿问答</a>
+                    <a href="${play.configuration['portal.domain']}/debates/list" title="辩论" >辩论</a>
+                </li>
+
+                <li>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=2" title="同龄圈" >同龄圈</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=3" title="同城圈">同城圈</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=4" title="学习交流">学习交流</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=5" title="专家问答">专家问答</a>
+                </li>
+            </ul>
+                </div>
+        </div>
+
+        <!--nav E -->
+
+    </div>
+<!--header  E-->
+
+    <div class="t-box">
+        <div class="t-logo">
+            <a href="source/sourceInfo.action">
+                <img src="/public/images/index_05.jpg"  border="0"/>
+            </a>
+        </div>
+
+        <form id="form1" action="/Resources/search" method="post" class="form">
+            <div class="t-sousuo-box">
+                <div class="t-sousuo-box1">
+                    <div class="t-sousuo-box-shu">
+                        <input name="key" type="text" class="shurukuan-01" />
+                    </div>
+                    <input name="Submit" type="submit" class="t-sousuo-box-an" value="提交" />
+                </div>
+                <div class="t-sousuo-box2">
+                    请输入关键字：
+                    一年级
+                    视频教程
+                    文档教程
+                    课件
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="t-link_box">
+        <ul>
+            <li>
+                <a href="/Resources/index">资源首页</a>
+            </li>
+            <li>
+                <a href="/Grades/index?leve=1">小学资源</a>
+            </li>
+            <li>
+                <a href="/Grades/index?leve=2">初中资源</a>
+            </li>
+            <li>
+                <a href="/Grades/index?leve=3">高中资源</a>
+            </li>
+            <li>
+                <a href="/Resources/teacherShow">名师讲堂</a>
+            </li>
+        </ul>
+    </div>
+    #{doLayout /}
+    <div class="clear"></div>
+    <div class="p_all">
+        <div class="p_flink">
+            <p>
+                <a href="${play.configuration['portal.domain']}/HelpCenters/aboutus" target="_blank">关于我们</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/contract" target="_blank">服务协议</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/service" target="_blank">客服中心</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/feedback" target="_blank">意见反馈</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/recruit" target="_blank">网站招聘</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/map" target="_blank">网站地图</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/contact" target="_blank">联系我们</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/copyright" target="_blank">版权所有</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+            </p>
+
+        </div>
+
+        <div class="p_logo">
+            <p>
+                Copyright  &copy;  2013 <a href="http://www.ziguiw.com">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a>
+            </p>
+            <p>
+                经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a>
+                <!-- WPA Button Begin -->
+                <script src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&amp;type=2&amp;kfuin=4009952116&amp;ws=www.ziguiw.com&amp;btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&amp;aty=0&amp;a=&amp;key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb" type="text/javascript"></script><iframe width="102" scrolling="no" height="24" frameborder="0" src="about:blank" allowtransparency="true" id="iframediv1364785900765"></iframe>
+            <!-- WPA Button END -->
+            </p>
+            <img src="/public/images/p_logo.gif">
+        </div>
+    </div>
+</div>
+</body>
+</html>

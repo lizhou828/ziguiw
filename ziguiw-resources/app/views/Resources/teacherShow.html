@@ -1,0 +1,93 @@
+#{extends 'resources.html'/}
+#{set "title"}
+教育资源-名师讲堂
+#{/set}
+<div class="r_index_ad">
+    <p><img border="0" src="/public/images/r_index_ad_101.jpg"></p>
+</div>
+<div class="t-sou-lie">
+    <p class="text-1-3">
+        您的位置：子贵网&nbsp;&gt;&nbsp;
+        <a href="/Resources/index">教育资源</a>&nbsp;&gt;&nbsp;
+        名师讲堂
+    </p>
+</div>
+
+<div class="list_t-neirong-01">
+<div class="list_t-neirong-01-z">
+    <p class="res_list_tit">名师讲堂</p>
+    <div class="res_tea_a">
+        <ul>
+            #{list map,as :'its'}
+                <li>
+                    <p><a href="/UserBases/show?userId=${its.key.id}"><img src="/public/images/teacher.jpg"></a></p>
+                    <p>昵称：<a href="/UserBases/show?userId=${its.key.id}">${its.key.realName}</a></p>
+                    <p>课件：${its.value}件</p>
+                    <p>
+                        <span>人气：</span>
+                        <span>
+                            <b><img src="/public/images/s_rate_good.gif"></b>
+                            <b><img src="/public/images/s_rate_good.gif"></b>
+                            <b><img src="/public/images/s_rate_good.gif"></b>
+                            <b><img src="/public/images/s_rate_good.gif"></b>
+                            <b><img src="/public/images/s_rate_bad.gif"></b>
+                        </span>
+                    </p>
+                </li>
+            #{/list}
+        </ul>
+        <div class="clear"></div>
+        <!--pagenum B-->
+        <div style="text-align: center">
+           #{page page:page, url:"/Resources/teacherShow"/}
+        </div>
+        <!--pagenum E-->
+    </div>
+</div>
+
+
+
+
+
+    <div class="t-neirong-01-y">
+        <div class="resource_have">
+            <p>当前已有<font class="resource_have_num">${totalCount}</font>份文档</p>
+            <p><a href="${play.configuration['portal.domain']}/MyHomes/addResource"><img border="0" src="/public/images/r_upload.gif"></a></p>
+        </div>
+
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;最新推荐</span>
+        </div>
+
+        <div class="t-neirong-01-y-nei mb10">
+            <ul>
+            #{list newResource,as : 'resource'}
+                <li>
+                    [<a  href="/Versions/list?id=${resource.version?.id}">${resource.version?.versionName}</a>]
+                    <a   href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>8? resource.title[0..8] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;人气下载</span>
+        </div>
+
+        <div class="t-neirong-01-y-nei">
+            <ul>
+            #{list downResource,as : 'resource'}
+                <li>
+                    [<a  href="/Versions/list?id=${resource.version?.id}">${resource.version?.versionName}</a>]
+                    <a   href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>8? resource.title[0..8] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+<div class="clear"></div>
+</div>

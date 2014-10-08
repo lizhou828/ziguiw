@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    #{stylesheet src:"space.css" /}
+    #{script src:"jquery-1.6.4.min.js" /}
+    <script type="text/javascript">
+        function changeImg(objId,img){
+            alert("aaaa");
+            $("<img/>").attr("src","topic/cloud/images/"+img+".png").appendTo($("#"+objId));
+        }
+
+        //删除事件
+        function delclick(id){
+            if(confirm('确定删除?')){
+
+                nextPage.action = "/Resources/delete?resourceId="+id;
+                nextPage.submit();
+            }
+        }
+
+        function updclick(id){
+            nextPage.action = "/Resources/add?resourceId="+id;
+            nextPage.submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="sp_main_right">
+        <div class="right">
+            <div class="bobti">
+                <div class="diary_tit">我的资源列表</div>
+                <form action="/Resources/psearch" method="post">
+                    <div class="friend_seach">
+                        <input type="text" class="fri_s_inp" name="key" value="${key}"/>
+                        <input type="submit" class="fri_s_btn" value="搜索"/>
+                    </div>
+                </form>
+            </div>
+        <form method="post" id="nextPage">
+            <div class="xunc_2 font-2">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="sideright_tab1">
+                    <tbody>
+                        <tr bgcolor="#f2f4f6">
+                            <th width="10%">文件名称</th>
+                            <th width="18%">积分</th>
+                            <th width="18%">人气</th>
+                            <th width="18%">上传时间</th>
+                            <th width="18%">操作</th>
+                        </tr>
+                        #{list page.data,as : 'resource'}
+                                <tr class="${resource_index == 1? 'menu_2' : 'menu_2 menu_4'}">
+                                    <td width="18%">
+                                        <p>
+                                            <img src="/public/images/${resource.resourceFileType.toLowerCase()}.png">
+                                        </p>
+                                        <p>
+                                            <a target="_blank" href="/Resources/show?resourceId=${resource.id}">${resource.title}</a>
+                                        </p>
+                                    </td>
+                                    <td width="18%">
+                                        <font style="width:50px; color:gray;">积分:${resource.needPoint}</font>
+                                    </td>
+                                    <td width="18%">
+                                        <img src="/public/images/s_rate_good.gif">
+                                        <img src="/public/images/s_rate_good.gif">
+                                        <img src="/public/images/s_rate_good.gif">
+                                        <img src="/public/images/s_rate_bad.gif">
+                                        <img src="/public/images/s_rate_bad.gif">
+                                    </td>
+                                    <td width="18%">
+                                        ${resource.createTime.format("yyyy-MM-dd HH:mm")}
+                                    </td>
+                                    <td width="18%">
+                                        #{if resource.state == 0}
+                                            <img title="修改"  src="/public/images/ico_edit_16.png" onclick="updclick('${resource.id}');" style="cursor:pointer" id="upd">
+                                        #{/if}
+                                        <img title="删除"  src="/public/images/ico_delete_16.png" onclick="delclick('${resource.id}');" style="cursor:pointer" id="del">
+                                    </td>
+                                </tr>
+                        #{/list}
+                    </tbody>
+                </table>
+                <div style="text-align: center">
+                    #{page page:page, url:"/Resources/list"/}
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

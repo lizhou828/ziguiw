@@ -1,0 +1,263 @@
+*{
+#{extends 'resources.html'/}
+<a target="_blank" href="/Resources/download?resourceId=${resource.id}&resId=${resource.resId}">下载101资源</a>
+}*
+
+
+#{extends 'resources.html'/}
+#{set "title"}
+${resource.title}
+#{/set}
+#{stylesheet src:"source_detail.css" /}
+<script type="text/javascript">
+    function down(resourceId,point,resId){
+        if(confirm("需要" + point + "个积分")){
+            document.getElementById("download").href = "/Resources/download?resourceId=" +　resourceId + "&resId=" + resId;
+        }
+    }
+    function collect(resourceId){
+        var url = "/Resources/collect";
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: "resourceId=" + resourceId,
+            success: function(msg){
+                alert("已加入收藏");
+            }
+        });
+    }
+
+    function isContent(){
+        var title = $("#content").val();
+        if(title.length==0){
+            alert("文件标题不能为空!");
+            return false;
+        }
+        if(title.length > 100){
+            alert("文件标题字符必须小于256!");
+            return false;
+        }
+        return true;
+    }
+
+</script>
+<div class="t-AD-03">
+    <p class="text-1-3"></p>
+    <p>
+        <a href="${play.configuration['portal.domain']}/MyHomes/addResource">
+            <img border="0" src="/public/images/zaixiananniu.jpg">
+        </a>
+    </p>
+</div>
+<div class="t-sou-lie">
+    <p class="text-1-3">
+        您的位置：子贵网&nbsp;&gt;&nbsp;<a href="/Resources/index">教育资源</a>
+        &nbsp;&gt;&nbsp;${resource.title}
+    </p>
+</div>
+
+<div class="t-neirong-01 mb10">
+<div class="desc_cont">
+    <!--source101  B-->
+    <div class="source101">
+        <table cellspacing="0" cellpadding="0" class="s101_tab">
+            <tbody>
+                <tr>
+                    <td class="s101_center" colspan="4"><h2>${resource.title}</h2></td>
+                </tr>
+                <tr>
+                    <th width="15%">年 级</th>
+                    <td width="42%">${resource.grade?.gradeName}</td>
+                    <th width="15%">学 科</th>
+                    <td width="15%">${resource.subject?.subjectName}</td>
+                </tr>
+                <tr>
+                    <th>关键词(字)</th>
+                    <td>${resource.keys}</td>
+                    <th>适合对象</th>
+                    <td>${resource.forObject}</td>
+                </tr>
+                <tr>
+                    <th>知识点</th>
+                    <td>${resource.knowledge}</td>
+                    <th> 资源类型</th>
+                    <td>${resource.type?.typeName}</td>
+                </tr>
+
+                <tr>
+                    <th>版 本</th>
+                    <td>${resource.version?.versionName} </td>
+                    <th>资源格式</th>
+                    <td>${resource.resourceFileType}</td>
+                </tr>
+                <tr>
+                    <th>资源来源</th>
+                    <td>101远程教育网</td>
+                    <th>下载数量</th>
+                    <td>${resource.resourceDownNumber}次</td>
+                </tr>
+                <tr>
+                    <th><p>描 述</p>(内容简介)</th>
+                    <td colspan="3">${resource.description}</td>
+                </tr>
+                <tr>
+                    <th>下 载</th>
+                    <td colspan="3">
+                        <div class="res_s_point">
+                            <ul>
+                                <li>
+                                    <a id="download" target="_blank">
+                                        <img src="/public/images/Buttons_d.gif" onclick="down(${resource.id},${resource.needPoint},'${resource.resId}')">
+                                    </a>
+                                    <span class="jifen">${resource.needPoint}积分</span>
+                                    <a  onclick="collect(${resource.id})"><img src="/public/images/Buttons_s.gif"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="come_from">除非注明，本站文章均为原创；转载请注明：文章来自。</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!--source101  E-->
+
+    <!--comment B-->
+    <div class="desc_comment">
+        <form action="/ResourceComments/create" method="post" onsubmit="return isContent()">
+            <input type="hidden" name="resourceId" value="${resource.id}" id="resourceId"/>
+            <input type="hidden" name="flag" value="${flag}" id="flag">
+            <div class="desc_comment_tit">
+                <h3>发表评论</h3>
+            </div>
+            <div class="desc_comment_cc">
+                <div class="desc_touxiang">
+                    <img src="/public/images/touxiang_m.gif">
+                </div>
+
+                <div class="desc_comment_con">
+                    <div class="ds-textarea-wrapper">
+                        <textarea class="ds-textarea-wrapper_bg" name="content" id="content"></textarea>
+                        <pre class="ds-hidden-text"></pre>
+                    </div>
+                    <div class="ds-post-toolbar">
+                        <div class="ds-post-options ds-gradient-bg"><span><a href="#"><img src="../images/ds-post-options.gif"></a></span> <span></span></div>
+                        <button type="submit" class="ds-post-button">发布</button>
+                        <div class="ds-toolbar-buttons">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <p>&nbsp;限填100字</p>
+                </div>
+
+            </div>
+        </form>
+        <!--comment list B-->
+        <div class="desc_comm_other" id="listTable">
+            <ul>
+                #{list page.data,as : 'data'}
+                    <li>
+                        <div class="desc_other_l">
+                            <p><img src="/public/images/touxiang_m.gif"></p>
+                            <p class="desc_other_name">${data.userBase.nickName}</p>
+                            <p>(${data.userBase.province})</p>
+                        </div>
+                        <div class="desc_other_r">
+                            <div class="desc_other_con">
+                                <p class="desc_other_time">[${data.createTime.format("yyyy-MM-dd HH:mm")}]</p>
+                                <p>${data.content}</p>
+                            </div>
+                        </div>
+                    </li>
+                #{/list}
+            </ul>
+
+            <!--pagenum B-->
+            <div style="text-align: center">
+                 #{page1 page:page,url:'/Resources/show',paramIds:'resourceId flag',isAjax:'true'/}
+            </div>
+            <!--pagenum E-->
+        </div>
+        <!--comment list E-->
+
+
+
+    </div>
+    <!--comment E-->
+</div>
+
+
+<div class="t-neirong-01-y">
+    <div class="source_inf mb10">
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;文档信息</span>
+        </div>
+        <div class="source_inf_cont">
+            <ul>
+                <li>昵称：${resource.user.nickName}</li>
+                <li>文件大小：${resource.resourceSize}KB</li>
+                <li>贡献于：${resource.createTime.format("yyyy-MM-dd HH:mm")}</li>
+                <br>
+                <li>
+
+                    <div class="r_left">
+                        <p>
+                            <span><b>3分</b></span>
+                                        <span>
+                                            <b><img src="/public/images/s_rate_good.gif"></b>
+                                            <b><img src="/public/images/s_rate_good.gif"></b>
+                                            <b><img src="/public/images/s_rate_good.gif"></b>
+                                            <b><img src="/public/images/s_rate_good.gif"></b>
+                                            <b><img src="/public/images/s_rate_bad.gif"></b>
+                                        </span>
+                        </p>
+                        <p><span class="r_have"><a href="#">(已有322人评价)</a></span></p>
+                    </div>
+
+                    <div class="r_right">
+                        <span class="esti"><a href="#"><img src="/public/images/Buttons_rate.gif"></a></span>
+                    </div>
+                </li>
+
+                <li>你的评价，会给更多的用户带来帮助。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="source_inf">
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;最新上传</span>
+        </div>
+        <div class="source_inf_cont">
+            <ul>
+            #{list newResource,as : 'resource'}
+                <li>
+                    <a  href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>14? resource.title[0..14] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="re_xia-nei-da-box-xia-biao">
+        <span class="source_title">&nbsp;喜欢这个文档的还喜欢</span>
+    </div>
+    <div class="t-neirong-01-y-nei">
+        <ul>
+        #{list downResource,as : 'resource'}
+            <li>
+                <a  href="/Resources/show?resourceId=${resource.id}">
+                ${resource.title.length()>14? resource.title[0..14] + '..' : resource.title}
+                </a>
+            </li>
+        #{/list}
+        </ul>
+    </div>
+</div>
+
+<div class="clear"></div>
+</div>

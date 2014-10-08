@@ -1,0 +1,254 @@
+#{extends 'resources.html'/}
+#{set 'title'}
+教育资源首页
+#{/set}
+<script>
+    function dj(i)
+    {
+        for(j=1;j<100;j++)  //遍历刷新所有门的状态，序号与参数相同的的一种状态，其余一种状态
+        {
+            if(document.getElementById("a"+j)==null){
+                break;
+            }
+            document.getElementById("a"+j).className="li1";
+            document.getElementById("b"+j).style.display="none";
+        }
+        document.getElementById("a"+i).className="li2";
+        document.getElementById("b"+i).style.display = "block";
+
+    }
+</script>
+<div class="r_index_ad">
+    <p><img border="0" src="/public/images/r_index_ad_101.gif"></p>
+</div>
+<div class="t-sou-lie">
+    <p class="text-1-3">
+        您的位置：子贵网&nbsp;&gt;&nbsp;教育资源
+    </p>
+</div>
+<div class="t-neirong-01">
+    <div class="t-neirong-01-z">
+        <table width="662" height="217" cellspacing="0" cellpadding="0" bordercolor="#003399" border="0">
+            <tbody>
+            <tr>
+            #{list subjects,as : 'subject'}
+                <td width="69" height="31" background="/public/images/aaaq1.jpg">
+                    <div align="center" class="li${subject_index==1?'2' : '1'}" id="a${subject_index}">
+                        <a onmousemove="dj(${subject_index})" href="/Resources/resourceList?subjectId=${subject.id}" >
+                        ${subject.subjectName}
+                        </a>
+                    </div>
+                </td>
+            #{/list}
+            </tr>
+            <tr>
+                <td valign="top" height="500" colspan="11">
+                #{list subjects,as : 'subject'}
+                    <div align="center" style="display:${subject_index==1?'black':'none'};" class="wen-nei-box" id="b${subject_index}">
+                        #{if subject.subjectName == '语文'|| subject.subjectName == '数学' || subject.subjectName == '英语'}
+                            <div class="wen-nei-da-box">
+                                <div class="wen-nei-da-biao">
+                                    &nbsp;小学
+                                </div>
+                                <div class="wen-nei-da-neinong">
+                                    <ul>
+                                        #{list list1[subject_index-1],as : 'resource1'}
+                                            <li style="text-align: left">
+                                                [<a  href="/Resources/resourceList?gradeId=${resource1.grade.id}">${resource1.grade.gradeName}</a>]
+                                                [<a  href="/Resources/resourceList?versionId=${resource1.version?.id}">
+                                                    ${resource1.version?.versionName?.length()>3?resource1.version?.versionName[0..3] + ".." : resource1.version?.versionName}
+                                                </a>]
+                                                <a  href="/Resources/show?resourceId=${resource1.id}">
+                                                ${resource1.title.length()>7?resource1.title[0..7] + '..': resource1.title}
+                                                </a>
+                                            </li>
+                                        #{/list}
+                                    </ul>
+                                </div>
+                            </div>
+                        #{/if}
+                        <div class="wen-nei-da-box">
+                            <div class="wen-nei-da-biao">
+                                &nbsp;初中
+                            </div>
+                            <div class="wen-nei-da-neinong">
+                                <ul>
+                                    #{list list2[subject_index-1],as : 'resource2'}
+                                        <li style="text-align: left">
+                                            [<a  href="/Resources/resourceList?gradeId=${resource2.grade.id}">${resource2.grade.gradeName}</a>]
+                                            [<a  href="/Resources/resourceList?versionId=${resource2.version?.id}">
+                                                ${resource2.version?.versionName.length()>3?resource2.version?.versionName[0..3] + ".." : resource2.version?.versionName}
+                                            </a>]
+                                            <a  href="/Resources/show?resourceId=${resource2.id}">
+                                            ${resource2.title.length()>7?resource2.title[0..7] + '..': resource2.title}
+                                            </a>
+                                        </li>
+                                    #{/list}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="wen-nei-da-box">
+                            <div class="wen-nei-da-biao">
+                                &nbsp;高中
+                            </div>
+                            <div class="wen-nei-da-neinong">
+                                <ul>
+                                    #{list list3[subject_index-1],as : 'resource3'}
+                                        <li style="text-align: left">
+                                            [<a  href="/Resources/resourceList?gradeId=${resource3.grade.id}">${resource3.grade.gradeName}</a>]
+                                            [<a  href="/Resources/resourceList?versionId=${resource3.version?.id}">
+                                                ${resource3.version?.versionName.length()>3?resource3.version?.versionName[0..3] + ".." : resource3.version?.versionName}
+                                            </a>]
+                                            <a  href="/Resources/show?resourceId=${resource3.id}">
+                                            ${resource3.title.length()>7?resource3.title[0..7] + '..' : resource3.title}
+                                            </a>
+                                        </li>
+                                    #{/list}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                #{/list}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="t-neirong-01-y">
+        <div class="resource_have">
+            <p>当前已有<font class="resource_have_num">${totalCount}</font>份文档</p>
+            <p><a href="${play.configuration['portal.domain']}/MyHomes/addResource"><img border="0" src="/public/images/r_upload.gif"></a></p>
+        </div>
+
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;最新推荐</span>
+        </div>
+
+        <div class="t-neirong-01-y-nei mb10">
+            <ul>
+            #{list newResource,as : 'resource'}
+                #{if resource_index < 6}
+                    <li>
+                        [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                        <a   href="/Resources/show?resourceId=${resource.id}">
+                        ${resource.title.length()>12? resource.title[0..8] + '..' : resource.title}
+                        </a>
+                    </li>
+                #{/if}
+            #{/list}
+            </ul>
+        </div>
+
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;人气下载</span>
+        </div>
+
+        <div class="t-neirong-01-y-nei">
+            <ul>
+            #{list downResource,as : 'resource'}
+                <li>
+                    [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                    <a   href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>12? resource.title[0..8] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="t-AD">
+    <!--添加链接-->
+    <a href="user/teaIndexAction.action">
+        <img src="/public/images/adv03.jpg">
+    </a>
+</div>
+<div class="xia-nei-da-box mb10">
+    <div class="ind_xia-nei-da-box-xia mr10">
+        <div class="xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;最新教学视频</span>
+        <span class="more">
+            <a href="/Types/list?id=">更多</a>
+        </span>
+        </div>
+        <div class="xia-nei-da-box-xia-nei">
+            <ul>
+            #{list videoList,as :'resource'}
+                <li>
+                    [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                    <a   href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>12? resource.title[0..12] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="ind_xia-nei-da-box-xia mr10">
+        <div class="xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;最新教学文档</span>
+            <span class="more">
+                <a href="/Types/list?id=">更多</a>
+            </span>
+        </div>
+        <div class="xia-nei-da-box-xia-nei">
+            <ul>
+            #{list coursewareList,as :'resource'}
+                <li>
+                    [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                    <a   href="/Resources/show?resourceId=${resource.id}">
+                    ${resource.title.length()>12? resource.title[0..12] + '..' : resource.title}
+                    </a>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="res_tea">
+        <div class="re_xia-nei-da-box-xia-biao">
+            <span class="source_title">&nbsp;教师贡献榜</span>
+        </div>
+        <div class="t-neirong-01-y-nei">
+            <ul>
+            #{list teacherPoint,as : 'teacher'}
+                <li>
+                    <div class="res_teacher_index">
+                        <a href="/UserBases/show?userId=${teacher.id}">${teacher.realName}</a>
+                    </div>
+                    <div class="res_num_index">
+                        <span>${teacher.points}积分</span>
+                    </div>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="ques_index">
+    <div class="ques_index_t">
+        <strong>常见问题</strong>
+    </div>
+    <div class="ques_index_con">
+        <ul>
+            <li class="ques_index_con_tea">
+                <p class="ques_index_con_t">教师</p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon1">如何上传教育资源？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon2">如何注册子贵网账号？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon3">如何查看考勤记录？</a></p>
+            </li>
+            <li class="ques_index_con_st">
+                <p class="ques_index_con_stu">学生</p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon4">如何登录子贵网？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon5">如何获取积分？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon6">用户如何充值？</a></p>
+            </li>
+            <li class="ques_index_con_sch">
+                <p class="ques_index_con_sc">学校</p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon7">如何申请学校站内站账户？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon8">如何发布新闻？</a></p>
+                <p><a href="${play.configuration['portal.domain']}/HelpCenters/helpcon9">发布的新闻前台不显示？</a></p>
+            </li>
+        </ul>
+    </div>
+</div>

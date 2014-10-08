@@ -1,0 +1,156 @@
+#{extends 'resources.html'/}
+#{set 'title'}
+    教育资源-年级资源
+#{/set}
+#{script src:"focus.js" /}
+<div class="r_index_ad">
+    <p><img border="0" src="/public/images/r_index_ad_101.jpg"></p>
+</div>
+<div class="t-sou-lie">
+    <p class="text-1-3">
+        您的位置：子贵网&nbsp;&gt;&nbsp;
+        <a href="/Resources/index">教育资源</a>&nbsp;&gt;&nbsp;
+        ${leve == 1? '小学资源' : (leve == 2? "初中资源" : "高中资源")}
+    </p>
+</div>
+<div class="list_t-neirong-01">
+<div class="list_t-neirong-01-z">
+<p class="res_list_tit">${leve == 1? '小学资源' : (leve == 2? "初中资源" : "高中资源")}</p>
+<div class="res_focus_all">
+    <div class="res_focus mr10">
+        <!--focus01 B -->
+        <div class="sub_box_4">
+            <div class="sub_nav_4" id="p-select">
+                <div id="bd1lfsj" class="sub_no">
+                    <ul>
+                        <li class="show">1</li>
+                        <li class="">2</li>
+                        <li class="">3</li>
+                        <li class="">4</li>
+                        <li class="">5</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="bd1lfimg_4">
+                <div>
+                    <dl class="show"></dl>
+                    #{list hd,as : 'resource'}
+                        <dl class="">
+                            <dt>
+                                <a href="/Resources/show?resourceId=${resource.id}">
+                                    <img  src="${ctx}/${com.arj.ziguiw.common.ImageSize.getImage(resource.firstImage,com.arj.ziguiw.common.ImageSize.RESOURCELUNBO)}">
+                                </a>
+                            </dt>
+                            <dd>
+                                <h4 class="fyahei">
+                                    <a href="/Resources/show?resourceId=${resource.id}">${resource.title}</a>
+                                </h4>
+                            </dd>
+                            <dd class="bg_lunbo_4"></dd>
+                        </dl>
+                    #{/list}
+                </div>
+            </div>
+            <script type="text/javascript">movec_4();</script>
+        </div>
+        <!--focus01 E -->
+    </div>
+
+    <div class="res_focus_news">
+        <h1>
+            <a href="/Resources/show?resourceId=${newResources.get(0).id}">${newResources.get(0).title}</a>
+        </h1>
+        <div class="res_focus_news_con">
+            <p>
+                <a href="/Resources/show?resourceId=${newResources.get(0).id}">
+                    ${newResources.get(0).description}
+                </a>
+            </p>
+            <ul class="res_focus_more">
+                #{list newResources,as : 'resource'}
+                    #{if resource_index>1}
+                        <li>
+                            <a href="/Resources/show?resourceId=${resource.id}">
+                                [${resource.version?.versionName}]
+                                ${resource.title.length()>12? resource.title[0..12] + ".." : resource.title}
+                            </a>
+                        </li>
+                    #{/if}
+                #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div>
+        <ul>
+            #{list map,as : 'ita'}
+                <li class="resource_list_big">
+                    <div class="xia-nei-da-box-xia-biao">
+                        <span class="source_title">&nbsp;${ita.key.subjectName}</span>
+                    <span class="more">
+                        <a href="/Resources/resourceList?subjectId=${ita.key.id}">更多</a>
+                    </span>
+                    </div>
+                    <div class="xia-nei-da-box-xia-nei">
+                        <ul>
+                            #{list ita.value,as : 'resource'}
+                                <li>
+                                    [<a href="/Resources/resourceList?versionId=${resource.version?.id}">
+                                        ${resource.version?.versionName}
+                                    </a>]
+                                    <a href="/Resources/show?resourceId=${resource.id}">
+                                        ${resource.title.length()>12? resource.title[0..12] + '..' : resource.title}
+                                    </a>
+                                </li>
+                            #{/list}
+                        </ul>
+                    </div>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+</div>
+<div class="t-neirong-01-y">
+    <div class="resource_have">
+        <p>当前已有<font class="resource_have_num">${totalCount}</font>份文档</p>
+        <p><a href="${play.configuration['portal.domain']}/MyHomes/addResource"><img border="0" src="/public/images/r_upload.gif"></a></p>
+    </div>
+
+    <div class="re_xia-nei-da-box-xia-biao">
+        <span class="source_title">&nbsp;最新推荐</span>
+    </div>
+
+    <div class="t-neirong-01-y-nei mb10">
+        <ul>
+        #{list newResource,as : 'resource'}
+            <li>
+                [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                <a   href="/Resources/show?resourceId=${resource.id}">
+                ${resource.title.length()>8? resource.title[0..8] + '..' : resource.title}
+                </a>
+            </li>
+        #{/list}
+        </ul>
+    </div>
+
+    <div class="re_xia-nei-da-box-xia-biao">
+        <span class="source_title">&nbsp;人气下载</span>
+    </div>
+
+    <div class="t-neirong-01-y-nei">
+        <ul>
+        #{list downResource,as : 'resource'}
+            <li>
+                [<a  href="/Resources/resourceList?versionId=${resource.version?.id}">${resource.version?.versionName}</a>]
+                <a   href="/Resources/show?resourceId=${resource.id}">
+                ${resource.title.length()>8? resource.title[0..8] + '..' : resource.title}
+                </a>
+            </li>
+        #{/list}
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+</div>

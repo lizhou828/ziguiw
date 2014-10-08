@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>
+    <title>#{get 'title' /}</title>
+    #{stylesheet src:"header_footer.css" /}
+    #{stylesheet src:"source.css" /}
+    #{stylesheet src:"source_detail.css" /}
+    #{get 'moreStyles' /}
+    #{script src:"jquery-1.6.4.min.js" /}
+    #{script src:"png-tm.js" /}
+    #{get 'moreScripts' /}
+</head>
+<body>
+<div class="main">
+    <div class="toolbar">
+        <div class="tit">
+            欢迎来到子贵网！
+        </div>
+        <div id="loginbar" class="subNav">
+        #{if !username}
+            <a href="${play.configuration['cas.loginUrl']}">登录</a>
+            <a href="http://www.ziguiw.com/register.jsp">注册</a>
+            <script src="@{'/public/javascripts/user.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{/if}
+        </div>
+        *{<a href="http://dsis.ziguiw.com/downandroid/mobile.jsp" title="手机版" target="_blank">手机版</a>}*
+        <a href="javascript:setHome(window.location);" target="_self">设为首页</a>
+        <a href="javascript:addFavorite(window.location, document.title)" target="_self">加入收藏</a>
+        <script src="@{'/public/javascripts/base.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    </div>
+    <div class="new_header">
+        <a title="" href="http://new.ziguiw.com" class="logo">
+            <img alt="" src="/public/images/logo.jpg">
+        </a>
+        <div class="nav">
+            <ul class="nav_tit clearfix">
+                <li id='index_tab1'><a href="${play.configuration['portal.domain']}" target="_self">首   页</a></li>
+                <li id='index_tab2'><a href="${play.configuration['portal.domain']}/newses/index"  target="_self">教育在线</a></li>
+                <li id='index_tab3'><a href="${play.configuration['portal.domain']}/knowledges/index" target="_self">教育知识</a></li>
+                <li id='index_tab4'><a href="/" target="_self">教育资源</a></li>
+                <li id='index_tab5'><a href="${play.configuration['portal.domain']}/boards/index" target="_self">互动社区<img src="/public/images/new.png"/></a></li>
+                <li id='index_tab6'><a href="${play.configuration['portal.domain']}/myhomes/index" target="_self">我的小家</a></li>
+            </ul>
+            </ul>
+            <script language="javascript">
+                $(".nav_tit li").hover(
+                        function(){
+                            $(".nav_tit li:eq(0)").removeClass("cur");
+                            $(this).addClass("cur");
+
+                        },
+                        function(){
+
+                            $(this).removeClass("cur");
+                        }
+                );
+                function aaa() {
+                    var url = self.location.href;
+
+                    if(url.indexOf('news')&gt;0){
+                        document.getElementById('index_tab1').removeAttribute('class');
+                        document.getElementById('index_tab2').setAttribute('class','cur');
+                        document.getElementById('index_tab3').removeAttribute('class');
+                        document.getElementById('index_tab4').removeAttribute('class');
+                        document.getElementById('index_tab5').removeAttribute('class');
+                        document.getElementById('index_tab6').removeAttribute('class');
+                    }else if(url.indexOf('study')&gt;0){
+                        document.getElementById('index_tab1').removeAttribute('class');
+                        document.getElementById('index_tab2').removeAttribute('class');
+                        document.getElementById('index_tab3').setAttribute('class','cur');
+                        document.getElementById('index_tab4').removeAttribute('class');
+                        document.getElementById('index_tab5').removeAttribute('class');
+                        document.getElementById('index_tab6').removeAttribute('class');
+                    }else if(url.indexOf('source')&gt;0){
+                        document.getElementById('index_tab1').removeAttribute('class');
+                        document.getElementById('index_tab2').removeAttribute('class');
+                        document.getElementById('index_tab3').removeAttribute('class');
+                        document.getElementById('index_tab4').setAttribute('class','cur');
+                        document.getElementById('index_tab5').removeAttribute('class');
+                        document.getElementById('index_tab6').removeAttribute('class');
+                    }else if(url.indexOf('community')&gt;0){
+                        document.getElementById('index_tab1').removeAttribute('class');
+                        document.getElementById('index_tab2').removeAttribute('class');
+                        document.getElementById('index_tab3').removeAttribute('class');
+                        document.getElementById('index_tab4').removeAttribute('class');
+                        document.getElementById('index_tab5').setAttribute('class','cur');
+                        document.getElementById('index_tab6').removeAttribute('class');
+                    }else if(url.indexOf('home')&gt;0){
+                        document.getElementById('index_tab1').removeAttribute('class');
+                        document.getElementById('index_tab2').removeAttribute('class');
+                        document.getElementById('index_tab3').removeAttribute('class');
+                        document.getElementById('index_tab4').removeAttribute('class');
+                        document.getElementById('index_tab5').removeAttribute('class');
+                        document.getElementById('index_tab6').setAttribute('class','cur');
+                    }else{
+                        document.getElementById('index_tab1').setAttribute('class','cur');
+                        document.getElementById('index_tab2').removeAttribute('class');
+                        document.getElementById('index_tab3').removeAttribute('class');
+                        document.getElementById('index_tab4').removeAttribute('class');
+                        document.getElementById('index_tab5').removeAttribute('class');
+                        document.getElementById('index_tab6').removeAttribute('class');
+                    }
+                }
+                aaa();
+            </script>
+            <ul class="nav_sub_tit">
+                <li>
+
+                    <a href="${play.configuration['portal.domain']}/newses/list?id=1">焦点话题</a>
+                    <a  href="${play.configuration['site.domain']}/newses/list?id=2">
+                        <div class="znzbtn">校园站内站</div>
+                    </a>
+                    <a href="${play.configuration['portal.domain']}/newses/list?id=2">校园新闻</a>
+                    <a  href="${play.configuration['portal.domain']}/newses/list?id=3">考试升学</a>
+                </li>
+                <li>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=1" title="幼儿期" >幼儿期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=2" title="少儿期" >少儿期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=3" title="青年期" >青年期</a>
+                    <a href="${play.configuration['portal.domain']}/knowledges/list?id=4" title="心理咨询" >心理咨询</a>
+                    <a href="${play.configuration['portal.domain']}/questions/list?status=0" title="育儿问答" >育儿问答</a>
+                    <a href="${play.configuration['portal.domain']}/debates/list" title="辩论" >辩论</a>
+                </li>
+
+                <li>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=2" title="同龄圈" >同龄圈</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=3" title="同城圈">同城圈</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=4" title="学习交流">学习交流</a>
+                    <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=5" title="专家问答">专家问答</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--nav E -->
+
+    </div>
+    <div class="t-box">
+        <div class="t-logo">
+            <a href="/source/sourceInfo.action">
+                <img border="0" src="/public/images/index_05.jpg">
+            </a>
+        </div>
+
+        <form class="form" method="post" action="/source/sourcePageList.action" id="form1">
+            <div class="t-sousuo-box">
+                <div class="t-sousuo-box1">
+                    <div class="t-sousuo-box-shu"><input type="text" class="shurukuan-01" name="selstr">
+                        <input type="hidden" value="10" name="seltj">
+                    </div>
+                    <input type="submit" value="提交" class="t-sousuo-box-an" name="Submit">
+                </div>
+                <div class="t-sousuo-box2">
+                    <input type="radio" checked="checked" value="" name="filetype">
+                    全部
+                    <input type="radio" value="TXT" name="filetype">
+                    TXT
+                    <input type="radio" value="DOC" name="filetype">
+                    DOC
+                    <input type="radio" value="PDF" name="filetype">
+                    PDF
+                    <input type="radio" value="PPT" name="filetype">
+                    PPT
+                    <input type="radio" value="RAR" name="filetype">
+                    RAR
+                    <input type="radio" value="EXE" name="filetype">
+                    EXE
+                    <input type="radio" value="CHM" name="filetype">
+                    CHM
+                    <input type="radio" value="FLV" name="filetype">
+                    FLV</div>
+            </div>
+        </form>
+    </div>
+    <div class="t-link_box">
+        <ul>
+            <li>
+                <a href="/Resources/index">资源首页</a>
+            </li>
+            <li>
+                <a href="/Resources/glist?leve=1">小学资源</a>
+            </li>
+            <li>
+                <a href="/Resources/glist?leve=2">初中资源</a>
+            </li>
+            <li>
+                <a href="/Resources/glist?leve=3">高中资源</a>
+            </li>
+        </ul>
+    </div>
+    <div class="t-AD-03">
+        <p class="text-1-3"></p>
+        <p><a href="/Resources/add"><img border="0" src="/public/images/zaixiananniu.jpg"></a></p>
+    </div>
+    #{doLayout /}
+    <div class="clear"></div>
+</div>
+<!--footer B-->
+<div class="p_flink">
+    <p>
+        <a href="${play.configuration['portal.domain']}/HelpCenters/aboutus" target="_blank">关于我们</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/contract" target="_blank">服务协议</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/service" target="_blank">客服中心</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/feedback" target="_blank">意见反馈</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/recruit" target="_blank">网站招聘</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/map" target="_blank">网站地图</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/contact" target="_blank">联系我们</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/copyright" target="_blank">版权所有</a>|
+        <a href="${play.configuration['portal.domain']}/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+    </p>
+</div>
+<div class="p_logo">
+    <p>Copyright&copy;2012 <a href="http://www.ziguiw.com">ziguiw.com&nbsp;</a> All Rights Reserved&nbsp;<a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a></p>
+    <p>&#12288;客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a></p>
+    <img src="/public/images/p_logo.gif">
+</div>
+</body>
+</html>

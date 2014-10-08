@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>出错页面</title>
+    <style type="text/css">
+        .err_bg {
+            background:url(/public/images/err_bg.gif) repeat;
+        }
+        .error_m {
+            background:url(/public/images/err_mid_bg.gif) no-repeat;
+            width:494px;
+            height:344px;
+            position:relative;
+            left:50%;
+            top:120px;
+            margin-left:-240px;
+            padding:220px 0 0 60px;
+        }
+        .status_goon {
+            background: url("/public/images/status_goon.gif") repeat scroll 0 0 transparent;
+            border: medium none;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 14px;
+            height: 31px;
+            line-height: 31px;
+            margin: 15px 5px 0 0;
+            width: 107px;
+            display:inline-block;
+            text-align:center;
+        }
+        .status_home {
+            background: url("/public/images/status_home.gif") repeat scroll 0 0 transparent;
+            border: medium none;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 14px;
+            height: 31px;
+            line-height: 31px;
+            width: 107px;
+            display:inline-block;
+            text-align:center;
+        }
+        .err_words {
+            font-size:18px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body class="err_bg">
+<div class="error_m">
+    <p class="err_words">对不起，您要访问的页面暂时没有找到！</p>
+    <p>系统将自动跳转到首页。</p>
+    <p>您也可以:
+        <a class="status_goon" href="http://www.ziguiw.com">访问首页</a>
+        <a class="status_home" href="javascript:history.go(-1)">返回上一页</a>
+    </p>
+        <span style="display: none;">
+            400
+        </span>
+</div>
+</body>
+</html>

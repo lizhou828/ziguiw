@@ -1,0 +1,223 @@
+@charset "utf-8";
+/* CSS Document */
+
+.toolbar {
+    background: url("/public/images/repeat_x_01.png") repeat-x scroll 0 0 transparent;
+    border-color: #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto;
+    position: relative;
+    width: 988px;
+}
+.toolbar .tit {
+    float: left;
+    padding-left: 15px;
+}
+.toolbar .subNav {
+    float: right;
+    padding-right: 15px;
+}
+.toolbar .subNav A {
+    color: #666666;
+    margin-left: 25px;
+}
+.toolbar .subNav .trigel {
+    background: url("/public/images/trigel01.png") no-repeat scroll right center transparent;
+    padding-right: 10px;
+}
+.header {
+    background-color: #FFFFFF;
+    border-top: 1px solid #EBEBEB;
+    height: 128px;
+    margin: 0 auto;
+    position: relative;
+    width: 990px;
+}
+.header .logo {
+    left: 24px;
+    position: absolute;
+    top: 10px;
+}
+.header .search {
+    background: url("/public/images/search.jpg") no-repeat scroll 0 0 transparent;
+    height: 25px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 245px;
+}
+.header .search INPUT {
+    color: #999999;
+    float: left;
+}
+.header .search .text {
+    background: none repeat scroll 0 0 transparent;
+    border-color: -moz-use-text-color;
+    border-style: none;
+    border-width: 0;
+    height: 21px;
+    line-height: 21px;
+    padding: 2px 5px;
+    width: 210px;
+}
+.header .search .btn {
+    background: none repeat scroll 0 0 transparent;
+    border-color: -moz-use-text-color;
+    border-style: none;
+    border-width: 0;
+    cursor: pointer;
+    font-size: 0;
+    height: 25px;
+    line-height: 99px;
+    width: 25px;
+}
+.nav {
+    height: 74px;
+    padding-top: 46px;
+    width: 100%;
+}
+.nav .nav_tit {
+    bottom: -9px;
+    padding-left: 240px;
+    position: relative;
+    z-index: 2;
+}
+.nav .nav_tit LI {
+    float: left;
+    height: 42px;
+    position: relative;
+    text-align: center;
+    width: 125px;
+    z-index: 1;
+}
+.nav .nav_tit LI A {
+    background: url("/public/images/sub_tit_a.png") no-repeat scroll left center transparent;
+    color: #CC0000;
+    display: block;
+    font: 16px/42px "Arial";
+    height: 42px;
+    line-height: 42px;
+    position: relative;
+    text-decoration: none;
+}
+.nav .nav_tit LI A IMG {
+    position: absolute;
+    right: 8px;
+    top: -2px;
+}
+.nav_tit .cur {
+    color: #FFFFFF;
+    margin-right: -1px;
+    z-index: 2;
+}
+.nav_tit .cur A {
+    background: url("/public/images/nav_tit.jpg") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+}
+.nav_sub_tit {
+    background: url("/public/images/nav_sub_tit.jpg") no-repeat scroll 0 0 transparent;
+    height: 31px;
+    padding-top: 9px;
+    width: 990px;
+	position:relative;
+	top:-2px;
+	left:0;
+	z-index:1;
+	
+}
+.nav_sub_tit ul LI {
+    background: url("/public/images/sub_nav_tit_a.png") no-repeat scroll left center transparent;
+    float: left;
+    height: 31px;
+    line-height: 31px;
+    margin-left: -2px;
+    overflow: hidden;
+    padding: 0 3px 0 6px;
+    white-space: nowrap;
+}
+.nav_sub_tit ul LI A {
+    color: #FFFFFF;
+    display: inline;
+    float: left;
+    margin: 0 12px;
+    white-space: nowrap;
+}
+#wrapper{
+	width:750px;
+	position:relative;
+	top:7px;
+	left:240px;
+	z-index:5;
+	height:42px;
+		}
+.lavaLamp {
+	
+    /*padding-left: 240px;*/
+    /*position: absolute;
+	left:240px;
+	top:0;*/
+   
+}
+.lavaLamp li {
+	float: left;
+    height: 42px;
+	line-height: 42px;
+    position: relative;
+    text-align: center;
+    width: 125px;
+	font-size:14px;    
+}
+.lavaLamp li.back {
+	z-index: 2; position: absolute; width: 125px; background: url(/public/images/nav_tit.jpg) no-repeat 0px 0px; height: 42px;
+}
+.lavaLamp li A {
+	z-index: 3; position: relative; font-variant: small-caps; width: 125px; display: block; height: 42px; color: #555555; font-size: 1.2em; text-decoration: none;color:#CC0000;
+	    background: url("/public/images/sub_tit_a.png") no-repeat scroll left center transparent;
+}
+.lavaLamp li A:hover {
+	color: #fff;text-decoration:none;position: absolute; width: 125px; background: url(/public/images/nav_tit.jpg) no-repeat 0px 0px; height: 42px;z-index:3;top:0;left:0;
+}
+.lavaLamp li.current-cat A {
+	color: #cc0000;
+}
+
+
+.p_all {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin: 0 auto 5px;
+    overflow: hidden;
+    width: 990px;
+	_width: 996px;
+}
+.p_flink {
+    background: none repeat scroll 0 0 #EEEEEE;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto 5px;
+    width: 970px;
+}
+.p_flink p {
+    text-align: center;
+}
+.p_flink a {
+    color: #000000;
+    font-size: 12px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.p_flink a:hover {
+    text-decoration: underline;
+}
+.p_logo {
+    text-align: center;
+}
+.p_logo p {
+    line-height: 20px;
+}
+.p_logo span {
+    padding: 0 5px;
+}

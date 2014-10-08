@@ -1,0 +1,19 @@
+<title>
+    资源下载
+</title>
+<script type="text/javascript">
+    function closeme()
+    {
+        var browserName=navigator.appName;
+        if (browserName=="Netscape")
+        {
+            window.open('','_parent',''); window.close();
+        }
+        else if (browserName=="Microsoft Internet Explorer")
+        {
+            window.opener = "whocares"; window.close();
+        }
+    }
+    alert("您的积分不足！请充值");
+    window.setTimeout(closeme,1000)
+</script>
