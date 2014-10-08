@@ -1,0 +1,152 @@
+#{extends 'main.html'/}
+#{set title:'成绩查询——子贵网用户中心' /}
+#{script src:'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#examQueryBtn").click(function(){
+            var bjId= $("#bjId").val();
+            var termId= $("#termId").val();
+            var examId= $("#examId").val();
+            if( !bjId || bjId == null ||bjId == '-1'){
+                alert("必须选定班级！");
+                return false;
+            }
+            if(!termId || termId == null || termId == '-1'){
+                alert("必须选定学期！");
+                return false;
+            }
+            if( !examId || examId == null || examId == '-1'){
+                alert("必须选定考试名称！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/ExamResults/tlist?isAjax=1"+"&bjId="+bjId+"&termId="+termId+"&examId="+examId,
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+
+<div class="right">
+#{form action:@ExamResults.tlist(),enctype :'multipart/form-data',method:'post',id:'teaExamForm'}
+
+        <div class="bobti">成绩查询</div>
+        <div class="xunc_1 font-2">
+            <div class="xunc_1-1">
+                <table width="700" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+
+                            <td>班级：
+                                <select onchange="queryTermByClazzId(this.value);" id="bjId" name="bjId">
+                                    #{if clazzList == null || clazzList.size() == 0 }
+                                        <option value="-1">--没有班级--</option>
+                                    #{/if}
+                                    #{else }
+                                        <option value="-1">--请选择--</option>
+                                        #{list items:clazzList,as:'clazz'}
+                                            <option value="${clazz.bjId}">${clazz.bjMcheng}</option>
+                                        #{/list}
+                                    #{/else}
+
+                                </select>
+                            </td>
+                            <td>学期：
+                                <select onchange="queryExamInfo(this.value);" id="termId" name="termId">
+
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                考试名称：
+                                <select id="examId" name="examId">
+
+                                </select>
+                            </td>
+                            <td>
+                                学生姓名：
+                                <select id="studentId" name="studentId">
+
+                                    <option value="123">汤妙</option>
+                                </select>
+                            </td>
+                            <td><input type="button" class="cx" value="查询" id="examQueryBtn"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="xunc_2 font-2" id="listTable">
+            <table width="70%" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                    *{<tr>}*
+                        *{<td class="t1">考试名称</td>}*
+                        *{<td class="t1">学生姓名</td>}*
+                        *{<td class="t1">总分</td>}*
+                    *{</tr>}*
+                    <tr>
+                        <td class="t1">考试科目</td>
+                        <td class="t1">得分</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">语文</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">数学</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">英语</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">物理</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">化学</td>
+                        <td class="t1">89</td>
+                    </tr>
+
+                    <tr>
+                        <td class="t1">生物</td>
+                        <td class="t1">89</td>
+                    </tr>
+
+                    <tr>
+                        <td class="t1">政治</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">历史</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">地理</td>
+                        <td class="t1">89</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">总分</td>
+                        <td class="t1">801</td>
+                    </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    #{/form}
+</div>

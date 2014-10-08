@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd" default-autowire="byName">
+
+    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:conf.properties</value>
+        </property>
+    </bean>
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.zigui" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
+
+
+
+    <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver" value="${db.driver}"/>
+        <property name="driverUrl" value="${db.driverUrl}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="alias" value="${db.alias}"/>
+        <property name="simultaneousBuildThrottle" value="${db.simultaneousBuildThrottle}"/>
+        <property name="maximumConnectionCount" value="${db.maximumConnectionCount}"/>
+        <property name="minimumConnectionCount" value="${db.minimumConnectionCount}"/>
+        <property name="houseKeepingTestSql"  value="select CURRENT_DATE"/>
+        <property name="delegateProperties" value="user=scott,password=ziguiw"/>
+    </bean>
+
+
+
+    <bean class="org.logicalcobwebs.proxool.ProxoolFacade" destroy-method="shutdown"></bean>
+
+
+
+    <bean id="dataSource2" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver" value="${dsis.db.driver}"/>
+        <property name="driverUrl" value="${dsis.db.driverUrl}"/>
+        <property name="user" value="${dsis.db.user}"/>
+        <property name="password" value="${dsis.db.password}"/>
+        <property name="alias" value="${dsis.db.alias}"/>
+        <property name="simultaneousBuildThrottle" value="${dsis.db.simultaneousBuildThrottle}"/>
+        <property name="maximumConnectionCount" value="${dsis.db.maximumConnectionCount}"/>
+        <property name="minimumConnectionCount" value="${dsis.db.minimumConnectionCount}"/>
+        <property name="houseKeepingTestSql"  value="select CURRENT_DATE"/>
+        <property name="delegateProperties" value="user=scott,password=ziguiw"/>
+    </bean>
+    <bean class="org.logicalcobwebs.proxool.ProxoolFacade" destroy-method="shutdown"></bean>
+
+
+
+
+    <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.zigui.domain</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.OracleDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.cache.region_prefix">${hibernate.cache.region_prefix}</prop>
+				<prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<!--<prop key="hibernate.cache.provider_class">com.googlecode.hibernate.memcached.MemcachedCacheProvider</prop>-->
+				<prop key="hibernate.memcached.servers">${hibernate.memcached.servers}</prop>
+                <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="dsis_sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource2"></property>
+        <property name="packagesToScan">
+            <list>
+                <value>com.zigui.domain</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.OracleDialect
+                </prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.region_prefix">${hibernate.cache.region_prefix}</prop>
+                <prop key="hibernate.cache.use_structured_entries">${hibernate.cache.use_structured_entries}</prop>
+                <prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+                <!--<prop key="hibernate.cache.provider_class">com.googlecode.hibernate.memcached.MemcachedCacheProvider</prop>-->
+                <prop key="hibernate.memcached.servers">${hibernate.memcached.servers}</prop>
+                <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+            </props>
+        </property>
+    </bean>
+
+	<!--Hibernate 的模板（ HibernateTemplate ），对实体的增删查改操作 需要 sessionFactory -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+    <bean id="dsis_hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="dsis_sessionFactory"></property>
+    </bean>
+
+	<!-- 事物的管理需要注入 sessionFactory -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager"/>
+
+    <aop:aspectj-autoproxy/>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="load*" read-only="true"/>
+            <tx:method name="search*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="list*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true">
+        <aop:advisor order="10" pointcut="execution(* com.zigui.service..*.*(..))"
+                     advice-ref="txAdvice"/>
+    </aop:config>
+
+</beans>

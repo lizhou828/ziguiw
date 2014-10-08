@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*chengzhanzuji*/
+body{ background:#dbeaf3 url(../../images/user/body-bg.gif) repeat-x top left; padding-bottom:40px;}
+
+
+.right{ width:797px; float:left;}
+
+.bobti{ border-bottom:1px #aecada solid; margin-left:20px; padding-top:30px; width:729px; color:#006da6;height:35px; line-height:22px; font-weight:bolder;}
+.zzll{ width:729px; margin-left:20px; margin-bottom:40px;}
+.zzll a{ line-height:22px; color:#006da6;}
+.zzll a:hover{color:#333;}
+
+
+
+
+.tab-xx{ margin-bottom:10px;}
+.tab-xx td{color:#000; padding:10px 10px; line-height:22px;}
+
+.tab-xx td span{color:#F00;}
+ 
+.td-xx-2 {border-bottom:1px #aecada solid; line-height:40px; margin-bottom:10px;}
+.td-xx-2 span{color:#F00;}
+.qd{width:117px; height:44px; border:0; background:url(../../images/user/btn-44.gif) no-repeat top left;}
+input.xg{width:300px; height:20px; padding:1px 3px; line-height:20px;color:#999; border:1px #CCC solid;}
+
+input.form-file  { display: inline; height: auto; font-size: 12px !important; height:28px; padding:2px 2px; line-height:22px;}
+.hf-3{background:url(../../images/user/btn-45_03.gif) no-repeat top left; width:116px; height:40px; border:0; font-weight:bolder; color:#FFF;}
+
+.xx-img{ width:75px; height:100px; border:1px #CCC solid; padding:1px 1px; display:block;}
+.xx-img img{MAX-WIDTH: 100%!important;HEIGHT: auto!important;width:expression(this.width > 75 ? "75px" : this.width)!important;}
+.ly-top{width:715px; padding-bottom:10px; padding-top:14px; padding-left:14px; background:#eef6fb;}
+.ly-top span,.xx-m span,.xx-f span{color:#006da6;}
+.ly-top p{ line-height:22px; float:left; height:25px; margin-right:30px;}
+.xx-2{line-height:30px;}
+.xx-m{ padding-top:20px; padding-left:10px; padding-bottom:20px;}
+.xx-m p{line-height:22px; text-indent:24px; padding-top:10px;}
+
+.xx-f{width:714px; border-top:1px #d2d2d2 solid; padding-top:14px; padding-left:14px; background:#f4f4f4; padding-bottom:14px; margin-bottom:10px;}
+
+.hf-1{width:98%; height:102px; padding:2px 2px; line-height:22px;}
+.hf-2{width:117px; height:44px; border:0; background:url(../../images/user/btn-45.gif) no-repeat top left; margin-top:10px;}
+.img-hd{ width:100%; margin-top:10px; margin-bottom:10px;}
+.img-hd img{ margin-top:10px;MAX-height: 100%!important;WIDTH: auto!important;height:expression(this.width > 300 ? "300px" : this.width)!important;}
+
+textarea.hf-1{width:80%; height:102px; padding:1px 3px; line-height:20px; color:#999;border:1px #CCC solid;}
+textarea.hf-1-1{width:80%; height:102px; padding:1px 3px; line-height:20px; color:#999;border:1px #CCC solid;}

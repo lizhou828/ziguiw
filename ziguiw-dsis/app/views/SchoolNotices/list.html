@@ -1,0 +1,113 @@
+#{extends 'main.html'/}
+#{set title:'学校公告——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <script type="text/javascript">
+        $(function(){
+            $("#attenQueryBtn").click(function(){
+                var xsNode = $("#xsId");
+                var xsId
+                if(xsNode){
+                    xsId = $("#xsId").val();
+                } else{
+                    xsId = $("#studentId").val();
+                }
+                if(xsId && xsId != null && xsId == '-1'){
+                    alert("必须选定一个孩子！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/SchoolNotices/list?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            }) ;
+
+        });
+    </script>
+
+#{form action:@SchoolNotices.list(),enctype :'multipart/form-data',method:'post',id:'querySchoolNotice'}
+
+        <div class="bobti">
+            学校公告
+        </div>
+        <div class="xunc_1 font-2">
+            <div class="xunc_1-1">
+                <table width="697" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                    <tr>
+                        <td width="60%">
+                            日期：
+                            <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                                   id="startTime" name="startTime" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }">
+                            到
+                            <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                                   id="endTime" name="endTime" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }">
+                        </td>
+                        #{if studentList != null && studentList.size() > 1}
+                            <td>
+                                孩子：<select id="xsId" name="xsId">
+                                <option value="-1">--请选择--</option>
+                                #{list items:studentList,as:'student'}
+                                    <option value="${student.xsId}">${student.xsXming}</option>
+                                #{/list}
+                            </select>
+                            </td>
+                        #{/if}
+                        #{else }
+                            <input type="hidden" id ="studentId" value="${student?.xsId}">
+                        #{/else}
+
+                    </tr>
+                    <tr>
+                        <td width="40%">
+                            <input type="button" class="cx" value="查询" id="attenQueryBtn">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="not_spe" id="listTable">
+            #{if schNoticePage==null || schNoticePage.data == null}
+            <table>
+                <ul>
+                    <li>没有相关信息！</li>
+                </ul>
+            </table>
+
+            #{/if}
+            #{else }
+                <table>
+                    #{list items:schNoticePage.data,as:'data'}
+                        <ul>
+                            <li>
+                                <div class="noti_content">
+                                    <p>${data['MSG_CONTENT']}</p>
+                                    <p style="margin-top:8px;">
+                                    ${new java.text.SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(data['PUB_DATE']))}
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    #{/list}
+                </table>
+
+            *{分页}*
+                <div class="pageNav">
+                    #{page page : schNoticePage, url : "/SchoolNotices/list", paramIds : "xsId startTime endTime", isAjax : "true"/}
+                </div>
+
+            #{/else}
+        </div>
+
+
+    #{/form}
+</div>

@@ -1,0 +1,53 @@
+#{set title:'我的资源——子贵网用户中心'/}
+<div id="listTable">
+    <div class="res_tit">
+        <span>我的资源</span><span class="res_en">MY RESOURCE</span>
+    </div>
+    <div class="res_con">
+        <div class="upload_t">
+            <a href="javascript:void(0);" onclick="mySource('/Resources/list')" style="color: #0080BD">
+                我上传的资源
+            </a>
+        </div>
+
+        <div class="res_tb">
+
+            <table border="0">
+                <tr>
+                    <th>资源标题</th>
+                    <th>审核状态</th>
+                    <th>上传时间</th>
+                    <th>积分</th>
+                    <th>下载次数</th>
+                </tr>
+                #{if page.data == null || page.data.size() == 0}
+                    <tr>
+                        您没有上传过任何资源！
+                    </tr>
+                #{/if}
+                #{else }
+                    #{list items:page.data,as:'data'}
+                        <tr>
+                            <td  class="res_si"> ${data.title}</td>
+                            <td  class="res_si"> ${com.arj.ziguiw.common.ResourceCheckType.map.get(data.checkSign)}</td>
+                            <td  class="res_si"> ${data.createDate}</td>
+                            <td  class="res_si"> ${data.needPoint}</td>
+                            <td  class="res_si"> ${data.resourceDownNum}</td>
+                        </tr>
+                    #{/list}
+                #{/else}
+
+            </table>
+         *{分页}*
+            <div class="pageNav">
+             #{page page : page, url : "/Resources/list"/}
+            </div>
+
+        </div>
+        <div class="download_t">
+            <a href="javascript:void(0);" onclick="mySource('/ResourceDowns/list')" style="color: #FA6F00;">
+                我下载的资源
+            </a>
+        </div>
+    </div>
+</div>

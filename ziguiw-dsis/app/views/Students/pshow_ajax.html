@@ -1,0 +1,122 @@
+<div class="bobti font-5">${student?.xsXming}-学籍档案</div>
+
+<div class="zzll">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody><tr>
+            <td width="21%" valign="top" rowspan="2">
+                <table cellspacing="0" cellpadding="0" border="0" class="tx-img-1 font-2">
+                    <tbody><tr>
+                        <td valign="top">
+                            <div class="xx-img">
+                                <img src="${student.personalPhoto ? 'http://dsis.952116.com/'+student.personalPhoto : '/public/images/default.jpg'}">
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </td>
+            <td width="79%"><table cellspacing="0" cellpadding="0" border="0" class="tab-xx-5 font-2">
+                <tbody><tr>
+                    <td valign="middle" align="left" class="xgr-1"><b>基本信息</b><a href="#"></a></td>
+                    <td valign="middle" align="right" class="xgr-1">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="20%" valign="middle" align="left" class="xgr">孩子姓名：</td>
+                    <td width="80%" class="xgr">
+                    ${student?.xsXming}&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">出生日期：</td>
+                    <td class="xgr">
+                    ${student?.birthday==null ? '未填写' : student?.birthday?.format("yyyy-MM-dd")}
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">性别：</td>
+                    <td class="xgr">
+
+                    ${student?.sex==null ? '未填写': student?.sex}&nbsp;
+
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">一卡通卡号：</td>
+                    <td class="xgr"><p>${student?.idCard}&nbsp;</p></td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">民族：</td>
+                    <td class="xgr">
+                    ${student?.mzhu?.equalsIgnoreCase("null") ? '未填写': student?.mzhu}
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" align="left" class="xgr">家庭成员：</td>
+                    <td class="xgr">
+                    ${student?.otherLinks?.equalsIgnoreCase("null") ? '未填写': student?.otherLinks}
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" align="left" class="xgr">手机:</td>
+                    <td class="xgr">
+                    ${student?.homePhone?.equalsIgnoreCase("null") ? '未填写': student?.homePhone}
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" align="left" class="xgr">家庭住址：</td>
+                    <td class="xgr">
+                    ${student?.homeAddress?.equalsIgnoreCase("null") ? '未填写': student?.homeAddress}
+                    </td>
+                </tr>
+                </tbody></table></td>
+        </tr>
+        <tr>
+            <td><table cellspacing="0" cellpadding="0" border="0" class="tab-xx-5 font-2">
+                <tbody><tr>
+                    <td valign="middle" align="left" class="xgr-1"><b>在校信息</b></td>
+                    <td valign="middle" align="right" class="xgr-1">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="20%" valign="middle" align="left" class="xgr">所在学校：</td>
+                    <td width="80%" class="xgr">${school?.schName}&nbsp;</td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">入校日期：</td>
+                    <td class="xgr">${student?.dateToSchool==null ? '未填写':student?.dateToSchool?.format("yyyy-MM-dd")}&nbsp;</td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">所在年级：</td>
+                    <td class="xgr">
+                    ${grade?.njMcheng}&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">所在班级：</td>
+                    <td class="xgr">${clazz?.bjMcheng}&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td valign="middle" align="left" class="xgr">政治面貌：</td>
+                    <td class="xgr">
+                    #{if student.politicalFace == null || student.personalPhoto.equals("") || student.politicalFace.equalsIgnoreCase("null")}
+                        未填写
+                    #{/if}
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="middle" align="left" class="xgr">住宿情况：</td>
+                    <td class="xgr">
+                    #{if student?.accommodation==1}
+                        住校&nbsp;
+                    #{/if}
+                    #{else }
+                        不住校&nbsp;
+                    #{/else}
+
+                    </td>
+                </tr>
+                </tbody></table></td>
+        </tr>
+        </tbody></table>
+</div>

@@ -1,0 +1,99 @@
+#{extends 'main.html' /}
+#{set title:'考勤查询——子贵网用户中心' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+#{script 'Teacher.js'/}
+    <script type="text/javascript">
+        $(function(){
+            $("#attenQueryBtn").bind("click", function(){
+                var bjId= $("#bjId").val();
+                var xsId= $("#xsId").val();
+                if( bjId == null ||bjId == '-1'){
+                   alert("必须选定班级！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/Attendances/tlist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&bjId="+bjId+"&isAjax=1"+"&xsId="+xsId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+#{form action:@Attendances.tlist(),enctype :'multipart/form-data',method:'post',id:'teaAttendance'}
+
+    <div class="bobti">
+        考勤查询<span style="color:#2d2d2d;font-family:Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;">（以下考勤信息仅供参考）</span>
+    </div>
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="697" cellspacing="0" cellpadding="0" border="0">
+
+                <tbody><tr>
+
+                    <td width="60%">
+                        日期：
+                        <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="startTime" name="startTime" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }">
+                        到
+                        <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="endTime" name="endTime" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        班级：
+                        <select onchange="queryStudentsByClassId(this.value)" id=bjId name="bjId">
+                            <option value="-1">--请选择--</option>
+                            #{list items:clazzList,as:'classes'}
+                                <option value="${classes.bjId}">${classes.bjMcheng}</option>
+                            #{/list}
+                        </select>&nbsp;&nbsp;
+                        学生：<select id="xsId" name="xsId"></select>
+                    </td>
+
+                    <td >
+                        <input type="button" class="cx" value="查询" id="attenQueryBtn">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="chax-1 font-2" id = "listTable">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="kaoqt">
+        <tbody>
+        <tr>
+            <td width="20%" class="kaoq-td-1 t1 font-2">日期</td>
+            <td width="80%">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="kaoqt-1">
+                    <tbody>
+                    <tr>
+                        <td width="20%" class="t1 font-2">姓名</td>
+                        <td width="30%" class="t1 font-2">读卡时间 </td>
+                        <td width="30%" class="t1 font-2">考勤结果</td>
+                        <td width="20%" class="t1 font-2"> 状态</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+        <div class="pageNav">
+            #{page page : attendancePage, url : "/Attendances/tlist", paramIds : "xsId bjId startTime endTime", isAjax : "true"/}
+        </div>
+
+    </div>
+#{/form}
+
+</div>
+

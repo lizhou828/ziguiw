@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ background:#dbeaf3 url(../../images/user/body-bg.gif) repeat-x top left; padding-bottom:40px;}
+
+
+/*kaoqinchaxun*/
+
+.right{ width:797px; float:left;}
+
+.bobti{ border-bottom:1px #aecada solid; margin-left:20px; padding-top:30px; width:729px; color:#006da6;height:35px; line-height:22px; font-weight:bolder;}
+.zzll{ width:729px; margin-left:20px; margin-bottom:40px;}
+.zzll a{ line-height:22px; color:#006da6;}
+.zzll a:hover{color:#333;}
+
+.ly-top{width:715px; padding-bottom:10px;padding-top:14px; padding-left:14px; background:#eef6fb;}
+.ly-top span,.xx-m span,.xx-m-2 span,.xx-f span,.ly-2 span,.ly-3 span{color:#006da6;}
+.ly-top p,.ly-4 p{ line-height:22px; float:left; margin-right:30px;}
+.xx-2{line-height:30px;}
+.xx-m{ padding-top:20px; padding-left:10px; padding-bottom:20px;}
+.xx-m p{line-height:22px; padding-top:10px;}
+
+.xx-f{width:710px;padding-top:14px; padding-left:14px; background:#f4f4f4; padding-bottom:14px; margin-bottom:10px; margin-top:5px;}
+
+.hf-1{width:690px; height:102px; padding:2px 2px; line-height:22px; border:1px #d2d2d2 solid; margin-top:10px;}
+.hf-2{width:117px; height:44px; border:0; background:url(../../images/user/btn-45.gif) no-repeat top left; margin-top:10px;}
+
+.ly-2,.ly-3{width:705px; padding:10px 10px;  margin-bottom:5px; background:#f4f4f4; }
+.xx-m-2{ padding-top:5px; line-height:22px;}
+
+.ly-4 p{color:#999;}
+

@@ -1,0 +1,44 @@
+#{extends 'WapUCs/home.html'/}
+<div class="bobti">
+    班级通知<span style="color:#2d2d2d;font-family:Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;">（以下考勤信息仅供参考）</span>
+</div>
+<div class="xunc_1-1">
+    <font color="red"><p> &nbsp;近一个月内的信息</p></font>
+</div>
+
+<div class="title_5">
+    <p>( 共 ${page.totalCount}  封 )</p>
+</div>
+
+<div class="c_notice_con">
+
+        #{if page.data == null || page.data.size() == 0}
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+
+        </tr>
+            <th width="50%">内容</th>
+            <td width="50%"> 没有相关信息！</td>
+        </tr>
+        </table>
+        #{/if}
+            #{else }
+
+                #{list items:page.data,as:'data' }
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <th width="50%">主题</th>
+                        <td width="50%"> ${data?.title}</td>
+                    </tr>
+                    <tr>
+                        <th>内容</th>
+                        <td>${data?.text}</td>
+                    </tr>
+                    <tr>
+                        <th>时间</th>
+                        <td>${data?.createTime }</td>
+                    </tr>
+                </table>
+                #{/list}
+            #{/else}
+</div>

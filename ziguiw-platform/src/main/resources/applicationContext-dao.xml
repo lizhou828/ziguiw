@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="byName">
+	<context:component-scan base-package="com.zigui.dao" />
+	<bean id="newsDao" class="com.zigui.dao.NewsDao"/>
+	<bean id="newsChannleDao" class="com.zigui.dao.NewsChannleDao"/>
+	<bean id="newsRecommendRegionDao" class="com.zigui.dao.NewsRecommendRegionDao"/>
+	<bean id="newsSourceDao" class="com.zigui.dao.NewsSourceDao"/>
+	<bean id="templateDao" class="com.zigui.dao.TemplateDao"/>
+	
+	<bean id="userBaseDao" class="com.zigui.dao.UserBaseDao"/>
+	<bean id="roleDao" class="com.zigui.dao.RoleDao"/>
+	<bean id="authorityDao" class="com.zigui.dao.AuthorityDao"/>
+	<bean id="administratorDao" class="com.zigui.dao.AdministratorDao"/>
+	<bean id="pointsHistoryDao" class="com.zigui.dao.PointsHistoryDao"/>
+	
+	<bean id="questionDao" class="com.zigui.dao.QuestionDao"/>
+	<bean id="answerDao" class="com.zigui.dao.AnswerDao"/>
+	<bean id="debateDao" class="com.zigui.dao.DebateDao"/>
+	<bean id="debateOpinionDao" class="com.zigui.dao.DebateOpinionDao"/>
+	<bean id="dataFunctionDao" class="com.zigui.dao.DataFunctionDao"/>
+	<bean id="commonDao" class="com.zigui.dao.CommonDao"/>
+	
+	<bean id="knowledgeDao" class="com.zigui.dao.KnowledgeDao"/>
+	<bean id="knowledgeChannleDao" class="com.zigui.dao.KnowledgeChannleDao"/>
+	<bean id="knowledgeRecommendRegionDao" class="com.zigui.dao.KnowledgeRecommendRegionDao"/>
+	
+	<bean id="userDao" class="com.zigui.dao.UserDao"/>
+	<bean id="userAlbumDao" class="com.zigui.dao.UserAlbumDao"/>
+	<bean id="userDiaryDao" class="com.zigui.dao.UserDiaryDao"/>
+	<bean id="userDiaryCommnetDao" class="com.zigui.dao.UserDiaryCommentDao"/>
+	<bean id="userFriendDao" class="com.zigui.dao.UserFriendDao"/>
+	<bean id="userMessageDao" class="com.zigui.dao.UserMessageDao"/>
+	<bean id="userMoodDao" class="com.zigui.dao.UserMoodDao"/>
+	<bean id="userPhotoDao" class="com.zigui.dao.UserPhotoDao"/>
+	<bean id="userCommentDao" class="com.zigui.dao.UserCommentDao"/>
+	<bean id="spaceVisitHistoryDao" class="com.zigui.dao.SpaceVisitHistoryDao"/>
+	
+	<bean id="schoolDao" class="com.zigui.dao.SchoolDao"/>
+	<bean id="schoolInfoDao" class="com.zigui.dao.SchoolInfoDao"/>
+    <bean id="nianJiDao" class="com.zigui.dao.NianJiDao"/>
+	
+	<!-- community -->
+	<bean id="boardDao" class="com.zigui.dao.BoardDao"/>
+	<bean id="forumDao" class="com.zigui.dao.ForumDao"/>
+	<bean id="loveDao" class="com.zigui.dao.LoveDao"/>
+	
+	<bean id="adDao" class="com.zigui.dao.AdDao"/>
+	<bean id="adPlanDao" class="com.zigui.dao.AdPlanDao"/>
+	<bean id="configCenterDao" class="com.zigui.dao.ConfigCenterDao"/>
+	
+	<bean id="healthArchivesDao" class="com.zigui.dao.HealthArchivesDao"/>
+	<bean id="healthHistoryDao" class="com.zigui.dao.HealthHistoryDao"/>
+    <bean id="commonTypeDao" class="com.zigui.dao.CommonTypeDao"/>
+	<bean id="growArchivesDao" class="com.zigui.dao.GrowArchivesDao"/>
+	<bean id="growFootmarkDao" class="com.zigui.dao.GrowFootmarkDao"/>
+	<bean id="homeWorkDao" class="com.zigui.dao.HomeWorkDao"/>
+	<bean id="commonMessageDao" class="com.zigui.dao.CommonMessageDao"/>
+
+    <bean id="studentDao" class="com.zigui.dao.StudentDao"/>
+    <bean id="classDao" class="com.zigui.dao.ClassDao"/>
+    <bean id="teacherClaszDao" class="com.zigui.dao.TeacherClaszDao"/>
+    <bean id="parentDao" class="com.zigui.dao.ParentDao"/>
+    <bean id="teacherDao" class="com.zigui.dao.TeacherDao"/>
+
+    <bean id="dsisDao" class="com.zigui.dao.DsisDao">
+        <property name="hibernateTemplate" ref="dsis_hibernateTemplate"></property>
+        <property name="sessionFactory" ref="dsis_sessionFactory"></property>
+    </bean>
+    <bean id="dsisExamDao" class="com.zigui.dao.DsisExamDao">
+        <property name="hibernateTemplate" ref="dsis_hibernateTemplate"></property>
+        <property name="sessionFactory" ref="dsis_sessionFactory"></property>
+    </bean>
+    <bean id="dsisTermSetDao" class="com.zigui.dao.DsisTermSetDao">
+        <property name="hibernateTemplate" ref="dsis_hibernateTemplate"></property>
+        <property name="sessionFactory" ref="dsis_sessionFactory"></property>
+    </bean>
+
+    <bean id="newsAuditDao" class="com.zigui.dao.NewsAuditDao"/>
+
+    <bean id="schoolListDao" class="com.zigui.dao.SchoolListDao"/>
+    <bean id="classInfoDao" class="com.zigui.dao.ClassInfoDao"/>
+    <bean id="classForumDao" class="com.zigui.dao.ClassForumDao"/>
+    <bean id="classPhotoDao" class="com.zigui.dao.ClassPhotoDao"/>
+</beans>

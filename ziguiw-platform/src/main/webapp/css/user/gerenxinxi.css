@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+body{ background:#dbeaf3 url(../../images/user/body-bg.gif) repeat-x top left; padding-bottom:40px;}
+
+
+.zzll{ width:729px; margin-left:20px; margin-bottom:40px; overflow:hidden;}
+.zzll-1{ width:729px; margin-left:20px; margin-bottom:40px;}
+
+.tab-xx{ margin-bottom:10px; margin-top:20px; border:1px solid #ccc;}
+.tab-xx td.tdrt{border-bottom:1px solid #ccc;}
+
+.tab-xx-2{ margin-top:20px;}
+.tab-xx-1 td,.tab-xx-2 td{color:#000; line-height:22px; padding:8px 8px; }
+
+.tab-xx-4 {margin-top:20px;}
+.tab-xx-4 td{color:#000; line-height:22px; padding:6px 6px; }
+.bod{ border-bottom:1px #ccc solid; }
+
+.bkk{border-left:1px solid #ccc; border-bottom:1px solid #ccc;}
+.bky{border-left:1px solid #ccc;}
+.tab-xx td{color:#000; line-height:22px;}
+.td-xx-1{background:#f8f8f8;}
+.tab-xx td span{color:#F00;}
+
+.td-xx-2 {border-bottom:1px #aecada solid; line-height:40px; margin-bottom:10px;}
+.td-xx-2 span{color:#F00;}
+.qd{width:117px; height:44px; border:0; background:url(../../images/user/btn-44.gif) no-repeat top left;}
+input.xg{width:300px; height:22px; padding:1px 3px; line-height:22px;color:#999; border:1px #CCC solid;}
+
+
+.right{ width:797px; float:left; padding-bottom:20px;}
+.bobti{ border-bottom:1px #aecada solid; margin-left:20px; padding-top:30px; width:729px; color:#006da6;height:35px; line-height:22px; font-weight:bolder;}
+
+.xx-img{ width:120px; height:160px; border:1px #ccc solid; padding:1px 1px; display:block; background:#FFF;}
+.xx-img img{ width:120px; height:160px;}
+
+
+.xunc_1{width:727px; border:1px solid #aecada; background:#eef6fb; margin:20px 0px 0px 20px; }
+.xunc_1-1{ border:1px solid #fff; background:#eef6fb; padding:5px 10px; width:705px;}
+.xunc_1 table td{ line-height:30px; padding:5px 0px;}
+.xunc_1 table td.chx{font-weight:bold; border-bottom:1px solid #e8e8e8}
+.xunc_1 select{ width:120px; height:24px;}
+.xunc_1 input.cx{ background:url(../../images/user/btn-45_03_03.gif) no-repeat top left; height:36px; width:114px; border:none; font-weight:bolder; color:#FFF; text-align:center;}
+
+
+.xunc_2{  width:729px; margin:20px 0px 0px 20px; padding:5px 0px;}
+.xunc_2 h1{ color:red; }
+.xunc_2 h1 span{ font-weight:bold; color:#000;}
+.xunc_2 table{ border-top:1px solid #f4d7a6;border-left:1px solid #f4d7a6; margin:10px 0px 0px 0px; line-height:22px; }
+.xunc_2 table td{border-right:1px solid #f4d7a6; border-bottom:1px solid #f4d7a6;  padding:8px 5px;}
+.xunc_2 table td.t1{ background:#fff1ce; font-weight:bold; color:#252525;}
+.xunc_2 a,.xunc_3 a{ color:#224a9f; text-decoration:underline;} 
+.xunc_2 table td.t2{ color:#ff6c00; }
+.xunc_1 input.cx-2{ background:url(../../images/user/btn-45_03_03.gif) no-repeat top left; height:36px; width:109px; border:none; font-weight:bolder; color:#FFF;}
+.xunc_1 table a{ color:#09F;text-decoration:none;}
+
+.icon16 { margin-top:3px; margin-right:2px; width:39px; height:16px; line-height:16px;}
+
+.xx-img-1{ width:75px; height:100px; border:1px #CCC solid; padding:1px 1px; display:block;}
+.xx-img-1 img{width:75px;}
+
+input.form-file  { display: inline; height: auto; font-size: 12px !important; height:28px; padding:2px 2px; line-height:22px;}
+.hf-1{width:98%; height:102px; padding:2px 2px; line-height:22px;}
+.hf-3{background:url(../../images/user/btn-45_03.gif) no-repeat top left; width:116px; height:36px; border:0; font-weight:bolder; color:#FFF;}
+
+.tx-img{ width:729px; border:1px #eaeaea solid; background:#fafafa; margin-top:20px; margin-bottom:10px;}
+.tx-img td{line-height:22px; padding:10px 10px; }
+.tab-xx-3 td{line-height:22px; padding:12px 12px;}
+.xgr{ border-bottom:1px #eaeaea solid; }
+.xgr-1{ border-bottom:1px  #ccc solid; }
+
+.tab-xx-3 span{ color:#F00;}
+textarea.hf-1{width:80%; height:102px; padding:1px 3px; line-height:20px; color:#999;border:1px #CCC solid;}
+
+.tab-xx-5{ margin-top:20px; width:100%;}
+.tab-xx-5 td{line-height:22px; padding:8px 8px;}
+.tx-img-1{ margin-top:22px; width:100%;}
+
+.tx-img-1 a{float:right;}
+
+
+.zzll-8{ width:729px; margin-left:20px; margin-bottom:20px; overflow:hidden;}
+
+
+.sd{  padding-left:0px; line-height:30px; padding-top:20px;}
+
+.line-5{ height:1px !important; margin:15px 0px; line-height:1px; background:#CCC; overflow:hidden;}
+.zp-xx li img{ width:90px; height:120px;border:1px #ccc solid; padding:1px 1px; display:block; background:#FFF;}
+.zp-xx{ margin:0 auto;width:720px; height:150px; overflow:hidden; }
+.zp-xx li{ width:94px; float:left; margin:5px 13px; _display:inline; text-align:center; height:150px;}
+.zp-xx li a{ width:94px; float:left; text-align:center; line-height:25px; display:block; overflow:hidden;}

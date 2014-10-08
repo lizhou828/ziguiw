@@ -1,0 +1,27 @@
+<table cellspacing="0" cellpadding="0" border="0" class="sideright_tab1">
+    <tbody>
+    <tr bgcolor="#f2f4f6">
+        <td width="608" class="td_5">信息内容</td>
+    </tr>
+    #{if stuCommentPage == null || stuCommentPage.data == null}
+    <tr>
+        </br>
+          <strong>没有找到相关信息！</strong>
+        </br>
+    </tr>
+    #{/if}
+    #{else }
+        #{list items:stuCommentPage.data,as:'data' }
+        <tr style="cursor:pointer" >
+            <td class="td_6">
+                   ${data['MSM_CONTENT']}&nbsp;
+                <p>${data['DISPLAY_DATE']}&nbsp;</p>
+            </td>
+        </tr>
+        #{/list}
+    #{/else}
+    </tbody>
+</table>
+<div class="pageNav">
+#{page page : stuCommentPage, url : "/StudentComments/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+</div>

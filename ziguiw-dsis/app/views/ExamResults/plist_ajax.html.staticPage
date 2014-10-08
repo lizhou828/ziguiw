@@ -1,0 +1,53 @@
+<table border="0" cellpadding="0" cellspacing="0" width="729">
+    <tbody>
+    <tr>
+        <th>考试科目</th>
+        <th>得分</th>
+    </tr>
+
+
+    <tr>
+        <th>语文</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>数学</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>英语</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>物理</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>化学</th>
+        <th></th>
+    </tr><tr>
+        <th>生物</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>政治</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>历史</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>地理</th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <th>总分</th>
+        <th></th>
+    </tr>
+
+
+    </tbody>
+</table>

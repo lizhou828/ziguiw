@@ -1,0 +1,41 @@
+#{extends 'WapUCs/home.html'/}
+    <div class="bobti">
+        考勤查询<span style="color:#2d2d2d;font-family:Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;">（以下考勤信息仅供参考）</span>
+    </div>
+    <div class="xunc_1-1">
+        <font color="red"><p> &nbsp;近一个月内的信息</p></font>
+    </div>
+
+    <div class="kaoqin_con">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <th width="25%">日期</th>
+                <th width="25%">读卡时间</th>
+                <th width="25%">考勤结果</th>
+                <th width="25%">状态</th>
+            </tr>
+            #{if page == null || page.data == null }
+                未查找到相关记录！
+            #{/if}
+            #{else }
+                 #{list items:page.data ,as:'data'}
+                <tr>
+                    <td>
+                        ${data['READCARD_TIME'] ? new java.text.SimpleDateFormat("yyyy年MM月dd日").format(new java.util.Date(data['READCARD_TIME'])) : null}
+                    </td>
+                    <td>
+                        ${data['READCARD_TIME'] ? new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date(data['READCARD_TIME'])) : null}
+                    </td>
+                    <td>${data['RESULT']}</td>
+                    <td>
+                        #{if data['IN_OUT_STATE']=="0"} <font color="red">离校</font>#{/if}
+                        #{elseif data['IN_OUT_STATE']=="1"}<font color="green">进校</font>#{/elseif}
+                    </td>
+                </tr>
+                #{/list}
+            #{/else}
+
+
+        </table>
+    </div>
+

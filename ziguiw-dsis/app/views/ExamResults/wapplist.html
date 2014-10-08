@@ -1,0 +1,95 @@
+#{extends 'WapUCs/home.html'/}
+#{script src:'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#examQueryBtn").click(function(){
+            var wapXsIdNode= document.getElementById("wapXsId")
+            var wapXsId;
+            if(wapXsIdNode){
+                wapXsId=document.getElementById("wapXsId").value;
+                if(wapXsId && wapXsId == '-1'){
+                    alert("必须选定你的孩子！");
+                    return false;
+                }
+            }
+            var termId= $("#termId").val();
+            var examId= $("#examId").val();
+            if(!termId || termId == null || termId == '-1'){
+                alert("必须选定学期！");
+                return false;
+            }
+            if( !examId || examId == null || examId == '-1'){
+                alert("必须选定考试名称！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/ExamResults/wapplist?isAjax=1"+"&wapXsId="+wapXsId+"&termId="+termId+"&examId="+examId,
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+#{form action:@ExamResults.wapplist(),enctype :'multipart/form-data',method:'post',id:'stuQueryForm'}
+<div class="bobti">
+    成绩查询<span style="color:#2d2d2d;font-family:Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;">（以下考勤信息仅供参考）</span>
+</div>
+
+<div class="xunc_1-1">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+        #{if studentList.size() > 1 }
+        <tr>
+            <td>孩子：
+                <select name="wapXsId" id="wapXsId" onchange="queryTermByXsId(this.value);">
+                    <option value="-1">--请选择--</option>
+                    #{list items:studentList,as:'student'}
+                        <option value="${student.xsId}">${student.xsXming}</option>
+                    #{/list}
+                </select>
+            </td>
+        </tr>
+        #{/if}
+        <input type="hidden" id="bjId" name="bjId" value="${clazz.bjId}">
+        <tr>
+            <td>学期：
+                <select name="termId" id="termId" onchange="queryExamInfo(this.value);">
+                    <option value="-1">--请选择--</option>
+                #{list items:termSetList,as:'term'}
+                    <option value="${term.termId}">${term.termName}</option>
+                #{/list}
+
+                </select>
+            </td>
+            <td>考试名称：
+                <select name="examId" id="examId"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;<input type="button" class="cx" value="查询" id="examQueryBtn" name="examQueryBtn" style=""></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="score_con" id="listTable">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <th width="50%">学生姓名</th>
+            <td width="50%">${student.xsXming}</td>
+        </tr>
+       <tr>
+           <th><span style="font-weight: bold;">总&nbsp;&nbsp;分</span></th>
+           <td><span style="font-weight: bold;">0.0</span></td>
+       </tr>
+    </table>
+
+
+</div>
+
+#{/form}

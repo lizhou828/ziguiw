@@ -1,0 +1,29 @@
+#{if schNoticePage == null || schNoticePage.data == null}
+    <table>
+        <ul>
+            <li>没有相关信息！</li>
+        </ul>
+    </table>
+#{/if}
+#{else }
+    <table>
+            #{list items:schNoticePage.data,as:'data'}
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>${data['MSG_CONTENT']}</p>
+                            <p style="margin-top:8px;">
+                            ${new java.text.SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(data['PUB_DATE']))}
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            #{/list}
+    </table>
+
+*{分页}*
+<div class="pageNav">
+#{page page : schNoticePage, url : "/SchoolNotices/list", paramIds : "xsId startTime endTime", isAjax : "true"/}
+</div>
+
+#{/else}

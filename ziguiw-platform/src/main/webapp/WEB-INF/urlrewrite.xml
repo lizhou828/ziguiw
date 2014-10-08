@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN"
+        "http://tuckey.org/res/dtds/urlrewrite2.6.dtd">
+
+<!--   
+  
+Configuration file for UrlRewriteFilter   
+http://tuckey.org/urlrewrite/   
+  
+-->
+<urlrewrite>
+    <rule>
+        <from>^/index$</from>
+        <to>/index.jsp</to>
+    </rule>
+    <rule>
+        <from>^/news/index$</from>
+        <to>/page.action?templateName=news_index.ftl</to>
+    </rule>
+    <rule>
+        <from>^/news/list/(\d+)$</from>
+        <to>/page.action?templateName=news_list.ftl&amp;channleId=$1</to>
+    </rule>
+    <rule>
+        <from>^/news/detail/(.*)$</from>
+        <to>/page.action?templateName=news.ftl&amp;newsId=$1</to>
+    </rule>
+    <rule>
+        <from>^/study/all_question.html$</from>
+        <to>/ask/question_list.jsp?queryType=0</to>
+    </rule>
+    <rule>
+        <from>^/study/my_question.html$</from>
+        <to>/ask/question_list.jsp?queryType=4</to>
+    </rule>
+
+    <rule>
+        <from>^/study/ask.html$</from>
+        <to>/ask/ask.jsp</to>
+    </rule>
+
+    <rule>
+        <from>^/study/index$</from>
+        <to>/page.action?templateName=knowledge_index.ftl</to>
+    </rule>
+
+    <rule>
+        <from>^/study/youer/list$</from>
+        <to>/page.action?templateName=knowledge_list.ftl&amp;channleId=1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/shaoer/list$</from>
+        <to>/page.action?templateName=knowledge_list.ftl&amp;channleId=2</to>
+    </rule>
+
+    <rule>
+        <from>^/study/qingnian/list$</from>
+        <to>/page.action?templateName=knowledge_list.ftl&amp;channleId=3</to>
+    </rule>
+
+    <rule>
+        <from>^/study/psychology/list$</from>
+        <to>/page.action?templateName=knowledge_list.ftl&amp;channleId=4</to>
+    </rule>
+
+    <rule>
+        <from>^/study/youer/detail/(.*)$</from>
+        <to>/page.action?templateName=knowledge_detail.ftl&amp;knowledgeId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/shaoer/detail/(.*)$</from>
+        <to>/page.action?templateName=knowledge_detail.ftl&amp;knowledgeId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/qingnian/detail/(.*)$</from>
+        <to>/page.action?templateName=knowledge_detail.ftl&amp;knowledgeId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/psychology/detail/(.*)$</from>
+        <to>/page.action?templateName=knowledge_detail.ftl&amp;knowledgeId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/detail/(.*)$</from>
+        <to>/page.action?templateName=knowledge_detail.ftl&amp;knowledgeId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/yuer/list/0$</from>
+        <to>/page.action?templateName=question_list.ftl&amp;status=0</to>
+    </rule>
+
+    <rule>
+        <from>^/study/yuer/list/1$</from>
+        <to>/page.action?templateName=question_list.ftl&amp;status=1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/yuer/list/3$</from>
+        <to>/page.action?templateName=myquestion_list.ftl</to>
+    </rule>
+
+    <rule>
+        <from>^/study/yuer/ask$</from>
+        <to>/page.action?templateName=ask.ftl</to>
+    </rule>
+
+    <rule>
+        <from>^/study/yuer/detail/(.*)$</from>
+        <to>/page.action?templateName=question_detail.ftl&amp;questionId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/study/bianlun/list$</from>
+        <to>/page.action?templateName=debate_list.ftl</to>
+    </rule>
+
+    <rule>
+        <from>^/study/bianlun/detail/(.*)$</from>
+        <to>/page.action?templateName=debate_detail.ftl&amp;debateId=$1</to>
+    </rule>
+
+    <!--community-->
+    <rule>
+        <from>^/community/index$</from>
+        <to>/community/forum_index.jsp</to>
+    </rule>
+
+    <rule>
+        <from>^/community/aixin/list$</from>
+        <to>/forum/forumList.action?boardId=1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/age/list$</from>
+        <to>/forum/forumList.action?boardId=2</to>
+    </rule>
+
+    <rule>
+        <from>^/community/city/list$</from>
+        <to>/forum/forumList.action?boardId=3</to>
+    </rule>
+
+    <rule>
+        <from>^/community/jiaoliu/list$</from>
+        <to>/forum/forumList.action?boardId=4</to>
+    </rule>
+
+    <rule>
+        <from>^/community/zhuanjia/list$</from>
+        <to>/forum/forumList.action?boardId=5</to>
+    </rule>
+
+
+
+    <rule>
+        <from>^/community/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/aixin/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/age/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/city/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/jiaoliu/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/community/zhuanjia/detail/(\d+)$</from>
+        <to>/page.action?templateName=forum_detail.ftl&amp;forumId=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/myhome$</from>
+        <to>/user/portal.jsp</to>
+    </rule>
+
+    <rule>
+        <from>^/myhome/(.*)/diary/(.*)$</from>
+        <to>/user/getDiaryById?diary.id=$2&amp;hostUserName=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/myhome/(.*)/photo/(.*)/(.*)$</from>
+        <to>/user/getRoundPhoto.action?photoId=$3&amp;albumId=$2&amp;hostUserName=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/school/(.*)/photo/(.*)/(.*)$</from>
+        <to>/user/getSchoolRoundPhoto.action?photoId=$3&amp;albumId=$2&amp;hostUserName=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/myhome/(.*)$</from>
+        <to>/user/portal.jsp?hostUserName=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/myschool/(.*)$</from>
+        <to>/school/index.jsp?hostUserName=$1</to>
+    </rule>
+
+
+
+</urlrewrite>

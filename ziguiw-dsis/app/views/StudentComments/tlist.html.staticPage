@@ -1,0 +1,132 @@
+#{extends 'main.html'/}
+#{set title:'学生评语--- 子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#QueryBtn").click(function(){
+            var bjId= $("#bjId").val();
+            var xsId= $("#xsId").val();
+            if( bjId == null ||bjId == '-1'){
+                alert("必须选定班级！");
+            }
+            $.ajax({
+                type:"GET",
+                url:"/StudentComments/tlist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId+"$bjId="+bjId,
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                },
+                error : function(){
+                    alert("出错啦！");
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+<div class="right">
+#{form action:@StudentComments.tlist(),enctype :'multipart/form-data',method:'post',id:'studentCommentList'}
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="697" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+
+                    <td width="60%">
+                        日期：
+                        <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="startTime" name="startTime" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }">
+                        到
+                        <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="endTime" name="endTime" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }">
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        班级：
+                        <select id=bjId name="bjId">
+                            <option value="-1">--请选择--</option>
+                            #{list items:clazzList,as:'classes'}
+                                <option value="${classes.bjId}">${classes.bjMcheng}</option>
+                            #{/list}
+                        </select>&nbsp;&nbsp;
+
+                    </td>
+
+                    <td width="40%"><input type="submit" value="查  询" class="cx" id="QueryBtn"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="ly-tab font-2" id="listTable">
+        <table cellspacing="0" cellpadding="0" border="0" class="sideright_tab1">
+            <tbody>
+            <tr bgcolor="#f2f4f6">
+                <td width="608" class="td_5">信息内容</td>
+            </tr>
+
+                    <tr style="cursor:pointer" >
+                        <td class="td_6">
+                       内容： 今天汤妙同学表现很不错，再接再励&nbsp;
+
+                          <p>来自： G205班&nbsp;</p>
+                           <p>时间： 2013-01-04&nbsp;</p>
+                        </td>
+                    </tr>
+            <tr style="cursor:pointer" >
+                <td class="td_6">
+                    内容： 今天汤妙、李佳琪、唐慧梅同学表现很不错，再接再励&nbsp;
+
+                    <p>来自： G205班&nbsp;</p>
+                    <p>时间： 2013-02-04&nbsp;</p>
+                </td>
+            </tr>
+            <tr style="cursor:pointer" >
+                <td class="td_6">
+                    内容： 今天汤妙同学表现很不错，再接再励&nbsp;
+
+                    <p>来自： G205班&nbsp;</p>
+                    <p>时间： 2013-03-04&nbsp;</p>
+                </td>
+            </tr>
+            <tr style="cursor:pointer" >
+                <td class="td_6">
+                    内容： 今天汤妙同学表现很不错，课堂上很活跃，积极发言，望再接再励&nbsp;
+
+                    <p>来自： G205班&nbsp;</p>
+                    <p>时间： 2013-04-04&nbsp;</p>
+                </td>
+            </tr>
+            <tr style="cursor:pointer" >
+                <td class="td_6">
+                    内容： 今天汤妙同学表现很不错，再接再励&nbsp;
+
+                    <p>来自： G205班&nbsp;</p>
+                    <p>时间： 2013-04-01&nbsp;</p>
+                </td>
+            </tr>
+            <tr style="cursor:pointer" >
+                <td class="td_6">
+                    内容： 今天汤妙同学表现很不错，再接再励&nbsp;
+
+                    <p>来自： G205班&nbsp;</p>
+                    <p>时间： 2013-04-06&nbsp;</p>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+#{/form}
+</div>

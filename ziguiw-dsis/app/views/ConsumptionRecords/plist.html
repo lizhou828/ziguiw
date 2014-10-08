@@ -1,0 +1,97 @@
+#{extends 'main.html'/}
+#{set title:'消费记录查询——子贵网用户中心' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#consRecordsQueryBtn").click(function(){
+            var xsNode = $("#xsId");
+            var xsId
+            if(xsNode){
+                xsId = $("#xsId").val();
+            } else{
+                xsId = $("#studentId").val();
+            }
+            if(xsId && xsId != null && xsId == '-1'){
+                alert("必须选定一个孩子！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/ConsumptionRecords/plist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId,
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+
+<div class="right">
+#{form action:@ConsumptionRecords.plist(),enctype :'multipart/form-data',method:'post',id:'consRecordsForm'}
+
+        <div class="bobti">消费记录查询</div>
+        <div class="xunc_1 font-2">
+            <div class="xunc_1-1">
+                <table width="697" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                    <tr>
+
+                        <td width="60%">
+                            日期：
+                            <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                                   id="startTime" name="startTime" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }">
+                            到
+                            <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                                   id="endTime" name="endTime" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }">
+                        </td>
+                    </tr>
+
+                    <tr>
+                    #{if studentList != null && studentList.size() > 1}
+                        <td>
+                            孩子：<select id="xsId" name="xsId">
+                            <option value="-1">--请选择--</option>
+                            #{list items:studentList,as:'student'}
+                                <option value="${student.xsId}">${student.xsXming}</option>
+                            #{/list}
+                        </select>
+                        </td>
+                    #{/if}
+                    #{else }
+                        <input type="hidden" id ="studentId" value="${student.xsId}">
+                    #{/else}
+
+                        <td><input type="button" value="查  询" class="cx" id="consRecordsQueryBtn"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="xunc_2 font-2" id="listTable">
+            <h1 class="font-3">您的孩子 (  ${student.xsXming}  ) 消费记录如下</h1>
+            <table width="729" cellspacing="0" cellpadding="0" border="0" >
+                <tbody>
+                    <tr>
+                        <td class="t1">姓名</td>
+                        <td class="t1">类型</td>
+                        <td class="t1">消费时间</td>
+                        <td class="t1">消费金额(元)</td>
+                        <td class="t1">余额(元)</td>
+                    </tr>
+                </tbody>
+                <tbody id="tblAttendance">
+                    抱歉，没有查询到相关记录！
+                </tbody>
+            </table>
+            <div class="pageNav">
+                #{page page : consumeRecordPage, url : "/ConsumptionRecords/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+            </div>
+        </div>
+    #{/form}
+
+</div>

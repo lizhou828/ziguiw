@@ -1,0 +1,97 @@
+#{extends 'main.html'/}
+#{set title:'学生学籍档案列表'/}
+<div class="right">
+    <script type="text/javascript">
+        $(function(){
+            $("#studentlist").click(function(){
+                var bjId= $("#bjId").val();
+                if( bjId == null ||bjId == '-1'){
+                    alert("必须选定班级！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/Students/tshow?isAjax=1"+"&bjId="+bjId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            }) ;
+
+        });
+    </script>
+    #{form action:@Students.tshow(),enctyp:'multipart/form-data'}
+        <div class="bobti font-5">学生学籍档案列表</div>
+        <div class="xunc_1 font-2">
+            <div class="xunc_1-1">
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            班级：
+                            <select  name="bjId" id="bjId">
+                                <option value="-1">--请选择--</option>
+                                    #{list items:clazzList,as :'clazz'}
+                                        <option value="${clazz.bjId}">${clazz.bjMcheng}</option>
+                                    #{/list}
+                            </select>
+                        </td>
+                        <td>
+                            <input id="studentlist" type="button"  value="查询" class="cx" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+
+
+            <div class="dangan_tab" id="listTable">
+                <p class="dangan_class"><b><span id="className">${clazz.bjMcheng}</span>班所有孩子学籍档案如下：</b></p>
+
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>姓名</th>
+                        <th>照片</th>
+                        <th>性别</th>
+                        <th>出生日期</th>
+                        <th>手机</th>
+                        <th>在校状态</th>
+                    </tr>
+                    #{list  items:studentPage.data,as :'student'}
+                        <tr>
+                            <td class="dangan_single">${student?.xsXming}</td>
+                            <td class="dangan_single">
+                                <div class="da_img  xx-img">
+                                    <img src="${student.personalPhoto ? 'http://dsis.952116.com/'+student.personalPhoto : '/public/images/default.jpg'}">
+                                </div>
+                            </td>
+                            <td class="dangan_single">${student?.sex? student.sex : '未填写'}</td>
+                            <td class="dangan_single">${student?.birthday? student.birthday : '未填写'} </td>
+                            <td class="dangan_single">
+                                #{if student?.homePhone.equals("") || student?.homePhone.equals("null") }
+                                    未填写
+                                #{/if}
+                                #{else }
+                                ${ student?.homePhone}
+                                #{/else}
+                            </td>
+                            <td class="dangan_single" id="studentStatus">
+                            ${com.arj.ziguiw.common.StudentInSchoolState.map.get(student?.status)}
+                            </td>
+                        </tr>
+                    #{/list}
+                </table>
+                <div class="pageNav">
+                    #{page page:studentPage,url:"/Students/tshow?bjId="+clazz.bjId, isAjax:"true"/}
+                </div>
+            </div>
+
+
+   #{/form}
+</div>

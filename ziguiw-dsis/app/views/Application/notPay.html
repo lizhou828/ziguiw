@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'未交年费——子贵网用户中心'/}
+<div style="margin-left: 30px">
+
+<h2>您的孩子：${student?.xsXming}未缴纳年费，您无法查看该孩子的相关信息</h2>
+<br/>
+<h3>您可以<a href="#xsId=${student?.xsId}&userId=${userBase?.id}" style="color: #ff0000;">在线充值年费</a></h3>
+<br/>
+<h3> 或者与客服人员联系，客服电话：952116</h3>
+<br/>
+</div>

@@ -1,0 +1,47 @@
+<h1 class="font-3">您的学生的消费记录如下:</h1>
+<table width="729" cellspacing="0" cellpadding="0" border="0" >
+    <tbody>
+    <tr>
+        <td class="t1">卡号</td>
+        <td class="t1">姓名</td>
+        <td class="t1">类型</td>
+        <td class="t1">消费时间</td>
+        <td class="t1">消费金额(元)</td>
+        <td class="t1">余额(元)</td>
+    </tr>
+    </tbody>
+    <tbody id="tblAttendance">
+
+    #{if consumeRecordPage == null || consumeRecordPage.data == null}
+    抱歉，没有查询到相关记录！
+    #{/if}
+    #{else }
+        #{list items:consumeRecordPage.data,as:'data'}
+            <tr>
+                <td >${data['CARD_NUMBER']}</td>
+                #{if student==null}
+                    <td >${data['XS_XMING']}</td>
+                #{/if}
+                #{else }
+                    <td >${student.xsXming}</td>
+                #{/else}
+                <td >
+                    #{if data['CONS_STATE']=='0'}消费#{/if}
+                    #{elseif data['CONS_STATE']=='1'}充值#{/elseif}
+                    #{elseif data['CONS_STATE']=='2'}取款#{/elseif}
+                    #{elseif data['CONS_STATE']=='3'}补助#{/elseif}
+                    #{else}非法退出#{/else}
+                </td>
+                <td >
+                ${data['CONS_TIME'] ? new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.lang.Long(data['CONS_TIME'])) : null}
+                </td>
+                <td >${data['CONS_FARE']}(元)</td>
+                <td >${data['X_MONEY']}(元)</td>
+            </tr>
+        #{/list}
+    #{/else}
+    </tbody>
+</table>
+<div class="pageNav">
+#{page page : consumeRecordPage, url : "/ConsumptionRecords/tlist", paramIds : "xsId bjId startTime endTime", isAjax : "true"/}
+</div>

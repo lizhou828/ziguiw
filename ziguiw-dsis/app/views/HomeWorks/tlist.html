@@ -1,0 +1,91 @@
+#{extends 'main.html'/}
+#{set title:'作业查询——子贵网用户中心' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+#{script 'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#hmQueryBtn").click(function(){
+            var bjId= $("#bjId").val();
+            if(bjId == '-1'){
+                alert("必须选定班级！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/HomeWorks/tlist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&bjId="+bjId+"&isAjax=1",
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            })
+            return false;
+        });
+
+    });
+</script>
+
+<div class="right">
+    <div class="bobti">作业查询</div>
+#{form action:@HomeWorks.tlist(),enctype :'multipart/form-data',method:'post',id:'homeWordQueryForm'}
+
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="700" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="60%">日期：
+                        <input name="startTime" type="text" id="startTime"  style="float: none"
+                               class="Wdate"  onclick="WdatePicker()" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }"/>
+                        到
+                        <input name="endTime" type="text" id="endTime" style="float: none"
+                               class="Wdate"  onclick="WdatePicker()" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }"/>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        班级：
+                        <select onchange="queryStudentsByClassId(this.value)" id=bjId name="bjId">
+                            <option value="-1">--请选择--</option>
+                            #{list items:clazzList,as:'classes'}
+                                <option value="${classes.bjId}">${classes.bjMcheng}</option>
+                            #{/list}
+                        </select>&nbsp;&nbsp;
+                    </td>
+
+                    <td>
+                        <input  id="hmQueryBtn" type="button" value="查询" class="cx"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="xunc_2 font-2" id="listTable">
+        <table width="729" border="0" cellspacing="0" cellpadding="0"  >
+            <tr>
+                <td class="t1" width="12%">学生姓名</td>
+                <td class="t1" width="61%">信息内容</td>
+                <td class="t1" width="15%">发送时间</td>
+            </tr>
+            <tbody id="tblSms">
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="pageNav">
+        #{page page : homeWorkPage, url : "/HomeWorks/tlist", paramIds : "bjId startTime endTime", isAjax : "true"/}
+    </div>
+
+
+
+
+
+#{/form}
+
+</div>

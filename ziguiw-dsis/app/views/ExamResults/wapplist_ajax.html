@@ -1,0 +1,20 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <th width="50%">学生姓名</th>
+        <td width="50%">${student.xsXming}</td>
+    </tr>
+    #{if scoreMap.size() != 0}
+
+        #{list items:scoreMap,as:'score'}
+            <tr>
+                <th>${score.key}</th>
+                <td>${score.value == null ? "0.0" : score.value}</td>
+            </tr>
+
+        #{/list}
+    #{/if}
+    <tr>
+        <th><span style="font-weight: bold;">总&nbsp;&nbsp;分</span></th>
+        <td><span style="font-weight: bold;">${totalScore}</span></td>
+    </tr>
+</table>

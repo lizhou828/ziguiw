@@ -1,0 +1,68 @@
+#{extends 'main.html'/}
+#{set title:'成长足迹——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <div class="bobti">
+        成长足迹
+    </div>
+
+
+
+    <div id="addOneGrowFootPrint">
+
+        <span style="padding-left: 20px;  font-size: 17px;">
+               <a href="/GrowFootprints/pAdd" target="_self" style="color: orange;">添加</a>
+               <a href="/GrowFootprints/plist?xsId=${growFootprint.xsId}" target="_self" style="color: orange;">返回</a>
+        </span>
+
+    </div>
+    <div class="xunc_2 font-2" id= "listTable">
+        <form action="/GrowFootprints/pCreate"method="post">
+            <table width="729" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td class="t1 font-2">
+                        时间
+                    </td>
+                    <td class="t1 font-2">
+                        活动名称
+                    </td>
+                    <td class="t1 font-2">
+                        结果
+                    </td>
+                    <td class="t1 font-2">
+                        地点
+                    </td>
+                    <td class="t1 font-2">
+                        操作
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t1 font-2">
+                       ${new java.text.SimpleDateFormat("yyyy-mm-dd").format(growFootprint.createTime)}
+                    </td>
+                    <td class="t1 font-2">
+                        ${growFootprint.title}
+                    </td>
+                    <td class="t1 font-2">
+                        ${growFootprint.result}
+                    </td>
+                    <td class="t1 font-2">
+                        ${growFootprint.place}
+                    </td>
+                    <td class="t1 font-2">
+                        <a href="/GrowFootprints/pShow?id=${growFootprint.id}" target="_self">编辑</a>
+                        <a href="/GrowFootprints/pAdd" target="_self">继续创建</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <div>
+                <span style="font-size: 18px;color: orange;">创建成功！</span>
+            </div>
+        </form>
+    </div>
+
+
+</div>

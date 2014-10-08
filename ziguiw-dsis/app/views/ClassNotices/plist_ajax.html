@@ -1,0 +1,24 @@
+#{if page.data == null || page.data.size() == 0}
+    <div>
+            <div class="lett_bl">
+                   没有相关信息！
+            </div>
+    </div>
+
+#{/if}
+#{else }
+<div>
+    #{list items:page.data,as:'data'}
+        <div class="lett_bl">
+            <p>标题：${data?.title}</p>
+            <p>内容：${data?.text}</p>
+            <p class="lett_pa">
+                <span>发送时间：${data?.createTime }</span>
+            </p>
+        </div>
+    #{/list}
+</div>
+<div class="pageNav">
+    #{page page : page, url : "/ClassNotices/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+</div>
+#{/else}

@@ -1,0 +1,51 @@
+<div id="listTable">
+
+    <div class="res_tit">
+        <span>我的资源</span><span class="res_en">MY RESOURCE</span>
+    </div>
+    <div class="res_con">
+        <div class="upload_t">
+            <a href="javascript:void(0);" onclick="mySource('/Resources/list')" style="color: #0080BD">
+                我上传的资源
+            </a>
+        </div>
+        <div class="download_t">
+            <a href="javascript:void(0);" onclick="mySource('/ResourceDowns/list')" style="color: #FA6F00;">
+                我下载的资源
+            </a>
+
+        </div>
+        <div class="res_do">
+
+            <table border="0">
+                <tr>
+                    <th>资源标题</th>
+                    <th>下载时间</th>
+                    <th>所需积分</th>
+                    <th>上传用户</th>
+                </tr>
+                #{if page.data == null || page.data.size() == 0}
+                    <tr>
+                        <td>
+                          您没有下载过任何资源！
+                        </td>
+                    </tr>
+                #{/if}
+                #{else }
+                    #{list items:page.data,as:'data'}
+                        <tr>
+                            <td class="res_d">${data.resource.title}</td>
+                            <td class="res_d">${data.createDate}</td>
+                            <td class="res_d">${data.resource.needPoint}</td>
+                            <td class="res_d">${data.resource.userBase}</td>
+                        </tr>
+                    #{/list}
+                #{/else}
+            </table>
+           *{分页}*
+            <div class="pageNav">
+                #{page page : page, url : "/ResourceDowns/list"/}
+            </div>
+        </div>
+    </div>
+</div>

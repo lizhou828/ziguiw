@@ -1,0 +1,1665 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="false"/>
+    <!-- 把struts交给spring来管理 -->
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+
+    <!-- 上传的全部图片的最大限制-->
+    <constant name="struts.multipart.maxSize" value="1024102400"/>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
+    <package name="admin" namespace="/admin" extends="json-default">
+        <interceptors>
+            <interceptor name="adminLogin"
+                         class="com.zigui.filter.AdminLoginInterceptor"/>            
+            <interceptor-stack name="teamwareStack">
+                <interceptor-ref name="adminLogin"/>                
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="teamwareStack"/>
+
+        <global-results>
+            <result name="ADMIN_NO_LOGIN">/admin/login.jsp</result>
+            <result name="ADMIN_NO_AUTH">/admin/myConsole/no_auth.jsp</result>
+        </global-results>
+
+        <action name="administrator_login" class="administratorAction" method="login">
+            <result name="success">/admin/myConsole/index.jsp</result>
+            <result name="input">/admin/login.jsp</result>
+        </action>
+        <action name="administrator_logout" class="administratorAction" method="logout">
+            <result name="success">/admin/login.jsp</result>
+            <result name="input">/admin/login.jsp</result>
+        </action>
+
+        <action name="notify_deleteById" class="commonAction" method="deleteContentNotify">
+            <result name="success">/admin/notify/notify_getAll_success.jsp</result>
+            <result name="input">/admin/login.jsp</result>
+        </action>
+    </package>
+
+
+    <!-- 教育资源下载 -->
+    <package name="source" extends="struts-default" namespace="/source">
+
+        <interceptors>
+            <interceptor name="sourceIntercepter"
+                         class="com.zigui.filter.SourceInterceptor"/>
+            <interceptor-stack name="teamwareStack">
+                <interceptor-ref name="sourceIntercepter"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="teamwareStack"/>
+        <global-results>
+            <result name="fail" type="redirect">/user/login.jsp</result>
+        </global-results>
+
+        <!-- 新增前查询资源 -->
+        <action name="addsourceGet" class="sourceAction" method="addget">
+            <result name="input">/source/sourceadd.jsp</result>
+            <result name="success">/source/sourceadd.jsp</result>
+            <result name="error">/source/sourceadd.jsp</result>
+        </action>
+        <!-- 新增 -->
+        <action name="sourceAdd" class="sourceAction" method="add">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="token"/>
+            <result name="input" type="chain">addsourceGet</result>
+            <result name="success" type="redirect">sourceList.action</result>
+            <result name="error" type="chain">addsourceGet</result>
+            <result name="invalid.token" type="redirect">addsourceGet.action</result>
+        </action>
+
+        <!-- 查询资源 分页-->
+        <action name="sourceList" class="sourceAction" method="list">
+            <result name="input">/source/sourcelist.jsp</result>
+            <result name="success">/source/sourcelist.jsp</result>
+            <result name="error">/source/sourcelist.jsp</result>
+        </action>
+
+        <!-- 资源列表 -->
+        <action name="sourceInfo" class="sourceInfoAction" method="info">
+            <result>/source/index.jsp</result>
+        </action>
+
+        <!-- 版本，年级所包括的资源分页 -->
+        <action name="sourcePageList" class="sourceAction" method="list_qt">
+            <result name="list">/source/list.jsp</result>
+
+        </action>
+
+        <!-- 更多 -->
+        <action name="soureMore" class="sourceAction" method="listMore">
+            <result name="list">/source/listMore.jsp</result>
+        </action>
+
+        <action name="schoolInfo" class="sourceInfoAction" method="schoolInfo">
+            <result>/source/school.jsp</result>
+        </action>
+
+
+        <!--资源详细 、列表  -->
+        <action name="sourceGet" class="sourceAction" method="get">
+            <result name="list">/source/list.jsp</result>
+            <result name="login">/login.jsp</result>
+            <result name="detail">/source/sourcedetail.jsp</result>
+            <result name="getSuccess">/source/externalResources.jsp</result>
+        </action>
+
+
+        <!-- 下载 -->
+
+        <action name="downLoad" class="sourceAction" method="downLoad">
+            <result name="nopoint">/login.jsp</result>
+            <result name="login">/login.jsp</result>
+        </action>
+
+
+        <!-- 修改前查询资源 -->
+        <action name="sourceUpGo" class="sourceAction" method="goUpdate">
+            <result name="input">/source/sourceedit.jsp</result>
+            <result name="success">/source/sourceedit.jsp</result>
+            <result name="error">/source/sourceedit.jsp</result>
+        </action>
+
+
+        <!-- 修改 -->
+        <action name="sourceUpd" class="sourceAction" method="update">
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="token"/>
+            <result name="input" type="chain">sourceList</result>
+            <result name="success" type="chain">sourceList</result>
+            <result name="error" type="chain">sourceUpGo</result>
+            <result name="invalid.token" type="redirect">sourceList.action</result>
+        </action>
+
+        <action name="getExternalResources" class="sourceAction" method="getExternalResources">
+            <result name="success">/source/getSuccess.jsp</result>
+            <result name="fail" type="redirect">/login.jsp</result>
+        </action>
+
+    </package>
+
+    <!--资源审核  -->
+    <package name="checkResource" namespace="/admin/resource" extends="admin">
+        <action name="resourcesAudit_list" class="resourcesAuditAction" method="list">
+            <result name="success">/admin/resource/resource_list.jsp</result>
+
+        </action>
+
+        <action name="listBykey" class="resourcesAuditAction" method="listBykey">
+            <result name="success">/admin/resource/resource_list.jsp</result>
+        </action>
+
+        <action name="sourceGet" class="resourcesAuditAction" method="open">
+            <result name="success">/admin/resource/edit.jsp</result>
+        </action>
+
+        <!-- 资源审核 -->
+        <action name="sourceAudit" class="resourcesAuditAction" method="updAuditResources">
+            <result name="success" type="chain">resourcesAudit_list</result>
+        </action>
+    </package>
+
+    <package name="payment" namespace="/payment" extends="source">
+        <action name="return_url" class="paymentAction" method="return_url">
+
+            <result name="success">/payment/success.jsp</result>
+        </action>
+
+        <action name="pay" class="paymentAction" method="pay">
+
+            <result name="alipay">/payment/alipayto.jsp</result>
+            <result name="tenpay">/payment/tenpayto.jsp</result>
+        </action>
+
+
+    </package>
+
+
+    <package name="ad_admin" namespace="/admin/ad" extends="admin">
+
+        <action name="ad_getById" class="adAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/ad/ad_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="adPlan_getById" class="adPlanAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/ad/adPlan_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="ad_delete" class="adAction" method="delete">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/ad/ad_getAll.action</param>
+            </result>
+        </action>
+        <action name="adPlan_delete" class="adPlanAction" method="delete">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/ad/adPlan_getPlansByType.action?type=${type}</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/ad/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/ad/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/ad/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="config_admin" namespace="/admin/config" extends="admin">
+
+        <action name="config_get4update" class="configCenterAction" method="getConfig">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/config/config_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/config/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/config/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/config/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+
+    <package name="news_admin" namespace="/admin/news" extends="admin">
+
+        <action name="newsChannle_getById" class="newsChannleAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/newsChannle_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="newsRecommendRegion_getById" class="newsRecommendRegionAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/newsRecommendRegion_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="news_getById" class="newsAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/news_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="news_listNewsByCondition" class="newsAction" method="listNewsByCondition">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/news_listNewsByCondition.jsp</param>
+            </result>
+        </action>
+        <action name="newsChannle_delete" class="newsChannleAction" method="delete">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/newsChannle_delete_success.jsp</param>
+            </result>
+            <result name="input" type="redirectAction">
+                /newsChannle_getAll
+            </result>
+            <result name="error" type="redirectAction">
+                /newsChannle_getAll
+            </result>
+        </action>
+        <action name="newsAudit_*" class="newsAuditAction" method="{1}">
+            <result name="view">/admin/news/news_audit_view.jsp</result>
+            <result name="success">/admin/news/news_audit_result.jsp</result>
+            <result name="reasonView">/admin/news/news_audit_rejectReason.jsp</result>
+        </action>
+        <action name="classNews_*" class="classNewsAction" method="{1}">
+            <result name="saveOrUpdate">/admin/news/classnews_saveOrUpdate.jsp</result>
+            <result name="view">/admin/news/classnews_saveOrUpdate.jsp</result>
+            <result name="success">/admin/news/classnews_saveOrUpdate_success.jsp</result>
+            <result name="list">/admin/news/classnews_listByCondition.jsp</result>
+        </action>
+        <action name="schoolNews_*" class="schoolNewsAction" method="{1}">
+            <result name="saveOrUpdate">/admin/news/schoolnews_saveOrUpdate.jsp</result>
+            <result name="view">/admin/news/schoolnews_saveOrUpdate.jsp</result>
+            <result name="success">/admin/news/schoolnews_saveOrUpdate_success.jsp</result>
+            <result name="list">/admin/news/schoolnews_listByCondition.jsp</result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="news" namespace="/news" extends="json-default">
+        <action name="page" class="pageAction">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+        <action name="queryComment" class="userCommentAction" method="getMessageList">
+            <result name="success" type="dispatcher">
+                <param name="location">/news/comment.jsp</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/news/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="admin_ajax" namespace="/admin/ajax" extends="json-default">
+        <action name="getAjaxAnswerByQuestionId" class="answerAction" method="getAjaxAnswerByQuestionId">
+            <result name="success" type="json"/>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="json"/>
+        </action>
+    </package>
+
+    <package name="knowledge_admin" namespace="/admin/knowledge" extends="admin">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="knowledgeChannle_getById" class="knowledgeChannleAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/knowledgeChannle_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="knowledgeRecommendRegion_getById" class="knowledgeRecommendRegionAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/knowledgeRecommendRegion_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="knowledge_getById" class="knowledgeAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/knowledge_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="knowledge" namespace="/knowledge" extends="json-default">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/knowledge/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="auth_admin" namespace="/admin/auth" extends="admin">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="knowledgeChannle_getById" class="knowledgeChannleAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/knowledge/knowledgeChannle_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="role_grantAuth" class="roleAction" method="grantAuth">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+        <action name="role_getById" class="roleAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/auth/role_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/auth/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/auth/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/auth/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="default" namespace="/" extends="json-default">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="imageUpload" class="imageUpload">
+            <result name="success" type="json">
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+        <action name="kdImgUpload" class="kdImgUpload">
+            <result name="success" type="json">
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+        <action name="page" class="pageAction">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+        <action name="search" class="searchAction">
+            <result name="success">/search/search_result.jsp</result>
+        </action>
+        <action name="commonQuery" class="commonAction" method="commonQuery">
+            <result name="success">/none.jsp</result>
+        </action>
+        <action name="commonQuery1" class="commonAction" method="commonQuery1">
+            <result name="success">/none.jsp</result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="json">
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="user" namespace="/user" extends="json-default">
+        <interceptors>
+            <interceptor name="userLogin" class="com.zigui.filter.UserLoginInterceptor"></interceptor>
+            <interceptor name="userAutoLogin" class="com.zigui.filter.UserAutoLoginInterceptor"></interceptor>
+        </interceptors>
+
+        <global-results>
+            <result name="USER_NO_LOGIN">/user/login.jsp</result>
+            <result name="USER_NO_ACTIVE">/user/info_jump.jsp?kind=12</result>
+        </global-results>
+
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="user_register" class="userAction" method="register">
+            <!--  
+            <result name="success">/user/home_index.jsp</result>
+            -->
+            <result name="PENDING_ACTIVITE">/user/info_jump.jsp?kind=11</result>
+
+            <result name="success">/user/jump.jsp</result>
+            <result name="input">/user/register.jsp</result>
+            <result name="error">/user/register.jsp</result>
+        </action>
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="user_login" class="userAction" method="login">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/user/login.jsp</result>
+        </action>
+
+        <action name="activeReg" class="userAction" method="activeUser">
+            <result name="success">/user/info_jump.jsp?kind=13</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/user/login.jsp</result>
+        </action>
+
+        <action name="user_logout" class="userAction" method="logout">
+            <result name="success">/user/login.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/user/login.jsp</result>
+        </action>
+
+        <action name="user_setLoginPreUrl" class="userAction" method="setLoginPreUrl">
+            <result name="success" type="json"/>
+        </action>
+
+        <action name="user_ajaxGetLogonInfo" class="userAction" method="ajaxGetLogonInfo">
+            <result name="success" type="json"/>
+        </action>
+
+        <action name="ajaxSaveSchoolSummary" class="userAction" method="ajaxSaveSchoolSummary">
+            <result name="success" type="json"/>
+        </action>
+
+        <action name="user_info" class="userAction" method="updateInfo">
+            <result name="success">/user/home_index_gr.jsp</result>
+            <result name="input">/user/found_gr_info.jsp</result>
+            <result name="error">/user/found_gr_info.jsp</result>
+        </action>
+
+        <action name="getUserPortal" class="userAction" method="getUserPortal">
+            <interceptor-ref name="userLogin"/>
+            <result name="success">/user/home.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/user/login.jsp</result>
+        </action>
+
+        <action name="user_portrait" class="userAction" method="updatePortrait">
+            <result name="success" type="redirect">/user/home.jsp</result>
+            <result name="input">/user/found_gr_portrait.jsp</result>
+        </action>
+
+        <action name="diary_save" class="userDiaryAction" method="save">
+            <result name="success" type="redirect">/user/diary_list.jsp</result>
+            <result name="input">/user/publish_diary.jsp</result>
+            <result name="error">/user/publish_diary.jsp</result>
+        </action>
+        <action name="school_news_save" class="userDiaryAction" method="save">
+            <result name="success" type="redirect">/school/school_news.jsp?type=${type}</result>
+            <result name="input">/school/publish_diary.jsp</result>
+            <result name="error">/school/publish_diary.jsp</result>
+        </action>
+        <action name="diary_list" class="userDiaryAction" method="getDiaryByStatus">
+            <result name="success">/user/home_index.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="delDiaryById" class="userDiaryAction" method="delDiaryById">
+            <result name="success" type="redirect">/user/diary_list.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input" type="redirect">/user/diary_list.jsp?hostUserName=${encoderdHostUserName}</result>
+        </action>
+
+        <action name="delSchoolDiaryById" class="userDiaryAction" method="delDiaryById">
+            <result name="success" type="redirect">/school/school_news.jsp?type=${type}&amp;hostUserName=${encoderdHostUserName}</result>
+            <result name="input" type="redirect">/school/school_news.jsp?type=${type}&amp;hostUserName=${encoderdHostUserName}</result>
+        </action>
+        <action name="classNews" class="classNewsAction" method="getClassNewsBytype">
+            <result name="success">/school/classNews.jsp</result>
+        </action>
+        <action name="classMovie" class="classPhotoAction" method="getClassMovie">
+            <result name="movie">/school/classMovies.jsp</result>
+        </action>
+        <action name="classPhoto" class="classPhotoAction" method="getClassPhoto">
+            <result name="success">/school/classPhoto.jsp</result>
+        </action>
+        <action name="classNewsInfo" class="classNewsAction" method="getClassNewsById">
+            <result name="success">/school/classNewsInfo.jsp</result>
+        </action>
+        <action name="classInfo" class="classInfoAction" method="getAll">
+            <result name="success">/school/classInfo.jsp</result>
+        </action>
+        <action name="schoolList" class="schoolListAction" method="getSchoolList">
+            <result name="success">/school/schoolList.jsp</result>
+        </action>
+        <action name="classMovieInfo" class="classPhotoAction" method="getClassMovieInfo">
+            <result name="movieInfo">/school/classMovieInfo.jsp</result>
+        </action>
+        <action name="schoolInfoList" class="schoolListAction" method="getSchoolInfoList">
+            <result name="success" type="redirect">/school/schoolList.jsp</result>
+        </action>
+        <action name="classForumList" class="classForumAction" method="getClassForumList">
+            <result name="forumlist">/school/classForum.jsp</result>
+        </action>
+        <action name="classForumSave" class="classForumAction" method="saveClassForum">
+            <result name="saveForumSuccess" type="redirect">/user/classForumList.action?class_id=${class_id}</result>
+        </action>
+        <action name="classForumInfo" class="classForumAction" method="getClassForumInfo">
+            <result name="forumInfo">/school/classForumInfo.jsp</result>
+        </action>
+        <action name="saveClassReply" class="classForumAction" method="saveClassReply">
+            <result name="saveReplySuccess" type="redirect">/user/classForumInfo.action?class_id=${class_id}&amp;classForumId=${classForumId}</result>
+        </action>
+
+        <action name="hot_diary_list" class="userDiaryAction" method="getHotDiary">
+            <result name="success">/user/home_index.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="diary_getByNickName" class="userDiaryAction" method="getDiaryByUserNickName">
+            <result name="success">/user/found_diary_list.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="schoolDiary_getByNickName" class="userDiaryAction" method="getSchoolDiaryByUserNickName">
+            <result name="success">/user/found_diary_list.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="schoolNewsAction" class="userDiaryAction" method="getSchoolNews">
+            <result name="success">/user/found_diary_list.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="classList" class="classAction" method="getAllClass">
+            <result name="list">/school/classList.jsp</result>
+        </action>
+        <action name="getDiaryById" class="userDiaryAction" method="getDiaryById">
+            <result name="success">/user/diary_detail.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getShoolDiaryById" class="userDiaryAction" method="getDiaryById">
+            <result name="success">/school/diary_detail.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getDiaryByIdForEdit" class="userDiaryAction" method="getDiaryById">
+            <result name="success">/user/publish_diary.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getSchoolDiaryByIdForEdit" class="userDiaryAction" method="getDiaryById">
+            <result name="success">/school/publish_diary.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="fillment_teacher" class="userAction" method="fillmentTeacher">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="fillment_parent" class="userAction" method="fillmentParent">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="fillment_student" class="userAction" method="fillmentStudent">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="photo_add" class="userPhotoAction" method="save">
+            <!-- 限制图片的格式和图片的大小 -->
+            <interceptor-ref name="fileUpload">
+                <!--<param name="allowedTypes">
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg
+                </param>-->
+                <param name="maximumSize">3072000</param>
+            </interceptor-ref>
+            <!-- 默认拦截器 -->
+            <interceptor-ref name="defaultStack"/>
+            <result name="success" type="redirectAction">getPhotoByAlbumId?albumId=${photo.albumId}</result>
+            <result name="input">/user/photo_upload.jsp</result>
+        </action>
+        <action name="school_photo_add" class="userPhotoAction" method="save">
+            <!-- 限制图片的格式和图片的大小 -->
+            <interceptor-ref name="fileUpload">
+                <!--<param name="allowedTypes">
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg
+                </param>-->
+                <param name="maximumSize">3072000</param>
+            </interceptor-ref>
+            <!-- 默认拦截器 -->
+            <interceptor-ref name="defaultStack"/>
+            <result name="success" type="redirectAction">getSchoolPhotoByAlbumId?albumId=${photo.albumId}</result>
+            <result name="input">/school/photo_upload.jsp</result>
+        </action>
+        <action name="getPhotoByAlbumId" class="userPhotoAction" method="getPhotoByAlbumId">
+            <result name="success">photo_list.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="getSchoolPhotoByAlbumId" class="userPhotoAction" method="getPhotoByAlbumId">
+            <result name="success">/school/photo_list.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="album_saveOrUpdate" class="userAlbumAction" method="save">
+            <result name="success" type="redirectAction">album_list</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <!-- 增加相册，用在上图图片没有相册的时候，增加相册之后直接返回图片上传页面 -->
+        <action name="album_saveOrUpdate_from_upload" class="userAlbumAction" method="save">
+            <result name="success" type="redirect">/user/photo_upload.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="album_list" class="userAlbumAction" method="getAlbumList">
+            <result name="success">/user/album_list.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="school_album_list" class="userAlbumAction" method="getAlbumList">
+            <result name="success">/school/school_view.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="school_album_saveOrUpdate" class="userAlbumAction" method="save">
+            <result name="success" type="redirect">/school/photo_upload.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+        <action name="album_del" class="userAlbumAction" method="delById">
+            <result name="success">/user/photo_xc.jsp</result>
+            <result name="input">/user/photo_xc.jsp</result>
+        </action>
+
+        <action name="publishMood" class="userMoodAction" method="save">
+            <result name="success" type="redirect">/user/home.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="mood_list" class="userMoodAction" method="getMoodList">
+            <result name="success">/user/home_index.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="gr_mood_list" class="userMoodAction" method="getUserMoodList">
+            <result name="success">/user/home_index_gr.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="publishMessage" class="userMessageAction" method="save">
+            <result name="success" type="redirect">/user/leave_message.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/leave_message.jsp</result>
+            <result name="USER_NO_LOGIN">/user/login.jsp</result>
+        </action>
+
+        <action name="message_saveMail" class="userMessageAction" method="saveMail">
+            <result name="success" type="redirect">/user/mail.jsp?mailType=1</result>
+            <result name="input">/user/mail.jsp?mailType=1</result>
+            <result name="USER_NO_LOGIN">/user/login.jsp</result>
+        </action>
+
+        <action name="replyMail" class="userMessageAction" method="replyMail">
+            <result name="success" type="redirect">/user/mail.jsp?mailType=1</result>
+            <result name="input">/user/mail.jsp?mailType=1</result>
+            <result name="USER_NO_LOGIN">/user/login.jsp</result>
+        </action>
+
+        <action name="publishSchoolMessage" class="userMessageAction" method="save">
+            <result name="success" type="redirect">/school/leave_message.jsp?hostUserName=${encoderdHostUserName}
+            </result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="message_list" class="userMessageAction" method="getMessageList">
+            <result name="success">/user/leave_message.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="visit_history_list" class="spaceVisitHistoryAction" method="getVisitHistory">
+            <result name="success">/user/home_index.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="updateSetting" class="userAction" method="updateSetting">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="updatePassword" class="userAction" method="updatePassword">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/update_passwd.jsp</result>
+            <result name="error">/user/update_passwd.jsp</result>
+        </action>
+        <action name="updateSchoolPassword" class="userAction" method="updatePassword">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/school/update_passwd.jsp</result>
+            <result name="error">/school/update_passwd.jsp</result>
+        </action>
+        <action name="hot_home_list" class="userAction" method="getHotHome">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getRoundPhoto" class="userPhotoAction" method="getRoundPhoto">
+            <result name="success">/user/big_photo.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getSchoolRoundPhoto" class="userPhotoAction" method="getRoundPhoto">
+            <result name="success">/school/big_photo.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delMessageById" class="userMessageAction" method="delMessageById">
+            <result name="success" type="redirect">/user/leave_message.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+
+        <action name="delMailById" class="userMessageAction" method="delMessageById">
+            <result name="success" type="redirect">/user/mail.jsp??mailType=${mailType}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delPhotoCommentById" class="userCommentAction" method="delMessageById">
+            <result name="success" type="redirect">/user/getRoundPhoto.action?hostUserName=${encoderdHostUserName}&amp;albumId=${albumId}&amp;photoId=${message.commentedId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delSchoolPhotoCommentById" class="userCommentAction" method="delMessageById">
+            <result name="success" type="redirect">/user/getSchoolRoundPhoto.action?hostUserName=${encoderdHostUserName}&amp;albumId=${albumId}&amp;photoId=${message.commentedId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delMood" class="userMoodAction" method="delMood">
+            <result name="success" type="redirect">/user/home.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delAlbumById" class="userAlbumAction" method="delById">
+            <result name="success" type="redirect">/user/album_list.action?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delSchoolAlbumById" class="userAlbumAction" method="delById">
+            <result name="success" type="redirect">/user/school_album_list.action?hostUserName=${encoderdHostUserName}
+            </result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="saveAlbumCover" class="userAlbumAction" method="saveAlbumCover">
+            <result name="success" type="redirect">/user/getPhotoByAlbumId.action?albumId=${album.id}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="saveSchoolAlbumCover" class="userAlbumAction" method="saveAlbumCover">
+            <result name="success" type="redirect">/user/getSchoolRoundPhoto.action?albumId=${album.id}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="delPhoto" class="userPhotoAction" method="delPhoto">
+            <result name="success" type="redirect">/user/getPhotoByAlbumId.action?albumId=${albumId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="delSchoolPhoto" class="userPhotoAction" method="delPhoto">
+            <result name="success" type="redirect">/user/getSchoolRoundPhoto.action?albumId=${albumId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="commentPhoto" class="userCommentAction" method="save">
+            <result name="success" type="redirect">/user/getRoundPhoto.action?hostUserName=${encoderdHostUserName}&amp;albumId=${albumId}&amp;photoId=${message.commentedId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="commentSchoolPhoto" class="userCommentAction" method="save">
+            <result name="success" type="redirect">/user/getSchoolRoundPhoto.action?hostUserName=${encoderdHostUserName}&amp;albumId=${albumId}&amp;photoId=${message.commentedId}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="commentNews" class="userCommentAction" method="save">
+            <result name="success" type="redirect">/news/queryComment.action?commentedId=${message.commentedId}&amp;type=2</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="comment_list" class="userCommentAction" method="getMessageList">
+            <result name="success">/user/leave_message.jsp?hostUserName=${encoderdHostUserName}</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="findPassword" class="userAction" method="findPassword">
+            <result name="email_find_passwd_success">/user/info_jump.jsp?kind=14</result>
+            <result name="emailUnReg">/user/info_jump.jsp?kind=15</result>
+            <result name="mobileUnReg">/user/info_jump.jsp?kind=16</result>
+            <result name="success">/user/modifyPasswd.jsp?user.id=${user.id}</result>
+            <result name="input">/user/find_password.jsp</result>
+        </action>
+
+        <action name="getMyFriend" class="userFriendAction" method="getMyFriend">
+            <result name="success">/user/my_friend.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="fillSchoolInfo" class="userAction" method="fillSchoolInfo">
+            <result name="success">/user/portal.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_summaryManage" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/summary_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getSchoolSummary" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/school_summary.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getSchoolSpeech" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/school_speech.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getSchoolJob" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/school_job.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="summary_prepare_update" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/summary_update.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="summary_save" class="userAction" method="saveSchoolSummary">
+            <result name="success">/school/summary_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_speechManage" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/speech_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="speech_prepare_update" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/speech_update.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="speech_save" class="userAction" method="saveSchoolSpeech">
+            <result name="success">/school/speech_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_jobManage" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/job_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="job_prepare_update" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/job_update.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="job_save" class="userAction" method="saveSchoolJob">
+            <result name="success">/school/job_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_updateInfo" class="userAction" method="getSchoolInfoById">
+            <result name="success">/school/school_info.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="updateSchoolInfo" class="userAction" method="updateSchoolInfo">
+            <result name="success">/school/school_info.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_saveOrUpdateClasz" class="userAction" method="saveOrUpdateClasz">
+            <result name="success">/school/clasz_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="school_saveOrUpdateTeacherClasz" class="baseDataAction" method="saveOrUpdateTeacherClasz">
+            <result name="success">/school/teacher_manager.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="getAggregationMsgs" class="commonMessageAction" method="getById">
+            <result name="success">/user/business/get_aggregation_msg.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="remarkMsgs" class="commonMessageAction" method="getById">
+            <result name="success">/user/business/get_remark_msg.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/user/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="question" namespace="/question" extends="json-default">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="page" class="pageAction">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+
+        <action name="question_listByCondition" class="questionAction" method="listByCondition">
+            <result name="success" type="dispatcher">
+                <param name="location">/ask/question_list.jsp</param>
+            </result>
+        </action>
+        <action name="question_save" class="questionAction" method="save">
+            <result name="success" type="redirectAction">page.action?templateName=myquestion_list.ftl</result>
+            <!-- 
+            <result name="input" type="redirectAction">page.action?templateName=ask.ftl</result>
+            <result name="error" type="redirectAction">page.action?templateName=ask.ftl</result>
+             -->
+            <result name="input">/ask/ask.jsp</result>
+            <result name="error">/ask/ask.jsp</result>
+        </action>
+
+        <action name="question_getById" class="questionAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/ask/question.jsp</param>
+            </result>
+        </action>
+        <action name="answer_save" class="answerAction" method="save">
+            <result name="success" type="redirectAction">
+                page.action?templateName=question_detail.ftl&amp;questionId=${questionId}
+            </result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="answer_getAnswerByQuestionId" class="answerAction" method="getAnswerByQuestionId">
+            <result name="success">none.jsp</result>
+            <result name="input">none.jsp</result>
+            <result name="error">none.jsp</result>
+        </action>
+        <action name="question_satisfied" class="questionAction" method="satisfied">
+            <result name="success" type="redirectAction">page.action?templateName=question_detail.ftl&amp;questionId=${questionId}</result>
+        </action>
+    </package>
+
+    <package name="debate" namespace="/debate" extends="json-default">
+        <action name="page" class="pageAction">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+
+        <action name="debate_listByCondition" class="debateAction" method="listByCondition">
+            <result name="success" type="dispatcher">
+                <param name="location">/debate/debate_list.jsp</param>
+            </result>
+        </action>
+        <action name="debate_getById" class="debateAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/debate/debate.jsp</param>
+            </result>
+        </action>
+        <action name="debateOpinion_saveOrUpdate" class="debateOpinionAction" method="saveOrUpdate">
+            <result name="success" type="redirectAction">
+                page.action?templateName=debate_detail.ftl&amp;debateId=${debateId}
+            </result>
+            <result name="input">/debate/debate.jsp</result>
+            <result name="error">/debate/debate.jsp</result>
+        </action>
+    </package>
+
+    <package name="forum" namespace="/forum" extends="json-default">
+        <action name="page" class="pageAction">
+            <result type="plainText">
+                <param name="location">/none.jsp</param>
+                <param name="charSet">UTF-8</param>
+            </result>
+        </action>
+        <action name="forum_saveOrUpdate" class="forumAction" method="saveOrUpdate">
+            <result name="success" type="redirectAction">
+                forumList.action?boardId=${id}
+            </result>
+            <result name="postforum" type="redirectAction">
+                page.action?templateName=forum_detail.ftl&amp;forumId=${forumId}
+            </result>
+        </action>
+
+        <action name="forumList" class="forumAction" method="forumList">
+            <result name="forumlist" type="dispatcher">/community/forum_list.jsp</result>
+            <result name="lovelist" type="dispatcher">/community/forum_love.jsp</result>
+        </action>
+
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/community/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/community/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/community/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="userAdmin" namespace="/admin/user" extends="admin">
+        <action name="auditPass" class="userAction" method="auditPass">
+            <result name="school_audit_success">/admin/vip/school_audit.jsp</result>
+            <result name="teacher_audit_success">/admin/vip/teacher_audit.jsp</result>
+            <result name="parent_audit_success">/admin/vip/parent_audit.jsp</result>
+            <result name="student_audit_success">/admin/vip/student_audit.jsp</result>
+            <result name="input">/admin/vip/vip_welcome.jsp</result>
+        </action>
+
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/user/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/user/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/user/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="consoleAdmin" namespace="/admin/myConsole" extends="admin">
+        <!--
+        <action name="user_listByCondition" class="userAction" method="listByCondition"> 
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/user/user_listByCondition.jsp</param>
+            </result> 
+        </action>
+        -->
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/myConsole/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/myConsole/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/myConsole/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="templateAdmin" namespace="/admin/template" extends="admin">
+        <action name="dataFunction_getById" class="dataFunctionAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/template/dataFunction_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="template_getById" class="templateAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/template/template_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="template_ajaxPreviewFunction" class="templatePreviewAction" method="previewFunction">
+            <result name="success" type="json"/>
+        </action>
+        <action name="template_ajaxPreviewTemplate" class="templatePreviewAction" method="previewTemplate">
+            <result name="success" type="json"/>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/template/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/template/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/template/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="community_admin" namespace="/admin/community" extends="admin">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="board_getById" class="boardAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/community/board_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/community/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/admin/community/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/admin/community/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="user_info" namespace="/info" extends="json-default">
+        <!-- class属性值与spring管理的action的bean属性一致 -->
+        <action name="queryBussniss" class="bussnissDataAction" method="queryData">
+            <result name="attendanceRec" type="dispatcher">
+                <param name="location">/user/attendance_data.jsp</param>
+            </result>
+            <result name="recordflow" type="dispatcher">
+                <param name="location">/user/recordflow_data.jsp</param>
+            </result>
+            <result name="examresultList" type="dispatcher">
+                <param name="location">/user/examresultList_data.jsp</param>
+            </result>
+            <result name="schoolnotice" type="dispatcher">
+                <param name="location">/user/schoolnotice_data.jsp</param>
+            </result>
+        </action>
+        <action name="commonType_getById" class="commonTypeAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/commonType_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="commonType_fakeDelete" class="commonTypeAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/commonType_listByCondition_success.jsp</param>
+            </result>
+        </action>
+        <action name="homeWork_getById" class="homeWorkAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/homeWork_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="homeWork_fakeDelete" class="homeWorkAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/homeWork_listByCondition_success.jsp</param>
+            </result>
+        </action>
+        <action name="growArchives_getById" class="growArchivesAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growArchives_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="growArchives_getById_view" class="growArchivesAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growArchives_detail.jsp</param>
+            </result>
+        </action>
+        <action name="growArchives_fakeDelete" class="growArchivesAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growArchives_listByCondition_success.jsp</param>
+            </result>
+        </action>
+        <action name="growFootmark_getById" class="growFootmarkAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growFootmark_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+        <action name="growFootmark_fakeDelete" class="growFootmarkAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growFootmark_listByCondition_success.jsp</param>
+            </result>
+        </action>
+
+        <action name="healthArchives_getById" class="healthArchivesAction" method="getById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/healthArchives_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+
+        <action name="healthArchives_getBaseById" class="healthArchivesAction" method="getBaseById">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/baseHealth_saveOrUpdate.jsp</param>
+            </result>
+        </action>
+
+        <action name="healthArchives_saveOrUpdateBase" class="healthArchivesAction" method="saveOrUpdateBase">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/healthArchives_listByCondition_success.jsp</param>
+            </result>
+        </action>
+
+        <action name="healthArchives_fakeDelete" class="healthArchivesAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/healthArchives_listByCondition_success.jsp</param>
+            </result>
+        </action>
+
+        <action name="healthArchives_saveOrUpdate" class="healthArchivesAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/healthArchives_listByCondition_success.jsp?sid=${userId}</param>
+            </result>
+        </action>
+        <action name="growArchives_saveOrUpdate" class="growArchivesAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growArchives_listByCondition_success.jsp?sid=${userId}</param>
+            </result>
+        </action>
+        <action name="growFootmark_saveOrUpdate" class="growFootmarkAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growFootmark_listByCondition_success.jsp?sid=${userId}</param>
+            </result>
+        </action>
+        <action name="homeWork_saveOrUpdate" class="homeWorkAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/homeWork_listByCondition_success.jsp?sid=${userId}</param>
+            </result>
+        </action>
+        <action name="commonType_saveOrUpdate" class="commonTypeAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/commonType_listByCondition_success.jsp</param>
+            </result>
+        </action>
+        <action name="commonMessage_saveOrUpdate" class="commonMessageAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/commonMessage_listByCondition_success.jsp?kind=${kind}</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/business/commonMessage_listByCondition_success.jsp?kind=${kind}</param>
+            </result>
+        </action>
+        <action name="mail_saveOrUpdate" class="commonMessageAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/mail.jsp?kind=${kind}</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/business/mail.jsp?kind=${kind}</param>
+            </result>
+        </action>
+        <action name="remark_saveOrUpdate" class="commonMessageAction" method="saveOrUpdate">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/remark.jsp?kind=${kind}</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/business/remark.jsp?kind=${kind}</param>
+            </result>
+        </action>
+        <action name="commonMessage_fakeDelete" class="commonMessageAction" method="fakeDelete">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/commonMessage_listByCondition_success.jsp?kind=${kind}</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/business/commonMessage_listByCondition_success.jsp?kind=${kind}</param>
+            </result>
+        </action>
+        <action name="addGrowArchives" class="growArchivesAction" method="add">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/growArchives_saveOrUpdate.jsp?sid=${sid}</param>
+            </result>
+        </action>
+        <action name="addHealthArchives" class="healthArchivesAction" method="add">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/healthArchives_saveOrUpdate.jsp?sid=${sid}</param>
+            </result>
+        </action>
+        <action name="*_*" class="{1}Action" method="{2}">
+            <result name="success" type="dispatcher">
+                <param name="location">/user/business/{1}_{2}_success.jsp</param>
+            </result>
+            <result name="input" type="dispatcher">
+                <param name="location">/user/business/{1}_{2}.jsp</param>
+            </result>
+            <result name="error" type="dispatcher">
+                <param name="location">/user/business/{1}_{2}.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <package name="contentAdmin" namespace="/admin/content" extends="admin">
+        <!--
+        <action name="user_listByCondition" class="userAction" method="listByCondition"> 
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/user/user_listByCondition.jsp</param>
+            </result> 
+        </action>
+        -->
+        <action name="delNewsComment" class="userCommentAction" method="delMessageById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/content/news_comment.jsp</param>
+            </result>
+        </action>
+        <action name="delPhotoComment" class="userCommentAction" method="delMessageById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/content/photo_comment.jsp</param>
+            </result>
+        </action>
+        <action name="delMessage" class="userMessageAction" method="delMessageById">
+            <result name="success" type="dispatcher">
+                <param name="location">/admin/content/message_list.jsp</param>
+            </result>
+        </action>
+    </package>
+
+    <!--子贵网用户中心-->
+    <package name="userCenter" namespace="/userCenter" extends="json-default">
+        <!--show head message-->
+        <action name="showHeadMsg" class="com.zigui.action.UserCenterAction" method="showHeadMsg">
+            <result name="success">
+                /userCenter/ucPublic/head_detail.jsp
+            </result>
+            <result name="input">/user/login.jsp</result>
+            <result name="none"></result>
+        </action>
+
+        <!--show role information-->
+        <action name="showClasses" class="com.zigui.action.ClazzAction" method="findClasses">
+            <result name="success">/none.jsp</result>
+        </action>
+        <action name="showRoleInfo" class="com.zigui.action.UserCenterAction" method="showRoleInfo">
+            <result name="schoolRole">/userCenter/roleInfo/schoolRoleInfo.jsp</result>
+            <result name="teacherRole">/userCenter/roleInfo/teacherRoleInfo.jsp</result>
+            <result name="parentRole">/userCenter/roleInfo/parentRoleInfo.jsp</result>
+            <result name="studentRole">/userCenter/roleInfo/studentRoleInfo.jsp</result>
+            <result name="visitorRole">/userCenter/roleInfo/visitorRoleInfo.jsp</result>
+            <result name="noMoreInfo">/userCenter/roleInfo/noMoreInfo.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+
+        <!--query dsis data-->
+        <action name="showXueJi" class="com.zigui.action.StudentArchiveAction" method="showXueJi">
+            <result name="classXueJi">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="teacherNone">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="studentXueJi">/userCenter/student/studentArchive.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="queryStudentsXueJiByClassId" class="com.zigui.action.StudentArchiveAction"
+                method="queryStudentsXueJiByClassId">
+            <result name="success">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="NoStudentArchives">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+
+        <action name="showHomeWork" class="com.zigui.action.UserCenterAction" method="showHomeWork">
+            <result name="classHomeworkList">/userCenter/teacher/teaHomework.jsp</result>
+            <result name="classHomeworkNone">/userCenter/teacher/teaHomework.jsp</result>
+            <result name="studentHomeWork">/userCenter/student/stuHomework.jsp</result>
+            <result name="stuHomeWorkNone">/userCenter/student/stuHomework.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="none"></result>
+        </action>
+        <action name="examList" class="com.zigui.action.UserCenterAction" method="examList">
+            <result name="classExamList">/userCenter/teacher/classExamList.jsp</result>
+            <result name="studentExamList">/userCenter/student/stuExamList.jsp</result>
+            <result name="none"></result>
+            <result name="classExamListNone">/userCenter/teacher/classExamList.jsp</result>
+            <result name="studentExamListNone">/userCenter/student/stuExamList.jsp</result>
+        </action>
+        <action name="showSchoolNotice" class="com.zigui.action.UserCenterAction" method="showSchoolNotice">
+            <result name="input">/user/login.jsp</result>
+            <result name="success">/userCenter/schoolNoticeList.jsp</result>
+            <result name="none">/userCenter/schoolNoticeList.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="innerLetterList" class="com.zigui.action.UserCenterAction" method="innerLetterList">
+            <result name="success">/userCenter/innerLetter.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="innerLetterDetail" class="com.zigui.action.UserCenterAction" method="showLetterDetail">
+            <result name="success">/userCenter/innerLetterDetail.jsp</result>
+            <result name="none"></result>
+        </action>
+        <action name="replyInnerLetter" class="com.zigui.action.UserCenterAction" method="replyInnerLetter">
+            <result name="success">/userCenter/innerLetter.jsp</result>
+            <result name="none"></result>
+        </action>
+        <action name="sendLetterList" class="com.zigui.action.UserCenterAction" method="sendLetterList">
+            <result name="success">/userCenter/sentInnerLetter.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="sendInnerLetter" class="com.zigui.action.UserCenterAction" method="sendInnerLetter">
+            <result name="success">/userCenter/sentInnerLetter.jsp</result>
+            <result name="none"></result>
+        </action>
+        <action name="schoolNoticeList" class="com.zigui.action.UserCenterAction" method="schoolNoticeList">
+            <result name="success"></result>
+            <result name="error"></result>
+        </action>
+        <action name="classNoticeList" class="com.zigui.action.UserCenterAction" method="classNoticeList">
+            <result name="success">/userCenter/classNotice.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="studentCommentList" class="com.zigui.action.UserCenterAction" method="studentCommentList">
+            <result name="studentsComments">/userCenter/teacher/studentsComments.jsp</result>
+            <result name="stuComment">/userCenter/student/studentComment.jsp</result>
+            <result name="stuCommentNone">/userCenter/student/studentComment.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="questionAndAnswerList" class="com.zigui.action.UserCenterHeadNavigateAction"
+                method="questionAndAnswerList">
+            <result name="success">/userCenter/question.jsp</result>
+            <result name="none">/userCenter/question.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="studentConsumption" class="com.zigui.action.UserCenterAction" method="studentConsumptionQuery">
+            <result name="success">/userCenter/student/consumeRecord.jsp</result>
+            <result name="none">/userCenter/student/consumeRecord.jsp</result>
+        </action>
+
+        <action name="showAttendance" class="com.zigui.action.UserCenterAction" method="showAttendance">
+            <result name="studentsAttendance">/userCenter/teacher/classAttendance.jsp</result>
+            <result name="studentsArchivesNone">/userCenter/teacher/classAttendance.jsp</result>
+            <result name="studentAttendance">/userCenter/student/stuAttendance.jsp</result>
+            <result name="studentAttendanceNONE">/userCenter/student/stuAttendance.jsp</result>
+        </action>
+
+
+        <action name="queryExam" class="com.zigui.action.UserCenterAction" method="queryExam">
+            <result name="success" type="json">
+                <param name="root">exams</param>
+            </result>
+            <result name="error">/fail.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+        <action name="queryTermInfo" class="com.zigui.action.UserCenterAction" method="queryTermInfo">
+            <result name="success" type="json">
+                <param name="root">termList</param>
+            </result>
+        </action>
+        <action name="queryStudentsByClassId" class="com.zigui.action.UserCenterAction"
+                method="ajaxQueryStudentsByClassId">
+            <result name="success" type="json">
+                <param name="root">students</param>
+            </result>
+            <result name="none"></result>
+        </action>
+
+        <!--MySource-->
+        <action name="mySource" class="com.zigui.action.UserCenterHeadNavigateAction" method="mySource">
+            <result name="success">/userCenter/resource.jsp</result>
+            <result name="none">/userCenter/resource.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <action name="pageQueryDownloadSource" class="com.zigui.action.UserCenterHeadNavigateAction"
+                method="pageQueryDownloadSource">
+            <result name="success">/userCenter/resource.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+
+        <action name="pageQueryUploadSource" class="com.zigui.action.UserCenterHeadNavigateAction"
+                method="pageQueryUploadSource">
+            <result name="success">/userCenter/resource.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+
+        <!--my point-->
+        <action name="myPoint" class="com.zigui.action.UserCenterHeadNavigateAction" method="myPoint">
+            <result name="success">/userCenter/points.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <!--webNotice-->
+        <action name="webNotice" class="com.zigui.action.UserCenterHeadNavigateAction" method="webNotice">
+            <result name="success">/userCenter/notice.jsp</result>
+        </action>
+        <!--check  card number bind state of student whose parent is querying -->
+        <action name="ajaxCheckBind" class="com.zigui.action.UserCenterAction" method="ajaxCheckBind">
+            <result name="success" type="json">
+                <param name="root">map</param>
+            </result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <!--Grow archive start-->
+        <action name="growArchive" class="com.zigui.action.GrowArchivesAction" method="listByCondition">
+            <result name="success">/userCenter/growArchive.jsp</result>
+        </action>
+        <!--Grow archive end-->
+
+        <!--Grow footprint start-->
+        <!--<action name="growFootprint" class="com.zigui.action.GrowFootmarkAction">-->
+
+        <!--</action>-->
+        <!--Grow footprint end-->
+
+        <!--teacher change student's school status-->
+        <action name="changeSchoolStatus" class="com.zigui.action.StudentArchiveAction" method="changeSchoolStatus">
+            <result name="none"></result>
+        </action>
+
+    </package>
+
+    <!--The Wap version of Ziguiw UserCenter begin-->
+    <package name="userCenterWap" namespace="/userCenterWap" extends="json-default">
+        <action name="wapAjaxLogin" class="com.zigui.action.UserCenterWapAction" method="wapAjaxLogin">
+            <result name="success" type="redirectAction">index</result>
+            <result name="input">/userCenterWap/login.jsp</result>
+
+        </action>
+        <action name="wap_logout" class="com.zigui.action.UserCenterWapAction" method="logout">
+            <result name="success">/userCenterWap/login.jsp</result>
+        </action>
+        <action name="index" class="com.zigui.action.UserCenterWapAction" method="index">
+            <result name="success">/userCenterWap/index.jsp</result>
+            <result name="input"></result>
+        </action>
+        <action name="showSchoolNotice" class="com.zigui.action.UserCenterAction" method="showSchoolNotice">
+            <result name="input">/userCenterWap/login.jsp</result>
+            <result name="success">/userCenterWap/DsisQuery/schoolNotice.jsp</result>
+            <result name="none">/userCenterWap/DsisQuery/schoolNotice.jsp</result>
+            <result name="error">/userCenterWap/fail.jsp</result>
+        </action>
+        <!--query dsis data-->
+        <action name="showXueJi" class="com.zigui.action.StudentArchiveAction" method="showXueJi">
+            <result name="classXueJi">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="teacherNone">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="studentXueJi">/userCenterWap/DsisQuery/archive.jsp</result>
+            <result name="input">/userCenterWap/login.jsp</result>
+            <result name="error">/userCenterWap/fail.jsp</result>
+        </action>
+        <action name="showAttendance" class="com.zigui.action.UserCenterAction" method="showAttendance">
+            <result name="studentsAttendance">/userCenterWap/DsisQuery/kaoqin.jsp</result>
+            <result name="studentsArchivesNone">/userCenterWap/DsisQuery/kaoqin.jsp</result>
+            <result name="studentAttendance">/userCenterWap/DsisQuery/kaoqin.jsp</result>
+            <result name="studentAttendanceNONE">/userCenterWap/DsisQuery/kaoqin.jsp</result>
+        </action>
+        <action name="showHomeWork" class="com.zigui.action.UserCenterAction" method="showHomeWork">
+            <result name="classHomeworkList">/userCenterWap/DsisQuery/zuoye.jsp</result>
+            <result name="classHomeworkNone">/userCenterWap/DsisQuery/zuoye.jsp</result>
+            <result name="studentHomeWork">/userCenterWap/DsisQuery/zuoye.jsp</result>
+            <result name="stuHomeWorkNone">/userCenterWap/DsisQuery/zuoye.jsp</result>
+            <result name="input">/userCenterWap/login.jsp</result>
+        </action>
+        <action name="examList" class="com.zigui.action.UserCenterWapAction" method="examList">
+            <result name="success">/userCenterWap/DsisQuery/chengji.jsp</result>
+            <result name="none"></result>
+        </action>
+        <action name="classNoticeList" class="com.zigui.action.UserCenterAction" method="classNoticeList">
+            <result name="success">/userCenterWap/DsisQuery/classNotice.jsp</result>
+            <result name="input">/userCenterWap/login.jsp</result>
+        </action>
+        <action name="studentCommentList" class="com.zigui.action.UserCenterAction" method="studentCommentList">
+            <result name="studentsCommentsNone">/userCenterWap/DsisQuery/comment.jsp</result>
+            <result name="studentsComments">/userCenterWap/DsisQuery/comment.jsp</result>
+            <result name="stuComment">/userCenterWap/DsisQuery/comment.jsp</result>
+            <result name="stuCommentNone">/userCenterWap/DsisQuery/comment.jsp</result>
+            <result name="input">/userCenterWap/login.jsp</result>
+        </action>
+        <action name="studentConsumption" class="com.zigui.action.UserCenterAction" method="studentConsumptionQuery">
+            <result name="success">/userCenterWap/DsisQuery/consume.jsp</result>
+            <result name="none">/userCenterWap/DsisQuery/consume.jsp</result>
+        </action>
+        <action name="queryTermInfo" class="com.zigui.action.UserCenterWapAction" method="queryTermInfo">
+            <result name="success">/userCenterWap/DsisQuery/chengji.jsp</result>
+            <result name="none"></result>
+        </action>
+
+
+        <action name="queryStudentsXueJiByClassId" class="com.zigui.action.StudentArchiveAction"
+                method="queryStudentsXueJiByClassId">
+            <result name="success">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="NoStudentArchives">/userCenter/teacher/studentsArchives.jsp</result>
+            <result name="input">/user/login.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+
+        <action name="queryExam" class="com.zigui.action.UserCenterAction" method="queryExam">
+            <result name="success" type="json">
+                <param name="root">exams</param>
+            </result>
+            <result name="error">/fail.jsp</result>
+            <result name="input">/user/login.jsp</result>
+        </action>
+
+        <action name="queryStudentsByClassId" class="com.zigui.action.UserCenterAction"
+                method="ajaxQueryStudentsByClassId">
+            <result name="success" type="json">
+                <param name="root">students</param>
+            </result>
+            <result name="none"></result>
+        </action>
+
+
+    </package>
+    <!--The Wap version of Ziguiw UserCenter end-->
+
+    <package name="classPhoto_admin" namespace="/admin/classPhoto" extends="admin">
+        <action name="classPhoto_*" class="classPhotoAction" method="{1}">
+            <result name="list">/admin/classPhoto/classphoto_list.jsp</result>
+            <result name="success">/admin/classPhoto/classphoto_result.jsp</result>
+            <result name="view">/admin/classPhoto/classphoto_view.jsp</result>
+        </action>
+    </package>
+
+
+    <package name="test" namespace="/" extends="struts-default">
+        <action name="test" class="com.zigui.action.TestAction">
+            <result name="view">/test.jsp</result>
+        </action>
+    </package>
+
+</struts>  

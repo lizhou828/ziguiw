@@ -1,0 +1,61 @@
+<div class="uc_p">
+    <div class="uc_p_left">
+        <div class="uc_photo">
+            #{if userBase!=null && userBase.photo !=null && !"".equals(userBase.photo) &&  !"null".equalsIgnoreCase(userBase.photo) }
+                <img  width="165" height="160" src="${userBase.photo}" />
+            #{/if}
+            #{else }
+                <img  width="165" height="160" src="@{'public/images/photo.gif'}" />
+            #{/else}
+
+        </div>
+        <p class="modi"><a href="/user/upload_portrait.jsp">修改头像</a></p>
+    </div>
+    <div class="uc_p_right">
+        <div class="uc_p_inf">
+            <table width="400">
+                <tr>
+                    <td class="n_str">姓&nbsp;&nbsp;&nbsp;名：</td>
+                    <td class="n_con">${displayName}</td>
+                </tr>
+                <tr>
+                    <td class="n_str">账&nbsp;&nbsp;&nbsp;号：</td>
+                    <td class="n_con">${username}</td>
+                </tr>
+                <tr>
+                    <td class="n_str">身份类别：</td>
+                    <td class="n_con" >${userBase}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="15">登录次数：</td>
+                    <td>${userBase?.loginCount}</td>
+                </tr>
+                <tr>
+                    <td>上次登录：</td>
+                    <td>
+                        ${userBase?.lastLoginTime?.format("yyyy-MM-dd hh:mm:ss")}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" height="28">
+                        <a href="http://www.ziguiw.com/user/update_passwd.jsp">
+                            <input type="button" class="in_btn" value="修改密码"/>
+                        </a>
+                        <a href="http://www.ziguiw.com/user/select_role.jsp">
+                            <input type="button" class="in_btn" value="完善资料"/>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="uc_mon">
+            <p>我的积分：<span style="color:#c90408;font-family:Arial, Helvetica, sans-serif;font-size:24px;">${userBase?.points}</span>分</p>
+            <div class="mon_btn">
+                <a href="/payment/chongzhi_1.jsp"><input type="image" src="@{'public/images/mon_btn.gif'}" /></a>
+            </div>
+        </div>
+    </div>
+</div>

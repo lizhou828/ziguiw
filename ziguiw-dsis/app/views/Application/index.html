@@ -1,0 +1,457 @@
+#{extends 'main.html' /}
+#{script 'easydialog.min.js'/}
+#{stylesheet 'easydialog.css'/}
+<style type="text/css">
+      table td {
+          padding: 5px 0;
+          text-align: center;
+      }
+</style>
+<div class="main_left">
+    <!--个人信息!-->
+    <div class="s_user">
+        <div class="u_photo">
+            <div class="p_photo">
+                <img src="@{'public/images/user_photo.gif'}" />
+                <div class="u_revise"></div>
+            </div>
+        </div>
+    #{if userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.PARENT}
+        <div class="u_xinxi">
+            <p>
+                <strong>您有${studentList ? studentList.size() : 0}个在校孩子：
+                #{if studentList.size() > 1}
+                    <script type="text/javascript">
+                        function  selectChild (_xsId){
+                            $.ajax({
+                                type:"GET",
+                                url:"/Application/pshow_index?isAjax=1"+"&xsId="+_xsId,
+                                beforeSend : function(){
+                                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                                },
+                                success : function(result){
+                                    $("#listTable").html(result);
+                                }
+                            });
+                            return false;
+                        }
+                    </script>
+                    <div>
+                        #{list items:studentList,as:'students'}
+                            <a href="javascript:void(0);" onclick="selectChild(${students.xsId})" style="color: #000000;font-size: 15px;">
+                                <font color="#ff6105">${students.xsXming}</font>
+                            </a>
+                            &nbsp;&nbsp;
+                        #{/list}
+                        #{if false && studentListNotPayed.size() != 0}
+                            <span style="color: #ff0000;font-size: 15px;">未缴纳年费的孩子有：</span>
+                            #{list items:studentListNotPayed,as:'s'}
+                                <span style="color: #ff0000;font-size: 15px;" >${s.xsXming}</span>
+                            #{/list}
+                        #{/if}
+                        </select>
+                    </div>
+                #{/if}
+                </strong>
+            </p>
+            <span id="listTable">
+                <p><strong>您的孩子的基本信息：</strong></p>
+                <p>姓名：<strong>${student?.xsXming}</strong></p>
+                <p>所在学校：<strong>${school.schName}</strong></p>
+                <p>所在班级：<strong>${clazz.bjMcheng}</strong></p>
+            </span>
+        </div>
+     #{/if}
+    #{if userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+        <div class="u_xinxi">
+
+                <p><strong>您的的基本信息：</strong></p>
+                <p>姓名：<strong>${teacher?.name}</strong></p>
+                <p>所在学校：<strong>${school.schName}</strong></p>
+                <p>管理的班级：
+                    #{list items:clazzList,as:'clazz'}
+                        <strong>${clazz.bjMcheng}&nbsp;</strong>
+                        &nbsp;&nbsp;
+                    #{/list}
+                </p>
+        <p class="m_con_t">您的班级学生<span>${currentTime}</span>基本考勤情况：</p>
+        <p class="m_kaoq"><span>正常考勤(<strong class="m_red">0</strong>)次 </span><span> 迟到(<strong class="m_red">0</strong>)次</span></p>
+        </div>
+    #{/if}
+    #{if userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+        <div class="u_xinxi">
+            <p><strong>学生基本信息：</strong></p>
+            <p>姓名：<strong>${student?.xsXming}</strong></p>
+            <p>所在学校：<strong>${school.schName}</strong></p>
+            <p>所在班级：<strong>${clazz.bjMcheng}</strong></p>
+        </div>
+    #{/if}
+    </div>
+    <!--个人信息!-->
+
+
+
+    <!--最新考勤开始!-->
+    <div class="s_check">
+        <div class="c_title">
+            <strong>最新考勤</strong>
+        </div>
+        <div class="c_table">
+            <table width="578" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr align="center" style="height: 35px">
+                    <td width="146" class="c_tb1"><b>学生姓名</b></td>
+                    <td width="146" class="c_tb1"><b>读卡时间</b></td>
+                    <td width="146" class="c_tb1"><b>状态</b></td>
+                </tr>
+                #{if userBase && userBase.type != com.arj.ziguiw.common.UserBaseType.TEACHER}
+                    #{if !attendancePage.data}
+                        <tr>
+                            <td colspan="3">暂无记录</td>
+                        </tr>
+                    #{/if}
+                    #{list items:attendancePage.data, as:'data'}
+                        #{if data_index < 6}
+                        <tr align="center">
+                            <td>${student.xsXming}</td>
+                            <td>${data['READCARD_TIME'] ? new java.text.SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(data['READCARD_TIME'])) : null}</td>
+                            <td>
+                                #{if data['IN_OUT_STATE']=="0"} <font color="red">离校</font>#{/if}
+                                #{elseif data['IN_OUT_STATE']=="1"}<font color="green">进校</font>#{/elseif}
+                            </td>
+                        </tr>
+                        #{/if}
+                    #{/list}
+                #{/if}
+                #{else}
+                <tr align="center">
+                    <td>张迪</td>
+                    <td>2013-04-14 16:50:01</td>
+                    <td>离校</td>
+                </tr>
+                <tr align="center">
+                    <td>唐帆</td>
+                    <td>2013-04-14 16:41:11</td>
+                    <td>离校</td>
+                </tr>
+                <tr align="center">
+                    <td>杨盟</td>
+                    <td>2013-04-14 16:40:41</td>
+                    <td>离校</td>
+                </tr>
+                <tr align="center">
+                    <td>宁梦全</td>
+                    <td>2013-04-14 16:30:41</td>
+                    <td>离校</td>
+                </tr>
+                #{/else}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--最新考勤结束!-->
+
+    <!--最新消费始!-->
+    <div class="s_buy">
+        <div class="b_title">
+            <strong>最新消费</strong>
+        </div>
+        <div class="b_table">
+            <table width="578" border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr align="center" style="height: 35px">
+                    <td width="76" class="b_tb1"><b>姓名</b></td>
+                    <td width="73" class="b_tb1"><b>类型</b></td>
+                    <td width="138" class="b_tb1"><b>消费时间</b></td>
+                    <td width="92" class="b_tb1"><b>消费金额</b></td>
+                    <td width="96" class="b_tb1"><b>余额</b></td>
+                </tr>
+                #{if userBase && userBase.type != com.arj.ziguiw.common.UserBaseType.TEACHER}
+                    #{if !attendancePage.data}
+                    <tr>
+                        <td colspan="5">暂无记录</td>
+                    </tr>
+                    #{/if}
+                #{list items:consumePage.data, as:'data'}
+                #{if data_index < 6}
+                <tr>
+                    <td >${student.xsXming}</td>
+                    <td >
+                        #{if data['CONS_STATE']=='0'}消费#{/if}
+                        #{elseif data['CONS_STATE']=='1'}充值#{/elseif}
+                        #{elseif data['CONS_STATE']=='2'}取款#{/elseif}
+                        #{elseif data['CONS_STATE']=='3'}补助#{/elseif}
+                        #{else}非法退出#{/else}
+                    </td>
+                    <td >
+                    ${data['CONS_TIME'] ? new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.lang.Long(data['CONS_TIME'])) : null}
+                    </td>
+                    <td >${data['CONS_FARE']}</td>
+                    <td >${data['X_MONEY']}</td>
+                </tr>
+                #{/if}
+                #{/list}
+                #{/if}
+                #{else}
+                <tr align="center">
+                    <td>杨盟</td>
+                    <td>消费</td>
+                    <td>2013-04-14 07:45:41</td>
+                    <td>5（元）</td>
+                    <td>125（元）</td>
+                </tr>
+                <tr align="center">
+                    <td>唐帆</td>
+                    <td>消费</td>
+                    <td>2013-04-14 08:40:40</td>
+                    <td>10（元）</td>
+                    <td>200（元）</td>
+                </tr>
+                <tr align="center">
+                    <td>张迪</td>
+                    <td>消费</td>
+                    <td>2013-04-14 09:05:41</td>
+                    <td>30（元）</td>
+                    <td>10（元）</td>
+                </tr>
+                <tr align="center">
+                    <td>宁梦全</td>
+                    <td>消费</td>
+                    <td>2013-04-14 15:01:25</td>
+                    <td>10（元）</td>
+                    <td>10（元）</td>
+                </tr>
+                #{/else}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--最新消费结束!-->
+
+    <!--提意见开始!-->
+     <script type="text/javascript">
+        function checkAdvise1(){
+            var comments  = document.getElementById("comments").value;
+            if(comments == "提提我的想法和建议"){
+                document.getElementById("comments").value = "";
+            }
+        }
+        function checkAdvise2(){
+            var comments  = document.getElementById("comments").value;
+            if(comments == null || comments =="" || comments ==" " || comments == "undefined"){
+                document.getElementById("comments").value = "提提我的想法和建议";
+            }
+        }
+        function submitAdvise(){
+            var comments  = document.getElementById("comments").value;
+            if(comments == null || comments == " "){
+                var btnFn = function(){
+                    return true;
+                };
+                easyDialog.open({
+                    container : {
+                        header : '提提我的想法和建议',
+                        content : '填写的内容不能为空！',
+                        yesFn : btnFn,
+                        noFn : true
+                    },
+                    drag:false   //禁止拖拽
+                });
+
+                return false;
+            }else if(comments == "提提我的想法和建议"){
+                var btnFn = function(){
+                    return true;
+                };
+                easyDialog.open({
+                    container : {
+                        header : '提提我的想法和建议',
+                        content : '请认真填写您的建议!',
+                        yesFn : btnFn,
+                        noFn : true
+                    },
+                    drag:false   //禁止拖拽
+
+                });
+                return false;
+            }
+            else{
+                var btnFn = function(){
+                    return true;
+                };
+                easyDialog.open({
+                    container : {
+                        header : '提提我的想法和建议',
+                        content : '提交成功!',
+                        yesFn : btnFn,
+                        noFn : true
+                    },
+                    drag:false   //禁止拖拽
+
+                });
+                return true;
+            }
+        }
+     </script>
+    <div class="s_talk">
+        <table width="578" height="42" border="0">
+            <tbody><tr>
+                <td width="0" height="38" style="padding: 0">&nbsp;</td>
+                <td width="451" style="padding: 0">
+                    <input class="talk_ipt" style="color: gray;" id = "comments" value="提提我的想法和建议" type="text"  onfocus="checkAdvise1()" onblur="checkAdvise2()">
+                </td>
+                <td width="113" style="padding: 0">
+                    <input class="talk_btn" type="button" name="button" id="button" value="提交" onclick="submitAdvise();"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--提意见结束!-->
+</div>
+
+
+<div class="main_right">
+    <!--学校公告开始!-->
+    <div class="s_notice">
+        <div class="o_title">
+            <strong>&nbsp;&nbsp;学校公告</strong>
+            <a  target="_blank" href = "${play.configuration['schoolsite.domain']}/schoolnews/plist?xxId=${school?.xxId}&schoolNewsType=1">更多</a>
+        </div>
+        <ul>
+            #{list items:schoolNews_bulletin, as:'news'}
+                <li><a target="_blank" href="${play.configuration['schoolsite.domain']}/schoolnews/pshow?newsId=${news.id}">${news.title.length() > 11 ? news.title[0..11] : news.title}</a></li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <!--学校公告结束!-->
+    <!--学校公告开始!-->
+
+    <div class="s_notice">
+        <div class="o_title">
+            <strong>&nbsp;&nbsp;学校动态</strong>
+            <a  target="_blank" href="${play.configuration['schoolsite.domain']}/schoolnews/plist?xxId=${school?.xxId}&schoolNewsType=2">更多</a>
+        </div>
+        <ul>
+        #{list items:schoolNews_news, as:'news'}
+            <li><a  target="_blank" href="${play.configuration['schoolsite.domain']}/schoolnews/pshow?newsId=${news.id}">${news.title.length() > 11 ? news.title[0..11] : news.title}</a></li>
+        #{/list}
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+    <!--学校公告结束!-->
+
+    <!--站内信开始!-->
+
+    <div class="s_znx">
+        <div class="z_title">
+            <strong>&nbsp;&nbsp;站内信件</strong>
+            <a href="#">更多</a>
+        </div>
+        <ul>
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+    <!--站内信结束!-->
+</div>
+
+
+
+*{
+#{extends 'main.html' /}
+#{set title:'用户中心首页'/}
+    <div  id="roleBasicInfo" >
+        <div class="uc_m">
+            <div class="uc_m_con">
+                <p class="m_con_t">您的基本信息：</p>
+                <br/>
+                #{if userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+                <ul class="m_inf">
+                    <li>姓&nbsp;&nbsp;&nbsp;&nbsp;名：${teacher?.name}</li>
+                    <li>所在学校：${school.schName}</li>
+                    <li>管理的班级： <li>
+                    <li style="overflow:auto;height:auto;">
+                        #{list items:clazzList,as:'clazz'}
+                           ${clazz.bjMcheng}&nbsp;
+                        #{/list}
+                    </li>
+                    <li>共（<span class="m_red">${studentCount}</span>）名学生</li>
+                </ul>
+                    <p class="m_con_t">您的班级学生<span>${currentTime}</span>基本考勤情况：</p>
+                    <p class="m_kaoq"><span>正常考勤(<strong class="m_red">0</strong>)次 </span><span> 迟到(<strong class="m_red">0</strong>)次</span></p>
+                #{/if}
+                #{elseif userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.PARENT}
+                    <div id=listTable >
+                        #{if studentList.size() > 1}
+                            <script type="text/javascript">
+                                function  selectChild (_xsId){
+                                    $.ajax({
+                                        type:"GET",
+                                        url:"/Application/pshow_index?isAjax=1"+"&xsId="+_xsId,
+                                        beforeSend : function(){
+                                            $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                                        },
+                                        success : function(result){
+                                            $("#listTable").html(result);
+                                        }
+                                    });
+                                    return false;
+                                }
+                            </script>
+                           <div> <span style="font-size: 15px;">您的在校孩子有：</span>
+                                    #{list items:studentList,as:'students'}
+
+                                        <a href="javascript:void(0);" onclick="selectChild(${students.xsId})" style="color: #000000;font-size: 15px;">${students.xsXming}</a>
+                                        &nbsp;&nbsp;&nbsp;
+                                    #{/list}
+                                    <br/>
+                                    <br/>
+                               #{if studentListNotPayed.size() != 0}
+                                   <span style="color: #ff0000;font-size: 15px;">未缴纳年费的孩子有：</span>
+                                   #{list items:studentListNotPayed,as:'s'}
+
+                                       <span style="color: #ff0000;font-size: 15px;" >${s.xsXming}</span>
+
+                                   #{/list}
+                               #{/if}
+                              </select>
+
+                           </div>
+                        #{/if}
+                        <br/><br/>
+
+                        <ul class="m_inf">
+                            <li>孩子姓名：${student.xsXming}</li>
+                            <li>所在学校：${school.schName}</li>
+                            <li>所在班级：${clazz.bjMcheng}</li>
+                        </ul>
+                        <p class="m_con_t">您的孩子在 <span>${currentTime}</span>基本考勤情况：</p>
+                        <p class="m_kaoq"><span>正常考勤(<strong class="m_red">0</strong>)次 </span><span> 迟到(<strong class="m_red">0</strong>)次</span></p>
+                     </div>
+                #{/elseif}
+
+
+
+
+                #{elseif userBase && userBase.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+                    <ul class="m_inf">
+                        <li>姓名：${userBase?.displayName}</li>
+                        <li>学校:${school.schName}</li>
+                        <li>班级：${clazz?.bjMcheng}</li>
+                    </ul>
+                    <p class="m_con_t">您在 <span>${currentTime}</span>基本考勤情况：</p>
+                    <p class="m_kaoq"><span>正常考勤(<strong class="m_red">0</strong>)次 </span><span> 迟到(<strong class="m_red">0</strong>)次</span></p>
+                #{/elseif}
+
+            </div>
+
+            <hr style="height:1px;border: 1px solid #F3F3F3;">
+            <div class="m_sug">
+                <p>我对"子贵网"有<strong><a href="http://dsis.ziguiw.com/feedback/add.jsp">建议或意见</a></strong>，我要跟"子贵网" 说两句</p>
+            </div>
+        </div>
+    </div>
+
+}*

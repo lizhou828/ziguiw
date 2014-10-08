@@ -1,0 +1,165 @@
+%{
+if (!_page) {
+_page = _caller.page
+}
+
+if (_url) {
+_url += _url.contains("?") ? "&" : "?"
+}
+nbPages = _page.totalPage
+
+if (_isAjax) {
+    def params = [];
+    if (_paramIds) {
+        params = _paramIds.split(" ");
+    }
+    if (!_tableId) {
+        _tableId = "listTable";
+    }
+}%
+<script type="text/javascript">
+    function gotoPage(page){
+        var _url = "${_url}";
+        var params = "${params.join(",")}".split(",");
+        for (var i=0; i<params.length; i++) {
+            if(!document.getElementById(params[i]) ){
+                continue;
+            }
+            var paramKeyValue = params[i] + "=" + $("#"+params[i]).val() + "&";
+            _url += paramKeyValue;
+        }
+        _url += "page=" + page + "&isAjax=1";
+        $.ajax({
+            type:"GET",
+            url:_url,
+            beforeSend : function(){
+                $("#${_tableId}").html("<img src='/public/images/loading.gif'/>");
+            },
+            success : function(result){
+                $("#${_tableId}").html(result);
+            }
+        });
+        return false;
+    }
+</script>
+%{
+}
+}%
+
+
+#{if nbPages > 1}
+<p class="pageNav">
+
+%{
+    limit = (_limit != null ? _limit : 10)
+    start = _page.page - (int)(limit/2) + (limit % 2 ? 0 : 1)
+    end = _page.page + (int)(limit/2)
+
+    if(start < 1){
+        extra = 1 - start
+        end = (end + extra < nbPages ? end + extra : nbPages)
+        start = 1
+    }else if(end > nbPages){
+        extra = end - nbPages
+        start = (start - extra > 1 ? start - extra : 1)
+        end = nbPages
+    }
+}%
+
+    #{if start > 1}
+
+            %{
+                if (_url) {
+            }%
+                *{<a href="${_url}page=1&pageSize=${_page.pageSize}">首页</a>}*
+                <a onclick="gotoPage(1)"  href="javascript:void(0);" >首页</a>
+            %{
+                } else {
+            }%
+                *{#{a @list().add('page', 1).add('pageSize', _page.pageSize)}首页#{/a}}*
+            %{
+                }
+            }%
+
+    #{/if}
+
+    #{if _page.page > 1}
+
+
+            %{
+                if (_url) {
+            }%
+                 *{<a class="f12" href="${_url}page=${_page.page-1}&pageSize=${_page.pageSize}">上一页</a>}*
+                <a class="f12" href="javascript:void(0);" onclick="gotoPage(${_page.page-1})">上一页</a>
+             %{
+                } else {
+            }%
+                *{ #{a @list().add('page', _page.page-1).add('pageSize', _page.pageSize)}前一页#{/a}}*
+             %{
+                }
+            }%
+
+
+    #{/if}
+
+
+%{ for (i in start..end) { }%
+
+        #{if _page.page == i}
+            <a  style="background: none repeat scroll 0 0 #C41C1B;">${i}</a>
+        #{/if}
+        #{else}
+            %{
+                if (_url) {
+            }%
+            *{<a href="${_url}page=${i}&pageSize=${_page.pageSize}">${i}</a>}*
+            <a href="javascript:void(0);" onclick="gotoPage(${i})">${i}</a>
+            %{
+                } else {
+            }%
+            *{ #{a @list().add('page', i).add('pageSize', _page.pageSize)}${i}#{/a} }*
+            %{
+                }
+            }%
+        #{/else}
+
+%{ } }%
+
+    #{if _page.page < nbPages}
+
+            %{
+                if (_url) {
+            }%
+                *{<a  class="f12" href="${_url}page=${_page.page+1}&pageSize=${_page.pageSize}">下一页</a>}*
+                  <a class="f12" href="javascript:void(0);" onclick="gotoPage(${_page.page+1})">下一页</a>
+            %{
+                } else {
+            }%
+                *{ #{a @list().add('page', _page.page+1).add('pageSize', _page.pageSize)}下一页#{/a} }*
+            %{
+                }
+            }%
+
+    #{/if}
+
+    #{if end < nbPages}
+
+            %{
+                if (_url) {
+            }%
+                *{<a href="${_url}page=${nbPages}&pageSize=${_page.pageSize}">尾页</a>}*
+                <a href="javascript:void(0);" onclick="gotoPage(${nbPages})">尾页</a>
+            %{
+                } else {
+            }%
+                *{ #{a @list().add('page', nbPages).add('pageSize', _page.pageSize)}尾页#{/a} }*
+            %{
+                }
+            }%
+
+    #{/if}
+
+
+
+</p>
+#{/if}

@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{ background:#dbeaf3 url(../../images/user/body-bg.gif) repeat-x top left; padding-bottom:40px;}
+
+
+.rzhong{ width:555px; float:left; margin-left:15px; padding-bottom:20px; padding-top:10px;}
+.rzhong div{ float:left}
+.xinqing{ width:544px; padding:10px 0px 5px 0px; color:#3b3b3b; line-height:35px; height:35px;}
+.xinqing p{ width:430px; float:left;}
+.xinqing span{ float:right; display:block; width:100px;text-align:right; color:#a0a0a0;}
+.shukk{ width:534px; background:#e5f1f5; padding:5px;}
+.shukk textarea{ width:534px; border:1px solid #b3c5d9; height:50px; font-size:12px; color:#a6a6a6}
+.shukk ul li{ padding:2px 0px;}
+.shukk a.ty{ background:url(../../images/user/bq1.gif) no-repeat; padding:0px 0px 5px 20px; margin-right:10px;}
+.shukk a.ty1{ background:url(../../images/user/bq2.gif) no-repeat; padding:0px 0px 5px 20px;}
+.shukk a{ color:#18689f; line-height:22px;}
+.shukk ul li.yutt{ width:450px;}
+
+.dtai{ width:544px; background:url(../../images/user/ku.gif) bottom repeat-x; padding:10px 0px 0px 0px;}
+.dtai ul li.bai{ border:1px solid #aecada;border-bottom:none;background:#fff;padding:5px 12px 6px 12px;}
+.dtai ul li{ padding:5px 12px; border:1px solid #aecada; background:#dbeaf3; margin-right:5px; float:left;}
+.dongtai{width:544px;}
+.dongtai ul{ width:535px; border-bottom:1px solid #e9e9e9; float:left; padding:15px 0px 8px 0px;}
+.dongtai ul li{ float:left}
+.dongtai ul li.tuuser{ width:70px;}
+.dongtai ul li.tuuser img{ width:53px; height:53px; border:1px solid #cfcfcf}
+.dongtai ul li.tuuser1{ width:465px;}
+.dongtai ul li p{ padding:2px 0px; width:465px; float:left;}
+.dongtai ul li p.tuzi1{ color:#383838;}
+.dongtai ul li p.tuzi1 span{ color:#000}
+.dongtai ul li p a{ color:#18689f;}
+.dongtai ul li p.tuzi2 img{ width:20%; padding:2px; border:1px solid #cdcfce}
+.dongtai ul li p.tuzi2{ color:#6a6a6a; line-height:22px;}
+.dongtai ul li p.time{ color:#cacaca}
+.dongtai ul li p.tuzi3 a img{ width:15%; padding:2px; border:1px solid #cdcfce; float:left}
+.dongtai ul li p.tuzi3 span{ width:365px; height:82px; float:left; padding:0px 0px 0px 10px; color:#6b6b6b; line-height:24px;}
+.dongtai ul li p.tuzi3 span b{ color:#fe5504}
+
+.at-1{float:left; display:block; height:30px; line-height:30px; margin-top:10px; width:100px;}
+
+.ryou{ width:211px; float:left; margin-left:5px; padding-top:20px;}
+.huid{ line-height:28px; width:205px; color:#3a3a3a; padding:0px 0px 0px 5px; height:28px;}
+.huid span{font-weight:bold; display:block; float:left; width:150px;}
+.huid  a{float:right;}
+
+.pople{ width:210px;}
+.pople ul{ padding:10px 0px 2px 0px; width:210px;}
+.pople ul li{ width:70px; text-align:center; float:left; padding-bottom:10px;}
+.pople ul li p{color:#cdcdcb; line-height:20px;}
+.pople ul li p.img50 img{ width:50px; height:50px; border:1px solid #cfcfcf;}
+.pople ul li p a{ color:#18689f}
+.pople ul li a.att-1{display:block; width:65px; overflow:hidden; height:20px; margin:0 auto; line-height:20px;}
+
+
+.welcome-img{ background:url(../../images/user/welcome-img_03.gif) no-repeat top left; width:484px; height:468px;margin-top:20px; margin-left:40px;}
+
+.lli ul{ width:200px; padding:5px 5px 10px 5px;} 
+.lli ul li{line-height:24px;}
+.lli ul li a{ color:#18689f; width:180px; overflow:hidden; height:24px;}
+
+.line-1{height:1px; border-bottom:1px #CCC solid; width:210px;}

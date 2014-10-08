@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #{stylesheet src:'style.css'/}
+    #{script src:'jquery.js'/}
+    #{script src:'mouse.js'/}
+<title>子贵网_手机版_首页</title>
+</head>
+
+<body>
+<div class="header">
+	<p class="nav_title">数字化校园平台查询</p>
+</div>
+<div class="location">
+    <span><a href="/wapucs/index">首页</a> &gt;
+        用户中心
+    </span>
+    <span class="quit_btn">
+        #{if session.get("wapUserName")}
+            <a target="_self" href="/wapucs/index">[返回首页]</a>
+            <a target="_self"  href="/wapucs/wapLogout">[退出]</a>
+        #{/if}
+        #{elseif }
+            <a target="_self" href="/wapucs/index">登录</a>
+        #{/elseif}
+    </span>
+</div>
+<div class="c_name pl10">
+    <p>
+     ${session.get("wapUserName")},您好!
+    </p>
+</div>
+
+
+<div class="middle" >
+    #{doLayout /}
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+#{extends 'main.html'/}
+#{set title:'成长足迹——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <div class="bobti">
+        成长足迹
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#QueryBtn").click(function(){
+                var xsNode = $("#xsId");
+                var xsId
+                if(xsNode){
+                    xsId = $("#xsId").val();
+                } else{
+                    xsId = $("#studentId").val();
+                }
+                if(xsId && xsId != null && xsId == '-1'){
+                    alert("必须选定一个孩子！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/GrowFootprints/plist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            }) ;
+
+        });
+
+    </script>
+
+
+    <div id="addOneGrowFootPrint">
+         <span style="padding-left: 20px;  font-size: 17px;">
+                #{if studentList!=null && studentList.size() > 1}
+                           #{list items:studentList,as:'s'}
+                                #{if s.xsId == student.xsId}
+                                    <a href="/GrowFootprints/plist?xsId=${s.xsId}" target="_self" style="color: orange;"><strong>${s.xsXming}</strong></a> &nbsp;
+                                #{/if}
+                                #{else }
+                                    <a href="/GrowFootprints/plist?xsId=${s.xsId}" target="_self" style="color:#dcdcdc;">${s.xsXming}</a> &nbsp;
+                                #{/else}
+                           #{/list}
+                #{/if}
+                <a href="/GrowFootprints/pAdd" target="_self" style="color: orange;">添加</a>
+                 <a href="/GrowFootprints/plist?xsId=${student.xsId}" target="_self" style="color: orange;">返回</a>
+            </span>
+
+    </div>
+    <div class="xunc_2 font-2" id= "listTable">
+        <table width="729" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+            <tr>
+                <td class="t1 font-2">
+                    时间
+                </td>
+                <td class="t1 font-2">
+                    活动名称
+                </td>
+                <td class="t1 font-2">
+                    结果
+                </td>
+                <td class="t1 font-2">
+                  地点
+                </td>
+                <td class="t1 font-2">
+                    操作
+                </td>
+            </tr>
+
+            #{if growFootprintPage != null &&  growFootprintPage.data != null && growFootprintPage.data.size() != 0}
+                #{list items:growFootprintPage.data,as:'data'}
+                    <tr>
+                        <td>
+                        ${data.createTime ? new java.text.SimpleDateFormat("yyyy-mm-dd").format(data.createTime) : null}
+                        </td>
+
+                        <td class="t2">
+                          ${data.title}
+                        </td>
+                        <td class="t2">
+                        ${data.result}
+                        </td>
+                        <td>
+                            ${data.place}
+                        </td>
+                        <td>
+                            <a href="/GrowFootprints/pShow?id=${data.id}" class="icon16">编辑</a>
+                            <a href="/GrowFootprints/pDelete?id=${data.id}" class="icon16">删除</a>
+                        </td>
+                    </tr>
+                #{/list}
+            #{/if}
+            #{else }
+                <tr>
+                    没有找到相关记录!
+                </tr>
+            #{/else}
+
+
+            </tbody>
+        </table>
+        #{if growFootprintPage != null}
+            <div class="pageNav">
+                #{page page : growFootprintPage, url : "/GrowFootprints/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+            </div>
+        #{/if}
+
+    </div>
+
+
+</div>

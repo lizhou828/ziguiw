@@ -1,0 +1,76 @@
+#{extends 'main.html'/}
+#{set title:'成长足迹——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <div class="bobti">
+        成长足迹
+    </div>
+
+    <script type="text/javascript">
+        function checkForm(){
+            var time =document.getElementById("time").value;
+            var activitiesName =document.getElementById("activitiesName").value;
+            var place=document.getElementById("place").value;
+            var result=document.getElementById("result").value;
+            if(time == null ||time == '' || activitiesName == null || activitiesName == ''|| place == null || place == ''||result == null || result == ''){
+                alert("还有部分成长足迹信息没填写完整");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <div id="addOneGrowFootPrint">
+        <span style="padding-left: 20px;  font-size: 17px;">
+                    <a href="/GrowFootprints/pAdd" target="_self" style="color: orange;">添加</a>
+                    <a href="/GrowFootprints/plist?xsId=${growFootprint.xsId}" target="_self" style="color: orange;">返回</a>
+        </span>
+    </div>
+
+    <div class="xunc_2 font-2" id= "listTable">
+        <form action="/GrowFootprints/pSave"method="post" onsubmit="checkForm()">
+            <table width="729" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td class="t1 font-2">
+                        时间
+                    </td>
+                    <td class="t1 font-2">
+                        活动名称
+                    </td>
+                    <td class="t1 font-2">
+                        结果
+                    </td>
+                    <td class="t1 font-2">
+                        地点
+                    </td>
+                    <td class="t1 font-2">
+                        操作
+                    </td>
+                </tr>
+                <tr>
+                    <td class="t1 font-2">
+                        <input id="time" name="time" onclick="WdatePicker()" class="Wdate" style="float: none"
+                               value="${growFootprint.createTime ? new java.text.SimpleDateFormat("yyyy-mm-dd").format(growFootprint.createTime) : null}"/>
+                    </td>
+                    <td class="t1 font-2">
+                        <input id="activitiesName" name="activitiesName" value="${growFootprint.title}"/>
+                    </td>
+                    <td class="t1 font-2">
+                        <input id="result" name="result" value="${growFootprint.result}"/>
+                    </td>
+                    <td class="t1 font-2">
+                        <input id="place" name="place" value="${growFootprint.place}"/>
+                    </td>
+                    <td class="t1 font-2">
+                        <input type="hidden" name="id" value="${growFootprint.id}"/>
+                        <input type="submit" value="保存"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+
+</div>

@@ -1,0 +1,50 @@
+#{extends 'WapUCs/home.html'/}
+<div class="bobti">
+    消费纪录查询<span style="color:#2d2d2d;font-family:Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;">（以下考勤信息仅供参考）</span>
+</div>
+<div class="xunc_1-1">
+    <font color="red"><p>&nbsp;近一个月内的信息</p></font>
+</div>
+
+<div class="title_5">
+    <font color="red"><strong>您的消费纪录如下</strong></font>
+</div>
+
+<div class="score_con">
+    #{if page.data == null || page.data.size() == 0}
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>没有相关记录！</td>
+        </tr>
+    </table>
+    #{/if}
+        #{else }
+            #{list items:page.data,as:'data'}
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <th>消费时间</th>
+                        <td>  ${data['CONS_TIME'] ? new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.lang.Long(data['CONS_TIME'])) : null}</td>
+                    </tr>
+                    <tr>
+                        <th>类型</th>
+                        <td>
+                            #{if data['CONS_STATE']=='0'}消费#{/if}
+                            #{elseif data['CONS_STATE']=='1'}充值#{/elseif}
+                            #{elseif data['CONS_STATE']=='2'}取款#{/elseif}
+                            #{elseif data['CONS_STATE']=='3'}补助#{/elseif}
+                            #{else}非法退出#{/else}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>消费金额(元)</th>
+                        <td>${data['CONS_FARE']}</td>
+                    </tr>
+                    <tr>
+                        <th>余额(元)</th>
+                        <td>${data['X_MONEY']}</td>
+                    </tr>
+                </table>
+            #{/list}
+        #{/else}
+
+</div>

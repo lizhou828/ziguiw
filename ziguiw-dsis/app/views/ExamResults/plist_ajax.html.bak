@@ -1,0 +1,29 @@
+<table border="0" cellpadding="0" cellspacing="0" width="729">
+    <tbody>
+    <tr>
+        <th>考试科目</th>
+        <th>得分</th>
+    </tr>
+    #{if subjectList.size() == 0}
+        <tr>
+            没有相关信息！
+        </tr>
+    #{/if}
+    #{else}
+        #{list items:scoreMap ,as:'score'}
+            <tr>
+                <th>${score.key}</th>
+                <th>${score.value == null ? "0.0" : score.value}</th>
+            </tr>
+        #{/list}
+        <tr>
+            <th>总分</th>
+            <th>${totalScore}</th>
+        </tr>
+    #{/else}
+
+    </tbody>
+</table>
+<div class="pageNav">
+    #{page page : page, url : "/ExamResults/plist", paramIds : "xsId termId examId", isAjax : "true"/}
+</div>

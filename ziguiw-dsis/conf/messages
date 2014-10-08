@@ -1,0 +1,81 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+# For use in JavaExtensions.since tag
+since.seconds = %s second%s ago
+since.minutes = %s minute%s ago
+since.hours   = %s hour%s ago
+since.days    = %s day%s ago
+since.months  = %s month%s ago
+since.years   = %s year%s ago
+since.format  = MMM d, yyyy
+
+# Validation messages
+validation.required=必填
+validation.minSize=Minimum size is %2$d
+validation.maxSize=Maximum size is %2$d
+validation.email=Invalid email address
+validation.range=Not in the range %2$d through %3$d
+validation.min=Cannot be lower than %2$d
+validation.max=Cannot be greater than %2$d
+validation.match=Must match %2$s
+validation.isTrue=Must be checked
+validation.equals=Must be equal to &{%2$s}
+validation.invalid=Incorrect value
+validation.future=Must be in the future
+validation.after=Must be after %2$s
+validation.past=Must be in the past
+validation.before=Must be before %2$s
+validation.object=Validation failed
+validation.notFound=Object not found for id %2$s
+validation.url=Not a valid URL
+validation.phone=Not a valid phone
+validation.ipv4=Not a valid IP address
+validation.ipv6=Not a valid IP v6 address
+
+crud.title=
+crud.home=
+crud.blank=新增
+crud.index.title=选择记录
+crud.index.objectType=Object type
+crud.index.action=
+crud.index.add=新增
+crud.add=新增 &{%s}
+crud.list.title=&{%s}
+crud.list.size=%d &{%s}
+crud.list.totalSize=总共 %d
+crud.pagination.previous=« 前一页
+crud.pagination.next=后一页 »
+crud.pagination.last=最后 »»
+crud.pagination.first=«« 最前
+crud.show.title=编辑 &{%s}
+crud.save=保存
+crud.saveAndContinue=保存并继续
+crud.cancel=取消
+crud.hasErrors=操作失败，请查看错误
+crud.blank.title=新增 &{%s}
+crud.saveAndAddAnother=保存并继续创建
+crud.delete=删除 &{%s}
+crud.created=创建 &{%s} 成功
+crud.saved=保存 &{%s} 成功
+crud.deleted=删除 &{%s} 成功
+crud.delete.error=删除失败
+crud.search=查询
+crud.none=(None)
+crud.selectValue=请选择
+
+crud.help.required=必填.
+crud.help.minlength=最小长度 %d.
+crud.help.maxlength=最大长度%d.
+crud.help.email=邮箱无效.
+crud.help.dateformat=&{%s} 格式.
+crud.help.numeric=请输入数字.
+crud.help.min=必须大于 %d.
+crud.help.future=In the future.
+crud.help.past=In the past.
+crud.help.after=After %s.
+crud.help.before=Before %s.
+crud.help.range=在 %d 和 %d 之间

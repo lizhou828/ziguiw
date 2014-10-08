@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="byName">
+
+     <context:component-scan base-package="com.zigui.service.impl" />
+
+	<bean id="newsService" class="com.zigui.service.impl.NewsServiceImpl"/>
+	<bean id="userDiaryService" class="com.zigui.service.impl.UserDiaryServiceImpl"/>
+	<bean id="userMoodService" class="com.zigui.service.impl.UserMoodServiceImpl"/>
+	<bean id="userAlbumService" class="com.zigui.service.impl.UserAlbumServiceImpl"/>
+	<bean id="userPhotoService" class="com.zigui.service.impl.UserPhotoServiceImpl"/>
+	<bean id="userMessageService" class="com.zigui.service.impl.UserMessageServiceImpl"/>
+	<bean id="userCommentService" class="com.zigui.service.impl.UserCommentServiceImpl"/>
+	<bean id="spaceVisitHistoryService" class="com.zigui.service.impl.SpaceVisitHistoryServiceImpl"/>
+	<bean id="userFriendService" class="com.zigui.service.impl.UserFriendServiceImpl"/>
+	<bean id="mailSenderService1" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${main.host}" />
+        <property name="port" value="${main.port}" />
+        <property name="username" value="${main.username}" />
+        <property name="password" value="${main.password}" />
+        <property name="javaMailProperties">
+             <props>
+                 <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                 <prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+             </props>
+        </property>
+    </bean>
+    
+    <bean id="smsService" class="com.zigui.service.impl.SmsServiceImpl">
+    </bean>
+
+
+	<bean id="newsChannleService" class="com.zigui.service.impl.NewsChannleServiceImpl"/>
+	<bean id="newsRecommendRegionService" class="com.zigui.service.impl.NewsRecommendRegionServiceImpl"/>
+	<bean id="newsSourceService" class="com.zigui.service.impl.NewsSourceServiceImpl"/>
+	<bean id="newsQueryService" class="com.zigui.service.impl.NewsQueryServiceImpl"/>
+	<bean id="templateService" class="com.zigui.service.impl.TemplateServiceImpl"/>
+	<bean id="dataFunctionService" class="com.zigui.service.impl.DataFunctionServiceImpl"/>
+	<bean id="dBTemplateLoaderService" class="com.zigui.service.impl.DBTemplateLoaderServiceImpl"/>
+	<bean id="stringTemplateLoaderService" class="com.zigui.service.impl.StringTemplateLoaderServiceImpl"/>
+	<bean id="templateGenerationService" class="com.zigui.service.impl.TemplateGenerationServiceImpl">
+		<property name="templateLoaderService">
+			<ref bean="dBTemplateLoaderService"></ref>
+		</property>
+	</bean>
+	<bean id="tempTemplateGenerationService" class="com.zigui.service.impl.TemplateGenerationServiceImpl">
+	<property name="templateLoaderService">
+			<ref bean="stringTemplateLoaderService"></ref>
+	</property>
+	</bean>
+
+    <bean id="teacherService" class="com.zigui.service.impl.TeacherServiceImpl"/>
+    <bean id="studentService" class="com.zigui.service.impl.StudentServiceImpl"/>
+    <bean id="parentService" class="com.zigui.service.impl.ParentServiceImpl"/>
+	<bean id="userService" class="com.zigui.service.impl.UserServiceImpl"/>
+	<bean id="userQueryService" class="com.zigui.service.impl.UserQueryServiceImpl"/>
+	<bean id="roleService" class="com.zigui.service.impl.RoleServiceImpl"/>
+	<bean id="authorityService" class="com.zigui.service.impl.AuthorityServiceImpl"/>
+	<bean id="administratorService" class="com.zigui.service.impl.AdministratorServiceImpl"/>
+	<bean id="commonService" class="com.zigui.service.impl.CommonServiceImpl"/>
+
+	<bean id="questionService" class="com.zigui.service.impl.QuestionServiceImpl"/>
+	<bean id="answerService" class="com.zigui.service.impl.AnswerServiceImpl"/>
+	<bean id="debateService" class="com.zigui.service.impl.DebateServiceImpl"/>
+	<bean id="debateOpinionService" class="com.zigui.service.impl.DebateOpinionServiceImpl"/>
+	<bean id="dataFunctionDirective" class="com.zigui.utils.DataFunctionDirective"/>
+	
+	<bean id="knowledgeService" class="com.zigui.service.impl.KnowledgeServiceImpl"/>
+	<bean id="knowledgeRecommendRegionService" class="com.zigui.service.impl.KnowledgeRecommendRegionServiceImpl"/>
+	<bean id="knowledgeChannleService" class="com.zigui.service.impl.KnowledgeChannleServiceImpl"/>
+	
+	<!-- community -->
+	<bean id="boardService" class="com.zigui.service.impl.BoardServiceImpl"/>
+	<bean id="forumService" class="com.zigui.service.impl.ForumServiceImpl"/>
+	<bean id="loveService" class="com.zigui.service.impl.LoveServiceImpl"/>
+	<bean id="adService" class="com.zigui.service.impl.AdServiceImpl"/>
+	<bean id="adPlanService" class="com.zigui.service.impl.AdPlanServiceImpl"/>
+	<bean id="configCenterService" class="com.zigui.service.impl.ConfigCenterServiceImpl"/>
+	
+	<bean id="schoolService" class="com.zigui.service.impl.SchoolServiceImpl"/>
+    <bean id="clazzService" class="com.zigui.service.impl.ClassServiceImpl"></bean>
+    <bean id="nianJiService" class="com.zigui.service.impl.NianJiServiceImpl"/>
+
+	
+	<bean id="bussnissDataService" class="com.zigui.service.impl.BussnissDataServiceImpl"/>
+	
+	<bean id="healthArchivesService" class="com.zigui.service.impl.HealthArchivesServiceImpl"/>
+	<bean id="healthHistoryService" class="com.zigui.service.impl.HealthHistoryServiceImpl"/>
+	<bean id="commonTypeService" class="com.zigui.service.impl.CommonTypeServiceImpl"/>	
+	<bean id="growArchivesService" class="com.zigui.service.impl.GrowArchivesServiceImpl"/>	
+	<bean id="growFootmarkService" class="com.zigui.service.impl.GrowFootmarkServiceImpl"/>
+	<bean id="homeWorkService" class="com.zigui.service.impl.HomeWorkServiceImpl"/>
+	<bean id="commonMessageService" class="com.zigui.service.impl.CommonMessageServiceImpl"/>
+    <bean id="pointService" class="com.zigui.service.impl.PointHistoryService"></bean>
+
+    <!--access DB information of DSIS ，the DB name is "yan"-->
+    <bean id="dsisExamService" class="com.zigui.service.impl.DsisExamServiceImpl" />
+    <bean id="dsisTermSetService" class="com.zigui.service.impl.DsisTermSetServiceImpl"/>
+
+    <bean id="newsExService" class="com.zigui.service.impl.NewsExImplService">
+        <property name="newsAuditDao" ref="newsAuditDao"/>
+    </bean>
+
+    <bean id="schoolListService" class="com.zigui.service.impl.SchoolListServiceImpl"/>
+    <bean id="classInfoService" class="com.zigui.service.impl.ClassInfoServiceImpl"/>
+    <bean id="classForumService" class="com.zigui.service.impl.ClassForumServiceImpl"/>
+    <bean id="adminMenuService" class="com.zigui.service.impl.AdminMenuServiceImpl"/>
+    <bean id="studentArchiveService" class="com.zigui.service.impl.StudentArchiveServiceImpl"></bean>
+</beans>

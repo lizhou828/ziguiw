@@ -1,0 +1,64 @@
+.w_w990{ width:990px; margin:auto}
+.w_user_menu{ height:29px; background:url(../images/w_user_subMenu_bg.jpg); text-align:center;}
+.w_user_menu li{ float:left; width:100px; margin-top:5px; border-right:1px solid #fff}
+.w_user_menu li.end{ border-right:0px;}
+.w_user_menu a:link,.w_user_menu a:visited{ color:#fff;}
+.w_user_menu a:hover{color:yellow}
+
+.w_user_topChannel{ border:1px solid #9c9c9c; margin-bottom:8px; }
+.w_user_topChannelheader{ background:url(../images/w_topChannelHeaderBg.gif); height:29px; font-family:微软雅黑,宋体;border-bottom:1px solid #9c9c9c;}
+.w_user_topChannelContent{ padding:1px}
+.w_user_topChannelContentBox{width:100%; }
+.w_user_topChannelContentBox td{ margin:0px;}
+.w_user_topChannelContentBox .w_topLeft{width:11px; height:11px;}
+.w_user_topChannelContentBox .w_topMiddle{ height:11px; }
+.w_user_topChannelContentBox .w_topRight{width:11px; height:11px; }
+.w_user_topChannelContentBox .w_middleLeft{width:11px;}
+.w_user_topChannelContentBox .w_middleRight{width:11px;}
+.w_user_topChannelContentBox .w_bottomLeft{width:11px; height:11px;}
+.w_user_topChannelContentBox .w_bottomMiddle{height:11px; }
+.w_user_topChannelContentBox .w_bottomRight{width:11px; height:11px; }
+
+.w_user_topPic{ width:275px; float:left; height:220px;}
+.w_user_intro{ width:310px; float:left; height:220px; overflow:hidden; font-size:14px; letter-spacing:2px; text-indent:30px;
+border-right:1px solid #9a9a9a;
+	padding:2px 15px;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis; margin-right:15px;	}
+.w_user_ext{ width:300px; float:left; height:220px;}
+.w_user_ext li{ border-bottom:1px dotted gray; line-height:16px; padding-bottom:5px; font-size:14px;  margin-top:15px;}
+.w_user_ext label{ background:url(../images/w_user_ssmenubg.gif);width:76px; height:20px; display:block; float:left; text-align:center; margin-right:10px; margin-top:-2px; color:#fff; line-height:20px;}
+.w_user_topSzll li{ float:left; width:104px; margin:14px; text-align:center; font-size:14px; font-weight:bold}
+.w_user_topSzll li img{ margin-bottom:2px;}
+.w_user_topList { }
+.w_user_topList li{ margin:4px 0px; font-size:14px;}
+
+.w_user_topList li .w_title{width:170px; display:inline-block; *display:inline; zoom:1;-o-text-overflow: ellipsis;
+	text-overflow: ellipsis; 	white-space: nowrap; overflow:hidden; height:20px; margin-right:5px; background:url(../images/w_user_box_point1.gif) left center no-repeat; padding-left:12px;}
+.w_user_topList li .w_datetime{ display:inline-block; *display:inline; zoom:1;  letter-spacing:-1px;  -o-text-overflow: ellipsis;
+	text-overflow: ellipsis; 	white-space: nowrap; overflow:hidden; font-size:12px; text-align:right }
+.w_bigImgList{ margin:5px;}
+.w_user_btn{ background:url(../images/w_user_btn.jpg); border:0px;width:81px; height:28px; text-align:center; font-size:14px;color:#fff}
+.w_user_bigbtn{ background:url(../images/w_user_bigbtn.jpg); border:0px;width:109px; height:28px;text-align:center; font-size:14px;color:#fff}
+
+.w_user_form{font-size:14px;}
+.w_user_form input[type=text]{ vertical-align:middle; margin-right:10px; border:1px solid #888888; font-size:14px;}
+.w_user_form textarea{border:1px solid #888888 !important; background:#f8fcff}
+
+.w_user_commentPanel{ font-size:14px; border:1px solid #565656}
+.w_user_comment { width:90%; }
+.w_user_comment li{ border-bottom:1px dotted #878787; padding:20px;  }
+.w_user_comment .w_avatar{ float:left; }
+.w_user_commentPanel .w_content{ margin-left:80px;}
+.w_user_commentPanel .w_top{margin-left:80px; height:30px;}
+.w_user_commentPanel a.blue:link,.w_user_commentPanel a.blue:visited{color:#4094ec}
+.w_user_commentPanel a.blue:hover{color:#40caec; text-decoration:underline}
+.w_user_commentPanel .ip{ color:#4094ec; display:inline-block; *display:inline;zoom:1; padding-left:20px}
+.w_user_commentPanelTitle{border-bottom:1px solid #858585; height:27px;}
+.w_user_commentPanel .right{ float:right}
+.w_commentActionBar { text-align:right}
+.w_commentActionBar a{ padding:4px; margin:4px; }
+.w_gray{ color:gray}
+.w_ared{color:#b60021}
+
+.p_flink{overflow:hidden; clear:both;}

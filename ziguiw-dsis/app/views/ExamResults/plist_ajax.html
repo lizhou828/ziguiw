@@ -1,0 +1,233 @@
+#{if page != null &&  page.data != null &&  page.data.size() != 0}
+        <div class="sc_tab">
+            <table cellpadding="0" cellspacing="0">
+
+                <tr>
+                    <th class="sc_tab_h">时间/科目	</th>
+                    #{if exams != null && exams.subList.size() != 0}
+                        #{list items:exams[0].subList,as:'subject'}
+                            <th class="sc_tab_h">${subject.subName}(${subject.subTotal}分)</th>
+                        #{/list}
+                        <th class="sc_tab_h">总分</th>
+                    #{/if}
+
+                </tr>
+                #{list items:exams,as:'exam'}
+                    <tr>
+
+                        <th class="sc_tab_h">${new java.text.SimpleDateFormat("yyyy-MM-dd").format(exam.examTime)}${exam.examName}</th>
+                        #{list items:exam.subList,as:'subject'}
+                            <td >${subject.subScore == null || subject.subScore.equals("null")  ? 0.0f : subject.subScore }</td>
+                        #{/list}
+                        <td >${exam.totalScore}</td>
+                    </tr>
+                #{/list}
+            </table>
+        </div>
+
+        <!--成绩曲线图开始-->
+
+
+        <script type="text/javascript">
+
+            //考试名称的集合
+            var examNames = "${examNameList}";
+            examNames = examNames.replace('[','');
+            examNames = examNames.replace(']','');
+            examNames = examNames.split(',');
+            var examNameList = new Array();
+            for(var i = 0 ;i < examNames.length; i++){
+                if(examNames[i] != null && examNames[i] != '' &&  (typeof examNames[i]) != 'undefined'){
+                    examNameList.push(examNames[i]);
+                }
+            }
+
+            //成绩曲线图
+            var chart;
+            $(document).ready(function() {
+                var options = {
+                    chart: {
+                        renderTo: 'container', //设置显示图表的容器
+                        defaultSeriesType: 'line', //设置图表样式，可以为line,spline, scatter, splinearea bar,pie,area,column
+                        inverted: false,//可选，控制显示方式，默认false,上下正向显示
+                        shadow:true//外框阴影
+                    },
+                    title: {
+                        text: '${termSet.termName}${student.xsXming}同学成绩曲线图'
+                    },
+                    subtitle: {
+                        text: '${school.schName}${grade.njMcheng}${clazz.bjMcheng}'
+                    },
+                    xAxis: {
+                        categories: examNameList,
+                        //                categories: ['第一次月考', '第一次月考', '期中考试', '第三次月考', '期末考试']
+                        labels: {
+                            //                    rotation: -45,   //倾斜45度
+                            //                    align: 'right',
+                            style: {
+                                fontSize: '11px',
+                                fontFamily: 'Verdana, sans-serif',
+                                color: 'black'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: '科目满分100分(特别科目注明的除外)'
+                        }
+                    },
+                    credits:{//右下角的文本
+                        enabled: true,
+                        position: {//位置设置
+                            align: 'right',
+                            x: -10,
+                            y: -10
+                        },
+                        href: "http://www.ziguiw.com",//点击文本时的链接
+                        style: {
+                            color:'blue'
+                        },
+                        text: "该图仅供参考，解释权归子贵网所有"//显示的内容
+                    },
+                    plotOptions:{//绘图线条控制
+                        series: {
+                            cursor: 'pointer',
+                            allowPointSelect :true,//是否允许使用鼠标选中数据点
+                            events: {
+                                click: function(e) {
+                                    var s = e.point;
+                                    //                            alert("s.y的类型="+ typeof s.y+",s.y = "+ s.y); //s.y 为number类型
+                                    //                            alert("科目="+ s.series.name+","+s.category+"=,"+s.y);
+                                    var gradeName = "${gradeResource.gradeName}";
+                                    var xsId = document.getElementById("xsId").value;
+                                    var termId = document.getElementById("termId").value;
+                                    $.ajax({
+                                        type:"post",
+                                        url:"/ExamResults/checkExamResult",
+                                        data:{"score":s.y,"subjectName":s.series.name,"examName":s.category,"gradeName": gradeName,"xsId":xsId,"termId":termId},
+                                        success:function(source){
+                                            $("#sourceTable").html(source);
+                                        }
+                                    });
+                                }
+                            }
+                        },
+                        spline:{
+                            enabled:true,
+                            allowPointSelect :true,//是否允许使用鼠标选中数据点
+                            // animation:false,//是否在显示图表的时候使用动画
+                            dataLabels:{
+                                enabled :true//是否在点的旁边显示数据
+                            },
+                            enableMouseTracking:true,//鼠标移到图表上时是否显示提示框
+                            events:{//监听鼠标事件
+                                click:function(){
+
+                                }
+                            },
+                            marker:{
+                                enabled:true,//是否显示点
+                                radius:3,//点的半径
+                                fillColor:"#888",   //数据点标志填充的颜色
+                                lineColor:"#000",   //数据点标志线的颜色
+                                //  symbol: 'url(http://highcharts.com/demo/gfx/sun.png)',//设置点用图片来显示
+                                states:{
+                                    hover:{
+                                        enabled:true//鼠标放上去点是否放大
+                                    },
+                                    select:{
+                                        enabled:true//控制鼠标选中点时候的状态
+                                        //                                fillColor:"#ff0000",
+                                        //                                lineColor:"#ff0000"
+                                    }
+                                }
+                            },
+                            states:{
+                                hover:{
+                                    enabled:true,//鼠标放上去线的状态控制
+                                    lineWidth:1
+                                }
+                            },
+                            stickyTracking:true,//跟踪
+                            visible:true,
+                            lineWidth:1,//线条粗细
+                            pointStart:100
+                        }
+                    },
+                    tooltip: {    //鼠标移到图形上时显示的提示框
+                        enabled: true,
+                        formatter: function() {
+                            return '<b>'+ this.series.name +'</b><br/>'+
+                                    this.x +': '+ this.y +'分';
+
+                            //判断是哪个科目
+                            //比较该生此次的成绩与全班的平均成绩相比
+                        }
+                    },
+                    series: []
+                };
+
+
+                var subjectScore= "${subjectScore}";
+                var length = "${subjectScore.size()}";
+                subjectScore = subjectScore.replace('{','') ;
+                subjectScore = subjectScore.replace('}','') ;
+                subjectScore = subjectScore.split(" ");
+                //科目名称的数组
+                var subjectNameArray = new Array();
+                //科目对应成绩的数组
+                var subjectScoreArray= new Array();
+                for(var j =0;j<length;j++){
+                    var temp = subjectScore[j].split("=");
+                    subjectNameArray.push(temp[0]);
+                    var score = temp[1].replace("[",'');
+                    score = score.replace("]",'');
+                    //            alert("score="+score+" score.type"+typeof score);
+                    var scoreArray = score.split(",");
+                    var scores = new Array();
+                    for(var k = 0;k<scoreArray.length;k++){
+                        if(scoreArray[k] != '' && scoreArray[k] != null && typeof scoreArray[k] !='undefined'){
+                            scores.push(parseFloat(scoreArray[k]));
+                        } else{
+                            continue;
+                        }
+                    }
+                    subjectScoreArray.push(scores);
+                }
+                //        alert('subjectNameArray='+subjectNameArray);
+                //        alert('subjectScoreArray='+subjectScoreArray);
+                for(var i=0;i<length;i++) {
+                    options.series[i] = new Object();
+                    options.series[i].name =subjectNameArray[i];
+                    options.series[i].data =subjectScoreArray[i];
+                }
+                chart = new Highcharts.Chart(options);
+            });
+        </script>
+        <div id="container" style="width: 725px; height: 400px;" class="sc_graph"></div>
+
+        <!--成绩曲线图结束-->
+
+        *{精准资源推送开始}*
+        <div class="sc_source" id="sourceTable"></div>
+        *{精准资源推送结束}*
+#{/if}
+#{else }
+    *{成绩接口中没有该次考试的相关成绩信息}*
+    <div class="sc_tab">
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th class="sc_tab_h">时间/科目</th>
+                <th class="sc_tab_h">总分</th>
+            </tr>
+            <tr >
+                <th class="sc_tab_h" colspan="2">没有相关成绩信息</th>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+#{/else}

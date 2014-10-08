@@ -1,0 +1,108 @@
+#{extends 'main.html'/}
+#{set title:'成绩查询——子贵网用户中心'/}
+#{script src:'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#parQueryBtn").click(function(){
+            var xsNode = $("#xsId");
+            var xsId
+            if(xsNode){
+                xsId = $("#xsId").val();
+            } else{
+                xsId = $("#studentId").val();
+            }
+            if(xsId && xsId != null && xsId == '-1'){
+                alert("必须选定一个孩子！");
+                return false;
+            }
+            var termId= $("#termId").val();
+            var examId= $("#examId").val();
+
+            if(!termId || termId == null || termId == '-1'){
+                alert("必须选定学期！");
+                return false;
+            }
+            if( !examId || examId == null || examId == '-1'){
+                alert("必须选定考试名称！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/ExamResults/plist?isAjax=1"+"&xsId="+xsId+"&termId="+termId+"&examId="+examId,
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+#{form action:@ExamResults.plist(),enctype :'multipart/form-data',method:'post',id:'stuQueryForm'}
+
+    <div class="bobti">成绩查询</div>
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table border="0" cellpadding="0" cellspacing="0" width="700">
+
+                <tbody>
+                <tr>
+                    <input value="${clazz.bjId}" type="hidden" id="bjId" name="bjId"/>
+                     #{if studentList.size() > 1 }
+                        <td>
+                            <select name="xsId" id="xsId" onchange="queryTermByXsId(this.value);">
+                                <option value="-1">--请选择--</option>
+                                #{list items:studentList,as:'student'}
+                                    <option value="${student.xsId}">${student.xsXming}</option>
+                                #{/list}
+                            </select>
+                        </td>
+                     #{/if}
+                    #{else }
+                        <input type="hidden" id ="studentId" value="${student.xsId}">
+                    #{/else}
+                    <td>学期：
+                        <select name="termId" id="termId" onchange="queryExamInfo(this.value);">
+                            <option value="-1">--请选择--</option>
+                            #{list items:termSetList,as:'term'}
+                                <option value="${term.termId}">${term.termName}</option>
+                            #{/list}
+
+                        </select>
+                    </td>
+                    <td>考试名称：
+                        <select name="examId" id="examId"></select>
+                    </td>
+                    <td><input id="parQueryBtn" value="查询" class="cx" type="button"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+#{/form}
+<div class="xunc_2 font-2 stuscore" id="listTable">
+    <table border="0" cellpadding="0" cellspacing="0" width="729">
+        <tbody>
+        <tr>
+            <th>考试科目</th>
+            <th>时间</th>
+            <th>总分</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>0.0</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+*{<!--分数曲线图开始-->}*
+*{<div class="score_img">}*
+    *{<img src="/DisplayChart.jsp?filename=" border="0/" height="300" width="500">}*
+*{</div>}*
+*{<!--分数曲线图结束-->}*
+

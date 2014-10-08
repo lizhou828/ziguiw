@@ -1,0 +1,461 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    padding:0;
+    margin:0;
+}
+body {
+    background:#fff;
+    font-size:18px;
+}
+ul li {
+    list-style:none;
+}
+img {
+    border:0;
+}
+a {
+    font-size:18px;
+    color:#000;
+    text-decoration:none;
+}
+a:hover {
+    color:#000;
+    text-decoration:underline;
+}
+.header {
+    background:url(../images/header_bg.png) repeat-x;
+    width:100%;
+    height:33px;
+    text-align:center;
+}
+.login_header {
+    background:url(../images/login_01_bg.gif) repeat-x;
+    width:100%;
+    height:33px;
+    text-align:center;
+}
+.middle {
+    margin:0 auto;
+}
+/*登录页面开始*/
+.margin_height {
+    height:25px;
+    background:#fff;
+}
+.login {
+    margin: 15px auto 0;
+    width: 70%;
+}
+.login li {
+    line-height: 24px;
+}
+input.xg {
+    border: 1px solid #CCCCCC;
+    color: #999999;
+    height: 22px;
+    line-height: 22px;
+    padding: 1px 3px;
+    width: 99%;
+}
+input.xz {
+    margin-right: 5px;
+}
+input.an {
+    background: none repeat scroll 0 0 #fe7d2a;
+    border: 0 none;
+    color: #FFFFFF;
+    font-weight: bolder;
+    height: 37px;
+    line-height: 35px;
+    padding: 2px 20px 0;
+    cursor:pointer;
+}
+.footer {
+    background:url(../images/footer_bg.png) repeat-x;
+    width:100%;
+    height:26px;
+    text-align:center;
+    margin-top:20px;
+    padding-top:5px;
+    bottom:0px;
+    left:auto;
+    right:0px;
+    width:100%;
+    position:fixed;
+}
+.login span a{
+    color:#0756e7;
+    text-decoration:underline;
+    font-size:12px;
+}
+.login span a:hover{
+    color:#4486ff;
+    text-decoration:underline;
+    font-size:12px;
+}
+/*登录页面结束*/
+/*导航页面开始*/
+.nav {
+    font-size:14px;
+    border-top:2px solid #ff7324;
+    border-bottom:2px solid #ff7324;
+}
+.nav table td{
+    height:25px;
+    line-height:25px;
+    border-bottom:1px solid #adacac;
+    padding:5px;
+}
+.nav_title {
+    font-size:18px;
+    color:#ff6104;
+    font-weight:bold;
+    line-height:38px;
+}
+.nav_img {
+    padding-left:18px;
+}
+.highlight {
+    background: none repeat scroll 0 0 #feefe6;
+}
+.location {
+    height:22px;
+    line-height:22px;
+    border:1px solid #f0f0f0;
+    background:#f5f5f5;
+    margin:0 5px;
+    font-size:14px;
+}
+.quit_btn {
+    float:right;
+}
+.quit_btn a {
+    color:#102e9f;
+}
+.location a {
+    font-size:14px;
+}
+.c_name {
+    color:red;
+    font-size:14px;
+    height:25px;
+    line-height:25px;
+}
+.pl10 {
+    padding-left:10px;
+}
+/*导航页面结束*/
+/*详细信息页面开始*/
+.d_line {
+    border-bottom:2px solid #ff7324;
+}
+.detail {
+    /*border-bottom:2px solid #ff7324;*/
+    width:64px;
+    margin-top:10px;
+}
+.d_base {
+    margin:2px 0 0 5px;
+    font-size:14px;
+    background:#feeb99;
+    height:16px;
+    line-height:16px;
+    border-top:1px solid #c0c0c0;
+    border-left:1px solid #c0c0c0;
+    border-right:1px solid #c0c0c0;
+    text-align:center;
+}
+.line {
+    border-top:1px solid #c0c0c0;
+}
+.d_info table{
+    margin:0 auto;
+}
+.d_info table td{
+    border-bottom:1px solid #c0c0c0;
+    height:22px;
+    line-height:22px;
+    padding:5px 0 0 4px;
+
+}
+.stu_img {
+    border:1px solid #8b8a8a;
+    padding:1px;
+    margin-right:5px;
+}
+.stu_img img{
+    width:57px;
+    height:80px;
+}
+.d_info_sch table{
+    margin:0 auto 10px auto;
+}
+.d_info_sch table td {
+    border-bottom:1px solid #c0c0c0;
+    height:22px;
+    line-height:22px;
+    padding:5px 0 0 4px;
+}
+.footer_line {
+    bottom:0px;
+    left:auto;
+    right:0px;
+    width:100%;
+    background:#ff7324;
+    height:8px;
+    position:fixed;
+}
+/*详细信息页面结束*/
+/*错误页面开始*/
+.img404 {
+    margin:5px 0;
+}
+.f_middle {
+    margin-left:5px;
+}
+.sorrych {
+    font-size:14px;
+    font-weight:bold;
+}
+.wearesorry {
+    color: #CCCCCC;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 12px;
+    margin: 0 0 8px 0;
+    padding: 0 0 2px 0;
+    border-bottom:1px solid #ccc;
+}
+.content {
+    font-size: 13px;
+    line-height: 19px;
+    clear: both;
+}
+.content UL {
+    margin: 0;
+    padding: 10px 35px 20px;
+}
+.content ul li {
+    list-style:outside;
+}
+
+/*错误页面结束*/
+/*查询页面开始*/
+.bobti {
+    border-bottom: 1px solid #AECADA;
+    color: #006DA6;
+    font-weight: bolder;
+    height: 35px;
+    line-height: 22px;
+    width:96%;
+    margin:0 auto;
+    padding-top: 10px;
+}
+.xunc_1-1 {
+    background: none repeat scroll 0 0 #EEF6FB;
+    border: 1px solid #FFFFFF;
+    padding: 10px 0px;
+    width:96%;
+    margin:10px auto;
+}
+.xunc_1 table td {
+    line-height: 30px;
+    padding: 5px 0;
+}
+.kaoqin_con {
+    width:96%;
+    margin:0 auto;
+}
+.kaoqin_con table {
+    border:1px solid #F4D7A6;
+}
+.kaoqin_con table th{
+    background: none repeat scroll 0 0 #FFF1CE;
+    color: #252525;
+    border-right:1px solid #F4D7A6;
+    height:32px;
+}
+.kaoqin_con table td {
+    border-right:1px solid #F4D7A6;
+    border-top:1px solid #F4D7A6;
+    height:32px;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+}
+.pageNav a, .pageNav {
+    color: #1C1C1C;
+}
+.pageNav {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    height: 22px;
+    margin: 22px auto;
+    width:96%;
+}
+.pageNav a, .pageNav strong, .pageNav span {
+    display: block;
+    float: left;
+    margin-right: 5px;
+    overflow: hidden;
+    padding: 0 8px;
+}
+.pageNav a, .pageNav span {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.pageNav strong {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.pageNav a, .pageNav span {
+    border: 1px solid #DEDEDE;
+    height: 20px;
+    line-height: 22px;
+}
+.pageNav a.f12, .pageNav strong.f12, .pageNav span {
+    font-size: 12px;
+}
+.pageNav a:hover {
+    background: none repeat scroll 0 0 #C41C1B;
+    text-decoration: none;
+}
+.pageNav strong {
+    height: 22px;
+    line-height: 24px;
+}
+.pageNav .mor {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 none;
+    height: 21px;
+    line-height: 21px;
+    padding: 0;
+}
+.pageNav .na {
+    color: #DBE1E6;
+}
+.title_5 {
+    width:96%;
+    margin:15px auto 5px auto;
+}
+.notice_con {
+    width:96%;
+    margin:0 auto;
+}
+.notice_con table {
+    border:1px solid #C1C8D2;
+}
+.notice_con table th{
+    background: none repeat scroll 0 0 #f2f4f6;
+    color: #252525;
+    border-right:1px solid #C1C8D2;
+    height:32px;
+}
+.notice_con table td {
+    border-right:1px solid #C1C8D2;
+    border-top:1px solid #C1C8D2;
+    height:32px;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+}
+.notice_con table td.no_tit {
+    text-align:left;
+    padding-left:5px;
+}
+.c_notice_con {
+    width:96%;
+    margin:0 auto;
+}
+.c_notice_con table {
+    border:1px solid #C1C8D2;
+}
+.c_notice_con table th{
+    background: none repeat scroll 0 0 #f2f4f6;
+    color: #252525;
+    border-bottom:1px solid #C1C8D2;
+    height:32px;
+}
+.c_notice_con table td {
+    border-bottom:1px solid #C1C8D2;
+    border-left:1px solid #C1C8D2;
+    height:32px;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+}
+.score_con {
+    width:96%;
+    margin:0 auto;
+}
+.score_con table {
+    border:1px solid #F4D7A6;
+}
+.score_con table th{
+    background: none repeat scroll 0 0 #FFF1CE;
+    color: #252525;
+    border-bottom:1px solid #F4D7A6;
+    height:32px;
+}
+.score_con table td {
+    border-bottom:1px solid #F4D7A6;
+    border-left:1px solid #F4D7A6;
+    height:32px;
+    text-align:center;
+    height:30px;
+    line-height:30px;
+}
+.ly-tab {
+    width:96%;
+    margin:0 auto;
+}
+.sideright_tab1 td {
+    padding: 5px;
+}
+.td_4 {
+    border-bottom: 1px solid #C1C8D2;
+    border-right: 1px solid #C1C8D2;
+    font-weight: bolder;
+    line-height: 26px;
+    padding-left: 5px;
+}
+.td_41 {
+    border-bottom: 1px solid #C1C8D2;
+    border-right: 1px solid #C1C8D2;
+    font-weight: bolder;
+    line-height: 26px;
+    padding-left: 5px;
+    text-align: center;
+}
+.td_5 {
+    border-bottom: 1px solid #C1C8D2;
+    font-weight: bolder;
+    line-height: 26px;
+    padding-left: 5px;
+}
+.td_6 {
+    border-bottom: 1px solid #E3E6EB;
+    cursor: pointer;
+    line-height: 20px;
+    padding-left: 5px;
+}
+.td_6 p {
+    border-top: 1px dashed #CCCCCC;
+    color: #9A9A9A;
+    line-height: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+.td_6 p span {
+    color: #000000;
+}
+.bg-8 {
+    background: none repeat scroll 0 0 #F8F8F8;
+}
+.td_7 {
+    border-bottom: 1px solid #E3E6EB;
+    cursor: pointer;
+    padding-left: 5px;
+    text-align: center;
+}
+
+/*查询页面结束*/

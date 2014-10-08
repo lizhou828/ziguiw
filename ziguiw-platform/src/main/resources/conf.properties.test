@@ -1,0 +1,50 @@
+#db config
+db.driver=oracle.jdbc.driver.OracleDriver
+db.driverUrl=jdbc:oracle:thin:@192.168.0.128:1521:dw
+db.user=scott
+db.password=ziguiw
+db.alias=ziguiw
+db.simultaneousBuildThrottle=10
+db.maximumConnectionCount=10
+db.minimumConnectionCount=2
+
+dsis.db.driver=oracle.jdbc.driver.OracleDriver
+dsis.db.driverUrl=jdbc:oracle:thin:@192.168.0.172:1521:dsis
+dsis.db.user=dsiscnarj
+dsis.db.password=dsis+cnarj
+dsis.db.alias=dsis
+dsis.db.simultaneousBuildThrottle=5
+dsis.db.maximumConnectionCount=5
+dsis.db.minimumConnectionCount=2
+
+#hibernate config
+hibernate.hbm2ddl.auto=update
+hibernate.format_sql=false
+hibernate.show_sql=false
+hibernate.cache.use_second_level_cache=false
+hibernate.cache.region_prefix=quality.cache.ehcache
+hibernate.cache.use_structured_entries=false
+hibernate.cache.use_query_cache=false
+hibernate.memcached.servers=localhost:11211
+hibernate.jdbc.batch_size=0
+
+#resources config
+resources.swfTool=pdf2swf
+
+#mail config
+main.host=smtp.exmail.qq.com
+main.port=25
+main.username=admin@ziguiw.com
+main.password=adminziguiw602
+mail.smtp.auth=true
+mail.smtp.timeout=10000
+
+#images
+static.savedPath=/data/upload
+
+dsis.rpc.url=192.168.0.169:8089
+
+#sms
+sms.url=http://202.85.212.170:8099/websend.jsp?user=test&psw=952116&mobile=%s&content=%s&serviceid=1&srcid=0731
+#sms.url=http://202.85.212.170:8099/websend.jsp?user=test&psw=952116&mobile=%s&serviceid=1&srcid=0731
+email_Url=http://test.ziguiw.com/user/activeReg.action

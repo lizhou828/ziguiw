@@ -1,0 +1,121 @@
+#{extends 'main.html'/}
+#{set title:'消费记录查询——子贵网用户中心' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+#{script 'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#consRecordsQueryBtn").click(function(){
+            var bjId= $("#bjId").val();
+            var xsId= $("#xsId").val();
+            if( bjId == null ||bjId == '-1'){
+                alert("必须选定班级！");
+            }
+            $.ajax({
+                type:"GET",
+                url:"/ConsumptionRecords/tlist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId+"&bjId="+bjId,
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            });
+            return false;
+        }) ;
+
+    });
+</script>
+
+<div class="right">
+#{form action:@ConsumptionRecords.tlist(),enctype :'multipart/form-data',method:'post',id:'consRecordsForm'}
+
+    <div class="bobti">消费记录查询</div>
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="697" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+
+                    <td width="60%">
+                        日期：
+                        <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="startTime" name="startTime" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }">
+                        到
+                        <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="endTime" name="endTime" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        班级：
+                        <select onchange="queryStudentsByClassId(this.value)" id=bjId name="bjId">
+                            <option value="-1">请选择</option>
+                            #{list items:clazzList,as:'classes'}
+                                <option value="${classes.bjId}">${classes.bjMcheng}</option>
+                            #{/list}
+                        </select>&nbsp;&nbsp;
+                        学生：<select id="xsId" name="xsId"></select>
+                    </td>
+
+                    <td><input type="button" value="查  询" class="cx" id="consRecordsQueryBtn"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="xunc_2 font-2" id="listTable">
+        <h1 class="font-3">您的学生消费记录如下</h1>
+        <table width="729" cellspacing="0" cellpadding="0" border="0" >
+            <tbody>
+            <tr>
+                <td class="t1">卡号</td>
+                <td class="t1">姓名</td>
+                <td class="t1">类型</td>
+                <td class="t1">消费时间</td>
+                <td class="t1">消费金额(元)</td>
+                <td class="t1">余额(元)</td>
+            </tr>
+            </tbody>
+            <tbody id="tblAttendance">
+
+                #{if consumeRecordPage == null || consumeRecordPage.data == null}
+                抱歉，没有查询到相关记录！
+                #{/if}
+                #{else }
+                    #{list items:consumeRecordPage.data,as:'data'}
+                <tr>
+                    <td >${data['CARD_NUMBER']}</td>
+                    #{if student==null}
+                        <td >${data['XS_XMING']}</td>
+                    #{/if}
+                    #{else }
+                        <td >${student.xsXming}</td>
+                    #{/else}
+                    <td >
+                        #{if data['CONS_STATE']=='0'}消费#{/if}
+                        #{elseif data['CONS_STATE']=='1'}充值#{/elseif}
+                        #{elseif data['CONS_STATE']=='2'}取款#{/elseif}
+                        #{elseif data['CONS_STATE']=='3'}补助#{/elseif}
+                        #{else}非法退出#{/else}
+                    </td>
+                    <td >
+                    ${data['CONS_TIME'] ? new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.lang.Long(data['CONS_TIME'])) : null}
+                    </td>
+                    <td >${data['CONS_FARE']}(元)</td>
+                    <td >${data['X_MONEY']}(元)</td>
+                </tr>
+                    #{/list}
+                #{/else}
+            </tbody>
+        </table>
+        <div class="pageNav">
+            #{page page : consumeRecordPage, url : "/ConsumptionRecords/tlist", paramIds : "xsId bjId startTime endTime", isAjax : "true"/}
+        </div>
+
+    </div>
+
+
+#{/form}
+
+</div>

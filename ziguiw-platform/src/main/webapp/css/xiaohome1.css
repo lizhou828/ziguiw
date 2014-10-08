@@ -1,0 +1,967 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin:0;
+	padding:0;
+	}
+ul {
+	list-style:none outside none;
+	}
+a {
+	color:#000;
+	text-decoration:none;
+	}
+a:hover {
+	text-decoration:underline;
+	}
+body {
+	font-size:12px;
+	color:#000;
+	}
+.clear {
+	clear:both;
+	}
+/*首页 --B*/
+.p_flink {
+	width:100%;
+	height:35px;
+	line-height:35px;
+	background:#f0f0f0;
+	margin:0 0 5px 0;
+	font-size:12px;	
+	}
+.p_flink p {
+	text-align:center;
+	}
+.p_flink a {
+	margin:0 5px;
+	color:#000;
+    text-decoration: none;	
+	font-size:12px;
+	}
+.p_flink a:hover {
+	text-decoration: underline;
+	}
+.p_logo {
+	text-align:center;
+	}
+.p_logo p {
+	line-height:20px;
+	height:20px;
+	}
+.p_logo span {
+	padding:0 5px;
+	}
+.t_middle {
+	width:990px;
+	margin:0 auto;
+	background:#fff;
+	}
+.t_banner {
+	margin-bottom:5px;
+	overflow:hidden;
+	}
+.bann_logo {
+	float:left;
+	width:250px;
+	height:164px;
+	}
+.banner_sc {
+	float:left;
+	width:740px;
+	height:164px;
+	}
+/*nav --B*/
+.t_nav {
+	background:url(../images/t_nav_bg.gif);
+	width:990px;
+	height:29px;
+	color:#fff;
+	}
+.t_nav ul {
+	list-style:none;
+	padding-left:28px;	
+	}
+.t_nav ul li {
+	float:left;
+	display:block;
+	}
+.t_nav ul li a {
+	padding:0 15px;
+	font-size:14px;
+	color:#fff;
+	line-height:29px;
+	text-decoration:none;
+	}
+.t_nav ul li a:hover {
+	text-decoration:underline;
+	color:#FF0;
+	}	
+#menu_on a{
+	color:#ffff00;
+	text-decoration:none;	
+	}
+/*nav --E*/
+.t_intro {
+	border:1px solid #e3e3e3;
+	margin:5px;
+	height:240px;
+	}
+.intro_title {
+	background:url(../images/t_title_bg.gif) repeat-x;
+	height:28px;
+	line-height:28px;
+	padding:0 10px;
+	border-bottom: 1px solid #e3e3e3;
+	}
+.intro_title_l {
+	float:left;
+	_margin-top:8px;
+	}
+.intro_title_r {
+	float:right;
+	}
+.intro_title_r a{
+	color:#3d91e8;
+	text-decoration:none;
+	}
+.intro_title_r a:hover{
+	text-decoration:underline;
+	}
+.pic_show {
+	 border:1px solid #000;
+	 display: inline;
+	 float: left;
+	 margin: 3px 0px 0px 7px; 
+	 margin:0px;
+	 width: 315px;  
+	 height: 222px;
+	 overflow:hidden;
+	}
+.intro_img {
+	width:315px;
+	float:left;
+	margin-right:10px;
+	}
+.intro_words {
+	float:left;
+	width:310px;
+	padding:18px;
+	}
+.intro_words p {
+	font-size:14px;
+	text-indent:35px;
+	line-height:20px;
+	text-align: justify;	
+	}
+.intro_left {
+	float:left;
+	}
+.intro_img_inc {
+	width:250px;
+	height:180px;
+	float:left;
+	margin:12px 0 0 15px;
+}
+.intro_img_inc img {
+	width:250px;
+	height:180px;
+}
+.intro_right {
+	float:right;
+	}	
+.intro_inf {
+	width:320px;
+	padding:12px 5px 0 20px;
+	border-left:1px solid #979797;
+	font-size:14px;
+	margin-top:10px;
+	}
+.intro_inf ul {
+	list-style:none;
+	}
+.intro_inf ul li {
+	padding:4px 0 4px 5px;
+	border-bottom:1px dashed #C9C9C9;
+	}
+.s_name {
+	background:url(../images/inf_btn_bg.gif) no-repeat;
+	width:87px;
+	height:21px;
+	float:left;
+	line-height:21px;
+	padding-left:15px;
+	color:#fff;
+	font-size:12px;
+	}
+.s_name_w {
+	line-height:21px;
+	height:21px;
+	}
+.intro_photo {
+	border: 1px solid #e3e3e3;
+	margin: 5px;
+	padding-bottom:10px;
+	background:#FAFAFA;
+	overflow:auto;
+	}
+.intro_photo_img {
+	padding:5px;
+	margin-left:20px;
+	margin-top:10px;
+	overflow:hidden;
+	zoom:1;
+	}
+.intro_photo_img p {
+	heigth:22px;
+	line-height:22px;
+	text-align:center;
+	}
+.intro_photo_img ul {
+	list-style:none;
+	}
+.intro_photo_img ul li {
+	background:#fff;
+	width:110px;
+	padding:8px;
+	float:left;
+	margin-right:8px;
+	display:inline;
+	}	
+.photo_con {
+	width:104px;
+	height:133px;
+	}
+.intro_news {
+	padding:0;
+	margin:5px 0 0 5px;
+	overflow:auto;
+	}
+.intro_major {
+	width:320px;
+	overflow:auto;
+	border: 1px solid #e3e3e3;
+	margin-right:6px;
+	float:left;
+	padding-bottom:8px;	
+	}
+.intro_honor {
+	width:322px;
+	overflow:auto;
+	border: 1px solid #e3e3e3;
+	float:left;
+	padding-bottom:8px;
+	}	
+.m_intro_title {
+	background:url(../images/t_title_bg.gif) repeat-x;
+	height:28px;
+	line-height:28px;
+	padding:0 10px;
+	border-bottom: 1px solid #e3e3e3;
+	}
+.m_intro_title_l {
+	float:left;
+	_margin-top:8px;
+	}
+.m_intro_title_r {
+	float:right;
+	}
+.m_intro_title_r a{
+	color:#3d91e8;
+	text-decoration:none;
+	}
+.m_intro_title_r a:hover{
+	text-decoration:underline;
+	}
+
+.m_intro_con ul {
+	padding:0;
+	margin:0;
+	clear:left;
+	}
+.m_intro_con {
+	padding-top:10px;
+	}		
+.m_intro_con ul li{
+	heigth:22px;
+	line-height:22px;
+	padding-left:10px;	
+	}
+.news_left {
+	width:230px;
+	float:left;
+	overflow:hidden;
+	}
+.news_time {
+	float:right;
+	text-align:left;
+	margin-right:10px;
+	}
+.intro_school_img {
+	margin-left:10px;
+	margin-top:10px;
+	overflow:hidden;
+	zoom:1;
+	}
+.intro_school_img p {
+	heigth:22px;
+	line-height:22px;
+	text-align:center;
+	}
+.intro_school_img ul {
+	list-style:none;
+	}
+.intro_school_img ul li {
+	width:238px;
+	float:left;
+	margin-right:2px;
+	display:inline-block;
+	}	
+.intro_comm {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #e3e3e3;
+    margin: 5px 4px;
+    overflow: auto;
+    padding-bottom: 20px;	
+	}
+.intro_comm_con {
+	width:950px;
+	margin:0 auto;
+	}
+.comm_login {
+	background:url(../images/comm_username.gif);
+	width:46px;
+	height:23px;
+	border:none;
+	cursor:pointer;
+	vertical-align:middle;	
+	margin-left:8px;
+	}
+.comminput {
+	margin:8px 0 5px 30px;
+
+	height:25px;
+	line-height:25px;
+	}
+.comm_pw {
+	background:url(../images/comm_pw.gif);
+	width:46px;
+	height:23px;
+	border:none;
+	cursor:pointer;
+	vertical-align:middle;	
+	}
+.commtext_con {
+	width:942px;
+	margin-bottom:10px;
+	font-size:14px;
+	padding:5px 0 0 5px;
+	}
+.commtext {
+	margin:0 0 10px 20px;
+	width:950px;
+	margin:0 auto;
+	}
+.comme_b_left {
+	float:left;
+	width:720px;
+	padding:0 0 15px 40px;
+	color:#515251;
+	}
+.comme_b_right {
+	float:left;
+	}
+.comme_ok {
+	background:url(../images/comme_ok.gif);
+	width:88px;
+	height:27px;
+	border:none;
+	cursor:pointer;
+	vertical-align:middle;
+	}
+.usinp {
+	vertical-align:middle;	
+	}
+.pwinp {
+	vertical-align:middle;	
+	}	
+.comment_out {
+	width:936px;
+	border:1px solid #c6c6c6;
+	overflow:auto;
+	margin:8px auto 0 auto;
+	background:#f9fcff;
+	}
+.commernt_out_t {
+	padding:0 0 0 35px;
+	height:32px;
+	line-height:32px;
+	border-bottom:1px solid #d1d1d1;
+	}
+	
+.comment_cont {
+	width:840px;
+	margin:20px auto;
+	}
+.comment_us_img {
+	float:left;
+	padding:5px 0 0 0;
+	}
+.comment_right {
+	width:860px;
+	}
+.us_inf {
+	width:690px;
+	float:left;	
+	color:#3d91e8;	
+	}
+.us_time {
+	float:left;
+	color:#868484;
+	}
+.comment_right_con {
+	padding:18px 10px 18px 20px;
+	float:left;
+	color:#070707;	
+
+	}
+.comment_right_re {
+	text-align:right;
+	padding-right:10px;
+	width:840px;
+	}
+.comment_cont ul li{
+	border-bottom:1px dashed #868484;
+	padding:10px 0;
+	}
+.us_inf_name {
+
+	}
+.us_time_color {
+	color:#868484;
+	}
+.comment_right_re a{
+	color:#3d91e8;
+	padding:0 5px;
+	text-decoration:none;
+	}
+.comment_right_re a:hover{
+	text-decoration:underline;
+	}	
+/*首页 --E*/
+/*网友评价 --B*/
+.comm_k {
+	backgound:#fafafa;
+	border:1px solid #e7e7e7;
+	margin:5px;
+	overflow:hidden;
+	zoom:1;
+	padding-bottom:8px;
+	}
+.comm_w {
+	line-height:38px;
+	text-indent:40px;
+	font-size:14px;
+	font-weight:bold;
+	background:url(../images/comm_w.gif) no-repeat;
+	background-position:bottom;
+	height:38px;
+	}
+.comment_out_k {
+	width:936px;
+	overflow:auto;
+	margin:8px auto 0 auto;
+	background:#f9fcff;
+	}
+/*网友评价 --E*/
+/*校长信箱 --B*/
+.letter_l {
+	width:680px;
+	float:left;
+	padding:20px 0 0 10px;
+	}
+.l_title {
+	width:672px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	font-size:14px;
+	border:1px solid #CCC;
+	}
+.add {
+	margin:0 0 8px 0;
+	color:#237ee5;
+	font-size:14px;
+	font-weight:bold;
+	}	
+.remark {
+	background:#e6f2fd;
+	padding:12px 10px;
+	margin:5px auto;
+	color:#595959;
+	}	
+.remark p {
+	height:25px;
+	line-height:25px;
+	}
+.remark input {
+	margin:0 5px;
+	}
+.l_cont {
+	width:670px;
+	height:350px;
+	padding:5px;
+	}
+.l_info p{
+	height:46px;
+	line-height:46px;
+	color:#595959;
+	font-size:14px;
+	padding-left:10px;
+	}
+.heig {
+	width:222px;
+	height:18px;
+	left:18px;
+	vertical-align:middle;
+	padding-top:8px;
+	}
+.lett_btn {
+	background:url(../images/lett_btn.gif) no-repeat;
+	width:112px;
+	height:33px;
+	border:none;
+	color:#fff;
+	letter-spacing:5px;
+	text-align:center;
+	font-size:14px;
+	line-height:33px;
+	font-weight:bold;
+	cursor:pointer;
+	margin-top:8px;
+	}
+.letter_r {
+	float:left;
+	width:250px;
+	padding:0px 0 0 10px;
+	margin-top:50px;
+	margin-left:15px;
+	border-left:1px dashed #ccc;
+	}
+.letter_r p {
+	padding-bottom:16px;
+	color:#767676;
+	}
+/*校长信箱 --E*/
+/*校园风光 --B*/
+.picshow {
+	border-bottom: #d9e0ea 1px solid; border-left: #d9e0ea 1px solid; margin: 15px auto; width: 958px;padding-top:20px; border-top: #d9e0ea 1px solid; border-right: #d9e0ea 1px solid
+}
+
+#picarea {
+	margin: 0px auto; width: 958px; background: #fff; 
+}
+#bigpicarea {
+	position: relative; margin: 0px auto; width: 774px; height: 682px; overflow: hidden
+}
+.slidearea {
+	margin: 0px auto; height:485px; overflow: hidden;
+	position:relative;
+	}
+.image {
+	text-align: center
+}
+.image img {
+	border-bottom: #ececec 1px solid; border-left: #ececec 1px solid; margin: 0px auto; border-top: #ececec 1px solid; border-right: #ececec 1px solid
+}
+#bigpicarea .word {
+	text-align: center; height: 50px; color: #333
+}
+#bigpicarea .word H3 {
+	text-align: center; liNE-height: 48px; height: 48px; color: #333; font-size: 14px
+}
+#bigpicarea .ui-els-hide {
+	display: none
+}
+#thumbs {
+	overflow:hidden;
+	zoom:1;
+	list-style-type: none; margin: 0 auto 20px auto; width: 950px; 
+}
+* HTML #thumbs {
+	height: 100%
+}
+#thumbs li {
+	margin: 0px 2px; width: 213px; display: inline; float: left; height: 158px
+}
+#thumbs ul {
+	margin-top: 3px
+}
+#thumbs li.last_img {
+	margin-right: 4px
+}
+#thumbs li.first {
+	margin: 65px 10px 0px 15px; width: 9px; height: 16px; cursor: pointer
+}
+#thumbs li.last {
+	margin: 65px 10px 0px 15px; width: 9px; height: 16px; cursor: pointer
+}
+#thumbs li a {
+	border-bottom: #fff 1px solid; border-left: #fff 1px solid; width: 213px; display: block; font-size: 0px; border-top: #fff 1px solid; border-right: #fff 1px solid
+}
+#thumbs li a:hover {
+	border-bottom: #000 1px solid; border-left: #000 1px solid; border-top: #000 1px solid; border-right: #000 1px solid
+}
+#thumbs li a.current {
+	border-bottom: #f8ae0f 1px solid; border-left: #f8ae0f 1px solid; border-top: #f8ae0f 1px solid; border-right: #f8ae0f 1px solid
+}
+#thumbs li.first img {
+	
+}
+#thumbs li.last img {
+	
+}
+.bigbtnPrev {
+	z-index: 100; position: absolute; width: 35px; height: 51px; TOP: 186px; cursor: pointer; left: 30px
+}
+.bigbtnNext {
+	z-index: 100; position: absolute; width: 35px; height: 51px; TOP: 186px; cursor: pointer; right: 30px
+}
+#big_play_prev {
+	top:185px;left:20px;background-IMaGE: url(../images/leftbig.gif); width: 50px; display: block; height: 50px; _background: none; opacity: 0.8; filter:alpha(opacity=80); -moz-opacity:0.8; _filter: progid:DXImageTransform.Microsoft.alphaImageLoader(sizingMethod=crop,src='../images/leftbig.gif')
+}
+#big_play_next {
+	/*position:absolute;top:00px;right:20px;*/background-IMaGE: url(../images/rightbig.gif); width: 50px; display: block; height: 50px; _background: none;opacity: 0.8; filter:alpha(opacity=80); -moz-opacity:0.8; _filter: progid:DXImageTransform.Microsoft.alphaImageLoader(sizingMethod=crop,src='../images/rightbig.gif')
+}
+#smallpicarea {
+	margin: 0px auto; width: 958px; border-top: #ececec 1px solid; padding-top: 20px;_padding-bottom:20px;}
+
+/*校园风光 --E*/
+/*师资力量 --B*/
+.teachers_a {
+	width:910px;
+	margin:10px 0 10px 30px;
+	}
+.teachers_a th {
+	padding:5px 8px;
+	background:#4698ea;
+	color:#fff;
+	border:1px solid #fff;
+	text-align:center;
+	}
+.teachers_a td {
+	background:#f6f6f6;
+	text-align:center;
+	padding:10px 8px;
+	border:1px solid #fff;
+	width:135px;
+	}
+/*师资力量 --E*/
+/*校长致辞 --B*/
+.spee_con {
+	padding:20px;
+	}
+.spee_con h1 {
+	text-align:center;
+	font-size:18px;
+	}
+.spee_con h2 {
+	text-align:center;
+	font-weight:100;
+	}
+.spee_con p{
+	color:#343535;
+	line-height:22px;
+	font-size:14px;
+	}
+.teachers_t {
+	text-indent:30px;
+	}
+/*校长致辞 --E*/
+/*学校招聘 --B*/
+.recruit_l {
+	width:915px;
+	margin:15px auto 30px auto;
+	}
+.recruit_con {
+	width:900px;
+	margin:5px auto 18px auto;
+	padding:0 0 8px 40px;
+	overflow:hidden;
+	zoom:1;
+	border-bottom:3px solid #777676;
+	} 
+.recruit_con td{
+	padding:0 0 3px 0;
+	font-size:14px;
+	}
+.position {
+	font-size:18px;
+	font-weight:bold;
+	color:#247fe6;
+	}
+.posi_gray {
+	color:#5c5d5d;
+	}
+.pisi_info {
+	width:70px;
+	color:#5c5d5d;
+	}
+.posi_btn {
+	background:url(../images/posi_btn.gif) no-repeat;
+	line-height:41px;
+	height:41px;
+	border:none;
+	width:154px;
+	color:#fff;
+	font-size:20px;
+	font-weight:bold;
+	margin:10px 4px 5px 0;
+	cursor:pointer;
+	outline:none;
+	float:left;
+	}
+.posi_p {
+	padding-top:15px;
+	color:#999;	
+	}
+.posi_phone {
+	color:#999;
+	font-size:14px;
+	}
+.pisi_c {
+	width:150px;
+	}
+/*学校招聘 --E*/
+/*联系我们 --B*/
+.contact_c {
+	padding:20px 20px 10px 70px;
+	}
+.contact_l p {
+	height:32px;
+	line-height:32px;
+	font-size:14px;
+	}
+.contact_l {
+	width:520px;
+	float:left;
+	}
+.contact_r {
+	float:left;
+	}
+/*联系我们 --E*/
+/*学校介绍 --B*/
+.about_c {
+	padding:12px 25px 20px 25px;
+	font-size:14px;
+	}
+.about_inf {
+	margin-bottom:20px;
+	}
+.about_inf p{
+	text-indent:26px;
+	line-height:170%;
+	text-align:justify;
+	text-justify:inter-ideograph;	
+	}
+.about_title {
+	 font-size:24px;
+	 font-weight:bold;
+	 color:#237ee5;
+	 height:48px;
+	 width:900px;
+	 margin:10px auto 2px auto;
+	 text-align:center;
+	}
+.a_intro_inf {
+	width:320px;
+	padding:12px 5px 0 10px;
+	/*border-right:1px solid #979797;*/
+	font-size:14px;
+	margin-top:10px;
+	margin-left:12px;
+	float:right;
+	position:relative;
+	}
+.a_intro_inf ul {
+	list-style:none;
+	}
+.a_intro_inf ul li {
+	padding:4px 0 4px 5px;
+	border-bottom:1px dashed #C9C9C9;
+	}
+.a_s_name {
+	background:url(../images/inf_btn_bg.gif) no-repeat;
+	width:87px;
+	height:21px;
+	float:left;
+	line-height:21px;
+	padding-left:15px;
+	color:#fff;
+	font-size:12px;
+	}
+.a_s_name_w {
+	line-height:21px;
+	height:21px;
+	}	
+
+.about_l {
+	float:left;
+	width:280px;
+	margin:10px 0 15px 20px;
+	position:relative;
+	float:right;
+	border:1px solid #237EE5;
+	padding:8px 0;
+	}
+.about_l p {
+	line-height:220%;
+	}
+.about_r{
+	width:920px;
+	}
+.about_r ul li {
+	float:left;
+	padding:0 8px;
+	}
+/*学校介绍 --E*/
+/*学校动态 --B*/
+.news_cont {
+	/*width:990px;*/
+	background:#fff;
+	overflow:hidden;
+	zoom:1;
+	}
+.news_menu {
+	background:#f2f2f2;
+	border:1px solid #e5e5e5;
+	width:200px;
+	overflow:hidden;
+	zoom:1;
+	text-align:center;
+	margin:10px 0 0 10px;
+	font-weight:bold;
+	padding:8px 0 20px 0;
+	float:left;
+	}
+.news_t {
+	background:url(../images/n_line.gif) no-repeat;
+	background-position:bottom;
+	padding:8px 0;
+	}
+.news_menu ul li{
+	padding:7px 0;
+	}
+.news_menu #on a{
+	color:#bd0505;
+	}
+.news_right {
+	float:left;
+	margin:10px 0 0 8px;	
+	width:760px;
+	}
+.news_at {
+	font-size:14px;
+	font-weight:bold;
+	border:1px solid #d7d7d7;
+	/*width:738px;*/
+	padding:8px;
+	}
+.news_tips {
+	border:1px solid #d7d7d7;
+	margin:5px 0;
+	overflow:hidden;
+	zoom:1;
+	}
+/*菜单样式*/
+#basic-accordian{
+	width:20%;
+	z-index:2;
+	margin-top: 2%;
+	border-top-style: solid;
+	border-top-color: #999999;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 2%;
+	width:728px;
+}/*菜单背景*/
+.accordion_headings{
+	padding:2px;
+	color:#434343;
+	cursor:pointer;
+	font-weight:bold;
+	line-height: 25px;
+	letter-spacing: 1px;
+	border-bottom:1px dashed;
+	margin-bottom:5px;
+	/*clear:both;	*/
+
+}/*菜单分类行*/
+.accordion_headings:hover{
+}
+.accordion_child{
+	padding-left: 20px;
+	padding-bottom: 8px;
+	margin-bottom:5px;
+	overflow:hidden;
+	zoom:1;
+	border-bottom:1px dashed;
+}
+.accordion_child ul{}
+.accordion_child ul li{
+	font-size: 12px;
+	display: block;
+	line-height: 20px;
+	display:block;
+}
+.accordion_child ul li a{
+	text-decoration: none;
+	color: #666666;
+}
+.accordion_child ul li a:hover{
+	color:#FC0;
+}
+.header_highlight{
+	background-color:#4698ea;
+	color: #FFf;
+}
+.news_theme {
+	width:500px;
+	}
+/*当前显示菜单分类样式*/
+	
+/*菜单样式结束*/
+.main {
+	margin-top: 2%;
+	width: 96%;
+	margin-right: auto;
+	margin-left: auto;
+}
+.news_img1 {
+	float:left;
+	padding:3px;
+	border:1px solid #a4a4a4;	
+	margin:5px 15px 5px 5px;
+	}
+.news_cont_n {
+	padding:15px 5px 0 10px;
+	}
+.news_cont p {
+	line-height:170%; 
+	}
+.news_spe a{
+	color:#646464;
+	text-decoration:none;
+	}
+.news_spe a:hover{
+	text-decoration:underline;
+	}
+.news_bor {
+	border-bottom:1px dashed #999;
+	}
+/*特殊样式-------------------------*/	
+	
+	
+/*学校动态 --E*/

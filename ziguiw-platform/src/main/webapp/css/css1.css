@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+.nav{ background:url(../images/nav_bg.gif) no-repeat top left; width:950px; height:69px; margin:0 auto;margin-top:7px; }
+.lii_1{ margin-left:27px; padding-top:4px; width:923px; overflow:hidden;}
+.lii_1 li{ float:left; padding-right:18px;  width:96px; text-align:center;}
+.lii_1 li a{color:#FFFFFF; font-weight:bolder; height:30px;line-height:30px;display:block; font-size:14px;}
+.lii_1 li a:hover{color:#1c4b79;}
+.lii_1 li a.hits{color:#03589f; background:url(../images/nav_bg_1.gif) no-repeat;visibility: visible;}
+.lii_2{ margin-left:37px; padding-top:4px; width:913px; overflow:hidden;visibility:hidden;}
+.lii_2 li{ float:left; margin-right:18px; _display:inline;}
+.lii_2 li a{color:#000; font-weight:normal; height:30px;line-height:30px; font-size:12px;}
+.lii_2 li a.hit{color:#03589f; font-size:14px; font-weight:bolder;}
+.lii_2 li a:hover,.at1 a:hover{color:#03589f;}
+
+*/
+/*daohang*/
+.cx_tabmenu {background:url(/images/nav_bg.gif) no-repeat top left; width:950px; height:65px; margin:0 auto;margin-top:7px; padding-top:4px;}
+#ddimagetabs {PADDING-LEFT: 60px}
+#ddimagetabs A {PADDING-RIGHT: 20px; DISPLAY: inline; PADDING-LEFT: 20px; FONT-SIZE: 14px; FLOAT: left; PADDING-BOTTOM: 0px; COLOR: #FFFFFF; LINE-HEIGHT: 30px; MARGIN-RIGHT: 40px; PADDING-TOP: 0px; HEIGHT: 30px; TEXT-ALIGN: center; TEXT-DECORATION: none; font-weight:bolder;}
+#ddimagetabs A:hover {color:#03589f; background:url(/images/nav_bg_1.gif) no-repeat;}
+#ddimagetabs A.current {color:#03589f; background:url(/images/nav_bg_1.gif) no-repeat;}
+
+#tabcontentcontainer { HEIGHT: 27px; margin-left:10px; padding-top:4px; width:913px; overflow:hidden;}
+.tabcontent {DISPLAY: none; PADDING-TOP: 4px}
+.tabcontent  a{font-size:12px; color:#000000;}
+.tabcontent A:link {PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-SIZE: 12px; FLOAT: left; PADDING-BOTTOM: 4px; MARGIN-LEFT: 3px; CURSOR: pointer; LINE-HEIGHT: 18px; PADDING-TOP: 0px;  HEIGHT: 18px; TEXT-DECORATION: none}
+.tabcontent A:visited {PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-SIZE: 12px; FLOAT: left; PADDING-BOTTOM: 4px; MARGIN-LEFT: 3px; CURSOR: pointer; LINE-HEIGHT: 18px; PADDING-TOP: 0px; HEIGHT: 18px; TEXT-DECORATION: none}
+.tabcontent A:hover {color:#03589f; font-size:14px; font-weight:bolder;}
+.tabcontent a.hitss{color:#03589f; font-size:14px; font-weight:bolder;}
+
+.link{ width:918px; height:107px; background:#f3f3f3; border:1px #d9d9d9 solid; margin:0 auto; padding:10px 15px; overflow:hidden;}
+.link_title{ background:url(/images/link_bg.gif) no-repeat center left; height:21px;}
+.link_menu{ margin-top:13px;}
+.link_menu li{ float:left; display:block; width:118px; height:60px; border:1px #e3e3e3 solid; padding:2px 2px; background:#FFF; margin-right:14px; margin-left:14px; overflow:hidden; _display:inline;}
+
+#foot{ width:950px; height:auto; margin:0 auto; padding:20px 0px; text-align:center; font-size:12px; color:#444; line-height:20px;}

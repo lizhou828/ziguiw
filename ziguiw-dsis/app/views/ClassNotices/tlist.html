@@ -1,0 +1,96 @@
+#{extends 'main.html'/}
+#{set title:'班级通知——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <script type="text/javascript">
+        $(function(){
+            $("#attenQueryBtn").click(function(){
+                var bjId= $("#bjId").val();
+                if(bjId && bjId == '-1'){
+                    alert("必须选定班级！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/ClassNotices/tlist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&bjId="+bjId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            }) ;
+
+        });
+    </script>
+
+#{form action:@ClassNotices.tlist(),enctype :'multipart/form-data',method:'post',id:'querySchoolNotice'}
+
+    <div class="bobti">
+        班级通知
+    </div>
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="697" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td>
+                        班级：<select id="bjId" name="bjId">
+                        <option value="-1">--请选择--</option>
+                            #{list items:clazzList,as:'clazz'}
+                                <option value="${clazz.bjId}">${clazz.bjMcheng}</option>
+                            #{/list}
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td width="60%">
+                        日期：
+                        <input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="startTime" name="startTime" value="${startTime}">
+                        到
+                        <input type="text" onclick="WdatePicker()" class="Wdate" style="float: none"
+                               id="endTime" name="endTime" value="${endTime}">
+                    </td>
+                    <td width="40%">
+                        <input type="button" class="cx" value="查询" id="attenQueryBtn">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="not_spe" id="listTable">
+        #{if page.data == null || page.data.size() == 0}
+            <div>
+                <div class="lett_bl">
+                    没有相关信息！
+                </div>
+            </div>
+
+        #{/if}
+        #{else }
+            <div>
+                #{list items:page.data,as:'data'}
+                    <div class="lett_bl">
+                        <p>标题：${data?.title}</p>
+                        <p>内容：${data?.text}</p>
+                        <p class="lett_pa">
+                            <span>发送时间：${data?.createTime }</span>
+                        </p>
+                    </div>
+                #{/list}
+            </div>
+            <div class="pageNav">
+                #{page page : page, url : "/ClassNotices/tlist", paramIds : "bjId startTime endTime", isAjax : "true"/}
+            </div>
+        #{/else}
+    </div>
+
+
+#{/form}
+</div>

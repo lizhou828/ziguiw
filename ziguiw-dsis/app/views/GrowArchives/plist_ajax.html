@@ -1,0 +1,66 @@
+<table width="729" cellspacing="0" cellpadding="0" border="0" class="tab-xx-4 font-2">
+#{if page.data == null || page.data.size() == 0 }
+    <tbody>
+
+        <tr>
+            <td width="114" class="bod"><strong>暂无信息！</strong></td>
+            <td width="615" align="right" class="bod">&nbsp;</td>
+        </tr>
+        *{<tr>}*
+        *{<td width="114" class="xgr">}*
+        *{<input type="button" id="create" value="创建成长档案">}*
+        *{</td>}*
+        *{<td width="615" class="xgr">&nbsp;</td>}*
+        *{</tr>}*
+    </tbody>
+#{/if}
+#{else }
+    #{list items:page.data , as:'data'}
+        <tbody>
+
+        <tr>
+            <td width="114" class="bod"><strong>基本信息</strong></td>
+            <td width="615" align="right" class="bod">&nbsp;</td>
+        </tr>
+
+
+        <tr>
+            <td width="114" class="xgr">学生姓名：</td>
+            <td width="615" class="xgr">${student.xsXming}</td>
+        </tr>
+        <tr>
+            <td class="xgr">血型：</td>
+            <td class="xgr">${data.bloodType}</td>
+        </tr>
+        <tr>
+            <td class="xgr">爱好：</td>
+            <td class="xgr">${data.hobby}</td>
+        </tr>
+        <tr>
+            <td class="xgr">健康状态：</td>
+            <td class="xgr">${student.healthState}</td>
+        </tr>
+        <tr>
+            <td class="xgr">医保卡号：</td>
+            <td class="xgr">${student.ybHao}</td>
+        </tr>
+        <tr>
+            <td class="xgr">既往史：</td>
+            <td class="xgr">${data.pastMedicalHistory}</td>
+        </tr>
+        <tr>
+            <td class="xgr">过敏史：</td>
+            <td class="xgr">${data.allergicHistory}</td>
+        </tr>
+        <tr>
+            <td class="xgr">创建时间：</td>
+            <td class="xgr">${data.createTime}</td>
+        </tr>
+        </tbody>
+    #{/list}
+#{/else}
+</table>
+
+<div class="pageNav">
+#{page page : page, url : "/GrowArchives/plist", paramIds : "xsId", isAjax : "true"/}
+</div>

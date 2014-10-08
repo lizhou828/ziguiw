@@ -1,0 +1,36 @@
+<div style="padding-left: 25px;">
+    <span >
+       注意:点击相应的科目名称，可以把该科目成绩隐藏起来。
+    </span>
+    <br/><br/>
+    <span id="message" style="color: #ff0000; font-size: 15px">${message}</span>
+</div>
+#{if resourceMap.size() != 0 }
+    #{list items:resourceMap,as:'map'}
+    <div class="sc_source_c">
+        <div class="sc_source_t">
+            <h3 class="sc_source_l">资源精准推送<font color="red">(${map.key.subjectName}相关)</font></h3>
+            <span class="sc_source_r"><a href="http://res.ziguiw.com/Resources/resourceList?subjectId=${map.key.id}" target="_blank">更多&gt;</a></span>
+        </div>
+        <div class="clear"></div>
+        <div>
+            <ul>
+                #{if map.value != null && map.value.data != null && map.value.data.size() != 0}
+                    #{list items:map.value.data,as:'data'}
+                        <li>
+                            <div class="sc_source_a"><a href="http://res.ziguiw.com/Resources/show?resourceId=${data.id}" target="_blank">${data.title}</a></div>
+                            <div class="sc_source_time">${new java.text.SimpleDateFormat("yyyy-MM-dd").format(data.createTime)}</div>
+                        </li>
+                    #{/list}
+                #{/if}
+                #{else }
+                    <li>
+                        <div class="sc_source_a">抱歉，没有相关资源！</div>
+                    </li>
+                #{/else}
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    #{/list}
+#{/if}

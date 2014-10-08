@@ -1,0 +1,113 @@
+#{extends 'main.html'/}
+#{set title:'作业查询——子贵网用户中心' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+#{script 'Teacher.js'/}
+<script type="text/javascript">
+    $(function(){
+        $("#hmQueryBtn").click(function(){
+            var xsNode = $("#xsId");
+            var xsId
+            if(xsNode.length > 0){
+                xsId = $("#xsId").val();
+            } else{
+                xsId = $("#studentId").val();
+            }
+            if(xsId && xsId != null && xsId == '-1'){
+                alert("必须选定一个孩子！");
+                return false;
+            }
+            $.ajax({
+                type:"GET",
+                url:"/HomeWorks/plist?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&xsId="+xsId+"&isAjax=1",
+                beforeSend : function(){
+                    $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                },
+                success : function(result){
+                    $("#listTable").html(result);
+                }
+            })
+            return false;
+        });
+
+    });
+</script>
+
+<div class="right">
+    <div class="bobti">作业查询</div>
+#{form action:@HomeWorks.plist(),enctype :'multipart/form-data',method:'post',id:'homeWordQueryForm'}
+
+    <div class="xunc_1 font-2">
+        <div class="xunc_1-1">
+            <table width="700" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="60%">日期：
+                        <input name="startTime" type="text" id="startTime"  style="float: none"
+                              class="Wdate"  onclick="WdatePicker()" value="${startTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(startTime)) : null }"/>
+                        到
+                        <input name="endTime" type="text" id="endTime" style="float: none"
+                               class="Wdate"  onclick="WdatePicker()" value="${endTime ? new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.lang.Long(endTime)) : null }"/>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    #{if studentList != null && studentList.size() > 1}
+                        <td>
+                            孩子：<select id="xsId" name="xsId">
+                                    #{list items:studentList,as:'student'}
+                                        <option value="${student.xsId}">${student.xsXming}</option>
+                                    #{/list}
+                                </select>
+                        </td>
+                    #{/if}
+                    #{else }
+                        <input type="hidden" id ="xsId" value="${student.xsId}">
+                    #{/else}
+
+                    <td>
+                        <input  id="hmQueryBtn" type="button" value="查询" class="cx"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="xunc_2 font-2" id="listTable">
+
+        <table width="729" border="0" cellspacing="0" cellpadding="0" >
+            <tr>
+                <td class="t1" width="80%">信息内容</td>
+                <td class="t1" width="20%">发送时间</td>
+            </tr>
+            <tbody id="tblSms">
+                #{if homeWorkPage == null || homeWorkPage.data == null}
+                没有相关信息！
+                #{/if}
+                #{else }
+                    #{list items:homeWorkPage.data,as:'data'}
+                    <tr>
+                        <td style="text-align:left">
+                        ${data['MSM_CONTENT']}
+                        </td>
+                        <td>
+                        ${data['DISPLAY_DATE']}
+                        </td>
+                    </tr>
+                    #{/list}
+                #{/else}
+            </tbody>
+        </table>
+
+        <div class="pageNav">
+            #{page page : homeWorkPage, url : "/HomeWorks/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+        </div>
+
+    </div>
+
+
+
+#{/form}
+
+</div>

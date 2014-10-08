@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+
+.p_flink {
+    background: none repeat scroll 0 0 #F0F0F0;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 0 5px;
+    width: 100%;
+}
+.p_flink p {
+    text-align: center;
+}
+.p_flink a {
+    color: #000000;
+    font-size: 12px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.p_flink a:hover {
+    text-decoration: underline;
+}
+.p_logo {
+    text-align: center;
+}
+.p_logo p {
+    height: 20px;
+    line-height: 20px;
+}
+.p_logo span {
+    padding: 0 5px;
+}
+
+.czcenter1 {
+	width:990px;
+	margin:0 auto;
+	background:#fff;
+	overflow:hidden;
+	zoom:1;
+	}
+.cz_k {
+	border:1px solid #c8c6c5;
+	width:970px;
+	margin:5px auto;
+	}
+.cz_title {
+	width:970px;
+	background:url(../images/cz_t_bg.gif) repeat-x;
+	height:97px;
+	line-height:97px;
+	margin:0 auto;
+	text-align:center;
+	}
+.cz_status {
+	width:782px;
+	height:41px;
+	line-height:41px;
+	background:url(../images/cz_status_bg.gif);
+	margin:12px auto;
+	}
+.cz_status_num {
+	font-size:18px;
+	width:190px;
+	margin:0 40px 0 55px;
+	color:#646464;
+	}
+#cz_curr {
+	color:#fff;
+	}
+.cz_userinf {
+	width:700px;
+	margin:40px 0 55px 370px; 
+	}
+.cz_userinf table td{
+	padding:0 0 0 10px;
+	font-size:14px;
+	height:45px;
+	color:#000;
+	}
+.cz_next {
+	background:url(../images/cz_next.gif) no-repeat;
+	width:111px;
+	height:39px;
+	border:none;
+	outline:none;
+	margin-top:30px;
+	color:#fff;
+	font-size:18px;
+	font-family:SimHei;
+	cursor:pointer;
+	}
+.cz_userinf select {
+	width:135px;
+	height:25px;
+	line-height:25px;
+	font-size:14px;
+	}
+.cz_status2 {
+	width:782px;
+	height:41px;
+	line-height:41px;
+	background:url(../images/cz_status_bg2.gif);
+	margin:12px auto;
+	}
+.cz_bank {
+	width:700px;
+	margin:40px 0 55px 245px; 
+	}
+.cz_bank table td{
+	padding:0 0 0 10px;
+	font-size:14px;
+	height:70px;
+	color:#000;
+	}
+.cz_status4 {
+	width:782px;
+	height:41px;
+	line-height:41px;
+	background:url(../images/cz_status_bg4.gif);
+	margin:22px auto 12px auto;
+	}
+.cz_status_com {
+	text-align:center;
+	padding:40px 0 70px 0;
+	font-size:16px;
+	color:#000;
+	}
+.status_goon {
+	margin:15px 5px 0 0;
+	width:107px;
+	border:none;
+	height:31px;
+	line-height:31px;
+	color:#fff;
+	font-size:14px;
+	background:url(../images/status_goon.gif);
+	cursor:pointer;
+	}
+.status_home {
+	border:none;
+	width:107px;
+	height:31px;
+	line-height:31px;
+	color:#fff;
+	font-size:14px;
+	background:url(../images/status_home.gif);
+	cursor:pointer;
+	}
+.cz_status_w {
+	line-height:40px;
+	height:40px;
+	}
+.cz_customer {
+	width:405px;
+	margin:10px auto 8px auto;
+	text-align:center;
+	}

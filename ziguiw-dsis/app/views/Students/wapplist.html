@@ -1,0 +1,84 @@
+#{extends 'WapUCs/home.html'/}
+<div id="listTable">
+    <div class="detail">
+        <p class="d_base">基本信息</p>
+    </div>
+    <div class="line"></div>
+    <div class="d_info">
+    <table width="98%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td rowspan="5" width="57" align="center">
+                <div class="stu_img">
+                    <a href="#"><img src="${student.personalPhoto ? 'http://dsis.952116.com/'+student.personalPhoto : '/public/images/default.jpg'}"/></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>孩子姓名</strong>：${student.xsXming}</td>
+        </tr>
+        <tr>
+            <td><strong>出生日期</strong>：${student.birthday}</td>
+        </tr>
+        <tr>
+            <td><strong>民族</strong>：
+                 ${student?.mzhu?.equalsIgnoreCase("null") ? '未填写': student?.mzhu}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>手机</strong>：
+                ${student?.homePhone?.equalsIgnoreCase("null") ? '未填写': student?.homePhone}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>家庭成员</strong>：
+                ${student?.otherLinks?.equalsIgnoreCase("null") ? '未填写': student?.otherLinks}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>卡号</strong>：${student.idCard}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>家庭住址</strong>：
+                ${student?.homeAddress?.equalsIgnoreCase("null") ? '未填写': student?.homeAddress}
+            </td>
+        </tr>
+    </table>
+</div>
+    <div class="detail">
+         <p class="d_base">在校信息</p>
+    </div>
+    <div class="line"></div>
+    <div class="d_info_sch">
+          <table width="98%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td><strong>所在学校</strong>：${school.schName}</td>
+        </tr>
+        <tr>
+            <td><strong>入校日期</strong>：${student.dateToSchool}</td>
+        </tr>
+        <tr>
+            <td><strong>所在年级</strong>：${grade.njMcheng}</td>
+        </tr>
+        <tr>
+            <td><strong>所在班级</strong>：${clazz.bjMcheng}</td>
+        </tr>
+
+        <tr>
+            <td><strong>政治面貌</strong>：
+                ${student?.politicalFace?.equalsIgnoreCase("null") ? '未填写': student?.politicalFace}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>住宿情况</strong>：
+            #{if student?.accommodation==1}
+                住校&nbsp;
+            #{/if}
+            #{else }
+                不住校&nbsp;
+            #{/else}
+            </td>
+        </tr>
+    </table>
+    </div>
+
+</div>

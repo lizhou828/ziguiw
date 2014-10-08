@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<errorCodeMap>
+    <error>
+        <errorCode>1000</errorCode>
+        <clientErrorMessage>文件未找到</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+    <error>
+        <errorCode>1001</errorCode>
+        <clientErrorMessage>用户不存在或者未绑定学生卡号</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+    <error>
+        <errorCode>1002</errorCode>
+        <clientErrorMessage>未绑定学校或班级</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+    <error>
+        <errorCode>1101</errorCode>
+        <clientErrorMessage>您提交的内容中发现禁用词汇</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+    <error>
+        <errorCode>1102</errorCode>
+        <clientErrorMessage>您提交的内容不完整，丢失属性</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+    <error>
+        <errorCode>1103</errorCode>
+        <clientErrorMessage>权限不足</clientErrorMessage>
+        <redirectUrl></redirectUrl>
+        <target></target>
+    </error>
+
+</errorCodeMap>

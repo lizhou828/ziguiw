@@ -1,0 +1,60 @@
+<table width="70%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    *{<tr>}*
+    *{<td class="t1">考试名称</td>}*
+    *{<td class="t1">学生姓名</td>}*
+    *{<td class="t1">总分</td>}*
+    *{</tr>}*
+    <tr>
+        <td class="t1">考试科目</td>
+        <td class="t1">得分</td>
+    </tr>
+    <tr>
+        <td class="t1">语文</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">数学</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">英语</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">物理</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">化学</td>
+        <td class="t1">89</td>
+    </tr>
+
+    <tr>
+        <td class="t1">生物</td>
+        <td class="t1">89</td>
+    </tr>
+
+    <tr>
+        <td class="t1">政治</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">历史</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">地理</td>
+        <td class="t1">89</td>
+    </tr>
+    <tr>
+        <td class="t1">总分</td>
+        <td class="t1">801</td>
+    </tr>
+
+
+
+
+
+    </tbody>
+</table>

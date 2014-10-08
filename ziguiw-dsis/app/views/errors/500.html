@@ -1,0 +1,17 @@
+#{if exception && exception.getCause() instanceof controllers.DsisException }
+    #{if !((controllers.DsisException)exception.getCause()).isAjax} #{extends 'main.html'/} #{/if}
+        <h2>${((controllers.DsisException)exception.getCause()).tipMessage}</h2>
+        <br/>
+        有问题请与客服联系，客服电话：952116
+#{/if}
+#{else}
+#{extends 'main.html'/}
+    <div style="margin-left: 30px">
+        <h2>抱歉，没有查到记录</h2>
+        <br/>
+        有问题请与客服联系，客服电话：952116
+    </div>
+#{/else}
+<span style="display: none;">
+    #{500 exception /}
+</span>

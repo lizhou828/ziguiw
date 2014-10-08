@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+.side-left{width:199px; height:auto; float:left; padding-bottom:30px;}
+
+ .tt{ height:auto ; width:199px; padding-top:20px;}
+.ru1{ width:181px; height:85px; margin-left:18px;} 
+.ru1 img{ border:1px solid #cfcfcf; width:75px; height:75px; float:left;}
+.ru1 p{ width:80px; float:left; padding:5px 0px 0px 10px; color:#006da6; line-height:24px;}
+.ru1 p a{ color:#ff6c00; line-height:20px;}
+.ru1 p img{ width:80px; height:24px; border:none;}
+
+
+.chaxun{ width:166px; padding-left:22px; padding-top:10px;}
+.title-1{ width:135px; height:25px; background:url(../../images/user/bg-cx-1_20.gif) no-repeat; padding-left:32px;  margin-bottom:2px;font-weight:bolder; line-height:25px;}
+
+ 
+.chaxun ul{background:url(../../images/user/li-bg-1_23.gif) repeat-x; height:34px; width:166px; overflow:hidden;}
+.chaxun ul li{width:166px; height:34px; line-height:34px; overflow:hidden;color:#333;}
+.chaxun ul li a.bj8{ background:url(../../images/user/tub7.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px; display:block;}
+.chaxun ul li a.bj9{ background:url(../../images/user/tub9.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px;line-height:34px;display:block;}
+.chaxun ul li a.bj10{ background:url(../../images/user/tub10.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj11{ background:url(../../images/user/tub3.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px;line-height:34px;display:block;}
+.chaxun ul li a.bj12{ background:url(../../images/user/tub11.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px;line-height:34px;display:block;}
+.chaxun ul li a.bj13{ background:url(../../images/user/tub8.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bja{ background:url(../../images/user/52design_com_kr_002.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bjb{ background:url(../../images/user/png-0003.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bjc{ background:url(../../images/user/52design_com_kr_020.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bjd{ background:url(../../images/user/52design_com_kr_008.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bje{ background:url(../../images/user/52design_com_kr_012.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bjf{ background:url(../../images/user/52design_com_kr_015.png) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj14{ background:url(../../images/user/tub6.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj15{ background:url(../../images/user/bjtz.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj16{ background:url(../../images/user/report_user.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj17{ background:url(../../images/user/xxda_03.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj18{ background:url(../../images/user/bjtz.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj19{ background:url(../../images/user/Clipped.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj21{ background:url(../../images/user/Contacts.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj22{ background:url(../../images/user/book_key.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj23{ background:url(../../images/user/building.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj24{ background:url(../../images/user/medal_bronze_1.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj25{ background:url(../../images/user/status_online.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj26{ background:url(../../images/user/bell.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj27{ background:url(../../images/user/page_white_text.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj28{ background:url(../../images/user/page_white_paste.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj29{ background:url(../../images/user/sitemap_color.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj30{ background:url(../../images/user/bullet_blue.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj31{ background:url(../../images/user/bullet_red.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj32{ background:url(../../images/user/bullet_orange.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj33{ background:url(../../images/user/status_away.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj34{ background:url(../../images/user/building_edit.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj35{ background:url(../../images/user/money_yen.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj36{ background:url(../../images/user/report_add.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+.chaxun ul li a.bj37{ background:url(../../images/user/cup_add.gif) no-repeat 22px 7px; height:34px; padding:0px 0px 0px 52px; line-height:34px;display:block;}
+
+
+
+.chaxun ul li a{color:#333;}
+.chaxun ul li.hit a{color:#006da6; font-weight:bolder;}
+.chaxun ul li a:hover{color:#006da6; font-weight:bolder;}

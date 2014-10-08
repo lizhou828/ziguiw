@@ -1,0 +1,47 @@
+#{extends 'WapUCs/home.html'/}
+<div id="listTable">
+    <div class="nav">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/my-acc.png"/></td>
+                <td width="65%">#{a @Students.wapplist()}学生学籍档案#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/time.png"/></td>
+                <td width="65%">#{a @Attendances.wapplist()}学生考勤#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/h_word.png"/></td>
+                <td width="65%">#{a @HomeWorks.wapplist()}学生作业#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/feed.png"/></td>
+                <td width="65%">#{a @ExamResults.wapplist()}学生成绩#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/c_note.png"/></td>
+                <td width="65%">#{a @SchoolNotices.wapplist()}学校公告#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/consulting.png"/></td>
+                <td width="65%">#{a @ClassNotices.wapplist()}班级通知#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/zoom.png"/></td>
+                <td width="65%">#{a @StudentComments.wapplist()}学生评语#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+            <tr onmouseout="out(this)" onmouseover="over(this);">
+                <td width="25%" class="nav_img"><img src="/public/images/my-acc.png"/></td>
+                <td width="65%">#{a @ConsumptionRecords.wapplist()}一卡通消费查询#{/a}</td>
+                <td width="10%"><img src="/public/images/tri.png" /></td>
+            </tr>
+        </table>
+    </div>
+</div>

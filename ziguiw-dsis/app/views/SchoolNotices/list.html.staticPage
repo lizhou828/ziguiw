@@ -1,0 +1,121 @@
+#{extends 'main.html'/}
+#{set title:'学校公告——子贵网用户中心'/}
+#{script 'My97DatePicker/WdatePicker.js'/}
+<div class="right">
+    <script type="text/javascript">
+        $(function(){
+            $("#attenQueryBtn").click(function(){
+                var xsNode = $("#xsId");
+                var xsId
+                if(xsNode){
+                    xsId = $("#xsId").val();
+                } else{
+                    xsId = $("#studentId").val();
+                }
+                if(xsId && xsId != null && xsId == '-1'){
+                    alert("必须选定一个孩子！");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/SchoolNotices/list?startTime="+$("#startTime").val()+"&endTime="+$("#endTime").val()+"&isAjax=1"+"&xsId="+xsId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            }) ;
+
+        });
+    </script>
+
+#{form action:@SchoolNotices.list(),enctype :'multipart/form-data',method:'post',id:'querySchoolNotice'}
+
+    <div class="bobti">
+        学校公告
+    </div>
+
+
+    <div class="not_spe" id="listTable">
+
+
+
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>通知：本学期开学日期：2月25号</p>
+                            <p style="margin-top:8px;">
+                                2013年02月10日 16:30:22
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>  本校于3月5日开展“学雷锋、树榜样”班级活动，望全校各个班级都能积极参与。</p>
+                            <p style="margin-top:8px;">
+                                2013年03月01日 16:39:59
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>  本校于3月9日在学校大礼堂举行“百灵鸟”杯英语讲演比赛决赛，请参赛选手准时参加！</p>
+                            <p style="margin-top:8px;">
+                                2013年03月08日 12:09:59
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <ul>
+                        <li>
+                            <div class="noti_content">
+                                <p>  本校于3月12日在学校后山一区开展“绿化校园，从我做起”植树活动，望全校各个班级都能积极参与。</p>
+                                <p style="margin-top:8px;">
+                                    2013年03月10日 13:49:59
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>  本校于3月20日14时在学校篮球场开校会，望全校师生到时都能准时参加。</p>
+                            <p style="margin-top:8px;">
+                                2013年03月19日 10:29:59
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <div class="noti_content">
+                            <p>各位敬爱的家长、亲爱的同学们，你们好：本校定于（3月28、29日）在市体育馆举行校运动会，请全体同学们3月28日早7:30分准时在市体育馆大门集中，参加开幕式。希望同学们尽力发挥，赛出好成绩！</p>
+                            <p style="margin-top:8px;">
+                                2013年03月28日 09:53:51
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+
+
+
+
+        *{分页}*
+            *{<div class="pageNav">}*
+                *{#{page page : schNoticePage, url : "/SchoolNotices/list", paramIds : "xsId startTime endTime", isAjax : "true"/}}*
+            *{</div>}*
+
+
+    </div>
+
+
+#{/form}
+</div>

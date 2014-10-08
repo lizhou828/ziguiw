@@ -1,0 +1,37 @@
+<p class="dangan_class"><b><span id="className">${clazz.bjMcheng}</span>班所有孩子学籍档案如下：</b></p>
+<table cellspacing="0" cellpadding="0">
+    <tr>
+        <th>姓名</th>
+        <th>照片</th>
+        <th>性别</th>
+        <th>出生日期</th>
+        <th>手机</th>
+        <th>在校状态</th>
+    </tr>
+    #{list  items:studentPage.data,as :'student'}
+        <tr>
+            <td class="dangan_single">${student?.xsXming}</td>
+            <td class="dangan_single">
+                <div class="da_img  xx-img">
+                    <img src="${student.personalPhoto ? 'http://dsis.952116.com/'+student.personalPhoto : '/public/images/default.jpg'}">
+                </div>
+            </td>
+            <td class="dangan_single">${student?.sex? student.sex : '未填写'}</td>
+            <td class="dangan_single">${student?.birthday? student.birthday : '未填写'} </td>
+            <td class="dangan_single">
+                #{if student?.homePhone.equals("") || student?.homePhone.equals("null") }
+                    未填写
+                #{/if}
+                #{else }
+                ${ student?.homePhone}
+                #{/else}
+            </td>
+            <td class="dangan_single" id="studentStatus">
+            ${com.arj.ziguiw.common.StudentInSchoolState.map.get(student?.status)}
+            </td>
+        </tr>
+    #{/list}
+</table>
+<div class="pageNav">
+#{page page:studentPage,url:"/Students/tshow", paramIds:"bjId", isAjax:"true"/}
+</div>

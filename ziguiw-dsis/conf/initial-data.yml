@@ -1,0 +1,108 @@
+# Test data
+
+UserBase(a):
+    nickName:       liz
+    email:         liz@952116.com
+    displayName:     李州
+    portrait:          public/images/photo.gif
+    type:          4
+    foreignKey:      1001
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+UserBase(b):
+    nickName:       lmj
+    email:         lmj@952116.com
+    displayName:     刘盟杰
+    portrait:          public/images/photo.gif
+    type:          2
+    foreignKey:      1002
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+UserBase(c):
+    nickName:      ljy
+    email:         ljy@952116.com
+    displayName:     刘建宇
+    portrait:          public/images/photo.gif
+    type:          3
+    foreignKey:      1003
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+UserBase(d):
+    nickName:       yq
+    email:         yq@952116.com
+    displayName:     叶强
+    portrait:          public/images/photo.gif
+    type:          4
+    foreignKey:      1004
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+UserBase(e):
+    nickName:       pcg
+    email:         pcg@952116.com
+    displayName:     彭常国
+    portrait:          public/images/photo.gif
+    type:          1
+    foreignKey:      1005
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+
+UserBase(f):
+    nickName:       lbb
+    email:         lbb@952116.com
+    displayName:     刘冰冰
+    portrait:          public/images/photo.gif
+    type:           0
+    foreignKey:      1006
+    lastLoginTime:   13545131545131
+    loginCount:      23
+    points:           56
+
+School(g):
+    xxId:             1005
+    schName:          彭哥软件精英培训基地
+    linkName:         彭哥
+    contactPhone:     123456789
+
+Student(h):
+    xsId:                1001
+    xs_xming:           李州
+    personalphoto:     null
+    bjId:                123
+    xxId:                1005
+    status:              1
+
+Student(i):
+    xsId:                1004
+    xs_xming:           叶强
+    personalphoto:     null
+    bjId:                123
+    xxId:                1005
+    status:              1
+
+Teacher(j):
+    teacherId:           1002
+    name:                 刘盟杰
+    xxId:                1005
+
+Parent(k):
+  parentId:             1003
+  parentName:              刘建宇
+  xsId:                1001
+  mobilePhone:          1234567489
+
+Parent(m):
+  parentId:             1006
+  parentName:              刘建宇
+  xsId:                  1004
+  mobilePhone:          1234567489
+

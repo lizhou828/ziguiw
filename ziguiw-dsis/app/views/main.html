@@ -1,0 +1,212 @@
+%{
+    if (userBase) {
+        username = userBase.nickName;
+        usertype = userBase.type;
+    }
+    if (!username) {
+        username = session.get("username");
+    }
+    if (!usertype && !userBase) {
+        usertype = session.get("usertype");
+    }
+    if (username) session.put("username", username);
+    if (usertype) session.put("usertype", usertype);
+}%
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>
+    <title>#{get 'title' /}</title>
+    #{stylesheet src:"amount.css" /}
+    #{stylesheet src:"uccss.css" /}
+    #{stylesheet src:"kaoqinchaxun.css" /}
+    #{get 'moreStyles' /}
+    #{script src:"jquery-1.6.4.min.js" /}
+    #{get 'moreScripts' /}
+    #{script src:'headNavigator.js'/}
+</head>
+<body>
+<div class="a_main">
+
+<!--顶部导航开始!-->
+<div class="a_top">
+    <div class="t_left">
+        <a href="${play.configuration['portal.domain']}">首页</a>|
+        <a href="${play.configuration['portal.domain']}/newses/index">教育在线</a>|
+        <a href="${play.configuration['portal.domain']}/knowledges/index">教育知识</a>|
+        <a href="${play.configuration['resources.domain']}" >教育资源</a>|
+        <a href="${play.configuration['portal.domain']}/boards/index">互动社区</a>|
+        <a href="${play.configuration['portal.domain']}/myhomes/index">我的小家</a>
+    </div>
+    <div class="t_right">
+    #{if username}
+        ${username}
+        <a href="/logout">退出</a>
+    #{/if}
+    #{else}
+        <a href="/login">登录</a>
+        <a href="${play.configuration['portal.domain']}/userbases/registerui">注册</a>
+    #{/else}
+    </div>
+</div>
+
+<!--顶部导航结束!-->
+
+<!--头部开始!-->
+<div class="a_head">
+    <div class="h_logo"></div>
+    <div class="h_banner">
+        <img src="@{'public/images/h_banner.gif'}" />
+    </div>
+    <div class="clear"></div>
+</div>
+<!--头部结束!-->
+
+<!--导航开始!-->
+<div class="a_nav">
+    <ul>
+        <li><a href="${play.configuration['portal.domain']}/myhomes/list?userId=${userBase?.id}">我的空间</a></li>
+        *{<li><a href="#">网站消息</a></li>}*
+        <li><a href="${play.configuration['dsis.domain']}">数字化校园</a></li>
+        <li><a href="${play.configuration['portal.domain']}">返回子贵网首页</a></li>
+    </ul>
+</div>
+<!--导航结束!-->
+
+<!--菜单开始!-->
+<div class="a_menu">
+    <div class="m_top">
+        <strong>数字化校园信息查询</strong>
+    </div>
+    <ul>
+        <li><div class="note"><img src="@{'public/images/xueji.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @Students.tshow()} <span>学生学籍档案</span>#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT}
+            #{a @Students.pshow()} <span>学生学籍档案</span>#{/a}
+        #{/elseif}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.STUDENT}
+            #{a @Students.sshow()} <span>学生学籍档案</span>#{/a}
+        #{/elseif}
+        </li>
+        <li><div class="note"><img src="@{'public/images/kaoq.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @Attendances.tlist()}学生考勤#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @Attendances.plist()}学生考勤#{/a}
+        #{/elseif}
+        </li>
+        <li><div class="note"><img src="@{'public/images/zuoy.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @HomeWorks.tlist()}学生作业#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @HomeWorks.plist()}学生作业#{/a}
+        #{/elseif}
+
+        </li>
+        <li><div class="note"><img src="@{'public/images/score.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @ExamResults.tlist()}学生成绩#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @ExamResults.plist()}学生成绩#{/a}
+        #{/elseif}
+        </li>
+    #{if usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+        <li><div class="note"><img src="@{'public/images/dang.gif'}"/></div>
+            #{a @GrowArchives.plist()}成长档案#{/a}
+        </li>
+        <li><div class="note"><img src="@{'public/images/zuji.gif'}"/></div>
+            #{a @GrowFootprints.plist()}成长足迹#{/a}
+        </li>
+    #{/if}
+
+        <li><div class="note"><img src="@{'public/images/gongg.gif'}"/></div>
+        #{a @SchoolNotices.list()}学校公告#{/a}
+
+        </li>
+        <li><div class="note"><img src="@{'public/images/tongz.gif'}"/></div>
+
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @ClassNotices.tlist()}班级通知#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @ClassNotices.plist()}班级通知#{/a}
+        #{/elseif}
+        </li>
+        <li><div class="note"><img src="@{'public/images/pingy.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @StudentComments.tlist()}学生评语#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @StudentComments.plist()}学生评语#{/a}
+        #{/elseif}
+
+        </li>
+    *{<li><div class="note"><img src="@{'public/images/zhann.gif'}"/></div>}*
+    *{<a href="/userCenter/innerLetterList.action">我的站内信</a>}*
+    *{</li>}*
+
+        <li><div class="note"><img src="@{'public/images/xiaof.gif'}"/></div>
+        #{if usertype==com.arj.ziguiw.common.UserBaseType.TEACHER}
+            #{a @ConsumptionRecords.tlist()}一卡通消费查询#{/a}
+        #{/if}
+        #{elseif usertype==com.arj.ziguiw.common.UserBaseType.PARENT || usertype==com.arj.ziguiw.common.UserBaseType.STUDENT }
+            #{a @ConsumptionRecords.plist()}一卡通消费查询#{/a}
+        #{/elseif}
+        </li>
+
+    </ul>
+</div>
+<!--菜单结束!-->
+
+<!--信息展示!-->
+<div class="a_show">
+    #{if request.action == "Application.index"}
+        #{doLayout /}
+    #{/if}
+    #{else }
+        <div class="shuzi">
+            #{doLayout /}
+        </div>
+    #{/else}
+
+</div>
+
+<div class="clear"></div>
+</div>
+<div class="p_all">
+    <div class="p_flink">
+        <p>
+            <a href="${play.configuration['portal.domain']}/HelpCenters/aboutus" target="_blank">关于我们</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/contract" target="_blank">服务协议</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/service" target="_blank">客服中心</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/feedback" target="_blank">意见反馈</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/recruit" target="_blank">网站招聘</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/map" target="_blank">网站地图</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/contact" target="_blank">联系我们</a>|
+            <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+            <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/copyright" target="_blank">版权所有</a>|
+            <a href="${play.configuration['portal.domain']}/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+        </p>
+    </div>
+
+    <div class="p_logo">
+        <p>
+            Copyright  ©  2013 <a href="http://www.ziguiw.com">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a>
+        </p>
+        <p>
+            经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a>
+            <!-- WPA Button Begin -->
+            <script src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&amp;type=2&amp;kfuin=4009952116&amp;ws=www.ziguiw.com&amp;btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&amp;aty=0&amp;a=&amp;key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb" type="text/javascript"></script><iframe id="iframediv1365665871988" scrolling="no" frameborder="0" width="102" height="24" allowtransparency="true" src="about:blank"></iframe>
+        <!-- WPA Button END -->
+        </p>
+        <img src="@{'public/images/p_logo.gif'}" />
+    </div>
+</div>
+</body>
+</html>

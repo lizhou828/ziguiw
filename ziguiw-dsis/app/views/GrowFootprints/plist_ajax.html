@@ -1,0 +1,55 @@
+<table width="729" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td class="t1 font-2">
+            时间
+        </td>
+        <td class="t1 font-2">
+            活动名称
+        </td>
+        <td class="t1 font-2">
+            结果
+        </td>
+        <td class="t1 font-2">
+             地点
+        </td>
+
+        <td class="t1 font-2">
+            操作
+        </td>
+    </tr>
+    #{if growFootprintPage != null &&  growFootprintPage.data != null && growFootprintPage.data.size() != 0}
+        #{list items:growFootprintPage.data,as:'data'}
+        <tr>
+            <td>
+            ${data.createTime ? new java.text.SimpleDateFormat("yyyy-mm-dd").format(data.createTime) : null}
+            </td>
+
+            <td class="t2">
+                 ${data.title}
+            </td>
+            <td class="t2">
+                ${data.result}
+            </td>
+            <td>
+                  ${data.place}
+            </td>
+            <td>
+                <a href="/GrowFootprints/pShow?id=${data.id}" class="icon16">编辑</a>
+                <a href="/GrowFootprints/pDelete?id=${data.id}" class="icon16">删除</a>
+            </td>
+        </tr>
+        #{/list}
+    #{/if}
+    #{else }
+    <tr>
+        没有找到相关记录!
+    </tr>
+    #{/else}
+
+
+    </tbody>
+</table>
+<div class="pageNav">
+#{page page : growFootprintPage, url : "/GrowFootprints/plist", paramIds : "xsId startTime endTime", isAjax : "true"/}
+</div>

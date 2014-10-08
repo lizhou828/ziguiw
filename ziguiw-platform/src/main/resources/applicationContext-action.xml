@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="byName">
+
+	<context:annotation-config/>
+	
+	<bean id="performanceInterceptor" class="com.zigui.utils.PerformanceMonitorInterceptor"></bean>
+	
+	<bean id="newsChannleAction" class="com.zigui.action.NewsChannleAction" scope="prototype"/>
+	
+	<bean id="newsChannleManagerAction" class="com.zigui.action.NewsChannleManagerAction" scope="prototype"/>
+	
+	<bean id="newsRecommendRegionAction" class="com.zigui.action.NewsRecommendRegionAction" scope="prototype"/>
+	
+	<bean id="newsAction" class="com.zigui.action.NewsAction" scope="prototype"/>
+	
+	<bean id="templateAction" class="com.zigui.action.TemplateAction" scope="prototype"/>
+	
+	<bean id="newsPageAction" class="com.zigui.action.NewsPageAction" scope="prototype"/>
+	
+	<bean id="imageUpload" class="com.zigui.action.ImageUpload" scope="prototype"/>
+	
+	<bean id="kdImgUpload" class="com.zigui.action.KdImgUpload" scope="prototype"/>
+	
+	<bean id="searchAction" class="com.zigui.action.SearchAction" scope="prototype"/>
+	
+	<bean id="userAction" class="com.zigui.action.UserAction" scope="prototype"/>
+	<bean id="userDiaryAction" class="com.zigui.action.UserDiaryAction" scope="prototype"/>
+	<bean id="userMoodAction" class="com.zigui.action.UserMoodAction" scope="prototype"/>
+	<bean id="userAlbumAction" class="com.zigui.action.UserAlbumAction" scope="prototype"/>
+	<bean id="userPhotoAction" class="com.zigui.action.UserPhotoAction" scope="prototype"/>
+	<bean id="userMessageAction" class="com.zigui.action.UserMessageAction" scope="prototype"/>
+	<bean id="userCommentAction" class="com.zigui.action.UserCommentAction" scope="prototype"/>
+	<bean id="spaceVisitHistoryAction" class="com.zigui.action.SpaceVisitHistoryAction" scope="prototype"/>
+	<bean id="userFriendAction" class="com.zigui.action.UserFriendAction" scope="prototype"/>
+	
+	<bean id="questionAction" class="com.zigui.action.QuestionAction" scope="prototype"/>
+	<bean id="answerAction" class="com.zigui.action.AnswerAction" scope="prototype"/>
+	<bean id="pageAction" class="com.zigui.action.PageAction" scope="prototype"/>
+	
+	<bean id="roleAction" class="com.zigui.action.RoleAction" scope="prototype"/>
+	<bean id="authorityAction" class="com.zigui.action.AuthorityAction" scope="prototype"/>
+	<bean id="administratorAction" class="com.zigui.action.AdministratorAction" scope="prototype"/>
+	
+	<bean id="dataFunctionAction" class="com.zigui.action.DataFunctionAction" scope="prototype"/>
+	
+	<bean id="templatePreviewAction" class="com.zigui.action.TemplatePreviewAction" scope="prototype">
+		<property name="templateLoaderService">
+			<ref bean="stringTemplateLoaderService"></ref>
+		</property>
+	</bean>
+	
+	<!-- knowledge -->
+	<bean id="knowledgeChannleAction" class="com.zigui.action.KnowledgeChannleAction" scope="prototype"/>
+	
+	<bean id="knowledgeChannleManagerAction" class="com.zigui.action.KnowledgeChannleManagerAction" scope="prototype"/>
+	
+	<bean id="knowledgeRecommendRegionAction" class="com.zigui.action.KnowledgeRecommendRegionAction" scope="prototype"/>
+	
+	<bean id="knowledgeAction" class="com.zigui.action.KnowledgeAction" scope="prototype"/>
+	
+	<bean id="debateAction" class="com.zigui.action.DebateAction" scope="prototype"/>
+	
+	<bean id="debateOpinionAction" class="com.zigui.action.DebateOpinionAction" scope="prototype"/>
+
+    <!-- community -->
+    <bean id="boardAction" class="com.zigui.action.BoardAction" scope="prototype"/>
+    
+    <bean id="forumAction" class="com.zigui.action.ForumAction" scope="prototype"/>
+    
+    <bean id="baseAction" class="com.zigui.action.BaseAction" scope="prototype"/>
+    
+    <bean id="commonAction" class="com.zigui.action.CommonAction" scope="prototype"/>
+    
+    <bean id="loveAction" class="com.zigui.action.LoveAction" scope="prototype"/>
+    
+    <bean id="adAction" class="com.zigui.action.AdAction" scope="prototype"/>
+    
+    <bean id="adPlanAction" class="com.zigui.action.AdPlanAction" scope="prototype"/>
+    
+    <bean id="configCenterAction" class="com.zigui.action.ConfigCenterAction" scope="prototype"/>
+    
+    <bean id="bussnissDataAction" class="com.zigui.action.BussnissDataAction" scope="prototype"/>
+    
+    <bean id="healthArchivesAction" class="com.zigui.action.HealthArchivesAction" scope="prototype"/>
+
+    <bean id="commonTypeAction" class="com.zigui.action.CommonTypeAction" scope="prototype"/>
+    
+    <bean id="growArchivesAction" class="com.zigui.action.GrowArchivesAction" scope="prototype"/>
+    
+    <bean id="growFootmarkAction" class="com.zigui.action.GrowFootmarkAction" scope="prototype"/>
+    
+    <bean id="homeWorkAction" class="com.zigui.action.HomeWorkAction" scope="prototype"/>
+    
+    <bean id="commonMessageAction" class="com.zigui.action.CommonMessageAction" scope="prototype"/>
+    
+    <bean id="baseDataAction" class="com.zigui.action.BaseDataAction" scope="prototype"/>
+    <bean id="stringTemplateLoaderService" class="com.zigui.service.impl.StringTemplateLoaderServiceImpl"/>
+
+    <bean id="schoolListAction" class="com.zigui.action.SchoolListAction"/>
+    <bean id="classAction" class="com.zigui.action.ClazzAction"/>
+    <bean id="classInfoAction" class="com.zigui.action.ClassInfoAction"/>
+    <bean id="classPhotoAction" class="com.zigui.action.ClassPhotoAction"/>
+    <bean id="classForumAction" class="com.zigui.action.ClassForumAction"/>
+
+    <bean id="newsAuditAction" class="com.zigui.action.NewsAuditAction" scope="prototype">
+        <property name="newsExService" ref="newsExService"/>
+        <property name="newsService" ref="newsService"/>
+    </bean>
+    
+    <bean id="classNewsAction" class="com.zigui.action.ClassNewsAction" scope="prototype">
+        <property name="classInfoService" ref="classInfoService"/>
+        <property name="classService" ref="clazzService"/>
+        <property name="schoolService" ref="schoolService"/>
+    </bean>
+
+    <bean id="schoolNewsAction" class="com.zigui.action.SchoolNewsAction" scope="prototype"/>
+    <bean id="testAction" class="com.zigui.action.TestAction" scope="prototype"/>
+</beans>

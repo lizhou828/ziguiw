@@ -1,0 +1,26 @@
+<table width="729" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td class="t1">考试名称</td>
+        <td class="t1">学生姓名</td>
+        <td class="t1">总分</td>
+    </tr>
+    #{if page == null || page.data == null || page.data.size() == null}
+        没有相关记录！
+    #{/if}
+    #{else }
+        #{list items:page.data,as:'data'}
+            <tr>
+                <td class="t1">${data['texamination']['examName']}</td>
+                <td class="t1">${data['tstudent']['xsXming']}</td>
+                <td class="t1">${data['totalScore']}</td>
+            </tr>
+        #{/list}
+    #{/else}
+
+    </tbody>
+</table>
+
+<div class="pageNav">
+#{page page : page, url : "/ExamResults/tlist", paramIds : "bjId termId examId", isAjax : "true"/}
+</div>
