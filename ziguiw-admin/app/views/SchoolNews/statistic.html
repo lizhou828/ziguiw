@@ -1,0 +1,81 @@
+#{extends 'main.html' /}
+#{stylesheet src:'crud.css'/}
+#{script src:'My97DatePicker/WdatePicker.js'/}
+<style type="text/css">
+    #crud #crudContent table th {
+        color: #000;
+        font-weight: bold;
+    }
+</style>
+
+<script type="text/javascript">
+    function expCSV() {
+        document.getElementById("exp").value = "1";
+        document.getElementById("form").submit();
+    }
+
+    function search() {
+        document.getElementById("exp").value = "0";
+        document.getElementById("form").submit();
+    }
+</script>
+
+<div id="crud">
+    <div id="crudContent">
+
+        <div id="crudList">
+
+            <h2 id="crudListTitle">统计所有新闻公告</h2>
+
+            <div id="crudListSearch">
+                <form id="form" action="/schoolnews/statistic" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+                    <input name="startTime" style="width: 100px" value="${startTime}" type="text" onClick="WdatePicker()"/>
+                    -
+                    <input name="endTime" style="width: 100px" value="${endTime}" type="text" onClick="WdatePicker()"/>
+                    <select name="status">
+                        #{list items:com.arj.ziguiw.common.Status.map, as:'state'}
+                            <option #{if status == state.key} selected #{/if} value="${state.key}">${state.value}</option>
+                        #{/list}
+                    </select>
+                    <input type="button" onclick="search();" value="查询">
+                    <input type="hidden" name="exp" id="exp" value="0">
+                    <input type="button" onclick="expCSV();" value="导出csv">
+                </form>
+            </div>
+
+            <div id="crudListTable">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>学校</th>
+                        <th>时间</th>
+                        <th>总篇数</th>
+                        <th>原创校园新闻</th>
+                        <th>转载校园新闻</th>
+                        <th>班级新闻/公告</th>
+                        <th>学习园地</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    #{list items:list, as:'map'}
+                        #{if map['zs']!="0"}
+                            <tr class="odd">
+                                <td>${map['sname']}</td>
+                                <td>${startTime} - ${endTime}</td>
+                                <td>${map['zs']}</td>
+                                <td>${map['yc']}</td>
+                                <td>${map['zz']}</td>
+                                <td>${map['gg']}</td>
+                                <td>${map['xxyd']}</td>
+                            </tr>
+                        #{/if}
+                    #{/list}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

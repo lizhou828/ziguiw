@@ -1,0 +1,45 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:['boardName', 'parentBoard', 'explains', 'bulletin']}
+
+            #{crud.custom 'parentBoard'}
+                <label for="object_parentBoard">父版区名称</label>
+                <select  id="object_parentBoard" name="object.parentBoard.id">
+                    <option selected="selected">选择父版块</option>
+                %{
+                    models.Board.findParentBoard().each(){
+                    }%
+                    <option value="${it.id}">${it.boardName}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+
+            #{crud.custom 'explains'}
+                <label for="object_explains">版块说明</label>
+                <textarea rows="5" cols="80" id="object_explains" name="object.explains"></textarea>
+            #{/crud.custom}
+
+            #{crud.custom 'bulletin'}
+                <label for="object_bulletin">版块说明</label>
+                <textarea rows="5" cols="80" id="object_bulletin" name="object.bulletin"></textarea>
+            #{/crud.custom}
+
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

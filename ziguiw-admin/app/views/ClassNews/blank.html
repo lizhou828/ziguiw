@@ -1,0 +1,12 @@
+﻿      function findQx(){
+                var region_id = $("#city").val();
+                var city =  $("#city").find("option:selected").text();
+                $.post("index.php?app=service&act=findQx",{region_id:region_id,city:city},function(data){
+                      var d = data.region;
+                      $("#quxian").empty();
+                      $("#quxian").append("<option>请选择</option>");
+                      for(var i=0;i< d.length;i++) {
+                          $("#quxian").append("<option value='" + d[i].region_id +"'>" + d[i].region_name + "</option>");
+                      }
+                },'json')
+          }

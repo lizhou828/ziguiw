@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/admin.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+        <div class="left">
+            <a href="@{Application.index}" target="_self" class="logo">
+                <img src="@{'public/images/logo.gif'}" alt="ZIGUICMD管理后台" width="155">
+            </a>
+            <div class="sidebar">
+                <ul>
+                #{list items:menus, as:'menu'}
+                    #{if (menu.parentId+"").equals(parentMenuId)}
+                     <li>
+                        <a href="${menu.url}" target="_self">${menu.name}</a>
+                    </li>
+                    #{/if}
+                #{/list}
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="head">
+                <p class="r a-r t-tips">
+                    <a href="http://www.ziguiw.com" target="_blank">网站首页</a>|[<a href="/Administrators/logout">退出管理中心</a>]
+                </p>
+                <ul id="nav">
+                #{list items:menus, as:'menu'}
+                    #{if menu.parentId == -1}
+                    <li>
+                        <a href="/?parentMenuId=${menu.id}" target="_self"><span>${menu.name}</span></a>|
+                    </li>
+                    #{/if}
+                #{/list}
+                </ul>
+            </div>
+            #{doLayout /}
+        </div>
+    </body>
+
+    *{<script src="@{'/public/noty/jquery-1.7.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/noty/jquery.noty.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/noty/bottomRight.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/noty/default.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script>
+       function genericNoty(message) {
+           noty({
+               text: message,
+               type: 'alert',
+               dismissQueue: true,
+               layout: "bottomRight",
+               theme: 'defaultTheme'
+           });
+       }
+       setInterval(function() {
+           $.ajax({
+               url: "/Administrators/noty",
+               cache: false,
+               success: function(data){
+                   if (data !='' && data != 'NULL' && data != 'null') {
+                       genericNoty(data);
+                   }
+               }
+           });
+       }, 2000);
+    </script>}*
+</html>

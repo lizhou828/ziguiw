@@ -1,0 +1,111 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', com.arj.ziguiw.common.SchoolPhotoType.map.get(photoType)) /}
+
+<div id="crudList" class="${type.name}">
+
+    <h2 id="crudListTitle">&{'crud.list.title', com.arj.ziguiw.common.SchoolPhotoType.map.get(photoType)}</h2>
+
+    <div id="crudListSearch">
+    #{crud.search /}
+    </div>
+
+<div id="crudListTable">
+#{if photoType == com.arj.ziguiw.common.SchoolPhotoType.PHOTO}
+    #{crud.table fields:['id' ,'title', 'status', 'url' ,'user','createTime', 'className', 'schoolName']}
+        #{crud.custom 'title'}
+            <a href="@{show(object.id)}">
+            ${object.title?.length() > 20 ? object?.title[0..20] + '..' : object.title}
+            </a>
+        #{/crud.custom}
+        #{crud.custom 'status'}
+            #{if object.status == com.arj.ziguiw.common.Status.OK}
+                <div style="color: green">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/if}
+            #{elseif object.status == com.arj.ziguiw.common.Status.FAIL}
+                <div style="color: red">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/elseif}
+            #{elseif object.status == com.arj.ziguiw.common.Status.DELETED}
+                <div style="color: #000000;">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/elseif}
+            #{else }
+                <div style="color: blue;">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/else}
+        #{/crud.custom}
+        #{crud.custom 'user'}
+        ${object.user?.nickName}
+        #{/crud.custom}
+        #{crud.custom 'url'}
+            <img src="${object.url ==null ? object.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(object.url,com.arj.ziguiw.common.ImageSize.SKL)}" height="100px" width="100px">
+        #{/crud.custom}
+    #{/crud.table}
+</div>
+
+    <div id="crudListPagination">
+        #{crud.pagination /}
+    </div>
+
+    <p id="crudListAdd">
+        <a href="@{blank()}">新增班级照片</a>
+    </p>
+#{/if}
+#{else }
+    #{crud.table fields:[ 'id','title', 'status', 'cover','user','createTime','className', 'schoolName']}
+        #{crud.custom 'title'}
+            <a href="@{show(object.id)}">
+            ${object.title?.length() > 20 ? object?.title[0..20] + '..' : object.title}
+            </a>
+        #{/crud.custom}
+        #{crud.custom 'user'}
+        ${object.user?.nickName}
+        #{/crud.custom}
+        #{crud.custom 'status'}
+            #{if object.status == com.arj.ziguiw.common.Status.OK}
+                <div style="color: green">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/if}
+            #{elseif object.status == com.arj.ziguiw.common.Status.FAIL}
+                <div style="color: red">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/elseif}
+            #{elseif object.status == com.arj.ziguiw.common.Status.DELETED}
+                <div style="color: #000000;">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/elseif}
+            #{else }
+                <div style="color: blue;">
+                ${com.arj.ziguiw.common.Status.map.get(object.status)}
+                </div>
+            #{/else}
+        #{/crud.custom}
+        #{crud.custom 'cover'}
+            #{if object.cover == null}
+                <img src="@{'public/images/noimg_120X155.jpg'}"  width="100px" height="100px">
+            #{/if}
+            #{else }
+                <img src="${object.cover == null ? object.cover : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(object.cover,com.arj.ziguiw.common.ImageSize.SKL)}" height="100px" width="100px">
+            #{/else}
+        #{/crud.custom}
+    #{/crud.table}
+
+</div>
+
+<div id="crudListPagination">
+    #{crud.pagination /}
+</div>
+
+<p id="crudListAdd">
+    <a href="@{blank()}">新增班级视频</a>
+</p>
+#{/else}
+</div>

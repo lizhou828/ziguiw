@@ -1,0 +1,88 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'查询年费—数字化校园—子贵网后台' /}
+#{script 'SchoolClassStudent.js'/}
+
+<div id="crudList">
+
+    <script type="text/javascript">
+        $(function(){
+            $("#submitButton").click(function(){
+                var xxId = $("#xxId").val();
+                var bjId = $("#bjId").val();
+                var xsId = $("#xsId").val();
+                var termId = $("#termId").val();
+                if( xxId == 0){
+                   alert("您还未选择学校！");
+                    return false;
+                }
+                if(bjId == -1){
+                    alert("该学校没有班级可选!");
+                    return false;
+                }
+                if(bjId == 0  ){
+                    alert("您还未选择班级!");
+                    return false;
+                }
+                $.ajax({
+                    type:"GET",
+                    url:"/AnnualFees/queryList?bjId="+bjId+"&xsId="+xsId+"&termId="+termId,
+                    beforeSend : function(){
+                        $("#listTable").html("<img src='/public/images/loading.gif'/>");
+                    },
+                    success : function(result){
+                        $("#listTable").html(result);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+    <h2 id="crudListTitle">查询年费</h2>
+    <div id="crudListSearch">
+        </br>
+        学&nbsp;校:<select id="xxId" onchange="getClasses(this);">
+                     <option value="0">-请选择-</option>
+                    %{
+                        List schools =  models.School.findAll();
+                        schools.each {
+                    }%
+                        <option  name="xxId" value="${it.xxId}">${it.name}</option>
+                    %{
+                        }
+                    }%
+                     </select>
+        &nbsp;&nbsp;
+        班&nbsp;级:<select id="bjId" name="bjId" onchange="getStudent(this)">
+                    </select>
+        &nbsp;&nbsp;
+        学&nbsp;生:<select id="xsId" name ="xsId" >
+                    </select>
+        &nbsp;&nbsp;
+        <input type="button" id="submitButton" value="查询">
+        <br/>
+        <br/>
+    </div>
+
+    <div id="crudListTable">
+        <div id="listTable">
+            #{crud.table fields:[ 'id','orderNo','payMethod', 'price','student','payDate']}
+                #{crud.custom 'orderNo'}
+                    <a href="@{show(object.id)}">${object.orderNo}</a>
+                #{/crud.custom}
+                #{crud.custom 'payMethod'}
+                    ${com.arj.ziguiw.common.PayMethod.map.get(object.payMethod)}
+                #{/crud.custom}
+                #{crud.custom 'price'}
+                    ${object.price}元
+                #{/crud.custom}
+            #{/crud.table}
+        <div id="crudListPagination">
+        #{crud.pagination /}
+        </div>
+        </div>
+
+    </div>
+
+
+
+</div>

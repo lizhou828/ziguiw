@@ -1,0 +1,89 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<script type="text/javascript">
+    function getClasses(obj){
+        $("#object_classId").empty();
+        var xxId = obj.value;
+        $.get("/Schools/clazz", {xxId : xxId}, function (data){
+            for (var i = 0; i < data.length; i++) {
+                $("#object_classId").append("<option value='" + data[i].id +"'>" + data[i].name + "</option>");
+            }
+        });
+    }
+</script>
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','url','type','state','xxId','classId','description','content','reprinted']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content" /}
+            #{/crud.custom }
+            #{crud.custom 'url'}
+                <label for="object_url">推荐图片</label>
+                <input id = "object_url" type="file" name="file">
+            #{/crud.custom}
+            #{crud.custom 'reprinted'}
+                <label for="object_reprinted">是否转载</label>
+                <select name="object.reprinted" id="object_reprinted">
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.NO}">否</option>
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.YES}">是</option>
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'state'}
+                <label for="object_state">状态</label>
+                <select name="object.state" id="object_state">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}">${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'type'}
+                <label for="object_type">类型</label>
+                <select name="object.type" id="object_type">
+                %{
+                    com.arj.ziguiw.common.ClassNewType.map.each {
+                    }%
+                    <option name="object.type" value="${it.key}">${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+
+            #{crud.custom 'xxId'}
+                <label id="object_xxId">学校</label>
+                <select name="object.xxId" id="object_xxId" onchange="getClasses(this);">
+                %{
+                    List schools =  models.School.findAll();
+                    schools.each {
+                    }%
+                    <option id="object_xxId" name="object.xxId" value="${it.xxId}">${it.name}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+
+            #{crud.custom 'classId'}
+                <label for="object_classId">班级</label>
+                <select name="object.classId" id="object_classId">
+            </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+</div>

@@ -1,0 +1,51 @@
+#{stylesheet src:'crud.css'/}
+<style type="text/css">
+    #crudListTable table td,th {
+        font-size: 12px;
+        font-family:\5b8b\4f53;
+    }
+</style>
+<div id="crud">
+#{if flash.success}
+    <div class="crudFlash flashSuccess">
+    ${flash.success}
+    </div>
+#{/if}
+#{if flash.error || error}
+    <div class="crudFlash flashError">
+    ${error ?: flash.error}
+    </div>
+#{/if}
+
+    <div id="crudContent" style="font-size: 12px">
+        <div id="crudList" class="${type.name}">
+            <div id="crudListTable">
+            #{crud.table fields:['id', 'title', 'area', 'createUserName', 'createTime', 'url'], displayNames:["ID", "标题", "推荐区域", "创建人", "创建时间", "操作"]}
+                #{crud.custom 'title'}
+                    <a href="@{show(object.id)}">
+                    ${object.title?.length() > 50 ? object.title[0..20] + '..' : object.title}
+                    </a>
+                #{/crud.custom}
+
+                #{crud.custom 'area'}
+                ${com.arj.ziguiw.common.RecommendArea.map.get(object.area)}
+                #{/crud.custom}
+
+                #{crud.custom 'createTime'}
+                ${object.createTime.format("yyyy-MM-dd hh:mm:ss")}
+                #{/crud.custom}
+
+                #{crud.custom 'url'}
+                    <a href="@{delete(object.id)}">删除</a>
+                #{/crud.custom}
+            #{/crud.table}
+            </div>
+
+            <div id="crudListPagination">
+            #{crud.pagination /}
+            </div>
+
+        </div>
+    </div>
+
+</div>

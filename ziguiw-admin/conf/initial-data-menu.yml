@@ -1,0 +1,205 @@
+Menu(1):
+  id: 1
+  name: 系统管理
+
+Menu(11):
+  id: 11
+  name: 修改密码
+  parentId: 1
+
+Menu(12):
+  id: 12
+  name: 用户管理
+  parentId: 1
+  url: /UserBases/list
+
+Menu(13):
+  id: 13
+  name: 菜单管理
+  parentId: 1
+  url: /Menus/list
+
+Menu(14):
+  id: 14
+  name: 刷新缓存
+  parentId: 1
+  url: /Application/flushCache
+
+Menu(2):
+  id: 2
+  name: 资讯类
+
+Menu(21):
+  id: 21
+  name: 新闻频道管理
+  parentId: 2
+  url : /NewsChannels/list
+
+Menu(22):
+  id: 22
+  name: 新闻管理
+  parentId: 2
+  url : /Newses/list
+
+Menu(23):
+  id: 23
+  name: 知识频道管理
+  parentId: 2
+  url : /KnowledgeChannels/list
+
+
+Menu(24):
+  id: 24
+  name: 知识管理
+  parentId: 2
+  url : /Knowledges/list
+
+Menu(25):
+  id: 25
+  name: 提问管理
+  parentId: 2
+  url : /Questions/list
+
+Menu(26):
+  id: 26
+  name: 辩论管理
+  parentId: 2
+  url : /Debates/list
+
+Menu(3):
+  id: 3
+  name: 社区类
+
+Menu(31):
+  id: 31
+  name: 用户说说管理
+  parentId: 3
+  url : /UserMoods/list
+
+Menu(32):
+  id: 32
+  name: 用户日志管理
+  parentId: 3
+  url : /UserDiarys/list
+
+Menu(33):
+  id: 33
+  name: 用户照片管理
+  parentId: 3
+  url : /UserPhotos/list
+
+Menu(34):
+  id: 34
+  name: 论坛版块管理
+  parentId: 3
+  url : /Boards/list
+
+Menu(35):
+  id: 35
+  name: 论坛贴子管理
+  parentId: 3
+  url : /Forums/list
+
+Menu(4):
+  id: 4
+  name: 站内站
+
+Menu(41):
+  id: 41
+  name: 学校信息
+  parentId: 4
+  url : /SchoolExtends/list
+
+Menu(42):
+  id: 42
+  name: 校园动态/公告
+  parentId: 4
+  url : /SchoolNews/list
+
+Menu(43):
+  id: 43
+  name: 学校师资力量
+  parentId: 4
+  url : /SchoolTeachers/list
+
+Menu(44):
+  id: 44
+  name: 校园照片
+  parentId: 4
+  url :  /SchoolPhotos/list?photoType=0
+
+Menu(45):
+  id: 45
+  name: 校园视频
+  parentId: 4
+  url :  /SchoolPhotos/list?photoType=1
+
+Menu(46):
+  id: 46
+  name: 学习园地
+  parentId: 4
+  url : /SchoolXxyds/list
+
+Menu(47):
+  id: 47
+  name: 班级动态/公告
+  parentId: 4
+  url : /ClassNews/list
+
+Menu(48):
+  id: 48
+  name: 班级照片
+  parentId: 4
+  url : /ClassPhotos/list?where.type=0
+
+Menu(49):
+  id: 49
+  name: 班级视频
+  parentId: 4
+  url : /ClassPhotos/list?where.type=1
+
+Menu(50):
+  id: 50
+  name: 班级话题
+  parentId: 4
+  url : /ClassForums/list
+
+Menu(53):
+  id: 53
+  name: 站内站账户管理
+  parentId: 4
+  url : /SchoolAdmins/list
+
+Menu(5):
+  id: 5
+  name: 数字化校园
+
+Menu(51):
+    id: 51
+    name: 查询年费
+    parentId: 5
+
+Menu(52):
+    id: 52
+    name: 缴纳年费
+    parentId: 5
+
+Menu(6):
+  id: 6
+  name: 资源
+
+Menu(60):
+  id: 60
+  name: 资源管理
+  parentId: 6
+  url : /Resources/list
+
+Menu(7):
+  id: 7
+  name: 六月活动
+
+Menu(61):
+  id: 61
+  name: 活动照片
+  parentId: 7
+  url : /FatherActivitys/list

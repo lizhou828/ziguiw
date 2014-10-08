@@ -1,0 +1,4 @@
+2013-01-26 09:43 0,078: INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (com.arj.ziguiw.datasynch.TeacherClassScheduler:45) - begin execute com.arj.ziguiw.datasynch.TeacherClassScheduler!
+2013-01-26 10:19 30,859: INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (com.arj.ziguiw.datasynch.TeacherClassScheduler:45) - begin execute com.arj.ziguiw.datasynch.TeacherClassScheduler!
+2013-01-26 10:19 34,281: INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (com.arj.ziguiw.datasynch.TeacherClassScheduler:47) - userLastModifiedTime is:0
+2013-01-26 10:19 34,281: INFO [org.springframework.scheduling.quartz.SchedulerFactoryBean#0_Worker-5] (com.arj.ziguiw.datasynch.TeacherClassScheduler:70) - the rpc url is : http://10.0.1.55:8088/DSIS_zgw_syndata/synchon/teacherClass.htm?pages=1&pagesize=100

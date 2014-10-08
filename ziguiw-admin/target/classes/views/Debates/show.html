@@ -1,0 +1,40 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['title', 'description', 'positiveOpinion', 'negativeOpinion','state','openDays']}
+            #{crud.custom 'positiveOpinion'}
+                <label for="object_positiveOpinion">正方观点</label>
+                <textarea id="object_positiveOpinion" rows="5" cols="10" value="" class="textarea" type="text" name="object.positiveOpinion">${object.positiveOpinion}</textarea>
+            #{/crud.custom}
+
+            #{crud.custom 'negativeOpinion'}
+                <label for="object_negativeOpinion">反方观点</label>
+                <textarea id="object_negativeOpinion" rows="5" cols="10" value="" class="textarea" type="text" name="object.negativeOpinion">${object.negativeOpinion}</textarea>
+            #{/crud.custom}
+            #{crud.custom 'state'}
+                <label for="object_state">状态</label>
+                <select id = "object_state" name="object.state">
+                %{
+                    com.arj.ziguiw.common.Status.map.each{
+                    }%
+                    <option value="${it.key}" #{if object.state == it.key}selected=true#{/if} >${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

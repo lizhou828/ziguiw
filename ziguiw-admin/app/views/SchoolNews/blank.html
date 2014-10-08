@@ -1,0 +1,66 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:['content','title','url','type','status','school','reprinted']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content"/}
+            #{/crud.custom}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" id = "object_title" name="object.title" size="75" value="${object.title}">
+            #{/crud.custom}
+            #{crud.custom 'url'}
+                <label for="object_url">新闻封面照</label>
+                <input type="file" id = "object_url" name="file" size="75" >
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'type'}
+                <label for="object_type">类型</label>
+                <select name="object.type" id="object_type">
+                %{
+                    com.arj.ziguiw.common.SchoolNewsType.map.each {
+                    }%
+                    <option name="object.type" value="${it.key}" #{if object.type == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'reprinted'}
+                <label for="object_reprinted">是否转载</label>
+                <select name="object.reprinted" id="object_reprinted">
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.NO}">否</option>
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.YES}">是</option>
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'createTime'}
+                <label for="object_createTime">发布时间</label>
+                <input type="text" id="object_createTime" name="object.createTime"/>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

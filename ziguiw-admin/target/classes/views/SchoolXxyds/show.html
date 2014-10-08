@@ -1,0 +1,119 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'content','title','status','url','type','videoUrl','cause','describe']}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" id = "object_title" name="object.title" size="75" value="${object.title}">
+            #{/crud.custom}
+            #{crud.custom 'cause'}
+                <label for="object_cause">审核失败原因</label>
+                <textarea id="object_cause" name="object.cause" rows="5" cols="100">${object.cause}</textarea>
+            #{/crud.custom }
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content" ,value : object.content /}
+            #{/crud.custom }
+            #{crud.custom 'describe'}
+                <label for="object_describe">描述(如果要推荐，则必填)</label>
+                <textarea id="object_describe" name="object.describe" rows="5" cols="100">${object.describe}</textarea>
+            #{/crud.custom }
+            #{crud.custom 'url'}
+                <label for="object_url">新闻封面图</label>
+                <input type="file" name="file" id="object_url">
+                #{if object.url == null}
+                    <img src="@{'public/images/noimg_120X155.jpg'}" >
+                #{/if}
+                #{else }
+                    <img src="${object.url ==null ? object.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(object.url,com.arj.ziguiw.common.ImageSize.SKL)}" height="100px" width="100px">
+                #{/else}
+                #{a @deletePhoto(object.id)}删除该图片#{/a}
+            #{/crud.custom }
+            #{crud.custom 'type'}
+                <label for="object_type">类型</label>
+                <select name="object.type" id="object_type">
+                %{
+                    com.arj.ziguiw.common.SchoolXxydType.map.each {
+                    }%
+                    <option name="object.type" value="${it.key}" #{if object.type == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'videoUrl'}
+                <label for="object_videoUrl">视频</label>
+                #{if object.videoUrl != null}
+                    <script src="/public/flashplayer/flexpaper_flash.js"></script>
+                    <script src="/public/flashplayer/AC_RunActiveContent.js"></script>
+                    <script language="javascript">
+                        if (AC_FL_RunContent == 0) {
+                            alert("This page requires AC_RunActiveContent.js.");
+                        } else {
+                            AC_FL_RunContent(
+                                    'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                    'width', '465',
+                                    'height', '295',
+                                    'src', '/public/flashplayer/jcplayer',
+                                    'quality', 'high',
+                                    'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                    'align', 'middle',
+                                    'play', 'true',
+                                    'loop', 'true',
+                                    'scale', 'noScale',
+                                    'wmode', 'window',
+                                    'devicefont', 'false',
+                                    'id', 'jcplayer',
+                                    'bgcolor', '#ffffff',
+                                    'name', 'jcplayer',
+                                    'menu', 'true',
+                                    'allowFullScreen', 'true',
+                                    'allowScriptAccess','sameDomain',
+                                    'FlashVars', 'videoURL=${ctx}/${object.videoUrl}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222',
+                                    'movie', '/public/flashplayer/jcplayer',
+                                    'salign','TL'
+                            );
+                        }
+                    </script>
+                    <noscript>
+                        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="465" height="295" id="jcplayer" align="TL">
+                            <param name="allowScriptAccess" value="sameDomain" />
+                            <param name="FlashVars" value="videoURL=${ctx}/${object.videoUrl}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222"/>
+                            <param name="allowFullScreen" value="true" />
+                            <param name="salign" value="TL" />
+                            <param name="scale" value="noScale" />
+                            <param name="movie" value="/public/flashplayer/jcplayer.swf" />
+                            <param name="quality" value="high" />
+                            <param name="bgcolor" value="#ffffff" />
+                            <embed src="/public/flashplayer/jcplayer.swf" FlashVars="videoURL=${ctx}/${object.videoUrl}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222" quality="high" bgcolor="#ffffff" width="465" height="295" name="jcplayer" align="middle" salign="TL" scale="noScale" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                        </object>
+                    </noscript>
+                #{/if}
+                <input type="file" name="videoUrl" id="object_videoUrl">
+            #{/crud.custom }
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

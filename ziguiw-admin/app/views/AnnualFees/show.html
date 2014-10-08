@@ -1,0 +1,45 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'查询年费—数字化校园—子贵网后台' /}
+
+<div id="crudList">
+
+    <h2 id="crudListTitle">查询年费</h2>
+
+
+    <div id="crudListTable">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['orderNo','userBase','payMethod','price','payDate','student']}
+            #{crud.custom 'student'}
+                <label id="object_student">学生姓名</label>
+            ${object.student ? object.student : "未填写"}
+            #{/crud.custom}
+            #{crud.custom 'orderNo'}
+                <label id="object_orderNo">订单号</label>
+            ${object.orderNo }
+            #{/crud.custom}
+            #{crud.custom 'userBase'}
+            <label id="object_userBase">支付者</label>
+            ${object.userBase ? object.userBase : "未填写" }
+            #{/crud.custom}
+
+            #{crud.custom 'payMethod'}
+                <label for="object_payMethod">支付方式</label>
+                <select name="object_payMethod" id="object_payMethod">
+                %{
+                    com.arj.ziguiw.common.PayMethod.map.each {
+                    }%
+                    <option name="object.payMethod" value="${it.key}" #{if object.payMethod == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+</div>

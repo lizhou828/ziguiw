@@ -1,0 +1,47 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', com.arj.ziguiw.common.SchoolPhotoType.map.get(photoType)}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{if com.arj.ziguiw.common.SchoolPhotoType.PHOTO == photoType}
+            #{crud.form fields:['title','url','school','describe']}
+                #{crud.custom 'url'}
+                    <label for="object_url"> 图片 </label>
+                    <input type="file" name="file" id="object_url">
+                #{/crud.custom}
+                #{crud.custom 'describe'}
+                    <label for="object_describe">描述</label>
+                    <textarea id="object_describe" name="object.describe" rows="5" cols="100"></textarea>
+                #{/crud.custom }
+            #{/crud.form}
+        #{/if}
+        #{else }
+            #{crud.form fields:['title','url','cover','describe','school']}
+                #{crud.custom 'url'}
+                    <label for="object_url"> 视频 </label>
+                    <input type="file" name="file" id="object_url">
+                #{/crud.custom}
+                #{crud.custom 'describe'}
+                    <label for="object_describe">描述</label>
+                    <textarea id="object_describe" name="object.describe" rows="5" cols="100"></textarea>
+                #{/crud.custom }
+                #{crud.custom 'cover'}
+                    <label for="object_cover"> 视频封面图 </label>
+                    <input type="file" name="cover" id="object_cover">
+                #{/crud.custom}
+            #{/crud.form}
+        #{/else}
+        <input type="hidden" name="object.type" value="${photoType}">
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

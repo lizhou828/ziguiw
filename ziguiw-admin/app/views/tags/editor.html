@@ -1,0 +1,57 @@
+<link href="@{'public/editor/editor-pkg-min-datauri.css'}" rel="stylesheet"/>
+<link href="@{'public/editor/admin.css'}" rel="stylesheet"/>
+<script src="http://a.tbcdn.cn/s/kissy/1.2.0/??kissy-min.js,uibase-min.js,component-min.js,dd-min.js,overlay-min.js,editor-min.js"></script>
+<script src="@{'public/editor/editor-plugin-pkg-min.js'}"></script>
+<script src="@{'public/editor/connection-min.js'}"></script>
+<script src="@{'public/editor/json-min.js'}"></script>
+
+%{
+if (!_width) {
+    _width="100%";
+}
+}%
+
+<textarea id="${_id}"
+          name="${_name}"
+          tabindex="0"
+          style="width:${_width};height:400px;margin:0 auto;"
+          >
+${_value}
+</textarea>
+<script type="text/javascript">
+
+    KISSY.ready(function(S) {
+
+        S.use('editor', function() {
+            var KE = KISSY.Editor;
+            var cfg = {
+                attachForm:true,
+                baseZIndex:10000,
+                pluginConfig: {
+                    "image":{
+                        upload:{
+                            serverUrl:"/images/upload",
+                            surfix:"png,jpg,jpeg,gif",
+                            fileInput:"file",
+                            sizeLimit:3000,//k
+                            extraHtml:"<p style='margin-top:10px;'>"
+                        }
+                    }
+                }
+            };
+            window.editor2 = KE("#${_id}", S.clone(cfg)).use("elementpaths," +
+                    "sourcearea,preview," +
+                    "checkbox-sourcearea," +
+                    "separator," +
+                    "undo,separator," +
+                    "removeformat,font,format,separator," +
+                    "list,indent," +
+                    "justify,separator,link," +
+                    "image," +
+                    "smiley,separator,table,resize," +
+                    "draft," +
+                    "pagebreak,separator,maximize,dragupload");
+
+        });
+    });
+</script>

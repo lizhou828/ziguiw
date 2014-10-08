@@ -1,0 +1,54 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['content', 'title', 'newsChannel', 'descr', 'firstImage', 'state', 'lastModifyTime','editors']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content", value:object.content/}
+                <input type="checkbox" name="contentUrl" value="url">选择第一张图片为封面图
+            #{/crud.custom}
+
+            #{crud.custom 'lastModifyTime'}
+                <label for="object_lastModifyTime">发布时间</label>
+                <input id = "object_lastModifyTime" type="text" name="object.lastModifyTime" value="${object.lastModifyTime.format("yyyy-MM-dd")}">
+            #{/crud.custom}
+
+            #{crud.custom 'descr'}
+                <label for="object_descr">描述</label>
+                <textarea rows="8" cols="120" id="object_descr" name="object.descr">${object.descr}</textarea>
+                <span class="crudHelp">
+                    最大长度1000.
+                </span>
+            #{/crud.custom}
+            #{crud.custom 'firstImage'}
+                <label for="object_firstImage">新闻封面图</label>
+                <input id="object_firstImage" name="file" type="file" />
+                <img src="${ctx}/${object.firstImage}" width="100" height="100"/>
+            #{/crud.custom}
+            #{crud.custom 'state'}
+                <label for="object_state">状态</label>
+                <select id = "object_state" name="object.state">
+                %{
+                    com.arj.ziguiw.common.Status.map.each{
+                }%
+                    <option value="${it.key}" #{if object.state == it.key}selected=true#{/if} >${it.value}</option>
+                %{
+                    }
+                }%
+                </select>
+            #{/crud.custom}
+
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

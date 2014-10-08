@@ -1,0 +1,47 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['content', 'title', 'knowledgeChannel', 'subtitle', 'keywords', 'description', 'firstImage','editors','province','city','state']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content", value:object.content/}
+            #{/crud.custom}
+
+            #{crud.custom 'descr'}
+                <label for="object_description">描述</label>
+                <textarea rows="8" cols="120" id="object_description" name="object.description"></textarea>
+            #{/crud.custom}
+            #{crud.custom 'firstImage'}
+                <label for="object_firstImage">新闻封面图</label>
+                <input id="object_firstImage" name="file" type="file" />
+                <img src="${ctx}/${object.firstImage}" width="50" height="50"/>
+            #{/crud.custom}
+            #{crud.custom 'state'}
+                <label for="object_state">状态</label>
+                <select id = "object_state" name="object.state">
+                %{
+                    com.arj.ziguiw.common.Status.map.each{
+                }%
+                    <option value="${it.key}" #{if object.state == it.key}selected=true#{/if} >${it.value}</option>
+                %{
+                    }
+                }%
+                </select>
+            #{/crud.custom}
+
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+
+    </div>
+
+</div>

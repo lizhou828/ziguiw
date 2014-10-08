@@ -1,0 +1,43 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'name','photo','status','school']}
+            #{crud.custom 'photo'}
+                <label for="object_photo"> 照片 </label>
+                <input type="file" name="file" id="object_photo">
+                #{if object.photo == null}
+                    <img src="@{'public/images/noimg_120X155.jpg'}" >
+                #{/if}
+                #{else }
+                    <img src="${ctx}/${object.photo}" height="200px" width="200px">
+                #{/else}
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'school'}
+                <label for="object_school">学校</label>
+                <input id="object_school" name="object.school" value="${object.school.name}" readonly="true" />
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+        <input type="hidden" name="object.school.id" value="${object.school.id}">
+    #{/form}
+    </div>
+
+</div>

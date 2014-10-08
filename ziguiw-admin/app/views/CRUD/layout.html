@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'}
+    #{stylesheet src:'crud.css'/}
+#{/set}
+
+#{if request.actionMethod != 'index'}
+<div id="crudBreadcrumb">
+    #{crud.navigation /}
+</div>
+#{/if}
+
+<div id="crud">
+
+    #{if flash.success}
+    	<div class="crudFlash flashSuccess">
+    		${flash.success}
+    	</div>
+    #{/if}
+    #{if flash.error || error}
+    	<div class="crudFlash flashError">
+    		${error ?: flash.error}
+    	</div>
+    #{/if}
+
+    <div id="crudContent">
+    	#{doLayout /}
+    </div>
+
+</div>

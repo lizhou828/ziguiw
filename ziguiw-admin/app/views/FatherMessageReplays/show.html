@@ -1,0 +1,30 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['content','mobile']}
+            #{crud.custom 'content'}
+                <label for="object_content">短信内容</label>
+                <textarea rows="3" cols="50" id="object_content">${object.content}</textarea>
+            #{/crud.custom}
+            #{crud.custom 'mobile'}
+                <label for="object_mobile">电话</label>
+                <input type="text" id = "object_mobile" size="75" value="${object.mobile}">
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save'}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue'}" />
+        </p>
+    #{/form}
+    </div>
+
+#{form @delete(object._key())}
+    <p class="crudDelete">
+        <input type="submit" value="&{'crud.delete', type.displayName}" />
+    </p>
+#{/form}
+
+</div>

@@ -1,0 +1,29 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'title', 'description', 'positiveOpinion', 'negativeOpinion', 'openDays']}
+            #{crud.custom 'positiveOpinion'}
+                <label for="object_positiveOpinion">正方观点</label>
+                <textarea id="object_positiveOpinion" rows="5" cols="10" value="" class="textarea" type="text" name="object.positiveOpinion"></textarea>
+            #{/crud.custom}
+
+            #{crud.custom 'negativeOpinion'}
+                <label for="object_negativeOpinion">反方观点</label>
+                <textarea id="object_negativeOpinion" rows="5" cols="10" value="" class="textarea" type="text" name="object.negativeOpinion"></textarea>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

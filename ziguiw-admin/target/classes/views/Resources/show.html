@@ -1,0 +1,47 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+        #{form action:@save(object._key()), enctype:'multipart/form-data'}
+            #{crud.form fields:['title',  'version', 'type',   'description','createTime','state','needPoint']}
+                #{crud.custom 'description'}
+                    <label for="object_description">描述</label>
+                    <textarea id="object_description" name="object.description" rows="10" cols="80">${object.description}</textarea>
+                #{/crud.custom}
+
+                #{crud.custom 'state'}
+                    <label for="object_state">状态</label>
+                    <select id = "object_state" name="object.state">
+                    %{
+                        com.arj.ziguiw.common.Status.map.each{
+                        }%
+                        <option value="${it.key}" #{if object.state == it.key}selected=true#{/if} >${it.value}</option>
+                    %{
+                        }
+                        }%
+                    </select>
+                #{/crud.custom}
+
+                #{crud.custom 'needPoint'}
+                    <label>赠送积分</label>
+                    <select name="points">
+                        <option value="0">请选择赠送积分</option>
+                        <option value="20">20积分</option>
+                        <option value="25">25积分</option>
+                        <option value="30">30积分</option>
+                        <option value="35">35积分</option>
+                        <option value="40">40积分</option>
+                        <option value="45">45积分</option>
+                        <option value="50">50积分</option>
+                    </select>
+                #{/crud.custom}
+            #{/crud.form}
+            <p class="crudButtons">
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            </p>
+        #{/form}
+    </div>
+
+</div>

@@ -1,0 +1,36 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'name','status','photo','school']}
+            #{crud.custom 'photo'}
+                <label for="object_photo"> 照片 </label>
+                <input type="file" name="file" id="object_photo">
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

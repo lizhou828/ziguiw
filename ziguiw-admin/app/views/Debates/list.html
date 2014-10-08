@@ -1,0 +1,45 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.displayName) /}
+<div id="crudList" class="${type.name}">
+
+
+    <h2 id="crudListTitle">&{'crud.list.title', type.displayName}</h2>
+
+    <div id="crudListSearch">
+    #{crud.search /}
+    </div>
+    <div id="crudListTable">
+    #{crud.table fields:['id', 'title', 'state', 'openDays', 'createTime'], displayNames:['ID', '标题']}
+        #{crud.custom 'id'}
+            <input type="checkbox" name="rid" value="${object.id}" />
+            <a href="@{show(object.id)}">
+            ${object.id}
+            </a>
+        #{/crud.custom}
+        #{crud.custom 'title'}
+            <a href="@{show(object.id)}">
+            ${object.title.length() > 50 ? object.title[0..20] + '..' : object.title}
+            </a>
+        #{/crud.custom}
+
+        #{crud.custom 'state'}
+        ${com.arj.ziguiw.common.Status.map.get(object.state)}
+        #{/crud.custom}
+
+        #{crud.custom 'createTime'}
+        ${object.createTime?.format("yyyy-MM-dd hh:mm:ss")}
+        #{/crud.custom}
+    #{/crud.table}
+
+    </div>
+
+    <div id="crudListPagination">
+    #{crud.pagination /}
+    </div>
+
+    <p id="crudListAdd">
+        <a href="@{blank()}">新增 ${type.displayName}</a>
+    </p>
+    <br/>
+    #{recommend url : "/Debates/recommend" /}
+</div>

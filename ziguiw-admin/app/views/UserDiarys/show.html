@@ -1,0 +1,39 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','text','description','state']}
+            #{crud.custom 'text'}
+                #{editor id:"object_text", name:"object.text", value:object.text/}
+            #{/crud.custom}
+            #{crud.custom 'descr'}
+                <label for="object_descr">描述</label>
+                <textarea rows="8" cols="120" id="object_descr" name="object.description"></textarea>
+            #{/crud.custom}
+            #{crud.custom 'state'}
+                <label for="object_state">状态</label>
+                <select id = "object_state" name="object.state">
+                %{
+                    com.arj.ziguiw.common.Status.map.each{
+                }%
+                    <option value="${it.key}" #{if object.state == it.key}selected=true#{/if} >${it.value}</option>
+                %{
+                    }
+                }%
+                </select>
+            #{/crud.custom}
+
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

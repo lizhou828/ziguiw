@@ -1,0 +1,55 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.displayName) /}
+
+<div id="crudList" class="${type.name}">
+
+    <h2 id="crudListTitle">&{'crud.list.title', type.displayName}</h2>
+
+    <div id="crudListSearch">
+    #{crud.search /}
+    </div>
+
+    <div id="crudListTable">
+    #{crud.table fields:[ 'id','title','state','schoolName','className','createTime'],}
+        #{crud.custom 'title'}
+            <a href="@{show(object.id)}">
+            ${object.title}
+            </a>
+        #{/crud.custom}
+        #{crud.custom 'createTime'}
+        ${object.createTime.format("yyyy-MM-dd")}
+        #{/crud.custom}
+        #{crud.custom 'state'}
+            #{if object.state == com.arj.ziguiw.common.Status.OK}
+                <div style="color: green">
+                ${com.arj.ziguiw.common.Status.map.get(object.state)}
+                </div>
+            #{/if}
+            #{elseif object.state == com.arj.ziguiw.common.Status.FAIL}
+                <div style="color: red">
+                ${com.arj.ziguiw.common.Status.map.get(object.state)}
+                </div>
+            #{/elseif}
+            #{elseif object.state == com.arj.ziguiw.common.Status.DELETED}
+                <div style="color: #000000;">
+                ${com.arj.ziguiw.common.Status.map.get(object.state)}
+                </div>
+            #{/elseif}
+            #{else }
+                <div style="color: blue;">
+                ${com.arj.ziguiw.common.Status.map.get(object.state)}
+                </div>
+            #{/else}
+        #{/crud.custom}
+    #{/crud.table}
+    </div>
+
+    <div id="crudListPagination">
+    #{crud.pagination /}
+    </div>
+
+    <p id="crudListAdd">
+        <a href="@{blank()}">新增</a>
+    </p>
+
+</div>

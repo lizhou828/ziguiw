@@ -1,0 +1,49 @@
+#{stylesheet src:'crud.css'/}
+<style type="text/css">
+    form {
+        font-size: 12px;
+        font-family:\5b8b\4f53;
+    }
+</style>
+#{set title:messages.get('crud.show.title', type.displayName) /}
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields : ['area', 'title', 'url', 'link', 'description', 'createUserName', 'createTime']}
+            #{crud.custom 'area'}
+                <label for="object_area">推荐区域</label>
+                <select id="object_area" name="object.area">
+                    #{list items:com.arj.ziguiw.common.RecommendArea.map, as:'area'}
+                        <option value="${area.key}" #{if area.key == object.area}selected="true" #{/if} >${area.value}</option>
+                    #{/list}
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'url'}
+                <label>图片：</label>
+                #{if object.url}
+                    <img src="${ctx}/${object.url}" width="100" height="100"/>
+                    <input name="object.url" value="${object.url}" size="50">
+                #{/if}
+                #{else }
+                    <input name="object.url" value="${object.url}" size="50">
+                #{/else}
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+#{form @delete(object._key())}
+    <p class="crudDelete">
+       *{ <input type="submit" value="&{'crud.delete', type.displayName}" />}*
+        <input type="button" value="返回" onclick="history.go(-1)"/>
+    </p>
+#{/form}
+
+</div>

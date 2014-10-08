@@ -1,0 +1,65 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','displayName','contact','schoolName','bj','age','email','url','status']}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" id = "object_title" size="75" value="${object.title}" >
+            #{/crud.custom}
+            #{crud.custom 'contact'}
+                <label for="object_contact">联系电话</label>
+                <input type="text" id = "object_contact" size="75" value="${object.contact}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'displayName'}
+                <label for="object_displayName">姓名</label>
+                <input type="text" id = "object_displayName" size="75" value="${object.displayName}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'age'}
+                <label for="object_age">年龄</label>
+                <input type="text" id = "object_age" size="75" value="${object.age}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'schoolName'}
+                <label for="object_schoolName">学校</label>
+                <input type="text" id = "object_schoolName" size="75" value="${object.schoolName}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'bj'}
+                <label for="object_bj">班级</label>
+                <input type="text" id = "object_bj" size="75" value="${object.bj}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'email'}
+                <label for="object_email">邮箱</label>
+                <input type="text" id = "object_email" size="75" value="${object.email}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'url'}
+                <label for="object_url">照片</label>
+                #{if object.url == null}
+                    <img src="@{'public/images/noimg_120X155.jpg'}" >
+                #{/if}
+                #{else }
+                    <img src="${object.url ==null ? object.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(object.url,"284X210")}" height="100px" width="100px">
+                #{/else}
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save'}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue'}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

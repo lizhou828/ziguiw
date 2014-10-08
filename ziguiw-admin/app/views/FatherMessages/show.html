@@ -1,0 +1,52 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:['signature','appellation','mobile','content','contact','email','status']}
+            #{crud.custom 'content'}
+                <label for="object_content">短信内容</label>
+                <textarea rows="3" cols="50" id="object_content">${object.content}</textarea>
+            #{/crud.custom}
+            #{crud.custom 'mobile'}
+                <label for="object_mobile">发送电话</label>
+                <input type="text" id = "object_mobile" size="75" value="${object.mobile}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'appellation'}
+                <label for="object_appellation">称谓</label>
+                <input type="text" id = "object_appellation" size="75" value="${object.appellation}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'contact'}
+                <label for="object_contact">联系电话</label>
+                <input type="text" id = "object_contact" size="75" value="${object.contact}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'signature'}
+                <label for="object_signature">姓名</label>
+                <input type="text" id = "object_signature" size="75" value="${object.signature}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'email'}
+                <label for="object_email">邮箱</label>
+                <input type="text" id = "object_email" size="75" value="${object.email}" readonly="true">
+            #{/crud.custom}
+            #{crud.custom 'status'}
+                <label for="object_status">状态</label>
+                <select name="object.status" id="object_status">
+                %{
+                    com.arj.ziguiw.common.Status.map.each {
+                    }%
+                    <option name="object.status" value="${it.key}" #{if object.status == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save'}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue'}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

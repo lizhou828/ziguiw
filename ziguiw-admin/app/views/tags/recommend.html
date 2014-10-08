@@ -1,0 +1,48 @@
+<div>
+    <div>
+    我要推荐到:
+    <select name="recommendArea" id="recommendArea">
+    %{
+        com.arj.ziguiw.common.RecommendArea.map.each(){
+        }%
+        <option value="${it.key}"
+                #{if session.get("controllers.RecommendsCRUD.list.search") == it.key} selected="true" #{/if}
+                >${it.value}</option>
+    %{
+        }
+        }%
+    </select> &nbsp;&nbsp;
+    <input type="button" value="确定" onclick="submitRecommend()"/>
+    <script type="text/javascript">
+        function submitRecommend() {
+            var data = new Array();
+            $("input[name='rid']:checked").each(function(i) {
+                data.push($(this).val());
+            });
+            $.ajax({
+                type:"POST",
+                url: "${_url}",
+                data:{rid : data, recommendArea : $("#recommendArea").val()},
+                beforeSend : function(){
+                    $("#remmendLoading").html("<img src='/public/images/loading.gif'/>");
+                },
+                complete : function(result){
+                    $("#remmendLoading").html("");
+                    if (result.responseText =="OK") {
+                        $("#recommendIframe").attr("src", "/Recommends/list?search=" + $("#recommendArea").val());
+                        $("input[name='rid']").each(function(i) {
+                            $(this).attr("checked", false);
+                        });
+                    } else {
+                        alert("推荐失败");
+                    }
+                }
+            });
+        }
+    </script>
+    </div>
+    <div>
+        <span id="remmendLoading"></span>
+        <iframe id = "recommendIframe" src="/Recommends/list" width="100%" onload="this.height=this.contentWindow.document.body.scrollHeight" frameborder="0" scrolling="no"></iframe>
+    </div>
+</div>

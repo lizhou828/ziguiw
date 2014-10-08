@@ -1,0 +1,105 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'缴纳年费—数字化校园—子贵网后台' /}
+#{script 'My97DatePicker/WdatePicker.js'/}
+#{script 'SchoolClassStudent.js'/}
+
+<script type="text/javascript">
+    $(function(){
+        $("#annualFeeSubmitForm").submit(function(){
+            var xxId = document.getElementById("xxId").value;
+            var bjId = document.getElementById("bjId").value;
+            var xsId = document.getElementById("xsId").value;
+            if(xxId == 0){
+                alert("您还未选择学校!");
+                return false;
+            }
+            if(bjId == 0){
+                alert("您还未选择班级!");
+                return false;
+            }
+            if(bjId == -1){
+                alert("没有可选的班级!");
+                return false;
+            }
+            if(xsId == -1){
+                alert("没有可选的学生!");
+                return false;
+            }
+            var price = document.getElementById("object.price").value;
+            if(!price || price == null){
+                alert("输入的金额不能为空！");
+                return false;
+            }
+            if( isNaN(price)){
+                alert("请输入合法的金额！");
+                return false;
+            }
+            if(price < 0 ){
+                alert("输入的金额不能小于0!");
+                return false;
+            }
+        });
+    });
+
+</script>
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">缴纳学生年费</h2>
+    </br>
+
+    <div class="objectForm">
+        #{form action:@create(object._key()), enctype:'multipart/form-data', id:'annualFeeSubmitForm'}
+            </br>
+           &nbsp; 学&nbsp;校:<select id="xxId" onchange="getClasses(this);">
+            <option value="0">-请选择-</option>
+        %{
+            List schools =  models.School.findAll();
+            schools.each {
+            }%
+            <option  name="xxId" value="${it.xxId}">${it.name}</option>
+        %{
+            }
+            }%
+        </select>
+            &nbsp;&nbsp;
+            班&nbsp;级:<select id="bjId" name="bjId" onchange="getStudent(this)">
+        </select>
+            &nbsp;&nbsp;
+         #{crud.form fields:[ 'student','price','payMethod','type']}
+            #{crud.custom 'type'}
+                <input type="hidden" name="object.type" value="${com.arj.ziguiw.common.PayType.ANNUAL_FEE}" >
+            #{/crud.custom}
+            #{crud.custom 'student'}
+
+             学&nbsp;生:<select id="xsId" name ="xsId" >
+                         </select>
+            #{/crud.custom}
+             </br>
+             </br>
+             #{crud.custom 'payMethod'}
+                 <lable for="object.payMethod">支付方式：</lable>
+                 <input readonly="true" id="object.payMethod"
+                        value="${com.arj.ziguiw.common.PayMethod.map.get(com.arj.ziguiw.common.PayMethod.SCHOOL_ACCEPT)}"/>
+                 <input type="hidden"  name="object.payMethod"
+                        value="${com.arj.ziguiw.common.PayMethod.SCHOOL_ACCEPT}"/>
+             #{/crud.custom }
+            #{crud.custom 'price'}
+                <lable for="object.price">金额：</lable>
+                <input id="object.price" name="object.price"/>
+            #{/crud.custom }
+            *{#{crud.custom 'payDate'}}*
+                *{<lable for="object.payDate">交费日期：</lable>}*
+                *{<input type="text"   onclick="WdatePicker()" class="Wdate" style="float: none"}*
+                       *{id="object.payDate" name="object.payDate" value="${payDate}">}*
+            *{#{/crud.custom}}*
+         #{/crud.form}
+
+
+            <p class="crudButtons">
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+            </p>
+    #{/form}
+
+    </div>
+</div>

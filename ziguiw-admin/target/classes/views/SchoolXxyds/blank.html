@@ -1,0 +1,76 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+
+<script type="text/javascript">
+    function getClasses(obj){
+        $("#object_classId").empty();
+        var id = obj.value;
+        $.get("/Schools/getClass", {id : id}, function (data){
+                $("#object_clazz").append("<option value=''>无</option>");
+            for (var i = 0; i < data.length; i++) {
+                $("#object_clazz").append("<option value='" + data[i].id +"'>" + data[i].name + "</option>");
+            }
+        });
+    }
+</script>
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'content','title','type','school','clazz','url','videoUrl']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content" /}
+            #{/crud.custom}
+            #{crud.custom 'url'}
+                <label for="object_url">新闻封面图</label>
+                <input type="file" id="object_url" name = "file">
+            #{/crud.custom}
+            #{crud.custom 'videoUrl'}
+                <label for="object_videoUrl">视频</label>
+                <input type="file" id="object_videoUrl" name = "videoUrl">
+            #{/crud.custom}
+            #{crud.custom 'type'}
+                <label for="object_type">类型</label>
+                <select name="object.type" id="object_type">
+                %{
+                    com.arj.ziguiw.common.SchoolXxydType.map.each {
+                    }%
+                    <option name="object.type" value="${it.key}" #{if object.type == it.key} selected="true" #{/if}>${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'school'}
+                <label id="object_school">学校</label>
+                <select name="object.school" id="object_school" onchange="getClasses(this);">
+                %{
+                    List schools =  models.School.findAll();
+                    schools.each {
+                    }%
+                    <option id="object_school" name="object.school.id" value="${it.id}">${it.name}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'clazz'}
+                <label for="object_clazz">班级</label>
+                <select name="object.clazz.id" id="object_clazz">
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <input type="hidden" name="object.type" value="${request.params.get("schoolNewsType")}" />
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

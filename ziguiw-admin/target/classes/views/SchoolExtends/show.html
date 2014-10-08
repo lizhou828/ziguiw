@@ -1,0 +1,41 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+    #{crud.form fields:['schoolId','logo','banner','description','tel','email','postcode','addr','site']}
+            #{crud.custom 'schoolId'}
+            <label for="object_schoolId">学校</label>
+                  %{
+                List schools = models.School.findAll();
+                     schools.each {
+                }%
+                #{if it.id == object.schoolId}
+                    <input type="text" name="object.schoolId" value="${it.name}" readonly="true">
+                #{/if}
+                %{
+                }
+                }%
+            #{/crud.custom}
+            #{crud.custom 'logo'}
+                <img src="${ctx}/${object.logo}"  width="100" height="100" />
+                <br/>
+                <label for="logo">学校logo</label>
+                <input id="logo" type="file" name="file" />
+            #{/crud.custom}
+            #{crud.custom 'banner'}
+                <img src="${ctx}/${object.banner}"  width="100" height="100" />
+                <br/>
+                <label for="banner">学校banner</label>
+                <input id="banner" type="file" name="banner" />
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save'}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue'}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

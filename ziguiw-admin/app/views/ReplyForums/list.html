@@ -1,0 +1,38 @@
+#{extends 'CRUD/layout.html' /}
+
+<div id="crudList" class="${type.name}">
+
+
+    <h2 id="crudListTitle">&{'crud.list.title', type.displayName}</h2>
+
+    <div id="crudListSearch">
+    #{crud.search /}
+    </div>
+        <div id="crudListTable">
+            #{crud.table fields:['id', 'board','title', 'state',  'createTime','firstImage'], displayNames:['ID','所属版块','主贴标题','状态','创建时间','操作']}
+                #{crud.custom 'title'}
+                    ${object.title.length() > 50 ? object.title[0..20] + '..' : object.title}
+                    </a>
+                #{/crud.custom}
+
+                #{crud.custom 'state'}
+                    ${com.arj.ziguiw.common.Status.map.get(object.state)}
+                #{/crud.custom}
+
+                #{crud.custom 'createTime'}
+                ${object.createTime?.format("yyyy-MM-dd hh:mm:ss")}
+                #{/crud.custom}
+
+                #{crud.custom 'firstImage'}
+                    <a href="@{delete(object.id)}">删除</a>
+                #{/crud.custom}
+            #{/crud.table}
+
+        </div>
+
+        <div id="crudListPagination">
+        #{crud.pagination /}
+        </div>
+
+        <br/>
+</div>

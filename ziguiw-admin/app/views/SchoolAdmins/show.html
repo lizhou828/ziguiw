@@ -1,0 +1,56 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<script type="text/javascript">
+    function getClasses(obj){
+        $("#object_classId").empty();
+        var id = obj.value;
+        $.get("/Schools/getClass", {id : id}, function (data){
+                $("#object_classId").empty();
+                $("#object_classId").append("<option value=''>无</option>");
+            for (var i = 0; i < data.length; i++) {
+                $("#object_classId").append("<option value='" + data[i].id +"'>" + data[i].name + "</option>");
+            }
+        });
+    }
+</script>
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+        #{crud.form fields:['account','school','classId','realName']}
+            #{crud.custom 'school'}
+                <label id="object_school">学校</label>
+                <select name="object.school.id" id="object_school" onchange="getClasses(this);">
+                %{
+                    List schools =  models.School.findAll();
+                    schools.each {
+                    }%
+                    <option id="object_school" name="object.school.id" value="${it.id}" #{if it.id == object.school.id}selected="true" #{/if}>${it.name}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+
+            #{crud.custom 'classId'}
+                <label for="object_classId">班级</label>
+                <select name="object.classId" id="object_classId">
+                    #{list schoolClazz,as:'clazz'}
+                        <option id="object_classId" name="object.classId" value="${clazz.id}" #{if clazz.id == object.classId}selected="true" #{/if}>${clazz.name}</option>
+                    #{/list}
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+        <input type="hidden" name="object.reprinted" value="${object.reprinted}">
+    #{/form}
+    </div>
+</div>
