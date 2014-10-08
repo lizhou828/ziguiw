@@ -1,0 +1,17 @@
+alter table zigui_log rename to zigui_log_${new java.util.Date().format("yyyyMMdd")};
+create table zigui_log (
+  app varchar(255),
+  log_time varchar(255),
+  log_level varchar(255),
+  thread_name varchar(255),
+  url varchar(2000),
+  className varchar(255),
+  message text,
+  params text,
+  user_name varchar(255),
+  useragent varchar(255),
+  referer varchar(2000)
+);
+create index log_time_${new java.util.Date().format("yyyyMMdd")} on zigui_log(log_time desc);
+create index log_level_${new java.util.Date().format("yyyyMMdd")} on zigui_log(log_level);
+create index user_name_${new java.util.Date().format("yyyyMMdd")} on zigui_log(user_name);

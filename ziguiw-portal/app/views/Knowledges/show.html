@@ -1,0 +1,58 @@
+#{extends 'main.html'/}
+#{set 'title'}
+${kn.title}|教育知识|子贵网
+#{/set}
+#{set 'description'}
+${kn.description}
+#{/set}
+<div class="mypos fsong">
+    <a href="${play.configuration['portal.domain']}">子贵首页</a> >
+    <a href="http://www.ziguiw.com/knowledges/index">教育知识</a> >
+    <a href="/Knowledges/list?id=${channelId}">${channelId==1?'幼儿期':(channelId==2?'少儿期':(channelId==3?'青年期':'心理咨询'))}</a> > 正文
+</div>
+
+<div class="col1 fl">
+    <div class="newscot">
+        <h1 class="fyahei">${kn.title}</h1>
+        <p class="news_tip fb">
+            <span>时间：${kn.createTime.format("yyyy-MM-dd")}</span>
+            <span>编辑：${kn.editors}</span>
+        </p>
+        <div class="news_info">
+            <strong>内容摘要：</strong>
+            <p class="f14">
+               ${kn.description}
+            </p>
+        </div>
+        <div class="newscots">
+            ${kn.content.raw()}
+        </div>
+    </div>
+
+
+    <div class="tz_xg p_b10 o-v">
+        <h2>相关文章</h2>
+        <ul class="clearfix">
+        </ul>
+
+        <!--百度分享按钮代码-->
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <span class="bds_more">分享到：</span>
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+        </script>
+        <!-- Baidu Button END -->
+    </div>
+
+
+</div>
+#{right /}

@@ -1,0 +1,87 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'}
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/crud.css'}" />
+#{/set}
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：<a href="#">学校站内站</a>  &gt; 管理中心</p>
+        </div>
+
+        <!--管理中心左边开始-->
+        <div class="usercenter">
+            <p class="user_title">管理中心导航</p>
+
+            <div class="manage_nav">
+                <ul>
+                    <li>
+                        <a href="" class="one">学校信息</a>
+                        <ul>
+                            <li class="two">
+                            #{if schoolExt}
+                                #{a @SchoolExtends.show(schoolExt.schoolId)}学校信息#{/a}
+                            #{/if}
+                            #{else }
+                                #{a @SchoolExtends.blank()}学校信息#{/a}
+                            #{/else}
+                            </li>
+                            <li class="two">#{a @SchoolTeachers.list()}师资力量#{/a}</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                #{a @SchoolNews.list().add("xxId",xxId), class:"one"}校园新闻/公告#{/a}
+                </ul>
+                <ul>
+                    <li>
+                        <a href="" class="one">校园风采</a>
+                        <ul>
+                            <li class="two">#{a @SchoolAlbums.list().add("xxId",xxId)}校园相册#{/a}</li>
+                            <li class="two">#{a @SchoolPhotos.list(com.arj.ziguiw.common.SchoolPhotoType.VIDEO).add("xxId",xxId)}校园视频#{/a}</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    #{a @SchoolXxyds.list().add("xxId",xxId).add("isSchool", "1"),class:"one"}学习园地#{/a}
+                </ul>
+                <ul>
+                #{a @SchoolPhotos.rlist().add("xxId",xxId),class:"one"}首页推荐图#{/a}
+                </ul>
+                <ul>
+                    #{a @ClassExtends.list().add("xxId",xxId),class:"one"}班级设置#{/a}
+                </ul>
+            </div>
+
+        </div>
+        <div class="usercenter_right">
+        #{if request.actionMethod != 'index'}
+            <div id="crudBreadcrumb" style="display: none">
+                #{crud.navigation /}
+            </div>
+        #{/if}
+
+            <div id="crud" style="margin-left: 15px">
+
+            #{if flash.success}
+                <div class="crudFlash flashSuccess">
+                ${flash.success}
+                </div>
+            #{/if}
+            #{if flash.error || error}
+                <div class="crudFlash flashError">
+                ${error ?: flash.error}
+                </div>
+            #{/if}
+
+                <div id="crudContent">
+                #{doLayout /}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

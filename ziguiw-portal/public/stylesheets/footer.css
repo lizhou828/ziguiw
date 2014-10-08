@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+.p_all {
+    margin: 10px auto;
+    overflow: hidden;
+    width: 990px;
+	_width: 996px;
+}
+.p_flink {
+    background: none repeat scroll 0 0 #EEEEEE;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto 5px;
+    width: 980px;
+}
+.p_flink p {
+    text-align: center;
+}
+.p_flink a {
+    color: #000000;
+    font-size: 12px;
+    margin: 0 5px;
+    text-decoration: none;
+}
+.p_flink a:hover {
+    text-decoration: underline;
+}
+.p_logo {
+    text-align: center;
+}
+.p_logo p {
+    line-height: 20px;
+}
+.p_logo span {
+    padding: 0 5px;
+}

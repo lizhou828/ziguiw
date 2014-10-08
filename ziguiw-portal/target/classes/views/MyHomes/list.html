@@ -1,0 +1,263 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间
+#{/set}
+
+<script type="text/javascript">
+    function checkDate(){
+        var content =  document.getElementById("content1").value;
+        if(content==null||content==""){
+            alert('请输入内容！');
+            return false;
+        }
+        return true;
+    }
+
+//    $(function(){
+//            $("#ft").click(function(){
+//                var e1 = $(".dongtai_tit ul li")[0];
+//                var e2 = $(".dongtai_tit ul li")[1];
+//                $(e1).attr("id","on")
+//                $(e2).attr("id","")
+//                $("#friendtrends").show();
+//                $("#mytrends").hide();
+//            });
+//    });
+//
+//    $(function(){
+//        $("#mt").click(function(){
+//            var e1 = $(".dongtai_tit ul li")[0];
+//            var e2 = $(".dongtai_tit ul li")[1];
+//            $(e1).attr("id","")
+//            $(e2).attr("id","on")
+//            $("#mytrends").show();
+//            $("#friendtrends").hide();
+//        });
+//    });
+
+
+
+</script>
+
+<div class="sp_main_right">
+<!--shuoshuo input  B-->
+    <div class="sp_r_l">
+        <div class="ad_midd_101">
+            <img src="@{'public/images/ad_midd_101.jpg'}"/>
+        </div>
+    #{if userBase.id == user?.id}
+        <form  action="/UserMoods/create" method="POST" onsubmit="return checkDate()">
+        <div class="sp_shuo">
+            <div class="sp_ind_input">
+                <textarea  id = "content1" name="text" rows="4" cols="66"></textarea>
+            </div>
+            <div class="sp_fun">
+              限填200个字
+            </div>
+            <input type="hidden" name="userId" value="${userBase.id}">
+            <div style="text-align: right">
+                <input type="submit" value="发表" class="sp_shuo_submit">
+            </div>
+        </div>
+    </form>
+    #{/if}
+
+<div class="clear"></div>
+        <form id="form1" action="${play.configuration['resources.domain']}/Resources/search" method="post" class="form">
+            <div class="sp_h_search">
+                <p><span class="sp_h_text">搜索教育资源</span>
+                    <input type="text" name="key" class="se_text" value="请输入您想要查找的年级、科目 快速找到相应资源" onfocus="if (value =='请输入您想要查找的年级、科目 快速找到相应资源'){value =''}" onblur="if (value ==''){value='请输入您想要查找的年级、科目 快速找到相应资源'}"/>
+                    <input type="submit" value="搜索" class="se_btn"/></p>
+                <!--<p>搜索关键词：<a href="">人教版</a> <a href="">课件</a> <a href="">视频教程</a> <a href="">文档教程</a>  </p>-->
+            </div>
+        </form>
+        <div class="clear"></div>
+
+<div class="freinds_res">
+    <div class="freinds_res_tit">
+        <span>最新好友上传资源</span>
+    </div>
+    <ul class="fr_res_con">
+    #{list resources,as:'resource'}
+
+        #{if resource_index < 6}
+        <li>
+            <div class="fr_res_con_n">
+                <a href="${play.configuration['resources.domain']}/Resources/show?resourceId=${resource.id}">
+                    ${resource.title?.length() > 10 ? resource.title[0..10] + "..": resource.title}
+                </a>
+            </div>
+            <div class="fr_res_span">
+                <span>${resource.needPoint}积分</span>
+                                <span>
+                                	人气：<b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star_bad.gif'}"></b>
+                                </span>
+                <span>时间：${resource.createTime?.format("yyyy-MM-dd")}</span>
+            </div>
+        </li>
+        #{/if}
+    #{/list}
+    </ul>
+</div>
+
+<div class="docum_res_con">
+    <div class="docum_res_tit">
+        <span>我的收藏夹</span>
+    </div>
+    <ul class="docum_res_con">
+        #{list resourceCollects,as:'resourceCollect'}
+        #{if resourceCollect_index < 6}
+        <li>
+            <div class="docum_res_con_n">
+                <a href="${play.configuration['resources.domain']}/Resources/show?resourceId=${resourceCollect.id}">
+                    ${resourceCollect.title?.length() > 10 ? resourceCollect.title[0..10] + ".." : resourceCollect.title}
+                </a>
+            </div>
+            <div class="docum_res_span">
+                <span>10积分</span>
+                                <span>
+                                	人气：<b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star.gif'}"></b><b><img src="@{'public/images/per_star_bad.gif'}"></b>
+                                </span>
+                <span>时间：${resourceCollect.createTime?.format("yyyy-MM-dd")}</span>
+            </div>
+        </li>
+        #{/if}
+        #{/list}
+    </ul>
+</div>
+
+<div class="dongtai_tit">
+    <ul>
+        <li  #{if params.get("thrends") == 'you' || params.get("thrends") == null}id="on"#{/if}><a href="/MyHomes/list?userId=${userBase.id}&thrends=you" id="ft">好友动态</a></li>
+        <li  #{if params.get("thrends") == 'my'}id="on"#{/if}><a href="/MyHomes/list?userId=${userBase.id}&thrends=my" id="mt">个人动态</a></li>
+    </ul>
+</div>
+
+<!--fr shuoshuo  B-->
+
+        #{if params.get("thrends") == 'you' || params.get("thrends") == null}
+            <div class="fr_shuoshuo" id="friendtrends">
+                <ul>
+                    #{list friendTrends.data,as:'friendtrends'}
+                        <li>
+                            <div class="fr_shuoshuo_l">
+                                <p><img class="img_border" src="${ctx}/${friendtrends.user?.photo}" height="45" width="45"/></p>
+                                <p>(湖南)</p>
+                            </div>
+                            <div class="fr_shuoshuo_r">
+                                <p><font class="color">
+                                    #{a @list(friendtrends.user?.id)}
+                                    ${friendtrends.user?.displayName}:
+                                    #{/a}
+                                </font>
+                                    #{if friendtrends.type == com.arj.ziguiw.common.UserTrendsType.DIARY}
+                                        #{a @UserDiarys.show(friendtrends.objectId)}
+                                            [日志]${friendtrends.title}
+                                        #{/a}
+                                    #{/if}
+                                    #{if friendtrends.type == com.arj.ziguiw.common.UserTrendsType.MOOD}
+                                        #{a @UserMoods.list(friendtrends.user?.id)}
+                                            [心情]${friendtrends.title}
+                                        #{/a}
+                                    #{/if}
+                                    #{if friendtrends.type == com.arj.ziguiw.common.UserTrendsType.PHOTO}
+                                        #{a @UserPhotos.detailList(friendtrends.objectId)}
+                                            [照片]${friendtrends.title}
+                                        #{/a}
+                                    #{/if}
+                                </p>
+                                <p><span class="dt_time">[${friendtrends.createTime?.format("yyyy-MM-dd HH:mm:ss")}]</span></p>
+                                <div class="dt_line">
+                                *{<p><img src="@{'public/images/dt_line.gif'}"/></p>}*
+                    *{<div class="dt_huif">}*
+                        *{<div class="dt_huif_img">}*
+                            *{<img class="img_border" src="@{'public/images/tp2.png'}" width="30" height="30"/>}*
+                        *{</div>}*
+                        *{<div class="dt_huif_words">}*
+                            *{<p><font class="color">李州:</font>很好！</p>}*
+                            *{<p><span class="dt_time">[2013-04-13 16:52]</span></p>}*
+                        *{</div>}*
+                    *{</div>}*
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                    #{/list}
+                </ul>
+            </div>
+            <div style="text-align: center">
+                #{page page:friendTrends, url:"/MyHomes/list?userId=" + userBase.id + "&thrends=you"/}
+            </div>
+        #{/if}
+
+        #{if params.get("thrends") == 'my'}
+            <div class="fr_shuoshuo" id="mytrends">
+                <ul>
+                    #{list myTrends.data,as:'mytrends'}
+                        <li>
+                            <div class="fr_shuoshuo_l">
+                                <p><img class="img_border" src="${ctx}/${mytrends.user?.photo}" height="45" width="45"/></p>
+                                <p>(湖南)</p>
+                            </div>
+                            <div class="fr_shuoshuo_r">
+                                <p><font class="color">
+                                    #{a @list(mytrends.user?.id)}
+                                    ${mytrends.user?.displayName}:
+                                    #{/a}
+                                </font>
+                                    #{if mytrends.type == com.arj.ziguiw.common.UserTrendsType.DIARY}
+                                        #{a @UserDiarys.show(mytrends.objectId)}
+                                            [日志]${mytrends.title}
+                                        #{/a}
+                                    #{/if}
+                                    #{if mytrends.type == com.arj.ziguiw.common.UserTrendsType.MOOD}
+                                        #{a @UserMoods.list(mytrends.objectId)}
+                                            [心情]${mytrends.title}
+                                        #{/a}
+                                    #{/if}
+                                    #{if mytrends.type == com.arj.ziguiw.common.UserTrendsType.PHOTO}
+                                        #{a @UserPhotos.detailList(mytrends.objectId)}
+                                            [照片]${mytrends.title}
+                                        #{/a}
+                                    #{/if}
+                                </p>
+                                <p><span class="dt_time">[${mytrends.createTime?.format("yyyy-MM-dd HH:mm:ss")}]</span></p>
+                            *{<div class="dt_line">}*
+                            *{<p><img src="@{'public/images/dt_line.gif'}"/></p>}*
+                            *{<div class="dt_huif">}*
+                            *{<div class="dt_huif_img">}*
+                            *{<img class="img_border" src="@{'public/images/tp2.png'}" width="30" height="30"/>}*
+                            *{</div>}*
+                            *{<div class="dt_huif_words">}*
+                            *{<p><font class="color">李州:</font>很好！</p>}*
+                            *{<p><span class="dt_time">[2013-04-13 16:52]</span></p>}*
+                            *{</div>}*
+                            *{</div>}*
+                            *{</div>}*
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                    #{/list}
+                </ul>
+            </div>
+            <div style="text-align: center">
+                #{page page:myTrends, url:"/MyHomes/list?userId=" + userBase.id + "&thrends=my"/}
+            </div>
+        #{/if}
+
+
+
+<!--fr shuoshuo  B-->
+
+<!--per shuoshuo  B-->
+<div class="per_shuoshuo" style="display:none;">
+
+</div>
+<!--per shuoshuo  B-->
+
+</div>
+<!--shuoshuo input  E-->
+
+#{include '/homeright.html'/}
+
+</div>

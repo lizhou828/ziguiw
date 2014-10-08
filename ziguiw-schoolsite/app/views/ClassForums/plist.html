@@ -1,0 +1,47 @@
+#{extends 'classmain.html' /}
+#{set title: school?.name + " - " + schoolClass?.name + " - 论坛"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：
+                #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                班级主页
+                #{/a}
+                &gt; 班级话题  &gt; 往期话题</p>
+        </div>
+
+        <div class="c_n_tit">
+            <div class="c_topic_tit">
+                往期话题
+            </div>
+
+            <div class="topic_list">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>话题名称</th>
+                        <th>评论</th>
+                        <th>日期</th>
+                    </tr>
+                    #{list page.data,as:'forum'}
+                    <tr>
+                        <td class="topic_tit">
+                            #{a @ClassForums.pshow(forum.id).add("xxId",xxId).add("classId",classId)}
+                                ${forum.title}
+                            #{/a}
+                         </td>
+                        <td align="center">${forum.replyCount}</td>
+                        <td align="cen
+                        ter">
+                           ${forum.lastReplyTime == null ? forum.lastReplyTime : forum.lastReplyTime.format("yyyy-MM-dd")}
+                        </td>
+                    </tr>
+                    #{/list}
+                </table>
+            </div>
+            <div style="text-align: center">
+            #{page page:page, url:"/ClassForums/plist?xxId=" + xxId  + "&classId=" + classId /}
+            </div>
+        </div>
+    </div>
+</div>

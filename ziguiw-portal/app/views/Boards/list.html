@@ -1,0 +1,121 @@
+#{extends 'main.html'/}
+#{set 'title'}
+互动社区
+#{/set}
+<div class="bbs_info_tlq">
+    <h3>
+        <b class="on">${parentBoardId == 2? '同龄圈':parentBoardId==3?'同城圈':parentBoardId==4?'学习交流':'专家问答'}</b>
+    </h3>
+    <ul>
+        #{list boards,as : 'board'}
+            <li>
+                <a href="/Forums/list?boardId=${board.id}">${board.boardName}</a>
+            </li>
+        #{/list}
+    </ul>
+</div>
+
+
+<div class="map mt10 mb10">
+    <label>
+        <img alt="" src="/public/images/bbs_map_bg _h.png" />
+    </label>
+    <a href="http://www.ziguiw.com">子贵首页</a> &gt; <a href="${play.configuration['portal.domain']}/boards/index">互动社区</a> ${parentBoardId == 2? '同龄圈':parentBoardId==3?'同城圈':parentBoardId==4?'学习交流':'专家问答'}
+</div>
+
+<!--ad01 E -->
+<div class="col1 fl  bbs_list_tl">
+<div class="h3titc">
+    <h3 class="pr fyahei">${parentBoardId == 2? '同龄圈':parentBoardId==3?'同城圈':parentBoardId==4?'学习交流':'专家问答'}<span>主题：<b class="red_f63"></b></span></h3>
+    <ul>
+        <li class="bordno"></li>
+        <li>
+            <a href="/Forums/forumUI?boardId=${board1?.id}">
+                <img alt="" src="/public/images/bbs_list_tlq_fq.gif">
+            </a>
+        </li>
+    </ul>
+</div>
+<div class=" borda">
+<div class="bbs_list_tj">
+<table cellpadding="0" class="table">
+<thead>
+<tr>
+    <td style="width:420px;" class="f14 fb bbs_list_zt">置顶主题</td>
+    <td style="width:80px;">作者</td>
+    <td style="width:60px;">回复/查看</td>
+    <td>最后发表</td>
+</tr>
+</thead>
+<tbody>
+#{list forums,as : 'forum' }
+    <tr>
+        <td class="up_bbs">
+            <span>
+                <a href="/Forums/show?id=${forum.id}" target="_blank" class="blue">${forum.title}</a>
+                #{if forum.elite}
+                    <img  src="/public/images/bbs_list_jj.gif" class="m-l4">
+                #{/if}
+            </span>
+        </td>
+        <td><a href="/myhome/lala" target="_blank" class="	block">${forum.creatorNick}</a>${forum.createTime.format("MM-dd")}</td>
+        <td>${forum.renum}/${forum.clickCount}</td>
+        <td>${forum.lastPostTime.format("yyyy-MM-dd")}</td>
+    </tr>
+#{/list}
+
+
+<tr>
+    <td colspan="4" class="f14 fb bbs_list_zt">板块主题</td>
+</tr>
+#{list page.data,as : 'forum'}
+    <tr>
+        <td class="pt_bbs">
+            <span>
+                <a href="/Forums/show?id=${forum.id}" target="_blank">${forum.title}</a>
+            </span>
+        </td>
+        <td><a href="/myhome/lala" target="_blank" class="	block">${forum.creatorNick}</a>${forum.createTime.format("MM-dd")}</td>
+        <td>${forum.renum}/${forum.clickCount}</td>
+        <td>${forum.lastPostTime.format("yyyy-MM-dd")}</td>
+    </tr>
+#{/list}
+
+
+</tbody>
+</table>
+
+</div>
+
+    <div style="text-align: center">
+        #{page page:page, url:"/Boards/list?parentBoardId=" + parentBoardId/}
+    </div>
+
+</div>
+
+</div>
+
+<div class="col2 fl ml10">
+    <div class="hottj borda pr pt40">
+        <div class="h3tita pa">
+            <h3 class="fyahei">24小时热帖排行</h3>
+        </div>
+        <div class="ph">
+            <ul>
+                <li><a href="/Forums/show?id=1204">孩子痴迷漫画引忧心 不如选书与娃共读</a></li>
+                <li><a href="/Forums/show?id=1203">四大防御秘籍帮助小学生摆脱假期网瘾</a></li>
+                <li><a href="/Forums/show?id=1202">5岁男孩只喝饮料不喝水导致尿结晶</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="ad_col2_1 borda mt10"><a href="#"><img src="/public/images/img_268_88.jpg" /></a></div>
+    <div class="mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">活跃用户</h3>
+        </div>
+        <div class="bordb dygs">
+            <ul class="img_f">
+            </ul>
+        </div>
+    </div>
+</div>

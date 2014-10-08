@@ -1,0 +1,58 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <ul class="errorMessage">
+        <li><span>${flash.error}</span></li>
+    </ul>
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'title','type','url','reprinted','content']}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" name="object.title" value="${object.title}" id="object_title" size="75">
+            #{/crud.custom}
+          #{crud.custom 'content'}
+              #{editor id:"object_content", name:"object.content" ,value:object.content/}
+          #{/crud.custom}
+            #{crud.custom 'url'}
+                <label for="object_url">新闻封面图</label>
+                <input type="file" id="object_url" name = "file">
+            #{/crud.custom}
+            #{crud.custom 'type'}
+                <label for="object_type">类型</label>
+                <select name="object.type" id="object_type">
+                    <option name="object.type" value="">请选择</option>
+                %{
+                    com.arj.ziguiw.common.SchoolNewsType.map.each {
+                    }%
+                    <option name="object.type" value="${it.key}" >${it.value}</option>
+                %{
+                    }
+                    }%
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'reprinted'}
+                <label for="object_reprinted">是否转载</label>
+                <select name="object.reprinted" id="object_reprinted">
+                    <option name="object.reprinted" value="">请选择</option>
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.NO}" >否</option>
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.YES}" >是</option>
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <input type="hidden" name="object.type" value="${request.params.get("schoolNewsType")}" />
+        <input type="hidden" name="object.school.id" value="${school.id}" />
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="创建并继续" />
+            *{<input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />}*
+        </p>
+    #{/form}
+    </div>
+
+</div>

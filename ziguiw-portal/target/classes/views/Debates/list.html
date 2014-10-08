@@ -1,0 +1,40 @@
+#{extends 'main.html'/}
+#{set 'title'}
+辩论
+#{/set}
+<div class="mypos fsong"><a href="http://www.ziguiw.com">子贵首页</a> &gt; <a href="/Knowledges/index"> 教育知识</a> &gt; 辩论</div>
+<div class="col1 fl">
+    <div class="newslist">
+        <ul>
+        #{list page.data,as :'debate'}
+            <li>
+                <span>${debate.createTime.format("yyyy-MM-dd")}</span>
+                <a href="@{show(debate.id)}">${debate.title}</a>
+            </li>
+        #{/list}
+        </ul>
+
+        <div style="text-align: center">
+            #{page page:page, url:"/debates/list"/}
+        </div>
+    </div>
+</div>
+<div class="col2 fl ml10">
+    <div class="ph mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">人气排行</h3>
+        </div>
+        <div class="bordb">
+            <ul>
+                <ul>
+                #{list hots,as : 'debate'}
+                    <li>
+                        <a href="@{show(debate.id)}">${debate.title}</a>
+                    </li>
+                #{/list}
+                </ul>
+            </ul>
+        </div>
+    </div>
+    <div class="ad_col2_1 borda mt10"><a href="#"><img src="/public/images/img_268_88.jpg"></a></div>
+</div>

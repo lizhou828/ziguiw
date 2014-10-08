@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>#{get 'title' /}</title>
+    #{get 'moreStyles'/}
+    <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    #{get 'moreScripts'/}
+    <script src="@{'/public/javascripts/user.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    #{if userBase.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+        <link href="@{'public/stylesheets/space_stu1.css'}" type="text/css" rel="stylesheet" />
+    #{/if}
+    #{elseif userBase.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+        <link href="@{'public/stylesheets/space_tea1.css'}" type="text/css" rel="stylesheet" />
+    #{/elseif}
+    #{else }
+        <link href="@{'public/stylesheets/space_fm1.css'}" type="text/css" rel="stylesheet" />
+    #{/else}
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+    <link href="@{'public/stylesheets/footer.css'}" type="text/css" rel="stylesheet" />
+
+
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+          $(function(){
+              $("#sign").click(function(){
+                  $.ajax({
+                      type: "GET",
+                      url: "/Signs/sign",
+                      cache: false,
+                      complete: function(html){
+                          var data = html.responseText;
+                          if(data == "OK"){
+                              easyDialog.open({
+                                  container : {
+                                      header : '子贵网空间签到活动',
+                                      content : '签到成功，成功获得2积分',
+                                      yesFn : btnFn,
+                                      noFn : true
+                                  }
+                              });
+                          }else if(data == "NO"){
+                              easyDialog.open({
+                                  container : {
+                                      header : '子贵网空间签到活动',
+                                      content : '您今天已签到，请明天再来',
+                                      yesFn : btnFn,
+                                      noFn : true
+                                  }
+                              });
+                          }else{
+                              easyDialog.open({
+                                  container : {
+                                      header : '子贵网空间签到活动',
+                                      content : '您还未登陆，请先登陆',
+                                      yesFn : btnFn,
+                                      noFn : true
+                                  }
+                              });
+                          }
+                      }
+                  });
+              });
+          });
+
+        $(function(){
+            $("#addFriend").click(function(){
+                var userId = document.getElementById("userId").value;
+                $.ajax({
+                    type: "GET",
+                    url: "/UserFriends/ajaxAdd",
+                    cache: false,
+                    data: {userId:userId},
+                    complete: function(html){
+                        var data = html.responseText;
+                        if(data == "ok"){
+                            easyDialog.open({
+                                container : {
+                                    header : '子贵网空间添加好友',
+                                    content : '添加成功',
+                                    yesFn : btnFn,
+                                    noFn : true
+                                }
+                            });
+                        }else{
+                            easyDialog.open({
+                                container : {
+                                    header : '子贵网空间添加好友',
+                                    content : '添加失败，请稍后再试',
+                                    yesFn : btnFn,
+                                    noFn : true
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+
+<body class="sp_body_bg">
+<!--top B-->
+<div class="topper">
+    <div class="topper_con">
+        <div class="topper_con_left">
+            <a href="${play.configuration['portal.domain']}" target="_blank">首页</a>|
+            <a href="${play.configuration['portal.domain']}/newses/index"  target="_blank">教育在线</a>|
+            <a href="${play.configuration['portal.domain']}/knowledges/index" target="_blank">教育知识</a>|
+            <a href="${play.configuration['resources.domain']}" target="_blank">教育资源</a>|
+            <a href="${play.configuration['portal.domain']}/boards/index" target="_blank">互动社区</a>|
+            <a href="${play.configuration['portal.domain']}/myhomes/index" target="_blank">我的小家</a>
+        </div>
+        <div class="topper_con_right" id="loginbar">
+            <a href="${play.Play.configuration.getProperty("cas.loginUrl")}?service=${play.mvc.Http.Request.current().getBase()}" target="_self">登录</a>
+            <a href="/UserBases/registerUI">新用户注册</a>
+        </div>
+    </div>
+</div>
+<!--top E-->
+
+<!--nav B-->
+<div class="nav">
+    <ul>
+        <li>#{a @MyHomes.list(userBase.id)}我的主页#{/a}</li>
+        <li>#{a @UserDiarys.list(userBase.id)}日志#{/a}</li>
+        <li>#{a @PhotoAlbums.list(userBase.id)}相册#{/a}</li>
+        <li>#{a @UserMoods.list(userBase.id)}心情#{/a}</li>
+        <li>#{a @UserFriends.list(userBase.id)}好友#{/a}</li>
+        <li>#{a @MyHomes.resourcesList(userBase.id)}我的资源#{/a}</li>
+        <li>#{a @UserMessages.list(userBase.id)}留言板#{/a}</li>
+        #{if user != null}
+            #{if userBase.id == user.id &&
+            (user.type == com.arj.ziguiw.common.UserBaseType.TEACHER || user.type == com.arj.ziguiw.common.UserBaseType.PARENT || user.type == com.arj.ziguiw.common.UserBaseType.STUDENT)}
+                <li class="shuzi"><a href="${play.configuration['dsis.domain']}" target="_blank">返回数字校园</a></li>
+            #{/if}
+            #{else }
+                <li>#{a @MyHomes.list(user.id)}返回空间#{/a}</li>
+            #{/else}
+        #{/if}
+    </ul>
+</div>
+<div style="height: 205px;"></div>
+<!--nav E-->
+
+<!--main B-->
+<div class="sp_main">
+<!--main_left B-->
+<div class="sp_main_left">
+    <div class="sp_main_per">
+        <div class="per_img">
+            #{if userBase.photo == null}
+                <img class="sp_main_per_img" src="@{'public/images/per_img.jpg'}"/>
+            #{/if}
+            #{else }
+                <img class="sp_main_per_img" src="${ctx}/${com.arj.ziguiw.common.ImageSize.getImage(userBase.photo,com.arj.ziguiw.common.ImageSize.HOMEPHOTO)}"
+                        width="138" height="135"/>
+            #{/else}
+            #{if userBase.id == user?.id}
+            <p>#{a @UserBases.alterPhoto(userBase.id)}修改头像#{/a}</p>
+            #{/if}
+        </div>
+        <div class="sp_per_con">
+            <p>昵称：<font class="per_name">${userBase.displayName}</font></p>
+            <p>积分：${userBase.points}</p>
+            <p>性别：
+                #{if userBase.sex == 0}
+                   保密
+                #{/if}
+                #{elseif userBase.sex == 1}
+                    男
+                #{/elseif}
+                #{elseif userBase.sex == 2}
+                    女
+                #{/elseif}
+            </p>
+            <p>身份：
+                #{list items:com.arj.ziguiw.common.UserBaseType.map,as:'m'}
+                     #{if m.key == userBase.type}${m.value}#{/if}
+                #{/list}
+            </p>
+            <p>个人签名：${userBase.signature}</p>
+            <p>
+                人气：
+                <b><img src="@{'public/images/per_star.gif'}" /></b>
+                <b><img src="@{'public/images/per_star.gif'}" /></b>
+                <b><img src="@{'public/images/per_star.gif'}" /></b>
+                <b><img src="@{'public/images/per_star.gif'}" /></b>
+                <b><img src="@{'public/images/per_star_bad.gif'}" /></b>
+            </p>
+        </div>
+    </div>
+    <input type="hidden" value="${userBase.id}" id="userId">
+    <div class="per_nav">
+        #{if userBase.id == user?.id}
+            <ul class="per_myres">
+                <li>
+                    #{a @MyHomes.resourcesList(userBase.id)}我的资源#{/a}
+                </li>
+                #{if user.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+                <li>
+                    #{a @MyHomes.addResource()}上传资源#{/a}
+                </li>
+                #{/if}
+            </ul>
+            <ul class="per_inf">
+                <li>#{a @ResourceCollects.list(userBase.id)}我的收藏夹#{/a}</li>
+                <li>#{a @HomeQuestions.list(userBase.id)}我的提问#{/a}</li>
+                <li>#{a @PointsHistorys.list(userBase.id)}我的积分#{/a}</li>
+                #{if user.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+                    <li>#{a @MyHomes.games(userBase.id)}智力游戏#{/a}</li>
+                #{/if}
+                #{else }
+                    <li>#{a @MyHomes.myApplication()}应用中心#{/a}</li>
+                #{/else}
+                #{if user.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+                    <li><a href="/Orders/payOne">申请充值</a></li>
+                #{/if}
+                #{else }
+                    <li><a href="/Orders/payOne">我要充值</a></li>
+                #{/else}
+                <li>#{a @UserBases.userInfo(userBase.id)}个人资料#{/a}</li>
+                <li>#{a @UserBases.alterPassword(userBase.id)}修改密码#{/a}</li>
+                <li>#{a @UserBases.alterInformation(userBase.id)}设置#{/a}</li>
+            </ul>
+        #{/if}
+        #{else }
+               <a href="javascript:;" id="addFriend">添加好友</a>
+        #{/else}
+    </div>
+</div>
+<!--main_left E-->
+
+<!--main_right B-->
+#{doLayout /}
+<!--main_right E-->
+</div>
+<!--main E-->
+
+<div class="p_all">
+    <div class="p_flink">
+        <p>
+            <a href="/HelpCenters/aboutus" target="_blank">关于我们</a>|
+            <a href="/HelpCenters/contract" target="_blank">服务协议</a>|
+            <a href="/HelpCenters/service" target="_blank">客服中心</a>|
+            <a href="/HelpCenters/feedback" target="_blank">意见反馈</a>|
+            <a href="/HelpCenters/recruit" target="_blank">网站招聘</a>|
+            <a href="/HelpCenters/map" target="_blank">网站地图</a>|
+            <a href="/HelpCenters/contact" target="_blank">联系我们</a>|
+            <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+            <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+            <a href="/HelpCenters/copyright" target="_blank">版权所有</a>|
+            <a href="/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+        </p>
+    </div>
+
+    <div class="p_logo">
+        <p>
+            Copyright  &copy;  2013 <a href="http://www.ziguiw.com">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a>
+        </p>
+        <p>
+            经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a>
+            <!-- WPA Button Begin -->
+            <script src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&amp;type=2&amp;kfuin=4009952116&amp;ws=www.ziguiw.com&amp;btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&amp;aty=0&amp;a=&amp;key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb" type="text/javascript"></script><iframe width="102" scrolling="no" height="24" frameborder="0" src="about:blank" allowtransparency="true" id="iframediv1365410144830"></iframe>
+        <!-- WPA Button END -->
+        </p>
+        <img src="/public/images/logo.jpg">
+    </div>
+</div>
+</body>
+</html>

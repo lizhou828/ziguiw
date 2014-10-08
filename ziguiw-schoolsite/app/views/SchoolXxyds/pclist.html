@@ -1,0 +1,120 @@
+#{extends 'classmain.html' /}
+#{set title: school.name + " - " + schoolClass.name + " -学习园地"/}
+
+<div class="middle center pt10">
+    <div class="news_left">
+        <div class="news_menu">
+            <div class="study_title">
+                <div class="study_left">学习园地</div>
+            </div>
+            <div class="news_classify">
+                <ul>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.COMPOSITION}id="on"#{/if}>
+                    #{a @pclist().add("xxId",xxId).add("classId",classId)}
+                        优秀作文展示
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.STRATEGY}id="on"#{/if}>
+                    #{a @pclist().add("xxId",xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STRATEGY)}
+                        学习小攻略
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.ANSWER}id="on"#{/if}>
+                    #{a @pclist().add("xxId",xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.ANSWER)}
+                        重点难点解答
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.STUDY}id="on"#{/if}>
+                    #{a @pclist().add("xxId",xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STUDY)}
+                        在线学习
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.RESOURCE}id="on"#{/if}>
+                    #{a @pclist(com.arj.ziguiw.common.SchoolXxydType.RESOURCE).add("xxId",xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.RESOURCE)}
+                        教育资源库
+                    #{/a}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="class_recommend mt10">
+            <div class="study_title">
+                <div class="c_study_left">
+                    班级花絮
+                </div>
+                <div class="dy_more">
+                    #{a @ClassPhotos.index().add("xxId",xxId).add("classId",classId)}
+                        更多&gt;&gt;
+                    #{/a}
+                </div>
+            </div>
+            <div class="recommend_con">
+                <ul>
+                #{list classPhotos,as:'photos'}
+                    <li>
+                       #{a @ClassPhotos.pshow(photos.id).add("xxId",xxId).add("classId",classId)}
+                            <img src="${photos.url ==null ? photos.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photos.url,com.arj.ziguiw.common.ImageSize.CZX)}" height="70" width="95"/>
+                       #{/a}
+                    </li>
+                #{/list}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="news_right">
+        <div class="position">
+            <p>您的位置：
+                #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                    班级主页
+                #{/a}
+                &gt; 学习园地</p>
+        </div>
+
+        <div class="c_n_tit">
+            <div class="c_news_tit">
+            #{if type == com.arj.ziguiw.common.SchoolXxydType.COMPOSITION}
+                优秀作文
+            #{/if}
+            #{if type == com.arj.ziguiw.common.SchoolXxydType.STRATEGY}
+                学习小攻略
+            #{/if}
+            #{if type == com.arj.ziguiw.common.SchoolXxydType.ANSWER}
+                重点难点解答
+            #{/if}
+            #{if type == com.arj.ziguiw.common.SchoolXxydType.STUDY}
+                在线学习
+            #{/if}
+            #{if type == com.arj.ziguiw.common.SchoolXxydType.RESOURCE}
+                教育资源库
+            #{/if}
+            </div>
+            <div class="news_con_list">
+                <ul class="news_con_sp">
+                    #{list page.data,as:'xxyds'}
+                    <li><div class="news_sp_l">
+                        #{a @SchoolXxyds.pcshow(xxyds.id).add("xxId",xxId).add("classId",classId)}
+                            ${xxyds.title}
+                        #{/a}
+                    </div>
+                        <div class="time">
+                        ${xxyds.createTime == null ? xxyds.createTime : xxyds.createTime.format("yyyy-MM-dd")}
+                        </div>
+                    </li>
+                        #{if xxyds_index % 5 == 0}
+                            <br />
+                            <br />
+                        #{/if}
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center">
+        #{page page:page, url:"/SchoolXxyds/pclist?xxId=" + xxId + "&type=" + type + "&classId=" + classId /}
+        </div>
+    </div>
+
+</div>

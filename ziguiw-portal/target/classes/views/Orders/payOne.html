@@ -1,0 +1,86 @@
+#{extends 'main.html'/}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/cz.css'}">
+<script type="text/javascript">
+    function change(option){
+
+        var optionElement = option;
+        var value = optionElement.value;
+        var select = document.getElementById("amount");
+        if(value=="points"){
+            var options ="<option value='5'>5元(500积分)</option>";
+            options = options + "<option value='10'>10元(1000积分)</option>";
+            options = options + "<option value='20'>20元(2000积分)</option>";
+            options = options + "<option value='30'>30元(3000积分)</option>";
+            options = options + "<option value='50'>50元(5000积分)</option>";
+            options = options + "<option value='70'>70元(7000积分)</option>";
+            options = options + "<option value='100'>100元(10000积分)</option>";
+
+            select.innerHTML = options;
+        }else{
+            select = document.getElementById("amount");
+            select.innerHTML= "<option value='100'>100元</option>";
+        }
+    }
+</script>
+<div class="czcenter1">
+
+    <div class="mypos fsong">
+        <a href="${play.configuration['portal.domain']}">子贵首页</a>&gt;
+        <a href="${play.configuration['portal.domain']}/myhomes/index">空间</a>&gt;
+        充值中心
+    </div>
+
+    <div class="cz_k">
+        <div class="cz_title">
+            <span style="color:#515151;font-size:28px;font-weight:bold;">子贵网-</span><span style="color:#c00202;font-size:28px;font-weight:bold;">充值中心</span>
+        </div>
+        <div class="cz_status">
+            <span class="cz_status_num" id="cz_curr">1 充值类别</span>
+            <span class="cz_status_num">2 充值方式</span>
+            <span class="cz_status_num">3 充值操作</span>
+            <span class="cz_status_num">4 充值完成</span>
+        </div>
+        <div class="cz_userinf">
+            <form action="/Orders/payTwo" method="get" id="form">
+                <table>
+                    *{<tr>
+                        <td align="right">账号：</td>
+                        <td>${userBase.nickName}</td>
+                    </tr>}*
+                    <tr>
+                        <td>请选择类别：</td>
+                        <td>
+                            <select name="type" onchange="change(this)">
+                                <option value="${com.arj.ziguiw.common.PayType.POINT}">积分</option>
+                                <option value="${com.arj.ziguiw.common.PayType.WEBUSE}">网站使用费</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>请选择金额：</td>
+                        <td>
+                            <select name="amount" id="amount">
+
+                                <option value="5">5元(500积分)</option>
+                                <option value="10">10元(1000积分)</option>
+                                <option value="20">20元(2000积分)</option>
+                                <option value="30">30元(3000积分)</option>
+                                <option value="50">50元(5000积分)</option>
+                                <option value="70">70元(7000积分)</option>
+                                <option value="100">100元(10000积分)</option>
+
+                            </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" class="cz_next" value="下一步" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>

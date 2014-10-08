@@ -1,0 +1,98 @@
+#{extends 'main.html'/}
+#{set 'title'}
+${debate.title}|教育知识|辩论|子贵网
+#{/set}
+<script type="text/javascript">
+    function validateDebateOpinionSave(type){
+        var content = document.getElementById('content'+type).value;
+        if(content==null||content==""){
+            alert('请输入内容！');
+            return false;
+        }
+        return true ;
+    }
+
+</script>
+<div class="mypos fsong"><a href="http://www.ziguiw.com">子贵首页</a> &gt; <a href="http://www.ziguiw.com/knowledges/index"> 教育知识</a> &gt; 用户辩论</div>
+<div class="argue_talk_ban">
+    <img alt="" src="/public/images/argue_banner.jpg"/>
+</div>
+
+<div class="argue_title">
+    <h1>${debate.title}</h1>
+    <p>
+        <b>简介</b>
+        ${debate.description}
+    </p>
+</div>
+<div class="red"></div>
+
+<!--正文观点 B-->
+<div class="augre_z l">
+    <h2 class="sum"><span style="">${debate.positiveSupportCount}</span></h2>
+    <p class="augre_gd">
+        <span class="fb">正方观点：</span>
+        ${debate.positiveOpinion}
+    </p>
+    <form method="post" action="/debates/createOpinion" onsubmit='return validateDebateOpinionSave(1);'>
+        <textarea name="opinion" cols="20" rows="2"  class="area" id='content1'></textarea>
+        <input type="hidden" name="debateId" value="${id}"/>
+        <input type="hidden" name="status" value="1"/>
+        <input name="Submit1" type="submit" value="" class="inp_sum2"/>您的留言不能超过200字，请登录后提交。<a href="/user/register.jsp" target="_blank" class="m-l4 red_f63">注册用户</a>
+    </form>
+    <div class="zjly">
+        <h3>最近留言 </h3>
+        <div contenteditable="true" style="width:430px;height:500px;overflow:auto;padding:5px">
+            #{list positives,as :'debateOpinion' }
+                <ul class="zjly_list">
+                    <li class="l">
+                        <a href="/myhome/1310024690" class="a-img1">
+                            <img alt="" src="${debateOpinion.creatorPortrait}" width=48 height=48 />
+                        </a>
+                        <a href="/myhome/1310024690">${debateOpinion.creatorNick}</a>
+                    </li>
+                    <li class="zjly_border">
+                        <p>${debateOpinion.opinion}</p>${debateOpinion.createTime.format("yyyy-MM-dd")}<var></var>
+                    </li>
+                </ul>
+            #{/list}
+        </div>
+    </div>
+</div>
+<!--正文观点 E-->
+
+<!--反文观点 B-->
+<div class="augre_f r">
+    <h2 class="sum"><span>${debate.negativeSupportCount}</span></h2>
+    <p class="augre_gd">
+        <span class="fb">反方观点：</span>
+        ${debate.negativeOpinion}
+    </p>
+    <form method="post" action="/debates/createOpinion" onsubmit='return validateDebateOpinionSave(2);'>
+        <textarea name="opinion" cols="20" rows="2"  class="area" id='content2'></textarea>
+        <input type="hidden" name="debateId" value="${id}"/>
+        <input type="hidden" name="status" value="2"/>
+        <input name="Submit1" type="submit" value="" class="inp_sum2"/>您的留言不能超过200字，请登录后提交。<a href="/user/register.jsp" target="_blank" class="m-l4 red_f63">注册用户</a>
+    </form>
+    <div class="zjly">
+        <h3>最近留言 </h3>
+        <div contenteditable="true" style="width:430px;height:500px;overflow:auto;padding:5px">
+        #{list negatives,as :'debateOpinion' }
+            <ul class="zjly_list">
+                <li class="l">
+                    <a href="/myhome/1310024690" class="a-img1">
+                        <img alt="" src="${debateOpinion.creatorPortrait}" width=48 height=48 />
+                    </a>
+                    <a href="/myhome/1310024690">${debateOpinion.creatorNick}</a>
+                </li>
+                <li class="zjly_border">
+                    <p>${debateOpinion.opinion}</p>${debateOpinion.createTime.format("yyyy-MM-dd")}<var></var>
+                </li>
+            </ul>
+        #{/list}
+        </div>
+    </div>
+</div>
+<!--反文观点 E-->
+
+  

@@ -1,0 +1,21 @@
+#{extends 'main.html' /}
+#{set title:school.name + "联系方式"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：<a href="#">学校主页</a>  &gt; 联系我们</p>
+        </div>
+        <div class="news_tit">
+            联系我们
+        </div>
+        <div class="contact_d">
+            <p><strong>${school?.name}</strong></p>
+            <p><strong>联系电话：${schoolExt?.tel}</strong></p>
+            <p><strong>学校网址：${schoolExt?.site}</strong></p>
+            <p><strong>E-Mail：${schoolExt?.email}</strong></p>
+            <p><strong>邮编：${schoolExt?.postcode}</strong></p>
+            <p><strong>学校地址：${schoolExt?.addr}</strong></p>
+        </div>
+    </div>
+</div>

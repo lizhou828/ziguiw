@@ -1,0 +1,18 @@
+<script type="text/javascript">
+    var top_loginBar;
+    try {
+        top_loginBar = parent.parent.document.getElementById("loginbar");
+    } catch (e) {
+        top_loginBar = parent.document.getElementById("loginbar");
+    }
+    if (top_loginBar) {
+        top_loginBar.innerHTML = "${toolBarBtn.raw()}";
+        #{if toolBarBtn.indexOf("admin") != -1}
+            try {
+                parent.parent.document.href = top_loginBar.getElementsByTagName("a")[0].href;
+            } catch (e) {
+                parent.document.href = top_loginBar.getElementsByTagName("a")[0].href;
+            }
+        #{/if}
+    }
+</script>

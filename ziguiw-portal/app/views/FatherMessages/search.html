@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>父亲节专题</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css.css'}">
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="top">
+    <div class="zigui_logo"><a href="http://www.ziguiw.com"><img src="@{'public/images/zigui_logo.gif'}"/></a></div>
+</div>
+<div class="top_1">
+    <div class="bt">
+
+        <p>五月的阳光，犹如母亲温柔；六月的烈日，却是父亲严厉。同样是爱，却爱得色彩斑斓。母爱如水、父爱如山！</p>
+        <p>父亲是一只船，载着我们的期待和梦幻；父亲是一棵树，为我们遮挡风雪和严寒；父亲是一盏灯，给我们光明和温暖；鬓角的白发，额头的皱纹，大山般的父亲，留给我们的不应该只是背影……</p>
+        <p><font color="c11919">所有曾经or此刻被爸爸呵护的大孩子、小孩子们，全都参与到传递父爱的活动中来吧！
+            让我们记住：<strong>六月的第三个星期日</strong>，真正属于父亲们的节日——父亲节。</font></p>
+    </div>
+</div>
+<div class="nr0">
+    <div class="dh">
+        <div class="dh1_1"><a href="/FatherActivitys/index" target="_blank">活动首页</a></div>
+        <div class="dh2_2"><a href="/FatherActivitys/list" target="_blank">作品投票</a></div>
+    </div>
+</div>
+<div class="fa_white">
+
+
+
+    <div class="cha_map">
+        <div class="dxhf_h">
+            <div class="dxhf_xk_h">
+                <div class="dxhf_bt_h">(${mobile.length() >= 11 ? mobile.substring(0,3) + "****" + mobile.substring(7) : mobile})父亲节短信：</div>
+                <div class="cha_dxhf_nr">
+                    #{if fatherMessageList.size() == 0 && replayList.size() == 0}
+                        <p>
+                            对不起，您没有参与我们的活动
+                        </p>
+                    #{/if}
+                    #{else }
+                        #{list fatherMessageList,as:'message'}
+                            <div class="cha_dxhf_nr">
+                                <p>
+                                    (${mobile.length() >= 11 ? mobile.substring(0,3) + "****" + mobile.substring(7) : mobile})
+                                    ${message.content}
+                                </p>
+                            </div>
+                        #{/list}
+                        #{list replayList,as:'replay'}
+                            <div class="cha_dxhf_nr">
+                                <p>
+                                    (${mobile.length() >= 11 ? mobile.substring(0,3) + "****" + mobile.substring(7) : mobile})
+                                ${replay.content}
+                                </p>
+                            </div>
+                        #{/list}
+                    #{/else}
+                    <!--<font>1.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：15</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span></div>
+              <div class="cha_dxhf_nr"><font>2.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：5</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span></div>
+              <div class="cha_dxhf_nr"><font>3.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：5</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span></div>
+              <div class="cha_dxhf_nr"><font>4.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：5</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span></div>
+              <div class="cha_dxhf_nr"><font>5.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：5</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span></div>
+              <div class="cha_dxhf_nr"><font>6.</font><span>作品编号：</span><span>作品标题：***</span><span> 投票数量：5</span><span class="fa_btn"><a href="#"><img src="images/toupiao_13.jpg" class="bottom"></a></span>--></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="yl">
+    <!--footer B-->
+    <div class="p_all">
+        <div class="p_flink">
+            <p>
+                <a href="http://www.ziguiw.com/helpCenter/about.jsp">关于我们</a>|
+                <a href="http://www.ziguiw.com/helpCenter/contract.jsp">服务协议</a>|
+                <a href="http://www.ziguiw.com/helpCenter/service.jsp">客服中心</a>|
+                <a href="http://dsis.ziguiw.com/feedback/add.jsp">意见反馈</a>|
+                <a href="http://www.ziguiw.com/helpCenter/pin.jsp">网站招聘</a>|
+                <a href="http://www.ziguiw.com/helpCenter/map.jsp">网站地图</a>|
+                <a href="http://www.ziguiw.com/helpCenter/contact.jsp">联系我们</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp">数字校园云服务展会专题</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp">轨迹查询</a>|
+                <a href="http://www.ziguiw.com/helpCenter/copyright.jsp">版权所有</a>|
+                <a href="http://www.ziguiw.com/helpCenter/help.jsp">帮助中心</a>
+            </p>
+        </div>
+
+        <div class="p_logo">
+            <p>
+                Copyright  &copy;  2013 <a href="http://www.ziguiw.com">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a>
+            </p>
+            <p>
+                经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a>
+                <!-- WPA Button Begin -->
+                <script type="text/javascript" src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&type=2&kfuin=4009952116&ws=www.ziguiw.com&btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&aty=0&a=&key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb"></script>
+                <!-- WPA Button END -->
+            </p>
+            <img src="../images/p_logo.gif" />
+        </div>
+    </div>
+    <!--footer E-->
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+</head>
+
+<body>
+<form  enctype="multipart/form-data" name="form" action="/UserPhotos/mobileCreate" method="post">
+    <input type="text" name="title" ><br>
+    <input type="file" name="file0"><br>
+    <input type="hidden" name="userId" value="118375"><br>
+    <input type="hidden" name="albumId" value="4"><br>
+    <input type="hidden" name="scale" value="500X500"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

@@ -1,0 +1,85 @@
+#{extends 'main.html'/}
+#{set 'title'}
+帮助中心
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="@{'public/images/banner02.gif'}" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;帮助中心
+
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>&#8226;</em>帮助中心</p></div>
+
+            <div class="p_con_l">
+                <div class="">
+                    <p><strong>如何注册子贵网会员？	</strong><!--<span class="helpmore">更多 &gt;&gt;</span>--></p>
+                    <hr style="margin:8px;">
+                    <div class="p_help_c">
+                        <ul>
+                            <li><a href="/HelpCenters/helpcon1">如何上传教育资源？</a></li>
+                            <li><a href="/HelpCenters/helpcon2">如何注册子贵网账号？</a></li>
+                            <li><a href="/HelpCenters/helpcon3">如何查看考勤记录？</a></li>
+                            <li><a href="/HelpCenters/helpcon4">如何登录子贵网账号？</a></li>
+                            <li><a href="/HelpCenters/helpcon5">如何获取积分？</a></li>
+                            <li><a href="/HelpCenters/helpcon6">用户充值?</a></li>
+                            <li><a href="/HelpCenters/helpcon7">如何申请学校站内站账户？</a></li>
+                            <li><a href="/HelpCenters/helpcon8">如何发布新闻？</a></li>
+                            <li><a href="/HelpCenters/helpcon9">发布的新闻前台不显示？</a></li>
+                        </ul>
+
+                        <!--                        <div class="p_help_w">
+                         <p>一．	登陆子贵网，点击页面顶部又上角的"新用户注册"</p>
+                        <p>二．	进入注册页面，提示登录或者注册。</p>
+                        <p><strong>登陆：</strong>1.填写"账户名"；填写"密码"；输入验证码完成登陆过程。</p>
+                        <p>个人用户注册：</p>
+                        <p>1.填写账户名，密码，邮箱，昵称基本信息；2.仔细阅读子贵网使用协议，同意条款后点击注册；3.此时子贵网会向您的邮箱发送"确认激活邮件"请按照邮件内容验证账号；5.确认激活邮件后，显示注册成功。</p>
+                        <p>为了您能顺利的完成注册，请您在填写用户注册表时，注意以下各项要求：</p>
+                        <p><strong>账户名：</strong>4-20位字符，由小写英文字母（a-z）.数字和下划线组成，如果您注册的账户名已有人使用，请重新填写账户名，一旦注册成功您的使用账户名将不能修改，请留意填写。</p>
+                        <p><strong>密码:</strong>6-16位字符，由6-16位字母和数字组成，建议您不要是用自己的生日，手机号码，姓名以及连续的数字作为密码，以防被盗取。</p>
+                        <p><strong>确认密码：</strong>需要跟上面填写的密码完全一致。</p>
+                        <p><strong>电子邮件：</strong>请您填写您常用的电子邮箱，以便找回密码使用。此邮箱用来激活您的账户名，它是您和子贵网交流的重要工具，注册邮箱具有唯一性，也是子贵网鉴别会员身份的一个重要条件。因此，请您填写真实有效的信息。</p>
+                        <p><strong>验证码：</strong>出于安全考虑，您需要按照图片显示的字符输入效验码，效验码请务必在英文状态或半角模式下输入，否则系统将会提示您的效验码出错，导致无法完成注册。</p>-->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p_con_r">
+                <div class="">
+                    <p><strong>网站的栏目功能：</strong><!--<span class="helpmore">更多 &gt;&gt;</span>--></p>
+                    <hr style="margin:8px;"/>
+                    <div class="p_help_c">
+                        <ul>
+                            <li>教育在线</li>
+                            <li>教育知识</li>
+                            <li>教育资源</li>
+                            <li>互动社区</li>
+                            <li>我的小家</li>
+                            <li>数字化校园功能</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <!--middle E-->
+
+</div>

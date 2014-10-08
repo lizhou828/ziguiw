@@ -1,0 +1,231 @@
+#{extends 'main.html'/}
+#{set 'title'}
+教育知识首页
+#{/set}
+<div class="clearfix">
+    <!--轮播 B-->
+    <div class="lunbo2 fl pr">
+        <div class="sub_box_1">
+            <div id="p-select" class="sub_nav_1">
+                <div class="sub_no" id="bd1lfsj">
+                    <ul>
+                        <li class="show">1</li>
+                        <li class="">2</li>
+                        <li class="">3</li>
+                        <li class="">4</li>
+                        <li class="">5</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="bd1lfimg_1">
+                <div>
+                    <dl class="show"></dl>
+                    #{list knowledge_index_hd,as : 'recommend'}
+                        <dl class="">
+                            <dt>
+                                <a href="@{show(recommend.objectId)}"  target="_blank">
+                                    <img src="${ctx}/${recommend.url}">
+                                </a>
+                            </dt>
+                            <dd>
+                                <h4 class="fyahei">
+                                    <a href="@{show(recommend.objectId)}" target="_blank">${recommend.title}</a>
+                                </h4>
+                            </dd>
+                            <dd class="bg_lunbo"></dd>
+                        </dl>
+                    #{/list}
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">movec_1();</script>
+    </div>
+    <!--轮播 E-->
+
+    <!--辩论 B-->
+    <div class="learn_bg fl pr">
+        <div class="learn borda pa">
+            #{if debate}
+                <h2 class="fyahei f18">
+                    <a href="/debates/show?id=${debate.id}">${debate.title}</a>
+                </h2>
+                <p class="f14">
+                    ${debate.description}　　
+                    <a href="/debates/show?id=${debate.id}">参与辩论</a>
+                </p>
+                <div class="talk_vs">
+                    <div class="talk_z">
+                        <p>${debate.positiveOpinion}</p>
+                        <var>支持数</var><sub>${debate.positiveSupportCount}</sub>
+                    </div>
+                    <div class="talk_f">
+                        <p>${debate.negativeOpinion}</p>
+                        <var>支持数</var><sub>${debate.negativeSupportCount}</sub>
+                    </div>
+                </div>
+            #{/if}
+        </div>
+    </div>
+    <!--辩论 E-->
+
+    <div class="fr w-270 yuer">
+        <div class="hottj borda pr pt40">
+            <div class="h3tita pa">
+                <h3 class="fyahei">育儿问答</h3>
+            </div>
+            <ul class="hottj_bot">
+                #{list parenting,as :'question'}
+                    <li>
+                        <span>${question.createTime.format("yyyy-MM-dd")}</span>
+                        <a href="/questions/show?id=${question.id}">${question.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+        <div class="ad_col2_1 borda mt5"><a ><img src="/public/images/img_268_88.jpg"></a></div>
+    </div>
+</div>
+
+<!--幼儿期 B-->
+<div class="clearfix borda mt10 mb10 jyzx">
+    <div class="h3titc">
+        <h3 class="pr fyahei"><a href="@{list(1)}" title="幼儿期" target="_blank">幼儿期</a></h3>
+    </div>
+
+    <div class="fl w-690">
+        <ul class="xy_top clearfix">
+            #{list knowledge_index_youerqi,as :'recommend'}
+                <li>
+                    <a href="@{show(recommend.objectId)}">
+                        <img src="${ctx}/${recommend.url}"/>
+                    </a>
+                    <h4><a href="@{show(recommend.objectId)}">${recommend.title}</a></h4>
+                    <p>
+                        ${recommend.description}
+                        <a href="@{show(recommend.objectId)}" class="fsong">[详细]</a>
+                    </p>
+                </li>
+            #{/list}
+        </ul>
+        <ul class="xy_bot clearfix">
+            #{list earlyChildhood,as : 'knowledge'}
+                <li>
+                    <strong class="fsong">
+                        <a href="@{list(1)}" title="幼儿期">[幼儿期]</a>
+                    </strong>
+                    <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+
+    <div class="know_rd ph r">
+        <h2 class="col-h2"><b class="l">幼儿期热点知识</b></h2>
+        <ul>
+            #{list earlyChildhoodHot,as:'knowledge'}
+                #{if knowledge_index<11}
+                    <li>
+                        <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                    </li>
+                #{/if}
+            #{/list}
+        </ul>
+    </div>
+</div>
+<!--幼儿期 E-->
+
+<div class="ad_w970"><a ><img src="/public/images/ad_970_1.jpg" alt="关键字" /></a></div>
+
+<!--少儿期 B-->
+<div class="clearfix borda mt10 mb10 jyzx">
+    <div class="h3titc">
+        <h3 class="pr fyahei"><a href="@{list(2)}" title="少儿期" >少儿期</a></h3>
+    </div>
+    <div class="fl w-690">
+        <ul class="xy_top clearfix">
+            #{list knowledge_index_shaoerqi,as :'recommend'}
+                <li>
+                    <a href="@{show(recommend.objectId)}">
+                        <img src="${ctx}/${recommend.url}"/>
+                    </a>
+                    <h4><a href="@{show(recommend.objectId)}">${recommend.title}</a></h4>
+                    <p>
+                    ${recommend.description}
+                        <a href="@{show(recommend.objectId)}" class="fsong">[详细]</a>
+                    </p>
+                </li>
+            #{/list}
+        </ul>
+        <ul class="xy_bot clearfix">
+            #{list stageChildren,as : 'knowledge'}
+                <li>
+                    <strong class="fsong">
+                        <a href="@{list(2)}" title="少儿期" >[少儿期]</a>
+                    </strong>
+                    <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="know_rd ph r">
+        <h2 class="col-h2"><b class="l">少儿期热点知识</b></h2>
+        <ul>
+            #{list stageChildrenHot,as:'knowledge'}
+                #{if knowledge_index<11}
+                    <li>
+                        <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                    </li>
+                #{/if}
+            #{/list}
+        </ul>
+    </div>
+</div>
+<!--少儿期 E-->
+
+<div class="ad_w970"><a ><img src="/public/images/adv02.jpg" alt="关键字" /></a></div>
+
+<!--青年期 B-->
+<div class="clearfix borda mt10 mb10 jyzx">
+    <div class="h3titc">
+        <h3 class="pr fyahei"><a href="@{list(3)}" title="青年期" target="_blank">青年期</a></h3>
+    </div>
+    <div class="fl w-690">
+        <ul class="xy_top clearfix">
+            #{list knowledge_index_qingnianqi,as :'recommend'}
+                <li>
+                    <a href="@{show(recommend.objectId)}">
+                        <img src="${ctx}/${recommend.url}"/>
+                    </a>
+                    <h4><a href="@{show(recommend.objectId)}">${recommend.title}</a></h4>
+                    <p>
+                    ${recommend.description}
+                        <a href="@{show(recommend.objectId)}" class="fsong">[详细]</a>
+                    </p>
+                </li>
+            #{/list}
+        </ul>
+        <ul class="xy_bot clearfix">
+            #{list youngPeriod,as : 'knowledge'}
+                <li>
+                    <strong class="fsong">
+                        <a href="@{list(3)}" title="青年期" >[青年期]</a>
+                    </strong>
+                    <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="know_rd ph r">
+        <h2 class="col-h2"><b class="l">青年期热点知识</b></h2>
+        <ul>
+            #{list youngPeriodHot,as:'knowledge'}
+                #{if knowledge_index<11}
+                    <li>
+                        <a href="@{show(knowledge.id)}">${knowledge.title}</a>
+                    </li>
+                #{/if}
+            #{/list}
+        </ul>
+    </div>
+</div>

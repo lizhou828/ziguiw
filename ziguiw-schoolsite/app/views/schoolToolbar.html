@@ -1,0 +1,16 @@
+<div class="toolbar">
+    <div class="tit">
+        欢迎来到子贵网！
+    </div>
+    <div id="loginbar" class="subNav">
+    #{if !username}
+        <a href="${play.configuration['cas.loginUrl']}">登录</a>
+        <span><a href="${play.configuration['portal.domain']}/UserBases/registerUI">注册</a></span>
+        #{script src:'user.js'/}
+    #{/if}
+    </div>
+    <a href="http://dsis.ziguiw.com/downandroid/mobile.jsp" title="手机版" target="_blank">手机版</a>
+    <a href="javascript:setHome(window.location);" target="_self">设为首页</a>
+    <a href="javascript:addFavorite(window.location, document.title)" target="_self">加入收藏</a>
+#{script src:'base.js'/}
+</div>

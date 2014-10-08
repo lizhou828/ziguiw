@@ -1,0 +1,62 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 校园风光" /}
+#{set "moreScripts"}
+    #{script src:'slide.js'/}
+    #{script src:'changimages.js'/}
+#{/set}
+
+<div class="comm_k">
+    <div class="comm_w">
+        <p>校园风光</p>
+    </div>
+
+    <div class="wrap picshow">
+        <!--大图轮换区-->
+        <div id="picarea">
+            <div class="slidearea">
+                <div style="margin: 0px auto;  overflow: hidden" id="bigpicarea">
+                    <p class="bigbtnprev"><span id="big_play_prev"></span></p>
+                    #{list items:schoolPhotos,as:'photo'}
+                        <div id="image_xixi-${photo.id}" class="image"
+                             #{if photo_index == 1}
+                                style="opacity: 0.6488957193722925; display: block;"
+                             #{/if}
+                             #{else }
+                                style="opacity: 0; display: none;"
+                             #{/else}
+                                >
+                            <a href="#" target="_blank">
+                                <img alt="${photo.title}"
+                                src="${photo.url == null ? photo.url : ctx + "/" +com.arj.ziguiw.common.ImageSize.getImage(photo.url,com.arj.ziguiw.common.ImageSize.LS1)}"></a>
+                            <div class="word" style="opacity: 0.85; display: none;">
+                                <h3>${photo.title}</h3>
+                            </div>
+                        </div>
+                    #{/list}
+                    <p class="bigbtnNext"><span id="big_play_next"></span></p>
+                </div>
+            </div>
+            <div id="smallpicarea">
+                <div id="thumbs">
+                    <ul>
+                        <li class="first btnprev"><img id="play_prev" src="@{'public/images/left.png'}"></li>
+                            #{list items:schoolPhotos, as:'photo'}
+                                <li class="slideshowItem" #{if photo_index > 4}style="display: none;"#{/}>
+                                    <a id=thumb_xixi-0${photo_index} href="#">
+                                        <img src="${photo.url == null ? photo.url : ctx + "/" +com.arj.ziguiw.common.ImageSize.getImage(photo.url,com.arj.ziguiw.common.ImageSize.LS2)}"/>
+                                    </a>
+                                </li>
+                            #{/list}
+                        <li class="last btnNext"><img id="play_next" src="@{'public/images/right.png'}"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script>
+            var target = [#{list items:schoolPhotos, as:'photo'}"xixi-${photo_index}",#{/list}];
+        </script>
+    </div>
+
+
+
+</div>

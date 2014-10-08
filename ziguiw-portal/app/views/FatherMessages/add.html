@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>父亲节专题</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css.css'}">
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+
+#{if flag == -1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '上传失败，请尽量把信息填写完整！',
+                    yesFn : btnFn,
+                    noFn : true
+                }
+            });
+        };
+
+    </script>
+#{/if}
+
+
+#{if flag == 1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '感谢您的参与，你的祝福我们将于6月16日父亲节当天送达。亲，记得多陪陪爸爸。父亲节' +
+                            '(6月16日)刚好是星期天，不如推掉朋友、女友/男友的聚会、约会，回家陪陪爸爸喝喝茶聊聊天吧！',
+                    yesFn : btnFn,
+                    noFn : true
+                }
+            });
+        };
+
+    </script>
+#{/if}
+</head>
+
+<body>
+<div class="top">
+    <div class="zigui_logo"><a href="http://www.ziguiw.com"><img src="@{'public/images/zigui_logo.gif'}"/></a></div>
+</div>
+<div class="top_1">
+    <div class="bt"><p>五月的阳光，犹如母亲温柔；六月的烈日，却是父亲严厉。同样是爱，却爱得色彩斑斓。母爱如水、父爱如山！</p>
+        <p>父亲是一只船，载着我们的期待和梦幻；父亲是一棵树，为我们遮挡风雪和严寒；父亲是一盏灯，给我们光明和温暖；鬓角的白发，额头的皱纹，大山般的父亲，留给我们的不应该只是背影……</p>
+        <p><font color="c11919">所有曾经or此刻被爸爸呵护的大孩子、小孩子们，全都参与到传递父爱的活动中来吧！
+            让我们记住：<strong>六月的第三个星期日</strong>，真正属于父亲们的节日——父亲节。</font></p>
+    </div>
+</div>
+<div class="nr0">
+    <div class="dh">
+        <div class="dh1"><a href="/FatherActivitys/index" target="_blank">活动首页</a></div>
+        <div class="dh2"><a href="/FatherActivitys/list" target="_blank">作品投票</a></div>
+    </div>
+</div>
+<div class="nr">
+    <div class="zpsc"></div>
+    <form enctype="multipart/form-data" name="form" action="/FatherMessages/upload" method="post">
+        <div class="zpsc_nr">
+            <div class="zpsc_bt">发送祝福</div>
+            <div class="bg"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align="right" ><p style="line-height:50%">短信接收号码：</p><p style="line-height:50%">(父亲手机号)&nbsp</p></td>
+                    <td><input type="text" name="mobile" value="${mobile}">&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">短信内容：</td>
+                    <td><textarea type="text" name="content" id="textfield2" value="${content}" cols="15" rows="3"></textarea>
+                        *限140字</td>
+                </tr>
+                <tr>
+                    <td align="right">儿子/女儿：</td>
+                    <td><input type="text" name="appellation" id="textfield3" value="${appellation}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">署名：</td>
+                    <td><input type="text" name="signature" id="textfield4" value="${signature}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">联系电话：</td>
+                    <td><input type="text" name="contact" id="textfield5" value="${contact}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">常用邮箱：</td>
+                    <td><input type="text" name="email" id="textfield6" value="${email}"/></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="" class="inp_upload"></td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="yl">
+    <p>
+        <a href="/HelpCenters/aboutus" target="_blank" class="hei">关于我们</a>|
+        <a href="/HelpCenters/contract" target="_blank">服务协议</a>|
+        <a href="/HelpCenters/service" target="_blank">客服中心</a>|
+        <a href="/HelpCenters/feedback" target="_blank">意见反馈</a>|
+        <a href="/HelpCenters/recruit" target="_blank">网站招聘</a>|
+        <a href="/HelpCenters/map" target="_blank">网站地图</a>|
+        <a href="/HelpCenters/contact" target="_blank">联系我们</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+        <a href="/HelpCenters/copyright" target="_blank">版权所有</a>|
+        <a href="/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+    #{if session.get("classAdminPhotoType") && com.arj.ziguiw.common.SchoolPhotoType.PHOTO == Integer.valueOf(session.get("classAdminPhotoType"))}
+        #{crud.form fields:['title','url','describe','album']}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" id = "object_title" name="object.title" size="75">
+            #{/crud.custom}
+            #{crud.custom 'url'}
+                <label for="object_url">图片</label>
+                <input id="object_url" type = "file" name="file">
+            #{/crud.custom }
+            #{crud.custom 'album'}
+                <label for="object_album"> 选择相册 </label>
+                <select name="object.album.id" id="object_album">
+                    #{list schoolAlbums,as:'albums'}
+                        <option value="${albums.id}">${albums.name}</option>
+                    #{/list}
+                </select>
+            #{/crud.custom}
+            #{crud.custom 'describe'}
+                <label for="object_describe">描述</label>
+                <textarea id="object_describe" name="object.describe" rows="5" cols="100"></textarea>
+            #{/crud.custom }
+        #{/crud.form}
+        #{/if}
+        #{else }
+            #{crud.form fields:['title','url','cover','describe']}
+                #{crud.custom 'url'}
+                    <label for="object_url"> 视频 </label>
+                    <input type="file" name="file" id="object_url">
+                #{/crud.custom}
+                #{crud.custom 'cover'}
+                    <label for="object_cover"> 视频封面图 </label>
+                    <input type="file" name="cover" id="object_cover">
+                #{/crud.custom}
+                #{crud.custom 'describe'}
+                    <label for="object_describe">描述</label>
+                    <textarea id="object_describe" name="object.describe" rows="5" cols="100"></textarea>
+                #{/crud.custom }
+            #{/crud.form}
+        #{/else}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            *{<input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />}*
+        </p>
+        <input type="hidden" name="object.xxId" value="${xxId}">
+        <input type="hidden" name="object.classId" value="${classId}">
+        <input type="hidden" name="xxId" value="${xxId}">
+        <input type="hidden" name="classId" value="${classId}">
+        <input type="hidden" name="object.type" value="${Integer.valueOf(session.get("classAdminPhotoType"))}">
+    #{/form}
+    </div>
+
+</div>

@@ -1,0 +1,73 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="/public/images/banner02.gif" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;
+        <a href="#">帮助中心</a>   &gt;
+        <a href="#"></a>   正文
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>•</em>帮助中心</p></div>
+
+            <div class="p_con">
+                <img src="/public/images/p_first.gif">
+                <div class="p_helpcon_middle">
+                    <p><strong>如何获取积分？	</strong></p>
+                    <hr style="margin:8px;">
+                    <div class="p_help_w">
+                        <p><strong> 积分获取：</strong></p>
+                        <p>1．登录（每天每人成功登录一次送2积分，每人每天限登录5次）；</p>
+                        <p>2．发表评论、留言，送5积分；</p>
+                        <p>3．论坛发帖，主题帖送2积分，回复帖送 1积分，自己发的主题帖回复会员数超过6人，则获得3分精华贴奖励；</p>
+                        <p>4．上传资源通过审核获（20～50积分）；</p>
+                        <p>5．用户下载自己上传的优质资源获得制定资源积分；</p>
+                        <p>6．注册成功送（15积分），用户完善会员资料送（20积分），成为VIP会员送（1000积分）；</p>
+                        <p>7、写日志，成功提问送5积分；</p>
+                        <p>8．推荐好友注册上次资源 送50积分/人；</p>
+                        <p>9、班级圈发起话题送2积分，回复话题1积分，回帖人数达到10、以上升级为经典话题再获得3分；</p>
+                        <p>11、班级动态/公告发表成功，送20积分；</p>
+                        <p>12、班级活动图片新闻（文字+图片）审核通过送20积分；</p>
+                        <p>13、班级视频审核通过送30积分；</p>
+                        <p>14、班级学习园地学习资讯信息发表一条送5积分；</p>
+                        <p>15、为帐户充值一元钱，获得（1贵币），同时（赠送10积分）。</p>
+                        <br>
+                        <p><strong>积分消耗途径</strong></p>
+                        <p>1．下载优质资源消耗该资源制定积分数额；</p>
+                        <p>2．发水帖，扣除（3积分）；</p>
+                        <p>3．发垃圾评论，扣除（3积分）。</p>
+                        <br>
+                        <p><strong>积分有效期：</strong></p>
+                        <p>用户登录后，可在个人空间或用户中心点击"积分明细"或"我的积分"查看积分。积分在操作状态成功后10分钟内发至账户，积分有效期为积入之日起至次年年底。如：2013年3月18日获得10积分，有效期至2014年12月31日。</p>
+
+
+                    </div>
+                </div>
+                <img src="/public/images/p_last.gif">
+            </div>
+            <div class="p_con">
+                <div class="p_helpcon_middle">
+                    <p><a class="status_home" href="javascript:history.go(-1)">返回</a></p>
+
+                </div>
+            </div>
+        </div>
+        <!--middle E-->
+
+    </div>
+</div>

@@ -1,0 +1,47 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-日志列表
+#{/set}
+    <!--main_right B-->
+<div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">我的日志</div>
+            #{if userBase.id == user?.id}
+                <div class="diary_wri">
+                    #{a @UserDiarys.add(userBase.id)}
+                        写日志
+                    #{/a}
+                </div>
+            #{/if}
+        </div>
+        <div class="diary">
+            <table>
+                #{list page.data,as:'diarys'}
+                    #{if diarys_index % 2 ==0 }
+                    <tr class="my_art_dy_bg">
+                    #{/if}
+                    #{else }
+                    <tr class="my_art_dy">
+                    #{/else}
+                    <td>
+                        <h4><a class="red_f63" target="_blank" href="/UserDiarys/show?userDiaryId=${diarys.id}">${diarys.title}</a></h4>
+                        <p>&#12288;&#12288;${diarys.description}</p>
+                        <p class="c_666">
+                            阅读(${diarys.clickCount})
+                            <a target="_blank" href="/UserDiarys/show?userDiaryId=${diarys.id}">查看全文</a>
+                            #{if userBase.id == user?.id}
+                                <a href="/UserDiarys/edit?userDiaryId=${diarys.id}">编辑文章</a>
+                                <a href="/UserDiarys/delete?userDiaryId=${diarys.id}">删除</a>
+                            #{/if}
+                        </p>
+                    </td>
+                </tr>
+                #{/list}
+            </table>
+            <div style="text-align: center">
+            #{page page:page, url:"/UserDiarys/list?userId=" + userBase.id /}
+            </div>
+        </div>
+
+    </div>
+    <!--main_right E-->

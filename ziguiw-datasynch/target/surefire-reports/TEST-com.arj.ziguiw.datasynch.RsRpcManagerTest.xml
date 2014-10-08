@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="1.891" errors="1" skipped="0" tests="1" name="com.arj.ziguiw.datasynch.RsRpcManagerTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0\jre\bin"/>
+    <property name="java.vm.version" value="1.6.0-b105"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="idea.launcher.port" value="7534"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 3"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\workSpaces\ziguiw-7.0\ziguiw-datasynch"/>
+    <property name="java.runtime.version" value="1.6.0-b105"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0\jre\lib\endorsed"/>
+    <property name="os.arch" value="x86"/>
+    <property name="java.io.tmpdir" value="C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows XP"/>
+    <property name="classworlds.conf" value="D:\apache-maven-3.0.4\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.6.0\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Program Files\JetBrains\IntelliJ IDEA 11.1.2\bin\..\.\bin;C:\oraclexe\app\oracle\product\10.2.0\server\bin;C:\Program Files\Java\jdk1.6.0\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;D:\Apache-Subversion-1.7.5\bin;D:\Program Files\TortoiseSVN\bin;D:\EditPlus;C:\Oracle\ora90\BIN\;d:\program files\jetbrains\intellij idea 11.1.2\jre\jre\bin"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="os.version" value="5.1"/>
+    <property name="user.home" value="C:\Documents and Settings\Administrator"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="idea.launcher.bin.path" value="D:\Program Files\JetBrains\IntelliJ IDEA 11.1.2\bin"/>
+    <property name="user.name" value="Administrator"/>
+    <property name="java.class.path" value="D:\apache-maven-3.0.4\boot\plexus-classworlds-2.4.jar;D:\Program Files\JetBrains\IntelliJ IDEA 11.1.2\lib\idea_rt.jar"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.6.0\jre"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="1.6.0"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.6.0\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.6.0\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0\jre\classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="maven.home" value="D:\apache-maven-3.0.4"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
+  </properties>
+  <testcase time="1.813" classname="com.arj.ziguiw.datasynch.RsRpcManagerTest" name="saveParent">
+    <error message="Invalid bean definition with name &apos;dataSource&apos; defined in file [D:\workSpaces\ziguiw-7.0\ziguiw-datasynch\target\classes\com\arj\ziguiw\datasynch\scheduler.xml]: Could not resolve placeholder &apos;db.driverUrl&apos;" type="org.springframework.beans.factory.BeanDefinitionStoreException">org.springframework.beans.factory.BeanDefinitionStoreException: Invalid bean definition with name &apos;dataSource&apos; defined in file [D:\workSpaces\ziguiw-7.0\ziguiw-datasynch\target\classes\com\arj\ziguiw\datasynch\scheduler.xml]: Could not resolve placeholder &apos;db.driverUrl&apos;
+	at org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.processProperties(PropertyPlaceholderConfigurer.java:287)
+	at org.springframework.beans.factory.config.PropertyResourceConfigurer.postProcessBeanFactory(PropertyResourceConfigurer.java:75)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:663)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:638)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:407)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.&lt;init&gt;(ClassPathXmlApplicationContext.java:93)
+	at com.arj.ziguiw.datasynch.RsRpcManagerTest.init(RsRpcManagerTest.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.junit.internal.runners.MethodRoadie.runBefores(MethodRoadie.java:122)
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:86)
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:77)
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:42)
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:88)
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:51)
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:44)
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:27)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:37)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</error>
+    <system-out>2013-01-26 11:05 36,500: INFO (org.springframework.context.support.AbstractApplicationContext:456) - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@12152e6: startup date [Sat Jan 26 11:05:36 CST 2013]; root of context hierarchy
+2013-01-26 11:05 36,765: INFO (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:315) - Loading XML bean definitions from file [D:\workSpaces\ziguiw-7.0\ziguiw-datasynch\target\classes\com\arj\ziguiw\datasynch\scheduler.xml]
+2013-01-26 11:05 37,984: INFO (org.springframework.beans.factory.support.DefaultSingletonBeanRegistry:422) - Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@79a2e7: defining beans [placeholderConfig,dataSource,transactionManager,org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,rsRpcManager,jdbcTemplateService,org.springframework.aop.config.internalAutoProxyCreator,org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0,org.springframework.transaction.interceptor.TransactionInterceptor#0,org.springframework.transaction.config.internalTransactionAdvisor,txAdvice,org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0,schoolScheduler,studentScheduler,parentScheduler,teacherScheduler,classScheduler,teacherClassScheduler,schoolJob,studentJob,parentJob,teacherJob,classJob,teacherClassJob,schoolCronTrigger,studentCronTrigger,parentCronTrigger,teacherCronTrigger,classCronTrigger,teacherClassCronTrigger,org.springframework.scheduling.quartz.SchedulerFactoryBean#0,taskExecutor,jdbcTemplate]; root of factory hierarchy
+</system-out>
+  </testcase>
+</testsuite>

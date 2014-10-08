@@ -1,0 +1,17 @@
+rpc.schoolurl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/school.htm?pages=%s&pagesize=%s
+rpc.studenturl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/student.htm?pages=%s&pagesize=%s
+rpc.teacherurl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/teacher.htm?pages=%s&pagesize=%s
+rpc.parenturl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/parent.htm?pages=%s&pagesize=%s
+rpc.classurl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/class.htm?pages=%s&pagesize=%s
+rpc.teacherClassurl=http://192.168.0.169:8089/DSIS_zgw_syndata/synchon/teacherClass.htm?pages=%s&pagesize=%s
+pageSize=100
+schoolScheduler.cron=0/10 * * * * ?
+studentScheduler.cron=0/10 * * * * ?
+parentScheduler.cron=0/10 * * * * ?
+teacherScheduler.cron=0/10 * * * * ?
+classScheduler.cron=0/10 * * * * ?
+teacherClassScheduler.cron=0/10 * * * * ?
+
+db.driverUrl=jdbc:oracle:thin:@192.168.0.128:1521:dw
+db.user=scott
+db.password=ziguiw

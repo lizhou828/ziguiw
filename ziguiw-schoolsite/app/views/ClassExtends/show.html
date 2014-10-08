@@ -1,0 +1,35 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title: "班级设置"/}
+
+<div id="crudShow">
+
+    <h2 id="crudShowTitle">班级设置</h2>
+
+    <div class="objectForm">
+    #{form action:@save(classExtend?.classId), enctype:'multipart/form-data'}
+        <div class="crudField crud_select">
+            <label for="classExtend_color">
+                皮肤
+            </label>
+            <select id="classExtend_color" name="object.color">
+                #{list items:com.arj.ziguiw.common.ClassTemplateColor.map, as : 'c'}
+                    <option value="${c.key}" #{if classExtend?.color == c.key}selected="true"#{/if}>${c.value}</option>
+                #{/list}
+            </select>
+        </div>
+        <div class="crudField crud_input">
+            <label for="classExtend_banner">
+                banner
+            </label>
+            <input type="file" name="file" id="classExtend_banner">
+            <img src="${ctx}/${classExtend?.banner}">
+        </div>
+        <p class="crudButtons">
+        *{<input type="submit" name="_save" value="&{'crud.save', type.displayName}" />}*
+            <input type="submit" name="_saveAndContinue" value="保存" />
+        </p>
+
+    #{/form}
+    </div>
+
+</div>

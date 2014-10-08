@@ -1,0 +1,270 @@
+#{extends 'classmain.html' /}
+#{set title: school.name + " - " + schoolClazz.name + " - 首页"/}
+
+<div class="middle center pt10">
+
+<!--轮播开始-->
+<div class="change_left">
+    <div class="sub_box_4">
+        <div class="sub_nav_4" id="p-select">
+            <div id="bd1lfsj" class="sub_no">
+                <ul>
+                    #{list classNewUrl,as:'url'}
+                        #{if url_index <= classNewUrl.size() && url_index < 6}
+                            #{if url_index <= 1}
+                                <li class="show">${url_index}</li>
+                            #{/if}
+                            #{else }
+                                <li class="">${url_index}</li>
+                            #{/else}
+                        #{/if}
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+        <div id="bd1lfimg_4">
+            <div>
+                <dl class=""></dl>
+                #{list classNewUrl,as:'newUrl'}
+                <dl class="">
+                    <dt>
+                        #{a @ClassNews.pshow(newUrl.id).add("xxId",xxId).add("classId",classId)}
+                        <img alt="${newUrl.title}"
+                             src="${newUrl.url ==null ? newUrl.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(newUrl.url,com.arj.ziguiw.common.ImageSize.SSL)}">
+                        #{/a}
+                    </dt>
+                    <dd>
+                        <h4 class="fyahei">
+                            #{a @ClassNews.pshow(newUrl.id).add("xxId",xxId).add("classId",classId)}
+                            ${newUrl.title}
+                            #{/a}
+                        </h4>
+                    </dd>
+                    <dd class="bg_lunbo_4"></dd>
+                </dl>
+                #{/list}
+            </div>
+        </div>
+        <script type="text/javascript" language="javascript">movec_4();</script>
+    </div>
+</div>
+<!--轮播结束-->
+
+<div class="news">
+    <div class="dynamic_news">
+        <div class="dy_title">
+            <div class="dy_left">班级动态</div>
+            <div class="dy_more">
+                #{a @ClassNews.plist().add("xxId",xxId).add("classId",classId)}
+                    更多 &gt;&gt;
+                #{/a}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="dy_con">
+            <ul>
+                #{list classNews,as:'news'}
+                <li>
+                    <div class="dy_c">
+                        #{a @ClassNews.pshow(news.id)}
+                            ${news.title}
+                        #{/a}
+                    </div>
+                    <div class="dy_time">
+                        <span>${news.createTime == null ? news.createTime : news.createTime.format("yyyy-MM-dd")}</span>
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="notice_news">
+        <div class="cam_title">
+            <div class="cam_left">班级公告</div>
+            <div class="dy_more">
+               #{a @ClassNews.plist(com.arj.ziguiw.common.ClassNewType.BULLETIN).add("xxId",xxId).add("classId",classId)}
+                    更多 &gt;&gt;
+                #{/a}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="cam_con">
+            <ul>
+                #{list classGg,as:'gg'}
+                <li>
+                    <div class="dy_c">
+                        #{a @ClassNews.pshow(gg.id)}
+                        ${gg.title}
+                        #{/a}
+                    </div>
+                    <div class="dy_time">
+                        <span>${gg.createTime == null ? gg.createTime : gg.createTime.format("yyyy-MM-dd")}</span>
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="clear"></div>
+
+<div class="about pt10">
+    <div class="a_intro">
+        <div class="dy_title">
+            <div class="intro_left">班级话题</div>
+            <div class="dy_more">
+                #{a @ClassForums.plist().add("xxId",xxId).add("classId",classId)}
+                更多 &gt;&gt;
+                #{/a}
+            </div>
+        </div>
+        <div class="stu_words">
+            <ul>
+                #{list classForums,as:'forum'}
+                <li>
+                    #{a @ClassForums.pshow(forum.id).add("xxId",xxId).add("classId",classId)}
+                        ${forum.title}
+                    #{/a}
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="a_happy">
+        <div class="hap_title">
+            <div class="hap_left">班级花絮</div>
+            <div class="dy_more">
+                #{a @ClassPhotos.index().add("xxId",xxId).add("classId",classId)}
+                    更多 &gt;&gt;
+                #{/a}
+            </div>
+        </div>
+        <div class="happy_con">
+            <ul>
+                #{list classPhotos,as:'photos'}
+                <li>
+                    <p>
+                    #{a @ClassPhotos.pshow(photos.album?.id).add("xxId",xxId).add("classId",classId)}
+                        <img src="${photos.url ==null ? photos.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photos.url,com.arj.ziguiw.common.ImageSize.SSX)}" height="102" width="136"/>
+                    #{/a}
+                    </p>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+        <div class="huaxu_v">
+                <script src="/public/flashplayer/flexpaper_flash.js"></script>
+                <script src="/public/flashplayer/AC_RunActiveContent.js"></script>
+                <script language="javascript">
+                    if (AC_FL_RunContent == 0) {
+                        alert("This page requires AC_RunActiveContent.js.");
+                    } else {
+                        AC_FL_RunContent(
+                                'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                'width', '269',
+                                'height', '226',
+                                'src', '/public/flashplayer/jcplayer',
+                                'quality', 'high',
+                                'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                'align', 'middle',
+                                'play', 'true',
+                                'loop', 'true',
+                                'scale', 'noScale',
+                                'wmode', 'window',
+                                'devicefont', 'false',
+                                'id', 'jcplayer',
+                                'bgcolor', '#ffffff',
+                                'name', 'jcplayer',
+                                'menu', 'true',
+                                'allowFullScreen', 'true',
+                                'allowScriptAccess','sameDomain',
+                                'FlashVars','videoURL=${ctx}/${classVideo?.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222',
+                                'movie', '/public/flashplayer/jcplayer',
+                                'salign','TL'
+                        ); //end AC code
+                    }
+                    <!--Settable JCPlayer  params :startPhotoSource,videoURL,loop,autoPlay,scaleMode,volume,bufferTime,backgroundColor1,movieBackgroundColor,backgroundColor2,highlightColor,inkColor,playButton,timeBar,seekBar,volumeButton,fullScreenButton,skin,smoothing,autoHide,autoHideFullScreen,offsetY,offsetYFullScreen,margins,marginsFullScreen -->
+                </script>
+                <noscript>
+                    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="465" height="295" id="jcplayer" align="TL">
+                        <param name="allowScriptAccess" value="sameDomain" />
+                        <param name="FlashVars" value="videoURL=${ctx}/${classVideo?.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222"/>
+                        <param name="allowFullScreen" value="true" />
+                        <param name="salign" value="TL" />
+                        <param name="scale" value="noScale" />
+                        <param name="movie" value="/public/flashplayer/jcplayer.swf" />
+                        <param name="quality" value="high" />
+                        <param name="bgcolor" value="#ffffff" />
+                        <embed src="/public/flashplayer/jcplayer.swf" FlashVars="videoURL=${ctx}/${classVideo?.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222" quality="high" bgcolor="#ffffff" width="465" height="295" name="jcplayer" align="middle" salign="TL" scale="noScale" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                    </object>
+                </noscript>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="v_s mt10">
+    <div class="study">
+        <div class="sty_title">
+            <div class="study_left">学习园地</div>
+            <div class="dy_more">
+                #{a @SchoolXxyds.pclist().add("xxId",xxId).add("classId",classId)}
+                    更多 &gt;&gt;
+                #{/a}
+            </div>
+        </div>
+        <div class="stu_con">
+            <div class="stu_words">
+                <ul>
+                    #{list schoolXxyds,as:'xxyds'}
+                    <li>
+                    #{a @SchoolXxyds.pcshow(xxyds.id).add("xxId",xxId).add("classId",classId)}
+                            ${xxyds.title}
+                    #{/a}
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+            <div class="stu_photo">
+                <ul>
+                    #{list schoolXxydsUrl,as:'xxydUrl'}
+                    <li>
+                        <div class="stu_photo_con">
+                            #{a @SchoolXxyds.pcshow(xxydUrl.id).add("xxId",xxId).add("classId",classId)}
+                            <img src="${xxydUrl.url ==null ? xxydUrl.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(xxydUrl.url,com.arj.ziguiw.common.ImageSize.SSX)}"height="102" width="136"/>
+                            #{/a}
+                        </div>
+                        <div class="ph_title">
+                        </div>
+                        <div class="ph_title_w">
+                            #{a @SchoolXxyds.pcshow(xxydUrl.id).add("xxId",xxId).add("classId",classId)}
+                                ${xxydUrl.title?.length() > 6 ? xxydUrl?.title[0..6] + '..' : xxydUrl.title}
+                            #{/a}
+                        </div>
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+            <div class="vedio">
+                <p><strong style="font-size:14px;">最新视频：</strong></p>
+                <div class="vedio_con">
+                    <ul>
+                        #{list classVideos,as:'videos'}
+                        <li>
+                            #{a @ClassVideos.pshow(videos.id).add("xxId",xxId).add("classId",classId)}
+                                ${videos.title}
+                            #{/a}
+                        </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

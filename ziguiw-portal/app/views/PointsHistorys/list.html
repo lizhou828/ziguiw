@@ -1,0 +1,40 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-积分明细
+#{/set}
+
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">我的积分-明细</div>
+        </div>
+        <div class="intergral">
+            <p class="intergral_note">注：您当前的积分：${userBase.points}分。积分在操作状态成功后10分钟内发至账户，积分有效期为积入之日起至次年年底。如：2012年6月1日获得10积分，有效期至2013年12月31日。
+            <a href="/newses/show?id=2100"><span style="color: #ff0000;">详情请点击查看积分规则</span></a></p>
+            <div class="intergral_all">
+                <p><span class="intergral_words">我的总积分:<font class="intergral_num">${userBase.points}</font>分</span></p>
+                <p><span class="my_album_upload"><a href="/Orders/payOne">充值</a></span></p>
+
+            </div>
+            <ul>
+                #{list page.data,as:'points'}
+                <li>
+                    <p><font class="per_name">${userBase.nickName}</font>于
+                        ${points?.changeTime?.format("yyyy-MM-dd HH:mm:ss")}
+                        因为
+                        #{list items:com.arj.ziguiw.common.PointType.maps,as:'m'}
+                        #{if m.key == points.type}${m.value}#{/if}
+                        #{/list}
+                        #{if points.flag == 1}增加#{/if}#{else }减少#{/else}<font class="per_name"> ${points.pointsChange} </font>分积分 </p>
+                </li>
+                #{/list}
+            </ul>
+
+            <div style="text-align: center">
+            #{page page:page, url:"/PointsHistorys/list?userId=" + userBase.id /}
+            </div>
+
+        </div>
+
+    </div>
+    <!--main_right E-->

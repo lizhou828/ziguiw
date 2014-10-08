@@ -1,0 +1,58 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="/public/images/banner02.gif" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;
+        <a href="#">帮助中心</a>   &gt;
+        <a href="#"></a>   正文
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>•</em>帮助中心</p></div>
+
+            <div class="p_con">
+                <img src="/public/images/p_first.gif">
+                <div class="p_helpcon_middle">
+                    <p><strong>数字校园系统用户充值</strong></p>
+                    <hr style="margin:8px;">
+                    <div class="p_help_w">
+                        <p>数字校园系统用户登录后，在用户中心点击"充值"按钮可进行购买积分充值，数字校园系统用户可进行网站使用费充值。</p>
+                        <p><strong>进入充值页面：</strong></p>
+                        <p><img width="650" src="/public/images/cs_status4.jpg"></p>
+                        <p>数字校园用户可选择积分或网站使用费充值类型，积分充值金额每次最少支付5元，最大100元，网站使用费目前暂支持每次充值100元。</p>
+                        <p><strong>点击下一步：</strong></p>
+                        <p><img width="650" src="/public/images/cs_status5.jpg"></p>
+                        <p>目前网站暂支持3种充值方式：支付宝、快钱、财付通，选择支付方式后点击确认跳转到支付页面，例如选择财付通支付：</p>
+                        <p><img width="650" src="/public/images/cs_status6.jpg"></p>
+                        <p>根据提示选择付款方式点击下一步即可完成充值。</p>
+
+                    </div>
+                </div>
+                <img src="/public/images/p_last.gif">
+            </div>
+            <div class="p_con">
+                <div class="p_helpcon_middle">
+                    <p><a class="status_home" href="javascript:history.go(-1)">返回</a></p>
+
+                </div>
+            </div>
+        </div>
+        <!--middle E-->
+
+    </div>
+</div>

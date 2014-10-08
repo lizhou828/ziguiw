@@ -1,0 +1,29 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create().add("xxId",xxId).add("classId",classId), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','content']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content"/}
+            #{/crud.custom}
+            #{crud.custom 'title'}
+                <label for="object_title">标题</label>
+                <input type="text" id = "object_title" name="object.title" size="75">
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            *{<input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />}*
+        </p>
+        <input type="hidden" name="object.xxId" value="${xxId}">
+        <input type="hidden" name="object.classId" value="${classId}">
+    #{/form}
+    </div>
+
+</div>

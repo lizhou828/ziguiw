@@ -1,0 +1,105 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间—我的提问
+#{/set}
+
+<!--main_right B-->
+<div class="sp_main_right">
+    <div class="bobti">
+        <div class="diary_tit">我的提问</div>
+        <div class="ques_t">
+        </div>
+    </div>
+
+    <div class="question">
+        #{if userBase.id == user?.id}
+        <ul class="errorMessage">
+            <li><span>${flash.error}</span></li>
+        </ul>
+        <form action="/HomeQuestions/create">
+        <div class="ques_shuo">
+            <div class="ques_sp_ind_input"><textarea rows="4" cols="75" name="text"></textarea></div>
+            <div class="ques_sp_fun">
+            </div>
+            <input type="hidden" name="userId" value="${userBase.id}">
+            <div style="text-align: right">
+                <input type="submit" value="发表">
+            </div>
+        </div>
+        </form>
+        #{/if}
+        <!--fr shuoshuo  B-->
+        <div class="comm_shuoshuo">
+            <ul>
+                #{list map,as:'maps'}
+                <li>
+                    <div class="comm_shuoshuo_l">
+                        <p><img class="img_border" src="${ctx}/${userBase.photo}" height="45" width="45"/></p>
+                        <p>(${userBase.province})</p>
+                    </div>
+                    <div class="comm_shuoshuo_r">
+                        <p><font class="color">${userBase.nickName}:</font>${maps.key.text}</p>
+                        <p class="comm_line"><span class="comm_dt_time">[${maps.key.createTime?.format("yyyy-MM-dd HH:mm")}]</span>
+                            #{if userBase.id == user?.id}
+                            <span>#{a @HomeQuestions.delete(userBase.id,maps.key.id)}删除#{/a}</span>
+                            #{/if}
+                        </p>
+                        <div class="dt_line">
+                            #{list maps.value,as:'answers'}
+                            <div class="dt_huif">
+                                <div class="comm_dt_huif_img">
+                                    <img class="img_border" src="${ctx}/${answers.user.photo}" width="30" height="30"/>
+                                </div>
+                                <div class="comm_dt_huif_words">
+                                    <p><font class="color">${answers.user.nickName}:</font>${answers.text}</p>
+                                    <p><span class="dt_time">[${answers.createTime?.format("yyyy-MM-dd HH:mm")}]</span>
+                                    #{if userBase.id == user?.id}
+                                        <span>#{a @HomeAnswers.delete(userBase.id,answers.id)}删除#{/a}</span>
+                                    #{/if}
+                                    </p>
+                                </div>
+                            </div>
+                            #{/list}
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <div class="comm_ss">
+                            <form action="/HomeAnswers/create">
+                            <p class="mes_hf_k">
+                                <textarea name="text" class="area3" cols="50"></textarea>
+                                <input type="submit" name="Submit1" value="回 复" class="btn2 l mt5">
+                                <input type="hidden" value="${maps.key.id}" name="questionId">
+                                <input type="hidden" value="${userBase.id}" name="userId">
+                            </p>
+                        </form>
+                        </div>
+
+                        <div class="sp_shuo" style="display:none;">
+                            <div class="comm_sp_ind_input"> </div>
+                            <div class="comm_sp_fun">
+                                <a href="#">表情</a>
+                            </div>
+                            <div class="comm_sp_shuo_submit">
+                                <a href="">发表</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+
+
+            <div style="text-align: center">
+            #{page page:page, url:"/HomeQuestions/list?userId=" + userBase.id /}
+            </div>
+        </div>
+        <!--fr shuoshuo  B-->
+    </div>
+
+
+
+
+</div>
+<!--main_right E-->

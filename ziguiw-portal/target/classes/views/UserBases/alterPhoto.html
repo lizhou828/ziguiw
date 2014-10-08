@@ -1,0 +1,30 @@
+#{extends 'homemain.html'/}}
+    <!--main_right B-->
+<div class="sp_main_right">
+        <div class="found">
+            <div class="bobti">更改头像</div>
+            <form enctype="multipart/form-data" name="form" action="/UserBases/updatePhoto?userId=${userId}" method="post">
+            <ul class="link_gray">
+                <li><span>我的头像：</span>
+                    <a href="#" target="_blank" class="a-img1 l">
+                        #{if userBase.photo == null}
+                            <img class="toux" src="@{'public/images/per_img.jpg'}" width="120" height="120">
+                        #{/if}
+                        #{else }
+                            <img class="toux" src="${ctx}/${com.arj.ziguiw.common.ImageSize.getImage(userBase.photo,com.arj.ziguiw.common.ImageSize.HOMEPHOTO)}" width="120" height="120">
+                        #{/else}
+                    </a>
+                </li>
+                <li><span>更换头像：</span>
+                    <input type="file" class="inp_txt" name="file">
+                </li>
+                <li>
+                    <div style="text-align: center">
+                        <input type="submit" value="发表">
+                    </div>
+                </li>
+            </ul>
+            </form>
+        </div>
+</div>
+

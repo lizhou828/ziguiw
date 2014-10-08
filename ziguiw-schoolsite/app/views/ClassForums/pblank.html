@@ -1,0 +1,34 @@
+#{extends 'clazz.html' /}
+#{set 'moreStyles'}
+    <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/editor/admin.css'}" />
+#{/set}
+#{set title: school.name + " - " + schoolClass.name + " - 论坛"/}
+<div class="main">
+    <div class="outside">
+        <div class="t_title">
+            <img src="@{'public/images/title_img.gif'}" />班级论坛</div>
+        <div class="clear">
+        </div>
+        #{form  action:@pcreate().add("xxId",xxId).add("classId",classId), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','content']}
+            <div class="new_edit">
+                <div class="newbbs_title">
+                    *{#{crud.custom 'title'}}*
+                    *{<input class="bn_text" type="text"  name = "object.title"/>}*
+                    *{#{/crud.custom}}*
+                </div>
+
+                <div class="nbt_edit">
+                    #{crud.custom 'content'}
+                            #{editor id:"object_content", name:"object.content"/}
+                    #{/crud.custom }
+                </div>
+            </div>
+            #{/crud.form}
+            <input type="hidden" name="object.classId" value="${classId}"/>
+            <div class="s_newbtn">
+                <input class="send_btn" type="submit" value="提交"/>
+            </div>
+        #{/form}
+    </div>
+</div>

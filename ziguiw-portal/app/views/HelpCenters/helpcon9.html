@@ -1,0 +1,50 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="/public/images/banner02.gif" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;
+        <a href="#">帮助中心</a>   &gt;
+        <a href="#"></a>   正文
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>•</em>帮助中心</p></div>
+
+            <div class="p_con">
+                <img src="/public/images/p_first.gif">
+                <div class="p_helpcon_middle">
+                    <p><strong>发布的新闻前台不显示?	</strong></p>
+                    <hr style="margin:8px;">
+                    <div class="p_help_w">
+                        <p>学校用户发布新闻，需通过管理员审核通过才会显示在学校站内站页面，如需帮助请联系客服。</p>
+
+                    </div>
+                </div>
+                <img src="/public/images/p_last.gif">
+            </div>
+            <div class="p_con">
+                <div class="p_helpcon_middle">
+                    <p><a class="status_home" href="javascript:history.go(-1)">返回</a></p>
+
+                </div>
+            </div>
+        </div>
+        <!--middle E-->
+
+    </div>
+</div>

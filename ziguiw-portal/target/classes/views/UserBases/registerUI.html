@@ -1,0 +1,158 @@
+#{extends 'main.html'/}
+#{set "title"}
+子贵网-注册
+#{/set}
+<script type="text/javascript">
+    $(function() {
+        $('#changeKaptch').click(function() {
+            $('#kaptchaImage').attr('src', '/UserBases/verifyCode?' + Math.floor(Math.random() * 100));
+        })
+    })
+
+    function allowProtocol(){
+        var register_btn = document.getElementById("register_btn");
+        var _protocol = document.getElementById("_protocol");
+        if (_protocol.checked) {
+            register_btn.className = "register_btn";
+            register_btn.disabled=false;
+        } else {
+            register_btn.className = "register_btn_no";
+            register_btn.disabled=true;
+        }
+    }
+</script>
+<div style="height:630px" class="login bor_d m-t10">
+    <h3>数字化校园用户，请直接点击 <a href="/user/login.jsp">登录</a>  <a href="#">什么是数字化校园用户？</a></h3>
+    <h2 class="">请填写您的注册信息</h2>
+    <form action="/UserBases/register" method="post">
+        <ul class="login_ul ul-li-s l">
+            <li class="red" style="text-align:center">
+
+                <ul class="errorMessage">
+                    <li><span>${flash.error}</span></li>
+                </ul>
+
+            </li>
+            <li>
+                <span>账户名：</span>
+                <input type="text"  id="userNickName" name="userName" class="inp_txt" value="${userName}">
+                <label class="red_b9 m-l4">*</label>
+                <samp style="width:200px;">4-16个字符</samp>
+            </li>
+            <li id="email">
+                <span>邮箱：</span>
+                <input type="text"  name="email" id="" class="inp_txt" value="${email}">
+                <label class="red_b9 m-l4">*</label>
+            </li>
+            <li>
+                <span>密码：</span>
+                <input type="password" name="password" class="inp_txt">
+                <label class="red_b9 m-l4">*</label>
+                <samp style="width:200px;">6-16个字符</samp>
+            </li>
+            <li>
+                <span>密码确认：</span>
+                <input type="password" name="password2" class="inp_txt">
+                <label class="red_b9 m-l4">*</label>
+                <samp style="width:200px;">请重新填写一遍密码</samp>
+            </li>
+            <li class="commonValid">
+                <span>验证码：</span>
+                <img width="83" id="kaptchaImage" src="/UserBases/verifyCode">
+                <a href="javascript:;" id="changeKaptch">看不清，换一张</a>
+            </li>
+            <li class="commonValid">
+                <span>输入验证码：</span>
+                <input type="text" name="validateCode" class="inp_txt">
+                <label class="red_b9 m-l4">*</label>
+            </li>
+            <style>
+                .register_btn_no {
+                    WIDTH: 226px;
+                    BACKGROUND: url(/public/images/register_no.png) no-repeat 0px 0px;
+                    border-width: 0;
+                    height: 42px;
+                    line-height: 36px;
+                    text-align: center;
+                }
+            </style>
+            <li>
+                <input type="checkBox" onclick="allowProtocol();" checked="true" id="_protocol">
+                《<a href="http://www.ziguiw.com/HelpCenters/contract">子贵网使用协议</a>》
+            </li>
+            <li>
+                <input type="submit" name="Button1" value="" class="register_btn" id="register_btn">
+            </li>
+        </ul>
+    </form>
+    <p class="r link_red">还没有帐号？现在<a href="#">注册</a>
+        <a href="#" class="l_ad bor_d"><img alt="" src="/public/images/238X177.jpg"></a>
+<span style="clear:both; width:238px; display:block; margin-top:200px;  font-weight:100; font-size:12px; ">
+<samp style="font-weight:bold;">温馨提示：</samp><br>
+数字校园信息系统用户登录子贵网<br>
+
+家长登录账号：手机号<br>
+学生登录账号：校徽卡<br>
+
+老师登录账号：信息员统一分配</span>
+
+    </p>
+</div>
+<script type="text/javascript">allowProtocol();</script>
+
+
+
+
+
+*{
+<form action="/UserBases/register" method="post">
+    <ul class="login_ul ul-li-s l">
+        <li class="red" style="text-align:center">
+
+            <ul class="errorMessage">
+                <li><span>${flash.error}</span></li>
+            </ul>
+
+        </li>
+        <li>
+            <span>账户名：</span>
+            <input type="text"  id="userNickName" name="userName" class="inp_txt">
+            <label class="red_b9 m-l4">*</label>
+            <samp style="width:200px;">4-16个字符</samp>
+        </li>
+        <li id="email">
+            <span>邮箱：</span>
+            <input type="text"  name="email" id="" class="inp_txt">
+            <label class="red_b9 m-l4">*</label>
+        </li>
+        <li>
+            <span>密码：</span>
+            <input type="password" name="password" class="inp_txt">
+            <label class="red_b9 m-l4">*</label>
+            <samp style="width:200px;">6-16个字符</samp>
+        </li>
+        <li>
+            <span>密码确认：</span>
+            <input type="password" name="password2" class="inp_txt">
+            <label class="red_b9 m-l4">*</label>
+            <samp style="width:200px;">请重新填写一遍密码</samp>
+        </li>
+        <style>
+            .register_btn_no {
+                WIDTH: 226px;
+                BACKGROUND: url(../images/register_no.png) no-repeat 0px 0px;
+                border-width: 0;
+                height: 42px;
+                line-height: 36px;
+                text-align: center;
+            }
+        </style>
+        <li>
+            <input type="checkBox" onclick="allowProtocol();" checked="true" id="_protocol">
+            《<a href="/helpCenter/contract.jsp">子贵网使用协议</a>》
+        </li>
+        <li>
+            <input type="submit" name="Button1" value="" class="register_btn" id="register_btn">
+        </li>
+    </ul>
+</form>}*

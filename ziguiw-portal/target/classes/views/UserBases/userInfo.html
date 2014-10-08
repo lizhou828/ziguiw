@@ -1,0 +1,55 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-我的资料
+#{/set}
+
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">个人资料</div>
+        </div>
+        <div class="personal_inf">
+            <table>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>昵称：</span>
+                    </td>
+                    <td width="70%">
+                        <font class="per_name">${userBase.displayName}</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>性别：</span>
+                    </td>
+                    <td width="70%">
+                    ${userBase.sex==0? '保密':(userBase.sex==1?"男":"女")}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>身份：</span>
+                    </td>
+                    <td width="70%">
+                    #{list items:com.arj.ziguiw.common.UserBaseType.map,as:'m'}
+                        #{if m.key == userBase.type}${m.value}#{/if}
+                    #{/list}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>地区：</span>
+                    </td>
+                    <td width="70%">
+                        ${userBase.province}
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%"><span>个性签名：</span></td>
+                    <td width="70%">${userBase.signature}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <!--main_right E-->

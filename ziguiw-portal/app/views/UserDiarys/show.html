@@ -1,0 +1,16 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间—日志详细
+#{/set}
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">日志详情</div>
+        </div>
+        <div class="diary_detail">
+            <h2>${userDiary.title}</h2>
+            <p>${userDiary.text.raw()}</p>
+        </div>
+
+    </div>
+    <!--main_right E-->

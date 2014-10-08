@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName">
+
+    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:conf.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="driverUrl" value="${db.driverUrl}"/>
+        <property name="user" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="alias" value="datasyn"/>
+        <property name="simultaneousBuildThrottle" value="10"/>
+        <property name="maximumConnectionCount" value="50"/>
+        <property name="minimumConnectionCount" value="10"/>
+        <property name="houseKeepingTestSql"  value="select CURRENT_DATE"/>
+        <property name="delegateProperties" value="user=scott,password=ziguiw"/>
+    </bean>
+
+
+    <!--<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">-->
+        <!--<property name="configLocation">-->
+            <!--<value>${ibatis.sqlmapconfig}</value>-->
+        <!--</property>-->
+        <!--<property name="dataSource">-->
+            <!--<ref bean="dataSource"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.arj.ziguiw.datasynch" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <tx:annotation-driven/>
+    <aop:aspectj-autoproxy/>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="load*" read-only="true"/>
+            <tx:method name="search*" read-only="true"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="list*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true">
+        <aop:advisor pointcut="execution(* com.arj.ziguiw.datasynch..*Manager.*(..))"
+                     advice-ref="txAdvice"/>
+    </aop:config>
+    <!-- scheduler -->
+    <bean id="schoolScheduler" class="com.arj.ziguiw.datasynch.SchoolScheduler"/>
+    <bean id="studentScheduler" class="com.arj.ziguiw.datasynch.StudentScheduler"/>
+    <bean id="parentScheduler" class="com.arj.ziguiw.datasynch.ParentScheduler"/>
+    <bean id="teacherScheduler" class="com.arj.ziguiw.datasynch.TeacherScheduler"/>
+    <bean id="classScheduler"  class="com.arj.ziguiw.datasynch.ClassScheduler"/>
+    <bean id="teacherClassScheduler" class="com.arj.ziguiw.datasynch.TeacherClassScheduler"/>
+    <bean id="examScheduler"  class="com.arj.ziguiw.datasynch.ExamScheduler"/>
+    <bean id="termSetScheduler"  class="com.arj.ziguiw.datasynch.TermSetScheduler"/>
+    <bean id="gradeScheduler"  class="com.arj.ziguiw.datasynch.GradeScheduler"/>
+
+
+    <bean id="schoolJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="schoolScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="studentJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="studentScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="parentJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="parentScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="teacherJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="teacherScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="classJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="classScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="teacherClassJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="teacherClassScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="examJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="examScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="termSetJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="termSetScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    <bean id="gradeJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="gradeScheduler"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+
+
+    <bean id="schoolCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="schoolJob"/>
+        <property name="cronExpression" value="${schoolScheduler.cron}"/>
+    </bean>
+    <bean id="studentCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="studentJob"/>
+        <property name="cronExpression" value="${studentScheduler.cron}"/>
+    </bean>
+    <bean id="parentCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="parentJob"/>
+        <property name="cronExpression" value="${parentScheduler.cron}"/>
+    </bean>
+    <bean id="teacherCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="teacherJob"/>
+        <property name="cronExpression" value="${teacherScheduler.cron}"/>
+    </bean>
+    <bean id="classCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="classJob"/>
+        <property name="cronExpression" value="${classScheduler.cron}"/>
+    </bean>
+    <bean id="teacherClassCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="teacherClassJob"/>
+        <property name="cronExpression" value="${teacherClassScheduler.cron}"/>
+    </bean>
+    <bean id="examCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="examJob"/>
+        <property name="cronExpression" value="${examScheduler.cron}"/>
+    </bean>
+    <bean id="termSetCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="termSetJob"/>
+        <property name="cronExpression" value="${termSetScheduler.cron}"/>
+    </bean>
+    <bean id="gradeCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="gradeJob"/>
+        <property name="cronExpression" value="${gradeScheduler.cron}"/>
+    </bean>
+
+
+    <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+        <property name="triggers">
+            <list>
+                <ref bean="schoolCronTrigger"/>
+                <ref bean="studentCronTrigger"/>
+                <ref bean="parentCronTrigger"/>
+                <ref bean="teacherCronTrigger"/>
+                <ref bean="classCronTrigger"/>
+                <ref bean="teacherClassCronTrigger"/>
+                <ref bean="examCronTrigger"/>
+                <ref bean="termSetCronTrigger"/>
+                <ref bean="gradeCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- scheduler end -->
+
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="5" />
+        <property name="keepAliveSeconds" value="5000" />
+        <property name="maxPoolSize" value="10" />
+        <property name="queueCapacity" value="10000" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref ="dataSource"></property>
+    </bean>
+</beans>

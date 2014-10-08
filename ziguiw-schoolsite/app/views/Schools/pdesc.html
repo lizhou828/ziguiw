@@ -1,0 +1,45 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 学校概况"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：<a href="/schools/pshow?xxId=${xxId}">学校主页</a>  &gt; 学校简介</p>
+        </div>
+        <div class="news_tit">
+            学校简介
+        </div>
+        <div class="introduct_d">
+            ${schoolExt?.description?.raw()}
+        </div>
+
+        <div class="news_tit">
+            师资力量
+        </div>
+        <div class="img-scroll">
+            <span class="prev"></span>
+            <span class="next"></span>
+            <div class="img-list">
+                <ul>
+                    #{list schoolTeachers , as:'teacher'}
+                    <li>
+                        <p>
+                            #{if teacher.photo == null}
+                                <img src="@{'public/images/noimg_120X155.jpg'}">
+                            #{/if}
+                            #{else }
+                            <img src="${teacher.photo ==null ? teacher.photo : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(teacher.photo,com.arj.ziguiw.common.ImageSize.TC)}"
+                                width="120" height="155" />
+                            #{/else}
+                        </p>
+                        <p class="teacher_name">${teacher.name}</p>
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="@{'public/javascripts/lunbo.js'}" language="javascript"></script>
+
+    </div>
+
+</div>

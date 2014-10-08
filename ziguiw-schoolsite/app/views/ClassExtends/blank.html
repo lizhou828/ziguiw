@@ -1,0 +1,30 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form}
+            #{crud.custom 'classId'}
+                <input type="hidden" name="object.classId" value="${schoolClass.id}" />
+            #{/crud.custom}
+            #{crud.custom 'color'}
+                <select name="object.color" id="object_color">
+                    #{list com.arj.ziguiw.common.ClassTemplateColor.map,as:'map'}
+                        <option name="object.color" value="${map.key}">${map.value}</option>
+                    #{/list}
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+        *{ <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />}*
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+        *{<input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.modelName}" />}*
+        </p>
+    #{/form}
+    </div>
+
+</div>

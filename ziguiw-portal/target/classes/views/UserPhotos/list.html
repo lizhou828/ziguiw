@@ -1,0 +1,47 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-照片
+#{/set}
+
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">我的相册</div>
+            <div class="album_t">
+            <span class="album_upload_d">
+                #{if userBase.id == user?.id}
+                #{a @UserPhotos.uploadUI()}上传图片#{/a}
+                #{/if}
+            </span>
+            </div>
+        </div>
+        <div class="album_list">
+            <ul>
+                #{list list,as:'userPhoto'}
+                <li>
+                    <p>
+                        #{a @UserPhotos.detailList(userPhoto.id)}
+                        <img class="album_p" src="${ctx}/${com.arj.ziguiw.common.ImageSize.getImage(userPhoto.url,com.arj.ziguiw.common.ImageSize.PHOTOLIST)}"  />
+                        #{/a}
+                    </p>
+                    <p>
+                        #{a @UserPhotos.detailList(userPhoto.id)}
+                            ${userPhoto.title}
+                        #{/a}
+                    </p>
+                    #{if userBase.id == user?.id}
+                        <p>
+                            #{a @UserPhotos.delete(userPhoto.id)}
+                            删除
+                            #{/a}
+                            #{a @UserPhotos.top(userPhoto.id)}
+                            置封面
+                            #{/a}
+                        </p>
+                    #{/if}
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <!--main_right E-->

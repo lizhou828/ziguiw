@@ -1,0 +1,25 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.displayName) /}
+
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','url']}
+            #{crud.custom 'url'}
+                <label for="object_url"> 图片 </label>
+                <input type="file" name="file" id="object_url">
+            #{/crud.custom}
+        #{/crud.form}
+        <input type="hidden" name="object.school.id" value="${school.id}" />
+        <p class="crudButtons">
+            <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            <input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.displayName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+#{extends 'main.html'/}
+#{set 'title'}
+互动社区
+#{/set}
+<script type="text/javascript">
+    function  validateSave(){
+        var content =  document.getElementById("content1").value;
+        if(content==null||content==""){
+            alert('请输入内容！');
+            return false;
+        }
+        return true;
+    }
+</script>
+<!--ad01 E -->
+<div class="mypos fsong"> <a href="${play.configuration['portal.domain']}/boards/index">互动社区</a> &gt;发表新话题</div>
+<div class="col1 ask_and_sea fl found">
+    <h2 class="col-h3">发表新话题</h2>
+    <form onsubmit="return validateSave();" name="myform" action="/Forums/saveForum" method="post">
+        <div class="red" style="color: red;">${flash.error}</div>
+        <ul class="link_gray ul-li-s2">
+            <li>
+                <label>标题:</label>
+                <input type="text" id="title" class="inp_txt2" name="title">
+            </li>
+            <li>
+                <label>话题类型:</label>
+                <select id="boardId" name="boardId">
+                    #{list boards,as:'boards'}
+                    <option value="${boards.id}">${boards.boardName}</option>
+                    #{/list}
+                </select>
+            </li>
+            <li>
+                <label>正文:</label>
+                <div class="art_zw">
+                #{editor id:'content1',name:'content',height:'500px'/}
+                </div>
+            </li>
+            <li>
+                <input type="submit" id="submit" class="btn2" value="提 交" name="Submit1">
+            </li>
+        </ul>
+    </form>
+</div>

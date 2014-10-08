@@ -1,0 +1,98 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-留言板
+#{/set}
+
+<!--main_right B-->
+<div class="sp_main_right">
+    <div class="bobti">
+        <div class="diary_tit">留言板</div>
+    </div>
+    <div class="leave_message">
+        <div class="comment">
+            <form action="/UserMessages/create" method="post">
+            <textarea rows="5" cols="80" name="text"></textarea>
+            <input type="hidden" value="${userBase.id}" name="toUserId">
+            <p><input type="submit" value="提交" class="comm_creat_btn2"></p>
+            </form>
+            <!--fr shuoshuo  B-->
+            <div class="comm_shuoshuo">
+                <ul>
+                    #{list page.data,as:'userMessage'}
+                    <li>
+                        <div class="comm_shuoshuo_l">
+                            <p><img class="img_border" src="${ctx}/${userMessage.formUser?.photo}" height="45" width="45"/></p>
+                        </div>
+                        <div class="comm_shuoshuo_r">
+                            <p><font class="color">
+                                #{a @list(userMessage.formUser?.id)}
+                                    ${userMessage.formUser?.displayName}:
+                                #{/a}
+                            </font>${userMessage.text}</p>
+                            <p class="comm_line"><span class="comm_dt_time">${userMessage.createTime?.format("yyyy-MM-dd HH;ss")}</span>
+                                #{if user?.id == userBase.id}
+                                <span>#{a @UserMessages.delete(userMessage.id)}删除#{/a}</span>
+                                #{/if}
+                            </p>
+                            <div class="dt_line">
+                                #{list map.get(userMessage), as:'replays'}
+                                <div class="dt_huif">
+                                    <div class="comm_dt_huif_img">
+                                        <img class="img_border" src="${ctx}/${replays.formUser?.photo}" width="30" height="30"/>
+                                    </div>
+                                    <div class="comm_dt_huif_words">
+                                        <p><font class="color">
+                                        #{a @list(replays.formUser?.id)}
+                                            ${replays.formUser?.displayName}:
+                                        #{/a}
+                                        </font>${replays.text}</p>
+                                        <p>
+                                            <span class="dt_time">${replays.createTime?.format("yyyy-MM-dd HH;ss")}</span>
+                                            #{if user?.id == userBase.id}
+                                            <span>#{a @UserMessages.delete(replays.id)}删除#{/a}</span>
+                                            #{/if}
+                                        </p>
+                                    </div>
+                                </div>
+                                #{/list}
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="comm_ss">
+                            <form action="/UserMessages/create" method="post">
+                                <p class="mes_hf_k">
+                                    <textarea name="text" class="area3" cols="50"></textarea>
+                                    <input type="submit" name="Submit1" value="回 复" class="btn2 l mt5">
+                                    <input type="hidden" value="${userMessage.id}" name="parentId">
+                                    <input type="hidden" value="${userBase.id}" name="toUserId">
+                                </p>
+                            </form>
+                          </div>
+
+                            <div class="sp_shuo" style="display:none;">
+                                <div class="comm_sp_ind_input"> </div>
+                                <div class="comm_sp_fun">
+                                    <a href="#">表情</a>
+                                </div>
+                                <div class="comm_sp_shuo_submit">
+                                    <a href="">发表</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                    #{/list}
+                </ul>
+
+                <div style="text-align: center">
+                #{page page:page, url:"/UserMessages/list?userId=" + userBase.id /}
+                </div>
+            </div>
+            <!--fr shuoshuo  B-->
+        </div>
+
+    </div>
+
+</div>
+<!--main_right E-->

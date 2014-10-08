@@ -1,0 +1,34 @@
+#{extends 'CRUD/layout.html' /}
+#{set title: school.name + messages.get('crud.blank.title', type.displayName) /}
+<div id="crudBlank" class="${type.name}">
+
+    <h2 id="crudBlankTitle">&{'crud.blank.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@create(), enctype:'multipart/form-data'}
+        #{crud.form}
+             #{crud.custom 'schoolId'}
+                    <input type="hidden" name="object.schoolId" value="${school.id}" />
+             #{/crud.custom}
+             #{crud.custom 'logo'}
+                <label for="logo">学校logo</label>
+                    <input id="logo" type="file" name="file">
+             #{/crud.custom}
+            #{crud.custom 'banner'}
+                <label for="banner">学校banner</label>
+                <input id="banner" type="file" name="banner">
+            #{/crud.custom}
+            #{crud.custom 'description'}
+                <label for="description">学校简介</label>
+                #{editor id:"description", name:"object.description"  /}
+            #{/crud.custom }
+        #{/crud.form}
+        <p class="crudButtons">
+           *{ <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />}*
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            *{<input type="submit" name="_saveAndAddAnother" value="&{'crud.saveAndAddAnother', type.modelName}" />}*
+        </p>
+    #{/form}
+    </div>
+
+</div>

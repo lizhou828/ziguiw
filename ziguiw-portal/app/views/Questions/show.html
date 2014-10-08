@@ -1,0 +1,87 @@
+#{extends 'main.html'/}
+#{set 'title'}
+${question.title}|育儿问答|子贵网
+#{/set}
+<script type="text/javascript">
+    function validate(){
+       var content =  document.getElementById("content1").value;
+        if(content==null||content==""){
+            alert('请输入内容！');
+            return false;
+        }
+       return true;
+    }
+
+</script>
+<div class="col1 ask_info fl">
+    <div class="question">
+        <dl class="col-h3">
+            <dt>${question.title}</dt>
+            <dd><span>提问者：<label class="red_f63">${question.creatorNick}</label></span>
+                <span>浏览次数：<label class="red_f63">${question.clickCount}</label>次</span>
+                <span>回答数：<label class="red_f63">${question.answerCount}</label>个</span>
+                <span>提问时间：<label class="red_f63">${question.createTime.format("yyyy-MM-dd")}</label></span>
+                <span>悬赏分：<label class="red_f63">${question.point}<img alt="" src="/public/images/learn_jb2.png" class="m-l4"/></label></span></dd>
+        </dl>
+        <p>${question.content}</p>
+    </div>
+    <div class="good_ask">
+        <h2 class="col-h3"><span>满意答案</span></h2>
+        <p>
+            ${bestAnswer?.content}
+        </p>
+    </div>
+
+    <div class="other_ask">
+        <h2 class="col-h3"><span>其他答案</span></h2>
+        #{list answers,as :'answer'}
+            <dl>
+                <dt>答案提供者：<label class="red_f63">${answer.creatorNick}</label>  回答时间：
+                    <label class="red_f63">${answer.createTime.format("yyyy-MM-dd")}</label></dt>
+                <dd>${answer.content}</dd>
+            </dl>
+        #{/list}
+    </div>
+
+        <form  action="/questions/answer" method="post" onsubmit="return validate();">
+            <ul>
+                <li><img src="/public/images/learn_FAQ_wlhd.gif" alt=""></li>
+                <li><input type="text" id="content1" class="textarea" name="content"></li>
+                <input type="hidden" class="inp_sum" value="${question.id}" name="questionId">
+                <li class="a-r">请登录后再回答问题！您每回答一个育儿问题，都可获得相应积分奖励。
+                <input type="submit" class="inp_sum" value="" name="Submit1"></li>
+            </ul>
+        </form>
+
+</div>
+<div class="col2 fl ml10">
+    <div class="clearfix">
+        <a href="/questions/askquestionui" class="ask l"><img  alt="我有问题" src="/public/images/learn_ask.png"/></a>
+        <a href="/questions/list?status=0" class="answer r"><img  alt="我来解答" src="/public/images/learn_answer.png"/></a>
+    </div>
+    <div class="ph mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">人气关注</h3>
+        </div>
+        <div class="bordb">
+            <ul>
+                #{list hots,as : 'question'}
+                    <li>
+                        <a href="@{show(question.id)}">${question.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+
+    <div class="ad_col2_1 borda mt10"><a href="#"><img src="/public/images/img_268_88.jpg" /></a></div>
+    <div class="mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">答疑高手</h3>
+        </div>
+        <div class="bordb dygs">
+            <ul class="img_f">
+            </ul>
+        </div>
+    </div>
+</div>

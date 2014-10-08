@@ -1,0 +1,42 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-照片上传
+#{/set}
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">上传图片</div>
+        </div>
+        <div class="album_ul">
+            <form enctype="multipart/form-data" action="/UserPhotos/upload" method="post">
+                <ul class="errorMessage">
+                    <li><span>${flash.error}</span></li>
+                </ul>
+            <ul class="padding-25">
+                <li>
+                    <span class="album_sel">选择相册：</span>
+                    <select name="photoAlbumId" style=" float: left;">
+                        #{list list,as : 'photoAlbum'}
+                            <option value="${photoAlbum.id}">${photoAlbum.name}</option>
+                        #{/list}
+                    </select>
+                </li>
+                <li>
+                    <label class="label font-14" >上传图片：</label>
+                    <input type="file"  class="inp_txt" name="file">
+                </li>
+                <li>
+                    <label class="label_top font-14">相片简介：</label>
+                    <textarea name="text"class="area l" rows="5" cols="58"></textarea>
+                </li>
+                <li class="nopadding btn-box">
+                    <input type="submit" class="creat_btn2" value="提交">
+                    <img id="form_create_album_loading" style="display:none" src="/img/common/loading_pic_s.gif">
+                </li>
+            </ul>
+             </form>
+        </div>
+    </div>
+
+
+

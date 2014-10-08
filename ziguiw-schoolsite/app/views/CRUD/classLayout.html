@@ -1,0 +1,74 @@
+#{extends 'classmain.html' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/crud.css'}" />
+#{/set}
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：<a href="#">班级站内站</a>  &gt; 管理中心</p>
+        </div>
+
+        <!--管理中心左边开始-->
+        <div class="usercenter">
+            <p class="user_title">管理中心导航</p>
+            <div class="manage_nav">
+                <ul>
+                #{a @ClassNews.list().add("xxId",xxId).add("classId",session.get("classId")), class:"one"}班级新闻/公告#{/a}
+                </ul>
+                <ul>
+                    <li>
+                        <a href="" class="one">班级花絮</a>
+                        <ul>
+                            <li class="two">#{a @SchoolAlbums.clist().add("classId",session.get("classId"))}班级相册#{/a}</li>
+                            <li class="two">#{a @ClassPhotos.list().add("xxId",xxId).add("classId",session.get("classId")).add("where.classId",classId).
+                            add("where.type",com.arj.ziguiw.common.SchoolPhotoType.VIDEO)}班级视频#{/a}</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    #{a @SchoolXxyds.list().add("xxId",xxId).add("classId",session.get("classId")), class:"one"}学习园地#{/a}
+                </ul>
+                <ul>
+                    #{a @ClassExtends.show().add("xxId",xxId).add("classId",session.get("classId")), class:"one"}班级设置#{/a}
+                </ul>
+                <ul>
+                     #{a @ClassForums.list().add("xxId",xxId).add("classId",session.get("classId")), class:"one"}班级话题#{/a}
+                </ul>
+                <ul>
+                     #{a @ClassPhotos.rlist().add("classId",classId), class:"one"}班级首页推荐图#{/a}
+                </ul>
+            </div>
+
+        </div>
+        <div class="usercenter_right">
+        #{if request.actionMethod != 'index'}
+            <div id="crudBreadcrumb" style="display: none">
+                #{crud.navigation /}
+            </div>
+        #{/if}
+
+            <div id="crud" style="margin-left: 15px">
+
+            #{if flash.success}
+                <div class="crudFlash flashSuccess">
+                ${flash.success}
+                </div>
+            #{/if}
+            #{if flash.error || error}
+                <div class="crudFlash flashError">
+                ${error ?: flash.error}
+                </div>
+            #{/if}
+
+                <div id="crudContent">
+                #{doLayout /}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

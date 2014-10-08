@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>
+    <title>#{get 'title' /}</title>
+
+    #{if !classExt?.color}
+        #{stylesheet src:"class_site1.css" /}
+    #{/if}
+    #{if classExt?.color == com.arj.ziguiw.common.ClassTemplateColor.BLUE }
+        #{stylesheet src:"class_site1.css" /}
+    #{/if}
+    #{elseif classExt?.color == com.arj.ziguiw.common.ClassTemplateColor.YELLOW}
+        #{stylesheet src:"class_site2.css" /}
+    #{/elseif}
+    #{elseif classExt?.color == com.arj.ziguiw.common.ClassTemplateColor.GREEN}
+        #{stylesheet src:"class_site3.css" /}
+    #{/elseif}
+#{get 'moreStyles' /}
+#{script src:"focus.js" /}
+#{script src:"jquery-1.7.2.js" /}
+#{get 'moreScripts' /}
+</head>
+
+<body class="sc_body1">
+
+#{render 'toolbar.html', schoolExt:schoolExt ,ctx:ctx  , school:school , schoolClass:schoolClass/}
+
+<div class="clear"></div>
+
+<!--banner开始-->
+<div class="banner center">
+    <div class="midd_line"></div>
+    <div class="midd_banner">
+            #{if classExt?.banner != null}
+                <img height="266" width="970" src="${ctx}/${classExt.banner}" />
+            #{/if}
+            #{elseif classExt?.banner == null && schoolExt?.banner != null}
+                <img height="266" width="970" src="${ctx}/${schoolExt.banner}" />
+            #{/elseif}
+            #{else }
+                <img height="266" width="970" src="@{'public/classImages/class_banner.jpg'}" />
+            #{/else}
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="sch_menu">
+        <ul>
+            <li>#{a @SchoolClazzs.pshow().add("xxId", xxId).add("classId",classId)}班级主页#{/a}</li>
+            <li class="sch_li_bg">#{a @ClassNews.plist().add("xxId", xxId).add("classId",classId)}班级动态#{/a}</li>
+            <li class="sch_li_bg">#{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId)}学习园地#{/a}</li>
+            <li class="sch_li_bg">#{a @ClassPhotos.index().add("xxId", xxId).add("classId",classId)}班级花絮#{/a}</li>
+            <li class="sch_li_bg">#{a @ClassForums.plist().add("xxId", xxId).add("classId",classId)}班级话题#{/a}</li>
+            <li class="sch_li_bg">#{a @Schools.pshow().add("xxId", xxId)}返回校园首页#{/a}</li>
+            #{if schoolAdmin != null && schoolAdmin.school.id == school.id && (schoolAdmin.classId == schoolClass.id || schoolAdmin.classId == null)}
+                <li>
+                    #{a @SchoolClazzs.admin().add("xxId",xxId).add("classId",session.get("classId"))}管理中心#{/a}
+                </li>
+            #{/if}
+        </ul>
+    </div>
+
+
+</div>
+<!--banner结束-->
+
+<div class="clear"></div>
+
+    #{doLayout /}
+
+<div class="clear"></div>
+
+<!--尾部开始-->
+<div class="footer center pt10">
+    <div class="p_all">
+        <div class="p_flink">
+            <p>
+                <a href="${play.configuration['portal.domain']}/HelpCenters/aboutus" target="_blank">关于我们</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/contract" target="_blank">服务协议</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/service" target="_blank">客服中心</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/feedback" target="_blank">意见反馈</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/recruit" target="_blank">网站招聘</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/map" target="_blank">网站地图</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/contact" target="_blank">联系我们</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/copyright" target="_blank">版权所有</a>|
+                <a href="${play.configuration['portal.domain']}/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+            </p>
+        </div>
+        <div class="p_logo">
+            <p>
+                Copyright  ?  2012 <a href="http://www.ziguiw.com" target="_blank">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/" target="_blank">湘ICP备09002922号-3</a>
+            </p>
+            <p>
+                经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com" target="_blank">kf@ziguiw.com</a>
+                <!-- WPA Button Begin -->
+                <script src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&amp;type=2&amp;kfuin=4009952116&amp;ws=www.ziguiw.com&amp;btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&amp;aty=0&amp;a=&amp;key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb" type="text/javascript"></script><iframe width="102" scrolling="no" height="24" frameborder="0" src="about:blank" allowtransparency="true" id="iframediv1359702766609"></iframe>
+            <!-- WPA Button END -->
+            </p>
+            <img src="@{'public/images/p_logo.gif'}">
+        </div>
+    </div>
+</div>
+<!--尾部结束-->
+</body>
+</html>

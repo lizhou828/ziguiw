@@ -1,0 +1,30 @@
+<div class="header center">
+    <div class="logo">
+        <span>
+              #{if schoolExt?.logo != null}
+                  <img height="90" width="120" src="${ctx}/${schoolExt?.logo}"/>
+              #{/if}
+        </span>
+        <span class="logo_words">
+            <p>${school?.name}</p>
+            <p>${schoolClass?.name}</p>
+        </span>
+    </div>
+    <div class="nav">
+        <div class="login" id="loginbar">
+            <span><a href="${play.configuration['cas.loginUrl']}">登录</a>&nbsp;&nbsp;</span>
+            <span><a href="${play.configuration['portal.domain']}/UserBases/registerUI">注册</a></span>
+        #{script src:'user.js'/}
+        </div>
+        <div class="menu">
+            <ul>
+                <li class="ziguiw_logo"><a href="${play.configuration['portal.domain']}" target="_blank">子贵网首页</a>&nbsp;/&nbsp;</li>
+                <li><a href="${play.configuration['portal.domain']}/newses/index" target="_blank">教育在线</a>&nbsp;/&nbsp;</li>
+                <li><a href="${play.configuration['portal.domain']}/knowledges/index" target="_blank">教育知识</a>&nbsp;/&nbsp;</li>
+                <li> <a href="${play.configuration['resources.domain']}" target="_blank">教育资源</a>&nbsp;/&nbsp;</li>
+                <li> <a href="${play.configuration['portal.domain']}/boards/index" target="_blank">互动社区</a>&nbsp;/&nbsp;</li>
+                <li> <a href="${play.configuration['portal.domain']}/myhomes/index" target="_blank">我的小家</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

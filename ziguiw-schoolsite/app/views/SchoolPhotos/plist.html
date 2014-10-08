@@ -1,0 +1,59 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 学校图片，视频"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：#{a @Schools.pshow().add("xxId",xxId)}学校主页#{/a}  &gt; 快乐校园</p>
+        </div>
+        <div class="news_tit">
+            #{if type == com.arj.ziguiw.common.SchoolPhotoType.PHOTO}
+            相册展示
+            #{/if}
+            #{else }
+            视频展示
+            #{/else}
+        </div>
+        <div class="happy_c_img">
+            <ul>
+                #{list page.data,as:'list'}
+                <li>
+                    <div class="happy_c">
+                        #{if type == com.arj.ziguiw.common.SchoolPhotoType.PHOTO}
+                        #{a @SchoolPhotos.pshowPhoto(list.id).add("xxId",xxId)}
+                        <img
+                                src="${list.coverUrl ==null ? list.coverUrl : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(list.coverUrl,com.arj.ziguiw.common.ImageSize.SKL)}"
+                                width="201" height="151"/>
+                        #{/a}
+                        #{/if}
+                        #{else }
+                        #{a @pshowVideo(list.id).add("xxId",xxId)}
+                        <img
+                                src="${list.cover == null ? list.cover : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(list.cover,com.arj.ziguiw.common.ImageSize.SKL)}"
+                                width="201" height="151"/>
+                        #{/a}
+                        #{/else}
+                    </div>
+                    <div class="happy_time">上传时间：${list.createTime.format("yyyy-MM-dd")}</div>
+                    <div class="clear"></div>
+                    <div class="happy_n">
+                    #{if type == com.arj.ziguiw.common.SchoolPhotoType.PHOTO}
+                    #{a @SchoolPhotos.pshowPhoto(list.id).add("xxId",xxId)}
+                    ${list.name}
+                    #{/a}
+                    #{/if}
+                    #{else }
+                    #{a @pshowVideo(list.id).add("xxId",xxId)}
+                    ${list.title}
+                    #{/a}
+                    #{/else}
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+        <div style="text-align: center">
+        #{page page:page, url:"/SchoolPhotos/plist?xxId=" + xxId + "&type=" + type /}
+        </div>
+   </div>
+</div>

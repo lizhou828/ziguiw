@@ -1,0 +1,92 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 学校视频"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：#{a @Schools.pshow().add("xxId",xxId)}学校主页#{/a}  &gt; 视频</p>
+        </div>
+        <div class="news_tit">
+            视频展示
+        </div>
+        <h1 class="fyahei">${video.title}</h1>
+            <div style="text-align: center">
+            <script src="/public/flashplayer/flexpaper_flash.js"></script>
+            <script src="/public/flashplayer/AC_RunActiveContent.js"></script>
+            <script language="javascript">
+                if (AC_FL_RunContent == 0) {
+                    alert("This page requires AC_RunActiveContent.js.");
+                } else {
+                    AC_FL_RunContent(
+                            'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                            'width', '515',
+                            'height', '325',
+                            'src', '/public/flashplayer/jcplayer',
+                            'quality', 'high',
+                            'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                            'align', 'middle',
+                            'play', 'true',
+                            'loop', 'true',
+                            'scale', 'noScale',
+                            'wmode', 'window',
+                            'devicefont', 'false',
+                            'id', 'jcplayer',
+                            'bgcolor', '#ffffff',
+                            'name', 'jcplayer',
+                            'menu', 'true',
+                            'allowFullScreen', 'true',
+                            'allowScriptAccess','sameDomain',
+                            'FlashVars', 'videoURL=${ctx}/${video.url}&autoPlay=false&backgroundColor1=0x333333&backgroundColor2=0x222222',
+                            'movie', '/public/flashplayer/jcplayer',
+                            'salign','TL'
+                    );
+                }
+            </script>
+            <noscript>
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="465" height="295" id="jcplayer" align="TL">
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="FlashVars" value="videoURL=${ctx}/${video.url}&autoPlay=false&backgroundColor1=0x333333&backgroundColor2=0x222222"/>
+                    <param name="allowFullScreen" value="true" />
+                    <param name="salign" value="TL" />
+                    <param name="scale" value="noScale" />
+                    <param name="movie" value="/public/flashplayer/jcplayer.swf" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <embed src="/public/flashplayer/jcplayer.swf" FlashVars="videoURL=${ctx}/${video.url}&autoPlay=false&backgroundColor1=0x333333&backgroundColor2=0x222222" quality="high" bgcolor="#ffffff" width="465" height="295" name="jcplayer" align="middle" salign="TL" scale="noScale" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                </object>
+            </noscript>
+            </div>
+            <div class="v_description">${video.describe}</div>
+
+        <div class="clear"></div>
+        <div class="vedio_d_more mt10">
+            <p>您可能还喜欢以下视频：</p>
+            <ul>
+                #{list schoolPhotos,as:'videos'}
+                <li>
+                    <div class="vedio_d_c">
+                        #{a @SchoolPhotos.pshowVideo(videos.id).add("xxId",xxId)}
+                            <img src="${videos.cover == null ? videos.cover : ctx + "/" +
+                            com.arj.ziguiw.common.ImageSize.getImage(videos.cover,com.arj.ziguiw.common.ImageSize.TC)}" width="156" height="117"/>
+                        #{/a}
+                    </div>
+                    <div class="vedio_d_play">
+                        #{a @SchoolPhotos.pshowVideo(videos.id).add("xxId",xxId)}
+                            <img src="@{'public/images/play.gif'}"/>
+                        #{/a}
+                    </div>
+                    <div class="vedio_d_time">上传时间：${videos.createTime.format("yyyy-MM-dd")}</div>
+                    <div class="vedio_d_n">
+                        #{a @SchoolPhotos.pshowVideo(videos.id).add("xxId",xxId)}
+                            ${videos.title}
+                        #{/a}
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+
+
+    </div>
+
+</div>

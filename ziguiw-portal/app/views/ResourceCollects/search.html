@@ -1,0 +1,74 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的小家-我的收藏夹
+#{/set}
+#{set 'moreScripts'}
+<script type="text/javascript">
+    function delclick(id,condition){
+        if(confirm('确定删除?')){
+
+            nextPage.action = "/ResourceCollects/sdelete?collectId="+id+"&condition="+condition;
+            nextPage.submit();
+        }
+    }
+</script>
+#{/set}
+<!--main_right B-->
+<div class="sp_main_right">
+    <div class="right">
+        <div class="bobti">
+            <div class="diary_tit">
+                我的收藏夹搜索
+            </div>
+            <div class="friend_seach"  style="float:right;">
+                <form action="/ResourceCollects/search" method="post">
+                    <input type="text" class="fri_s_inp" name="condition" value="${condition}"/>
+                    <input type="submit" class="fri_s_btn" value="搜索"/>
+                    <input type="hidden" name="userId" value="${userBase.id}">
+                </form>
+            </div>
+        </div>
+        <form method="post" id="nextPage">
+            <div class="xunc_2 font-2">
+                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="sideright_tab1">
+                    <tbody>
+                    <tr bgcolor="#f2f4f6">
+                        <th width="10%">文件名称</th>
+                        <th width="18%">人气</th>
+                        <th width="18%">上传时间</th>
+                        <th width="18%">操作</th>
+                    </tr>
+                    #{list page.data,as:'collects'}
+                    <tr class="${collects_index == 1? 'menu_2' : 'menu_2 menu_4'}">
+                        <td width="18%">
+                            <p>
+                                <img src="/public/images/${collects.resourceType}.png">
+                            </p>
+                            <p>
+                                <a target="_blank" href="${play.configuration['resources.domain']}/Resources/show?resourceId=${collects.objectId}">${collects.title}</a>
+                            </p>
+                        </td>
+                        <td width="18%">
+                            <img src="/public/images/s_rate_good.gif">
+                            <img src="/public/images/s_rate_good.gif">
+                            <img src="/public/images/s_rate_good.gif">
+                            <img src="/public/images/s_rate_bad.gif">
+                            <img src="/public/images/s_rate_bad.gif">
+                        </td>
+                        <td width="18%">
+                        ${collects.createTime?.format("yyyy-MM-dd HH:mm")}
+                        </td>
+                        <td width="18%">
+                            <img title="删除"  src="/public/images/ico_delete_16.png" onclick="delclick('${collects.id}','${condition}');" style="cursor:pointer" id="del">
+                        </td>
+                    </tr>
+                    #{/list}
+                    </tbody>
+                </table>
+                <div style="text-align: center">
+                #{page page:page, url:"/ResourceCollects/search?userId=" + userBase.id + "&condition=" + condition/}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

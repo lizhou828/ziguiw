@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>父亲节活动微信页</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/wx.css'}">
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+
+
+#{if flag == -1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '上传失败，请尽量把信息填写完整！',
+                    yesFn : btnFn,
+                    noFn : true
+                }
+            });
+        };
+
+    </script>
+#{/if}
+</head>
+
+<body>
+<div class="wx">
+    <div class="wx_logo"><img src="@{'public/images/logo_03.png'}"/></div>
+    <form enctype="multipart/form-data" name="form" action="/FatherActivitys/information" method="post">
+        <div class="wx_kk">
+            <div class="wx_bt">活动一：父亲画像/影像征集</div>
+            <div class="wx_nr">微信用户：${fatherActivity.userName}<br />
+                作品上传成功,请仔细填写如下资料<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="right">作品标题:</td>
+                        <td>&nbsp;
+                            <input name="title" type="text" id="textfield" size="12" ${title}/>
+                            <span class="zi_h1">*50字以内</span></td>
+                    </tr>
+                    <tr>
+                        <td align="right">作者姓名:</td>
+                        <td>&nbsp;<input name="displayName" type="text" id="textfield2" size="12" ${displayName}/>&nbsp;*</td>
+                    </tr>
+                    <tr>
+                        <td align="right">年龄:</td>
+                        <td>&nbsp;<input name="age" type="text" id="textfield3" size="12" ${age}/>
+                            <span class="zi_h1">岁</span></td>
+                    </tr>
+                    <tr>
+                        <td align="right">上传者学校：</td>
+                        <td><input type="text" name="schoolName" id="textfield7" value="${schoolName}"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">上传者班级：</td>
+                        <td><input type="text" name="bj" id="bj" value="${bj}"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">有效联系方式:</td>
+                        <td>&nbsp;<input name="contact" type="text" id="textfield4" size="12" ${contact}/>&nbsp;*</td>
+                    </tr>
+                    <tr>
+                        <td align="right">常用邮箱:</td>
+                        <td>&nbsp;<input name="email" type="text" id="textfield5" size="12" ${email}/></td>
+                    </tr>
+                </table>
+                <div class="wx_an"><input type="submit" value="提交" style="font-size: 28px"></div>
+                      <input type="hidden" name="fatherActivityId" value="${fatherActivityId}">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

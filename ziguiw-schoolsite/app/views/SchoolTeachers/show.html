@@ -1,0 +1,40 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form fields:[ 'name','photo']}
+            #{crud.custom 'photo'}
+                <label for="object_url"> 照片 </label>
+                <input type="file" name="file" id="object_url">
+                #{if object.photo == null}
+                    <img src="@{'public/images/noimg_120X155.jpg'}"  width="100px" height="100px">
+                #{/if}
+                #{else }
+                    <img src="${ctx}/${object.photo}" width="100px" height="100px">
+                #{/else}
+            #{/crud.custom}
+        #{/crud.form}
+        <p class="crudButtons">
+            #{if object.status != com.arj.ziguiw.common.Status.OK}
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            #{/if}
+        </p>
+        <input type="hidden" name="object.school.id" value="${school.id}">
+    #{/form}
+    </div>
+
+#{if object.status != com.arj.ziguiw.common.Status.OK}
+#{form @delete(object._key())}
+    <p class="crudDelete">
+        <input type="submit" value="&{'crud.delete', type.displayName}" />
+    </p>
+#{/form}
+#{/if}
+
+</div>

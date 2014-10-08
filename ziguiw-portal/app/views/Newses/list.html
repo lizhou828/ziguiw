@@ -1,0 +1,34 @@
+#{extends 'main.html' /}
+#{set 'title'}
+教育在线|子贵网
+#{/set}
+#{set 'description'}
+教育在线|子贵网
+#{/set}
+#{set 'Keywords'}
+教育在线, ${id==1?'焦点话题':(id==2?'校园新闻':'考试升学')},子贵网
+#{/set}
+<div class="mypos fsong">
+    <a href="http://www.ziguiw.com">子贵首页</a> >
+    <a href="/Newses/index">教育在线</a> >${id==1?'焦点话题':(id==2?'校园新闻':'考试升学')}
+</div>
+<div class="col1 fl">
+    <div class="newslist">
+        <ul>
+            #{list page.data,as:'newse'}
+                <li  class="f14">
+                    <span>${newse.lastModifyTime?.format("yyyy-MM-dd")}</span>
+                    <a href="@{show(newse.id)}">${newse.title}</a>
+                </li>
+            #{/list}
+        </ul>
+        <!--分页 B-->
+        <div style="text-align: center">
+            #{page page:page, url:"/Newses/list?id=" + id/}
+        </div>
+        <!--分页 E-->
+    </div>
+</div>
+
+<!--热点推荐 B-->
+#{right /}

@@ -1,0 +1,65 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 班级列表"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：<a href="#">学校主页</a>  &gt; 班级天地</p>
+        </div>
+        <div class="news_tit">
+            班级列表
+        </div>
+        #{list schoolStugrades,as:'stugrades'}
+          %{
+            boolean j = false;
+            }%
+          #{list schoolClazzs,as:'classes'}
+              #{if stugrades.njId == classes.njId}
+                 %{
+                   j = true;
+                  }%
+              #{/if}
+          #{/list}
+            #{if j}
+              <p class="class_name">${stugrades.name}:</p>
+        <div class="c_recommend_con">
+            %{
+                java.util.List arr = new java.util.ArrayList();
+                schoolClazzs.each(){ cls ->
+                    if (cls.classExtend?.hot == com.arj.ziguiw.common.Boolean.YES) {
+                        arr.add(cls);
+                    }
+                }
+                schoolClazzs.each(){ cls ->
+                    if (cls.classExtend?.hot == com.arj.ziguiw.common.Boolean.NO) {
+                        arr.add(cls);
+                    }
+                }
+                }%
+            <ul>
+                #{list arr,as:'clazz'}
+                  #{if stugrades.njId == clazz.njId}
+                     #{if clazz?.classExtend?.hot == com.arj.ziguiw.common.Boolean.YES}
+                       <li class="hot">
+                     #{/if}
+                     #{else }
+                       <li>
+                     #{/else}
+                    #{a @pshow().add("xxId",xxId).add("classId",clazz.id)}
+                    ${clazz.name}
+                    #{/a}
+                </li>
+                  #{/if}
+                #{/list}
+            </ul>
+        </div>
+           <br />
+         #{/if}
+        #{/list}
+           <br />
+    </div>
+</div>
+
+
+
+

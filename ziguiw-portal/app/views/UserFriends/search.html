@@ -1,0 +1,119 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-好友搜索
+#{/set}
+        <!--main_right B-->
+        <div class="sp_main_right">
+        	<div class="bobti">
+            	<div class="diary_tit">搜索好友</div>
+                <div class="friend_seach"  style="float:right;">
+                    <form action="/UserFriends/search" method="post">
+                	<input type="text" class="fri_s_inp" name="condition" value="${condition}"/>
+                    <input type="hidden" name="userId" value="${userId}">
+                    <input type="submit" class="fri_s_btn" value="搜索"/>
+                    </form>
+                </div>
+            </div>
+            <div class="friends_s">
+            	<table cellpadding="0" cellspacing="0">
+                	<tr bgcolor="#f2f4f6">
+                    	<th width="25%">
+                        	好友昵称
+                        </th>
+                        <th width="25%">
+                        	好友图像
+                        </th>
+                        <th width="25%">
+                        	是否已添加
+                        </th>
+                        <th width="25%">
+                        	操作
+                        </th>
+                    </tr>
+                    #{list page.data,as:'userbase'}
+                            %{
+                            boolean flag = true;
+                            }%
+                        <tr>
+                            <td>
+                                ${userbase.displayName}
+                            </td>
+                            <td>
+                                #{if userbase.photo == null}
+                                    <img src="@{'public/images/noimg_120X155.jpg'}" width="50" height="50"/>
+                                #{/if}
+                                #{else }
+                                    <img src="${ctx}/${userbase.photo}" width="50" height="50"/>
+                                #{/else}
+                            </td>
+                            <td>
+                                #{list userFriends,as:'userfriend'}
+                                   #{if userfriend == userbase.id}
+                                        %{
+                                         flag = false;
+                                       }%
+                                        是
+                                   #{/if}
+                                #{/list}
+                                #{if flag}
+                                    否
+                                #{/if}
+                            </td>
+                            <td>
+                                 #{if userBase?.id == user?.id}
+                                    #{if flag}
+                                        #{a @addFriend(userbase.id,condition,userId)}添加#{/a}
+                                    #{/if}
+                                    #{else }
+                                        #{a @removeFriend(userbase.id,condition,userId)}删除#{/a}
+                                    #{/else}
+                                 #{/if}
+                            </td>
+                        </tr>
+                    #{/list}
+                </table>
+            </div>
+
+            <div style="text-align: center">
+            #{page page:page, url:"/UserFriends/search?condition=" + condition + "&userId=" + userId /}
+            </div>
+            
+        </div>
+#{if flag == 1}
+<script type="text/javascript">
+    var btnFn = function(){
+        return true;
+    };
+
+    window.onload = function(){
+        easyDialog.open({
+            container : {
+                header : '子贵网空间添加好友',
+                content : '添加成功',
+                yesFn : btnFn,
+                noFn : true
+            }
+        });
+    };
+
+</script>
+#{/if}
+#{if flag == 0}
+<script type="text/javascript">
+    var btnFn = function(){
+        return true;
+    };
+
+    window.onload = function() {
+        easyDialog.open({
+            container : {
+                header : '子贵网空间删除好友',
+                content : '删除成功',
+                yesFn : btnFn,
+                noFn : true
+            }
+        });
+    };
+
+</script>
+#{/if}

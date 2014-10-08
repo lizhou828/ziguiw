@@ -1,0 +1,66 @@
+#{extends 'main.html'/}
+#{set 'title'}
+育儿问答
+#{/set}
+<div class="mypos fsong"><a href="http://www.ziguiw.com">子贵首页</a> &gt; <a href="/Knowledges/index">教育知识</a> &gt; 育儿问答</div>
+<div class="col1 fl">
+    <div class="newslist ask_question">
+        <h2 class="col-h3">
+            <a href="/questions/list?status=0" ${status==0?'class=on':''} >待解决问题<span></span></a>
+            <a href="/questions/list?status=1" ${status==1?'class=on':''}>已解决问题<span></span></a>
+            <a href="/questions/list?status=3" ${status==3?'class=on':''}>我提的问题<span></span></a>
+        </h2>
+        <ul class="ul_sign_3">
+            #{list page.data,as : 'question'}
+                <li>
+                    <span>${question.point}</span>
+                    <a href="@{show(question.id)}">${question.title}</a>
+                </li>
+            #{/list}
+
+        </ul>
+        <!--分页 B-->
+        <div style="text-align: center">
+            #{page page:page, url:"/Questions/list?status=" + 0/}
+        </div>
+        <!--分页 E-->
+    </div>
+</div>
+<div class="col2 fl ml10">
+    <div class="clearfix">
+        <a href="/questions/askquestionui"  class="ask l"><img  alt="我有问题" src="/public/images/learn_ask.png"/></a>
+        <a href="/questions/list?status=0"  class="answer r"><img  alt="我来解答" src="/public/images/learn_answer.png"/></a>
+    </div>
+
+    <div class="ph mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">人气排行</h3>
+        </div>
+        <div class="bordb">
+            <ul>
+                %{
+                    models.Question.findHot().each(){
+                    }%
+                    <li>
+                        <a href="@{show(it.id)}">${it.title}</a>
+                    </li>
+                %{
+                    }
+                    }%
+            </ul>
+        </div>
+    </div>
+
+    <div class="ad_col2_1 borda mt10"><a href="#"><img src="/public/images/img_268_88.jpg" /></a></div>
+
+    <div class="mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">答疑高手</h3>
+        </div>
+        <div class="bordb dygs">
+            <ul class="img_f">
+            </ul>
+        </div>
+    </div>
+
+</div>

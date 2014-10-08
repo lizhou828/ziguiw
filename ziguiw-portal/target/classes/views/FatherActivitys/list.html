@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>父亲节专题</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css.css'}">
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+
+#{if flag == 1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            document.location = "http://father.ziguiw.com/FatherActivitys/list";
+            return true;
+        };
+        var bnFn = function(){
+            document.location = "http://father.ziguiw.com/FatherActivitys/list";
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '投票成功',
+                    yesFn : btnFn,
+                    noFn : bnFn
+                }
+            });
+        };
+
+    </script>
+#{/if}
+
+#{if flag == -1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            document.location = "http://father.ziguiw.com/FatherActivitys/list";
+            return true;
+        };
+        var bnFn = function(){
+            document.location = "http://father.ziguiw.com/FatherActivitys/list";
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '投票失败，超出投票次数！',
+                    yesFn : btnFn,
+                    noFn : bnFn
+                }
+            });
+        };
+
+    </script>
+#{/if}
+</head>
+
+<body>
+<div class="top">
+    <div class="zigui_logo"><a href="http://www.ziguiw.com"><img src="@{'public/images/zigui_logo.gif'}"/></a></div>
+</div>
+<div class="top_1">
+    <div class="bt"><p>五月的阳光，犹如母亲温柔；六月的烈日，却是父亲严厉。同样是爱，却爱得色彩斑斓。母爱如水、父爱如山！</p>
+        <p>父亲是一只船，载着我们的期待和梦幻；父亲是一棵树，为我们遮挡风雪和严寒；父亲是一盏灯，给我们光明和温暖；鬓角的白发，额头的皱纹，大山般的父亲，留给我们的不应该只是背影……</p>
+        <p><font color="c11919">所有曾经or此刻被爸爸呵护的大孩子、小孩子们，全都参与到传递父爱的活动中来吧！
+            让我们记住：<strong>六月的第三个星期日</strong>，真正属于父亲们的节日——父亲节。</font></p>
+    </div>
+</div>
+<div class="nr0">
+    <div class="dh">
+        <div class="dh1_1"><a href="/FatherActivitys/index" target="_blank">活动首页</a></div>
+        <div class="dh2_2"><a href="/FatherActivitys/list" target="_blank">作品投票</a></div>
+    </div>
+</div>
+<div class="fa_white">
+<div class="biaoti_1"><img src="@{'public/images/biaot_03.jpg'}" /></div>
+    <div class="search">
+        <div class="zp_num">
+           <a href="/FatherActivitys/plist" target="_blank"><img src="@{'public/images/chaxun.gif'}"/></a>
+        </div>
+        <div class="search_l">
+            <form method="post" action="/FatherActivitys/search">
+                作品查询：<input type="text" name="mobile" class="sea_num" value="输入上传者手机号" onfocus="if (value =='输入上传者手机号'){value =''}" onblur="if (value ==''){value='输入上传者手机号'}"/>
+                <input type="submit" value="查询" />
+            </form>
+        </div>
+    </div>
+
+<div class="map">
+    #{list page.data,as:'data'}
+        <div class="showtext">
+            #{a @show(data.id)}
+            #{if data?.url?.contains("upload")}
+                <img src="${data.url == null ? data.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(data.url,"284X210")}" width="284px" height="210px"/>
+            #{/if}
+            #{else }
+                <img src="${data.url}" width="284px" height="210px"/>
+            #{/else}
+            #{/a}
+            <div class="toupiao">
+                #{a @show(data.id)}${data?.title?.length() > 5 ? data?.title[0..5] + "..." : data?.title}#{/a}&nbsp;${data.clickCount}票&nbsp;
+                #{a @show(data.id)}编号：${data.id + 1000}#{/a}
+            #{a @vote(data.id,2)}<img class="bottom" src="@{'public/images/toupiao_13.jpg'}" />#{/a}</div>
+        </div>
+    #{/list}
+        <div class="clear"></div>
+        <div class="pageNav">
+        #{page page:page, url:"/FatherActivitys/list"/}
+        </div>
+
+</div>
+
+    <div class="biaoti_1"><img src="@{'public/images/zpzs_03.png'}" /></div>
+    <div class="search">
+        <div class="search_l">
+            <form method="post" action="/FatherMessages/search">
+            短信查询：
+            <input type="text" name="mobile" onblur="if (value ==''){value='参与活动手机号'}" onfocus="if (value =='参与活动手机号'){value =''}" value="参与活动手机号" class="sea_num" name="mobile">
+            <input type="submit" value="查询">
+            </form>
+        </div>
+    </div>
+
+
+    <div class="map">
+
+
+    <div class="dxhf">
+        <div class="dxhf_xk">
+            <div class="dxhf_bt">活动二 爸爸，我想对您说（短信祝福）：</div>
+
+            <div style="overflow:hidden;height:250px;width:422px;background:#f4f4f4;" id="demo">
+                <div id="demo1">
+                    #{list list,as:'message'}
+                        <div class="dxhf_nr"><p>(${message.contact?.length() > 8 ? message.contact?.substring(0,3) + "****" + message.contact?.substring(7) : message.contact})${message.content}</p></div>
+                    #{/list}
+                </div>
+                <div id="demo2">
+                </div>
+            </div>
+            <script>
+                var speed = 50;
+                demo2.innerHTML = demo1.innerHTML;
+                function Marquee(){
+                    if(demo2.offsetTop-demo.scrollTop <= 0)
+                        demo.scrollTop-=demo1.offsetHeight
+                    else{
+                        demo.scrollTop++
+                    }
+                }
+                var MyMar=setInterval(Marquee,speed)
+                demo.onmouseover=function() {clearInterval(MyMar)}
+                demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+            </script>
+
+
+        </div>
+    </div>
+
+    <div class="dxhf">
+        <div class="dxhf_xk">
+            <div class="dxhf_bt">活动三 聆听父亲的心声（短信回复）：</div>
+
+            <div style="overflow:hidden;height:250px;width:422px;background:#f4f4f4;" id="demo_h">
+                <div id="demo1_h">
+                <marquee id="a" onmouseover=a.stop() onmouseout=a.start() direction=up height=250 scrollAmount=1 behavior=scroll>
+                #{list replays,as:'replay'}
+                    <div class="dxhf_nr"><p>(${replay.mobile?.length() > 8 ? replay.mobile?.substring(0,3) + "****" + replay.mobile?.substring(7) : replay.mobile})${replay.content}</p></div>
+                #{/list}
+                </marquee>
+                </div>
+                <div id="demo2_h"></div>
+            </div>
+            *{<script>}*
+                *{var speed=50}*
+                *{demo2_h.innerHTML=demo1_h.innerHTML}*
+                *{function Marquee2(){}*
+                    *{if(demo2_h.offsetTop-demo_h.scrollTop<=0)}*
+                        *{demo_h.scrollTop-=demo1_h.offsetHeight}*
+                    *{else{}*
+                        *{demo_h.scrollTop++}*
+                    *{}}*
+                *{}}*
+                *{var MyMar=setInterval(Marquee2,speed)}*
+                *{demo_h.onmouseover=function() {clearInterval(MyMar)}}*
+                *{demo_h.onmouseout=function() {MyMar=setInterval(Marquee2,speed)}}*
+            *{</script>}*
+        </div>
+    </div>
+
+</div>
+
+</div>
+<div class="yl">
+    <p>
+        <a href="/HelpCenters/aboutus" target="_blank" class="hei">关于我们</a>|
+        <a href="/HelpCenters/contract" target="_blank">服务协议</a>|
+        <a href="/HelpCenters/service" target="_blank">客服中心</a>|
+        <a href="/HelpCenters/feedback" target="_blank">意见反馈</a>|
+        <a href="/HelpCenters/recruit" target="_blank">网站招聘</a>|
+        <a href="/HelpCenters/map" target="_blank">网站地图</a>|
+        <a href="/HelpCenters/contact" target="_blank">联系我们</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+        <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+        <a href="/HelpCenters/copyright" target="_blank">版权所有</a>|
+        <a href="/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+    </p>
+</div>
+</body>
+</html>

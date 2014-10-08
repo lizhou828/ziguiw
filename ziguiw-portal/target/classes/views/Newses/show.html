@@ -1,0 +1,78 @@
+#{extends 'main.html'/}
+#{set 'title'}
+${newse.title}|教育在线|子贵网
+#{/set}
+<div class="mypos fsong">
+    <a href="${play.configuration['portal.domain']}">子贵首页</a> >
+    <a href="/newses/index">教育在线</a> >
+    <a href="/newses/list?id=${channelId}">${channelId == 1?'焦点新闻':(channelId==2?'校园新闻':'考试升学')}</a> > 正文
+</div>
+
+<div class="col1 fl">
+    <div class="newscot">
+        <h1 class="fyahei">${newse.title}</h1>
+        <p class="news_tip fb">
+            <span>发布时间：${newse.lastModifyTime?.format("yyyy-MM-dd")}</span>
+            <span>编辑：${newse.editors}</span>
+        </p>
+        <div class="news_info">
+            <strong>内容摘要：</strong>
+            <p class="f14">
+               ${newse.descr}
+            </p>
+        </div>
+        <div class="newscots">
+            ${newse.content.raw()}
+        </div>
+    </div>
+
+
+    <div class="tz_xg p_b10 o-v">
+        <h2>相关文章</h2>
+        <ul class="clearfix">
+        </ul>
+
+        <!--百度分享按钮代码-->
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+            <span class="bds_more">分享到：</span>
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="shareCount"></a>
+        </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+        <script type="text/javascript" id="bdshell_js"></script>
+        <script type="text/javascript">
+            document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+        </script>
+        <!-- Baidu Button END -->
+    </div>
+
+
+
+    *{<div class="bordb hi-at mt10 new_view">
+        <div class="h3titb">
+            <h3 class="fyahei">发表评论</h3>
+        </div>
+        <div class="p_b10 mb10">
+            <form action="/user/commentNews.action">
+                <div class="o-v leave_k">
+                    <ul class="ul-li-s">
+                        <li class="a-r"><a href="/news/queryComment.action?commentedId=1971&type=2" target="_blank">【查看评论】</a></li>
+                        <li><span>用户名：</span><input type="text" value="" name="loginUser.nickName" class="inp_txt"><a href="" target="_blank" class="m-l10">快速注册新用户</a></li>
+                        <li><span>密码：</span><input type="password" name="loginUser.password" class="inp_txt"></li>
+                        <li><span></span><textarea name="message.text" class="area3"></textarea></li>
+                        <input type="hidden" name="message.type" value="2">
+                        <input type="hidden" name="message.commentedId" value="">
+                        <li><input type="submit" name="Submit1" value="发 表" class="btn2 l mt5"></li>
+
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>}*
+
+</div>
+#{right /}

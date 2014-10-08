@@ -1,0 +1,199 @@
+#{extends 'main.html' /}
+#{set title:school.name + '首页' /}
+<div class="middle center pt10">
+
+
+<div class="sc_mid">
+<!--轮播开始-->
+<div class="change_left">
+    <div class="sub_box_4">
+        <div class="sub_nav_4" id="p-select">
+            <div id="bd1lfsj" class="sub_no">
+                <ul>
+                #{list schoolNewsUrl,as:'url'}
+                    #{if url_index <= schoolNewsUrl.size() && url_index < 6}
+                        #{if url_index <= 1}
+                            <li class="show">${url_index}</li>
+                        #{/if}
+                        #{else }
+                            <li class="">${url_index}</li>
+                        #{/else}
+                    #{/if}
+                #{/list}
+                </ul>
+            </div>
+        </div>
+        <div id="bd1lfimg_4">
+            <div>
+                <dl class=""></dl>
+                #{list schoolNewsUrl,as:'newsUrl'}
+                <dl class="">
+                    <dt>
+                        #{a @SchoolNews.pshow(newsUrl.id).add("xxId",xxId)}
+                        <img alt="${newsUrl.title}"
+                             src="${newsUrl.url ==null ? newsUrl.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(newsUrl.url,com.arj.ziguiw.common.ImageSize.SSL)}" >
+                        #{/a}
+                    </dt>
+                    <dd>
+                        <h4 class="fyahei">
+                            #{a @SchoolNews.pshow(newsUrl.id).add("xxId",xxId)}
+                                ${newsUrl.title}
+                                #{/a}
+                        </h4>
+                    </dd>
+                    <dd class="bg_lunbo_4"></dd>
+                </dl>
+                #{/list}
+            </div>
+        </div>
+        <script type="text/javascript" language="javascript">movec_4();</script>
+    </div>
+</div>
+<!--轮播结束-->
+
+<div class="news">
+    <div class="dynamic_news">
+        <div class="dy_title">
+            <div class="dy_left">新闻动态</div>
+            <div class="dy_more">#{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.NEWS).add("xxId", xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="clear"></div>
+        <div class="dy_con">
+            <ul>
+                #{list schoolNewses,as:'news'}
+                <li>
+                    <div class="dy_c">
+                        #{a @SchoolNews.pshow(news.id)}${news.title}#{/a}
+                    </div>
+                    <div class="dy_time">
+                        <span>${news.createTime == null ? news.createTime : news.createTime.format("yyyy-MM-dd")}</span>
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="notice_news">
+        <div class="cam_title">
+            <div class="cam_left">校园公告</div>
+            <div class="dy_more">#{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.BULLETIN).add("xxId", xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="clear"></div>
+        <div class="cam_con">
+            <ul>
+                #{list schoolNewsBulletins,as:'buletins'}
+                <li>
+                    <div class="dy_c">
+                        #{a @SchoolNews.pshow(buletins.id)}${buletins.title}#{/a}
+                    </div>
+                    <div class="dy_time">
+                        <span>${buletins.createTime == null ? buletins.createTime : buletins.createTime.format("yyyy-MM-dd")}</span>
+                    </div>
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="clear"></div>
+
+<div class="about pt10">
+    <div class="a_intro">
+        <div class="dy_title">
+            <div class="intro_left">学校简介</div>
+            <div class="dy_more">#{a @Schools.pdesc().add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="intro_con">
+            <p>${schoolExtend?.description?.raw()}</p>
+        </div>
+    </div>
+    <div class="a_happy">
+        <div class="hap_title">
+            <div class="hap_left">快乐校园</div>
+            <div class="dy_more">#{a @SchoolPhotos.index().add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="happy_con">
+            <ul>
+                #{list schoolPhotos,as:'schoolPhoto'}
+                #{if schoolPhoto_index < 9}
+                <li>
+                    <p>
+                        #{a @SchoolPhotos.pshowPhoto(schoolPhoto.album.id).add("xxId",xxId)}
+                        <img
+                           src="${schoolPhoto.url ==null ? schoolPhoto.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(schoolPhoto.url,com.arj.ziguiw.common.ImageSize.SSX)}"
+                              height="102" width="136"  />
+                        #{/a}
+                    </p>
+                    <p class="about_cam_note">
+                        #{a @SchoolPhotos.pshowPhoto(schoolPhoto.album.id).add("xxId",xxId)}
+                        ${schoolPhoto.title}
+                        #{/a}
+                        </p>
+                </li>
+                #{/if}
+                #{/list}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+<div class="v_s">
+    <div class="vedio">
+        <div class="dy_title">
+            <div class="vedio_left">最新视频</div>
+            <div class="dy_more"> #{a @SchoolPhotos.plist(com.arj.ziguiw.common.SchoolPhotoType.VIDEO).add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="vedio_con">
+            <ul>
+                #{list schoolVideos,as:'schoolVideo'}
+                <li>#{a @SchoolPhotos.pshowVideo(schoolVideo.id).add("xxId",xxId)}${schoolVideo.title}#{/a}</li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <div class="study">
+        <div class="hap_title">
+            <div class="study_left">学习园地</div>
+            <div class="dy_more">#{a @SchoolXxyds.plist().add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+        </div>
+        <div class="stu_con">
+            <div class="stu_words">
+                <ul>
+                    #{list schoolXxyds,as:'xxyd'}
+                    <li>#{a @SchoolXxyds.pshow(xxyd.id).add("xxId",xxId)}${xxyd.title}#{/a}</li>
+                    #{/list}
+                </ul>
+            </div>
+            <div class="stu_photo">
+                <ul>
+                    #{list schoolXxydUrl,as:'xxydUrl'}
+                    <li>
+                        <div class="stu_photo_con">
+                        #{a @SchoolXxyds.pshow(xxydUrl.id).add("xxId",xxId)}
+                            <img
+                                    src="${xxydUrl.url ==null ? xxydUrl.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(xxydUrl.url,com.arj.ziguiw.common.ImageSize.SSX)}"
+                                   height="102" width="136" />
+                        #{/a}
+                        </div>
+                        <div class="ph_title">
+                        </div>
+                        <div class="ph_title_w">
+                            #{a @SchoolXxyds.pshow(xxydUrl.id).add("xxId",xxId)}
+                                 ${xxydUrl.title?.length() > 6 ? xxydUrl?.title[0..6] + '..' : xxydUrl.title}
+                            #{/a}
+                        </div>
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>

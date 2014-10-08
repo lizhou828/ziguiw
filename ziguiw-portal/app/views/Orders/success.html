@@ -1,0 +1,37 @@
+#{extends 'main.html'/}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/cz.css'}">
+<div class="czcenter1">
+
+    <div class="mypos fsong">
+        <a href="${play.configuration['portal.domain']}">子贵首页</a>&gt;
+        <a href="${play.configuration['portal.domain']}/myhomes/index">空间</a>&gt;
+        充值中心
+    </div>
+
+    <div class="cz_k">
+        <div class="cz_title">
+            <span style="color:#515151;font-size:28px;font-weight:bold;">子贵网-</span><span style="color:#c00202;font-size:28px;font-weight:bold;">充值中心</span>
+        </div>
+        <div class="cz_status4">
+            <span class="cz_status_num">1 充值类别</span>
+            <span class="cz_status_num">2 充值方式</span>
+            <span class="cz_status_num">3 充值操作</span>
+            <span class="cz_status_num" id="cz_curr">4 充值完成</span>
+        </div>
+        <div class="cz_status_com">
+            <p class="cz_status_w"><img src="/public/images/status_yes.gif" /> 恭喜您，充值成功！</p>
+            <div class="cz_customer">
+                <div style="font-size:12px;color:#999;vertical-align:middle; height:22px;float:left;text-align:center;margin-top:4px;">如有疑问，请拨打客服电话 952116 或联系企业QQ客服</div><div style="margin-top:-8px;float:left;"></div><!-- WPA Button Begin -->
+                <script type="text/javascript" src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&type=1&kfuin=4009952116&ws=www.ziguiw.com&btn1=%E4%BC%81%E4%B8%9AQQ%E4%BA%A4%E8%B0%88&aty=0&a=&key=%5B2%067%050ThQl%06e%075P8R3%046Tm_1TgP%3E%5C%3A%05b%5B7%022Xd%056"></script></div>
+            <!-- WPA Button END --></p>
+            <p>
+                <a href="/Orders/payOne">
+                    <input type="button" class="status_goon" value="继续充值" style="background: url('/public/images/status_goon.gif');"/>
+                </a>
+                <a href="${play.configuration['portal.domain']}/myhomes/index">
+                    <input type="button"  class="status_home" value="返回个人空间" style="background: url('/public/images/status_home.gif');"/>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>

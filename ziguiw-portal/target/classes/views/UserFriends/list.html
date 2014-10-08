@@ -1,0 +1,43 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-我的好友
+#{/set}
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">我的好友</div>
+            <div class="friend_seach"  style="float:right;">
+                <form action="/UserFriends/search" method="post">
+                    <input type="text" class="fri_s_inp" name="condition"/>
+                    <input type="submit" class="fri_s_btn" value="搜索"/>
+                    <input type="hidden" name="userId" value="${userBase.id}">
+                </form>
+            </div>
+        </div>
+        <div class="friends">
+            <ul>
+            #{list page.data,as : 'users'}
+                <li>
+                    <p>
+                        #{a @MyHomes.list(users.friendUser.id)}
+                            #{if users.friendUser.photo == null}
+                            <img class="album_p" src="@{'public/images/per_img.jpg'}" height="125" width="125" >
+                            #{/if}
+                            #{else }
+                            <img class="album_p" src="${ctx}/${users.friendUser.photo}" height="125" width="125" />
+                            #{/else}
+                        #{/a}
+                    </p>
+                    <p>
+                        #{a @MyHomes.list(users.friendUser.id)}
+                        ${users.friendUser.nickName}
+                        #{/a}
+                    </p>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div style="text-align: center">
+        #{page page:page, url:"/UserFriends/list?userId=" + userBase.id /}
+        </div>
+    </div>

@@ -1,0 +1,36 @@
+<div class="class_recommend mt10">
+    <div class="news_tit">
+        最新推荐班级
+    </div>
+    <div class="recommend_con">
+        <ul>
+        %{
+            java.util.List arr = new java.util.ArrayList();
+            classes.each(){ cls ->
+            if (cls.classExtend?.hot == com.arj.ziguiw.common.Boolean.YES) {
+            arr.add(cls);
+            }
+            }
+            classes.each(){ cls ->
+            if (cls.classExtend?.hot == com.arj.ziguiw.common.Boolean.NO) {
+            arr.add(cls);
+            }
+            }
+            }%
+            #{list arr, as:'classes'}
+                #{if classes_index <= 8}
+                    #{if classes?.classExtend?.hot == com.arj.ziguiw.common.Boolean.YES}
+                        <li class="hot">
+                    #{/if}
+                    #{else }
+                        <li>
+                    #{/else}
+                      #{a @SchoolClazzs.pshow().add("xxId",classes.xxId).add("classId",classes.id)}
+                    ${classes.name}
+                    #{/a}
+                    </li>
+                #{/if}
+            #{/list}
+        </ul>
+    </div>
+</div>

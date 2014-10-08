@@ -1,0 +1,91 @@
+<div class="header">
+    <a class="logo" href="/" title=""><img src="@{'public/images/logo.jpg'}" /></a>
+    <div class="nav">
+        <ul class="nav_tit clearfix">
+            <li id="index_tab1" class=""><a href="${play.configuration['portal.domain']}" title="首   页" target="_blank">首   页</a></li>
+            <li id="index_tab2" class=""><a href="${play.configuration['portal.domain']}/newses/index" title="教育在线" target="_blank">教育在线</a></li>
+            <li id="index_tab3" class=""><a href="${play.configuration['portal.domain']}/knowledges/index" title="教育知识" target="_blank">教育知识</a></li>
+            <li id="index_tab4" class=""><a href="${play.configuration['resources.domain']}" title="教育资源" target="_blank">教育资源</a></li>
+            <li id="index_tab5" class=""><a href="${play.configuration['portal.domain']}/boards/index" title="互动社区" target="_blank">互动社区 <img src="@{'public/images/new.png'}" /></a></li>
+            <li id="index_tab6" class=""><a href="${play.configuration['portal.domain']}/myhomes/index" title="我的小家" target="_blank">我的小家</a></li>
+        </ul>
+        <script language="javascript">
+            function aaa() {
+                var url = self.location.href;
+
+                if(url.indexOf('news')>0){
+                    document.getElementById('index_tab1').removeAttribute('class');
+                    document.getElementById('index_tab2').setAttribute('class','cur');
+                    document.getElementById('index_tab3').removeAttribute('class');
+                    document.getElementById('index_tab4').removeAttribute('class');
+                    document.getElementById('index_tab5').removeAttribute('class');
+                    document.getElementById('index_tab6').removeAttribute('class');
+                }else if(url.indexOf('study')>0){
+                    document.getElementById('index_tab1').removeAttribute('class');
+                    document.getElementById('index_tab2').removeAttribute('class');
+                    document.getElementById('index_tab3').setAttribute('class','cur');
+                    document.getElementById('index_tab4').removeAttribute('class');
+                    document.getElementById('index_tab5').removeAttribute('class');
+                    document.getElementById('index_tab6').removeAttribute('class');
+                }else if(url.indexOf('source')>0){
+                    document.getElementById('index_tab1').removeAttribute('class');
+                    document.getElementById('index_tab2').removeAttribute('class');
+                    document.getElementById('index_tab3').removeAttribute('class');
+                    document.getElementById('index_tab4').setAttribute('class','cur');
+                    document.getElementById('index_tab5').removeAttribute('class');
+                    document.getElementById('index_tab6').removeAttribute('class');
+                }else if(url.indexOf('community')>0){
+                    document.getElementById('index_tab1').removeAttribute('class');
+                    document.getElementById('index_tab2').removeAttribute('class');
+                    document.getElementById('index_tab3').removeAttribute('class');
+                    document.getElementById('index_tab4').removeAttribute('class');
+                    document.getElementById('index_tab5').setAttribute('class','cur');
+                    document.getElementById('index_tab6').removeAttribute('class');
+                }else if(url.indexOf('home')>0){
+                    document.getElementById('index_tab1').removeAttribute('class');
+                    document.getElementById('index_tab2').removeAttribute('class');
+                    document.getElementById('index_tab3').removeAttribute('class');
+                    document.getElementById('index_tab4').removeAttribute('class');
+                    document.getElementById('index_tab5').removeAttribute('class');
+                    document.getElementById('index_tab6').setAttribute('class','cur');
+                }else{
+                    document.getElementById('index_tab1').setAttribute('class','cur');
+                    document.getElementById('index_tab2').removeAttribute('class');
+                    document.getElementById('index_tab3').removeAttribute('class');
+                    document.getElementById('index_tab4').removeAttribute('class');
+                    document.getElementById('index_tab5').removeAttribute('class');
+                    document.getElementById('index_tab6').removeAttribute('class');
+                }
+            }
+            aaa();
+        </script>
+        <ul class="nav_sub_tit">
+            <li>
+
+                <a href="${play.configuration['portal.domain']}/newses/list?id=1" title="焦点话题" >焦点话题</a>
+                <a href="${play.configuration['schoolsite.domain']}" title="校园站内站" >校园站内站</a>
+                <a href="${play.configuration['portal.domain']}/newses/list?id=2" title="校园新闻" >校园新闻</a>
+                <a href="${play.configuration['portal.domain']}/newses/list?id=3" title="考试升学" >考试升学</a>
+            </li>
+            <li>
+                <a href="${play.configuration['portal.domain']}/knowledges/list?id=1" title="幼儿期" >幼儿期</a>
+                <a href="${play.configuration['portal.domain']}/knowledges/list?id=2" title="少儿期" >少儿期</a>
+                <a href="${play.configuration['portal.domain']}/knowledges/list?id=3" title="青年期" >青年期</a>
+                <a href="${play.configuration['portal.domain']}/knowledges/list?id=4" title="心理咨询" >心理咨询</a>
+                <a href="${play.configuration['portal.domain']}/questions/list?status=0" title="育儿问答" >育儿问答</a>
+                <a href="${play.configuration['portal.domain']}/debates/list" title="辩论" >辩论</a>
+            </li>
+
+            <li>
+                <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=2" title="同龄圈" >同龄圈</a>
+                <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=3" title="同城圈">同城圈</a>
+                <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=4" title="学习交流">学习交流</a>
+                <a href="${play.configuration['portal.domain']}/boards/list?parentBoardId=5" title="专家问答">专家问答</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <!--nav E -->
+
+</div>

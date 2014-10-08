@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 师资力量"/}
+<div class="comm_k">
+    <div class="comm_w">
+        <p>师资力量</p>
+    </div>
+    #{list items:schoolTeachers, as:'teacher'}
+        <div class="teachers_a">
+            <table>
+                <tbody>
+                <tr>
+                    <th>老师姓名</th>
+                    <th>照片</th>
+                    <th>年/班级</th>
+                    <th>任教科目</th>
+                    <th>职位</th>
+                    <th>职称</th>
+                </tr>
+                <tr>
+                    <td>${teacher.name}</td>
+                    <td><p>
+                        <img src="${teacher.photo == null ? teacher.photo : ctx + "/" +com.arj.ziguiw.common.ImageSize.getImage(teacher.photo,com.arj.ziguiw.common.ImageSize.TCS)}">
+                    </p></td>
+                    <td>${teacher.bj}</td>
+                    <td>${teacher.km}</td>
+                    <td>${teacher.zw}</td>
+                    <td>${teacher.zc}</td>
+                </tr>
+                <tr>
+                    <td><b>详细内容：</b></td>
+                    <td colspan="5" style="text-align:left; text-align:justify;text-justify:inter-ideograph;">
+                        ${teacher.description}
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+    #{/list}
+</div>

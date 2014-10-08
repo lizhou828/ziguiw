@@ -1,0 +1,72 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 学校动态，公告"/}
+
+<div class="middle center pt10">
+    <div class="news_left">
+        <div class="news_menu">
+            <div class="news_tit">
+                新闻栏
+            </div>
+            <div class="news_classify">
+                <ul>
+                    <li #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.NEWS}id="on"#{/if}>
+                    #{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.NEWS).add("xxId", xxId)}校园新闻#{/a}</li>
+                    <li #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.BULLETIN}id="on"#{/if}>
+                    #{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.BULLETIN).add("xxId", xxId)}校园公告#{/a}</li>
+                </ul>
+            </div>
+        </div>
+
+        #{render 'schoolLeftClass.html', classes:classes/}
+
+        <div class="study_recommend mt10">
+            <div class="study_title">
+            #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.NEWS}
+                <div class="study_left">校园公告</div>
+                <div class="dy_more">#{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.BULLETIN).add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+            #{/if}
+            #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.BULLETIN}
+                <div class="study_left">校园动态</div>
+                <div class="dy_more">#{a @SchoolNews.plist(com.arj.ziguiw.common.SchoolNewsType.NEWS).add("xxId",xxId)}更多 &gt;&gt;#{/a}</div>
+            #{/if}
+            </div>
+            <div class="study_con">
+                <ul>
+                    #{list list,as:'list'}
+                    <li>#{a @pshow(list.id)}${list.title}#{/a}</li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="news_right">
+        <div class="position">
+            <p>您的位置：<a href="#">学校主页</a>  &gt; #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.BULLETIN}校园公告#{/if}
+            #{else }新闻动态#{/else}
+            </p>
+        </div>
+        <div class="news_tit">
+            #{if schoolNewsType == com.arj.ziguiw.common.SchoolNewsType.BULLETIN}校园公告#{/if}
+            #{else }新闻动态#{/else}
+        </div>
+        <div class="news_con_list">
+            <ul class="news_con_sp">
+                #{list page.data,as:'news'}
+                <li>
+                    <div class="news_sp_l">#{a @pshow(news.id)}${news.title}#{/a}</div>
+                       <div class="time">
+                       ${news.createTime == null ? news.createTime : news.createTime.format("yyyy-MM-dd")}
+                       </div></li>
+                     #{if news_index % 5 ==0 }<br /><br />#{/if}
+                #{/list}
+            </ul>
+        </div>
+
+        <div style="text-align: center">
+            #{page page:page, url:"/SchoolNews/plist?xxId=" + xxId + "&schoolNewsType=" + schoolNewsType /}
+        </div>
+    </div>
+
+</div>

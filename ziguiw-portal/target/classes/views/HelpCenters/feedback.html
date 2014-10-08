@@ -1,0 +1,275 @@
+#{extends 'main.html'/}
+#{set 'title'}
+意见反馈
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+<!--banner B-->
+<div class="f_banner">
+    <img src="@{'public/images/banner02.gif'}" />
+</div>
+<div class="mypos fsong">
+    <a href="#">子贵首页</a>  &gt;意见反馈
+
+</div>
+<!--banner E-->
+
+<!--middle B-->
+<div class="p_middle">
+<div class="p_middle_left" id="knowqqleft">
+#{render 'HelpCenters/menu.html'/}
+</div>
+<div class="p_middle_right">
+<div class="p_title"><p><em>&#8226;</em>意见反馈（您对"子贵网"有任何建议，或使用中遇到问题，请在本页面反馈。）</p></div>
+<div class="bd-1 font-1">
+<form method="post" action="http://dsis.ziguiw.com:80/user/feedback!saveFeedBack.action">
+<div class="bd-nr">
+<strong>请留下您对"子贵网"的意见和建议！（请填写）</strong>
+<div class="question-content">
+    <textarea onblur="if(this.value==''||this.value=='您最多可输入1000个字'){this.value='您最多可输入1000个字';this.style.color='#999';}" onfocus="if(this.value=='您最多可输入1000个字'){this.value=''};this.style.color='black';" rows="6" name="viewcontent" class="text-input" id="viewcontent" style="color: rgb(153, 153, 153);">您最多可输入1000个字</textarea>
+</div>
+<div class="line"></div>
+<strong>您使用子贵网过程中，是否曾经找不到一些入口？（单选）</strong>
+<div class="question-content">
+    <div>
+        <label>
+            <input type="radio" value="1" name="findentrasign">
+            是
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" checked="checked" value="0" name="findentrasign">
+            否
+        </label>
+    </div>
+</div>
+<div class="line"></div>
+
+
+<strong>您找不到的入口是？（请填写）</strong>
+<div class="question-content">
+    <textarea onblur="if(this.value==''||this.value=='您最多可输入1000个字'){this.value='您最多可输入1000个字';this.style.color='#999';}" onfocus="if(this.value=='您最多可输入1000个字'){this.value=''};this.style.color='black';" rows="6" name="entrapath" class="text-input" id="entrapath" style="color: rgb(153, 153, 153);">您最多可输入1000个字</textarea>
+</div>
+<div class="line"></div>
+
+
+<strong>对"子贵网"的以下各个方面，您的满意程度如何？（横向单选）</strong>
+<div class="question-content">
+    <table cellspacing="0" class="table-square">
+        <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                很不满意
+            </th>
+            <th>
+                不太满意
+            </th>
+            <th>
+                一般
+            </th>
+            <th>
+                比较满意
+            </th>
+            <th>
+                非常满意
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+            <th style="text-align: right;">
+                排版展现合理
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-2" name="showlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-1" name="showlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" checked="checked" value="0" name="showlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="1" name="showlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="2" name="showlevel">
+                </label>
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: right;">
+                操作过程方便
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-2" name="operlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-1" name="operlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" checked="checked" value="0" name="operlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="1" name="operlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="2" name="operlevel">
+                </label>
+            </th>
+        </tr>
+        <tr class="odd">
+            <th style="text-align: right;">
+                内容传达清晰
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-2" name="contentlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="-1" name="contentlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" checked="checked" value="0" name="contentlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="1" name="contentlevel">
+                </label>
+            </th>
+            <th>
+                <label>
+                    <input type="radio" value="2" name="contentlevel">
+                </label>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="line"></div>
+
+
+<strong>您使用"子贵网"的过程中，总体的满意程度如何？（单选）</strong>
+<div class="question-content">
+    <div>
+        <label>
+            <input type="radio" value="-3" name="totallevel">
+            没有使用过
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="-2" name="totallevel">
+            很不满意
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="-1" name="totallevel">
+            不太满意
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" checked="checked" value="0" name="totallevel">
+            一般
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="1" name="totallevel">
+            比较满意
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="2" name="totallevel">
+            非常满意
+        </label>
+    </div>
+</div>
+<div class="line"></div>
+<strong>您在子贵网的身份是？（单选）</strong>
+<div class="question-content">
+    <div>
+        <label>
+            <input type="radio" checked="checked" value="2" name="membertype">
+            家长
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="4" name="membertype">
+            学生
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="3" name="membertype">
+            老师
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" value="1" name="membertype">
+            学校管理员
+        </label>
+    </div>
+</div>
+<div class="line"></div>
+<strong>您常用的联系电话是？（请填写）</strong>
+<div class="question-content">
+    <div class="msg">
+        <span>请尽量填写，以便我们及时给您回复。</span>
+    </div>
+    <input type="text" name="linkphone" class="text-input-1" id="linkphone">
+</div>
+<div class="line"></div>
+<strong>您常用的电子邮箱是？（请填写）</strong>
+<div class="question-content">
+    <div class="msg">
+        <span>请尽量填写，以便我们及时给您回复。</span>
+    </div>
+    <input type="text" name="email" class="text-input-1" id="email">
+</div>
+</div>
+<div class="question-content-2"><input type="submit" value="提交问卷" class="cx-4" name="input" id="sub">
+</div>
+</form>
+</div>
+</div>
+<!--middle E-->
+</div>
+</div>
+<!--content E -->
+
+
+

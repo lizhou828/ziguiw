@@ -1,0 +1,34 @@
+#{extends 'main.html' /}
+#{set 'title'}
+教育知识|子贵网
+#{/set}
+#{set 'description'}
+教育知识|子贵网
+#{/set}
+#{set 'Keywords'}
+教育知识, ${id==1?'幼儿期':(id==2?'少儿期':(id==3?'青年期':'心理咨询'))},子贵网
+#{/set}
+<div class="mypos fsong">
+    <a href="http://www.ziguiw.com">子贵首页</a> >
+    <a href="/Knowledges/index">教育知识</a> >${id==1?'幼儿期':(id==2?'少儿期':(id==3?'青年期':'心理咨询'))}
+</div>
+<div class="col1 fl">
+    <div class="newslist">
+        <ul>
+            #{list page.data,as:'kn'}
+                <li  class="f14">
+                    <span>${kn.createTime.format("yyyy-MM-dd")}</span>
+                    <a href="@{show(kn.id)}">${kn.title}</a>
+                </li>
+            #{/list}
+        </ul>
+        <!--分页 B-->
+        <div style="text-align: center">
+            #{page page:page, url:"/Knowledges/list?id=" + id/}
+        </div>
+        <!--分页 E-->
+    </div>
+</div>
+
+<!--热点推荐 B-->
+#{right /}

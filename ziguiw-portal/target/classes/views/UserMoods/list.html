@@ -1,0 +1,76 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-说说
+#{/set}
+<script type="text/javascript">
+    function checkDate(){
+        var content =  document.getElementById("content1").value;
+        if(content==null||content==""){
+            alert('请输入内容！');
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+<!--main_right B-->
+<div class="sp_main_right">
+<!--shuoshuo input  B-->
+<div class="sp_r_l">
+    #{if userBase?.id == user?.id}
+        <form  action="/UserMoods/create" method="POST" onsubmit="return checkDate()">
+            <div class="sp_shuo_inp">
+                <div class="sp_ind_input">
+                    <p class="shuo_qs">说说你的校园趣事</p>
+                    <textarea  id ="content1" name="text"  rows="4" cols="66"></textarea>
+                    <div class="sp_fun">
+                        <span>限填300字</span>
+                    </div>
+                    <input type="hidden" name="userId" value="${userBase?.id}">
+                    <div style="text-align: right">
+                        <input type="submit" value="发表" class="sp_shuo_submit">
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    #{/if}
+
+    <div class="clear"></div>
+
+    <div class="mood_con">
+        #{list page.data,as:'userMoods'}
+          #{if userMoods_index % 2 == 0 }
+            <ul class="mood_ss">
+          #{/if}
+          #{else }
+            <ul class="mood_ss mood_bg">
+          #{/else}
+                <li><p>${userMoods.text}</p></li>
+                <li>
+                    <span>${userMoods?.createTime?.format("yyyy-MM-dd HH:mm")}</span>
+                    #{if userBase?.id == user?.id}
+                        #{a @UserMoods.delete(userMoods.id)}
+                          删除
+                        #{/a}
+                    #{/if}
+                </li>
+            </ul>
+        #{/list}
+    </div>
+
+        <div style="text-align: center">
+        #{page page:page, url:"/UserMoods/list?userId=" + userBase?.id /}
+        </div>
+
+</div>
+<!--shuoshuo input  E-->
+    <!--qidao E-->
+
+#{include '/homeright.html'/}
+
+</div>
+<!--main_right E-->
+
+

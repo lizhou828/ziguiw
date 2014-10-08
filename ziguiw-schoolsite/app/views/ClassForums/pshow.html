@@ -1,0 +1,86 @@
+#{extends 'classmain.html' /}
+#{set title: school.name + " - " + schoolClass.name + " - 话题"/}
+
+
+<div class="middle center pt10">
+<div class="happy_c_m">
+    <div class="position">
+        <p>您的位置：
+            #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                班级主页
+            #{/a}
+            &gt; #{a @ClassForums.plist().add("xxId",xxId).add("classId",classId)}班级话题#{/a}  &gt; 往期话题</p>
+    </div>
+
+    <div class="c_n_tit">
+        <div class="c_topic_tit">
+            班级话题
+        </div>
+
+        <div class="topic_con">
+            <div class="topic_hot">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th align="left" colspan="2">最新热题</th>
+                    </tr>
+                    <tr>
+                        <td class="topic_a" colspan="2">
+                            <h1>${classForum.title}</h1>
+                            <p>话题介绍：</p>
+                            <p>${classForum.content?.raw()}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="85%"><font color="#FF0000">热门话题：${classHotForum.title}</font></td>
+                        <td class="topic_inp">
+                            #{a @ClassForums.pshow(classHotForum.id).add("xxId",xxId).add("classId",classId)}
+                                往期话题
+                            #{/a}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br />
+            <p class="topic_t"><strong>我来说说：</strong></p>
+            #{list page.data,as:'page1'}
+            <div class="topic_ss">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="18%">昵称:<font class="us_color">${page1.user.nickName}</font></td>
+                        <td>评论：${page1.content.raw()}</td>
+                    </tr>
+                </table>
+            </div>
+            #{/list}
+            <div style="text-align: center">
+            #{page page:page, url:"/ClassForums/plist?xxId=" + xxId + "&classId=" + classId /}
+            </div>
+            <br />
+            <p class="topic_t"><span><strong>我要评论：</strong></span> <span>
+            </span></p>
+            <div class="express">
+            #{form action:@ClassReplys.create().add("xxId",xxId).add("classId",classId).add("forumId",classForum.id), enctype:'multipart/form-data' }
+                <div class="bbs_lou">
+                    #{crud.form fields:[ 'content']}
+
+                        <div class="bbs_edit">
+                            #{crud.custom 'content'}
+                        #{editor id:"object_content", name:"object.content"/}
+                    #{/crud.custom}
+                        </div>
+                    #{/crud.form}
+                    <div class="bre_btn">
+                        <div class="bbs_btn" style="text-align: center">
+                            <input class="send_btn" type="submit" value="发表"/>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="object.forumId" value="${classForum.id}">
+            #{/form}
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

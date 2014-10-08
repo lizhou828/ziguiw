@@ -1,0 +1,38 @@
+#{extends 'CRUD/layout.html' /}
+#{set title: school.name + messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form}
+            #{crud.custom 'schoolId'}
+                <input type="hidden" name="object.schoolId" value="${school.id}" />
+            #{/crud.custom}
+            #{crud.custom 'logo'}
+                <img src="${ctx}/${object.logo}"  width="100" height="100" />
+                <br/>
+                <label for="logo">学校logo</label>
+                <input id="logo" type="file" name="file" />
+            #{/crud.custom}
+            #{crud.custom 'banner'}
+                <img src="${ctx}/${object.banner}"  width="100" height="100" />
+                <label for="banner">学校banner</label>
+                <input id="banner" type="file" name="banner">
+            #{/crud.custom}
+            #{crud.custom 'description'}
+                <label for="description">学校简介</label>
+                #{editor id:"description", name:"object.description" ,value:object.description /}
+            #{/crud.custom }
+        #{/crud.form}
+        <p class="crudButtons">
+            *{<input type="submit" name="_save" value="&{'crud.save', type.displayName}" />}*
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+        </p>
+
+    #{/form}
+    </div>
+
+</div>

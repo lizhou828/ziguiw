@@ -1,0 +1,137 @@
+#{extends 'main.html'/}
+#{set 'title'}
+客服中心
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="@{'public/images/banner02.gif'}" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;客服中心
+
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>&#8226;</em>客服中心</p></div>
+
+            <div class="p_con">
+                <div class="servicebanner">
+                    <img src="/public/images/service_banner.jpg" />
+                </div>
+                <div class="p_con_l">
+                    <div class="p_help_middle">
+                        <p><strong>常见问题</strong></p>
+                        <hr style="margin:8px;"/>
+                        <div class="p_help_middle">
+                            <p><strong>如何注册注册子贵网会员？	</strong><!--<span class="helpmore">更多 &gt;&gt;</span>--></p>
+                            <hr style="margin:8px;"/>
+                            <div class="p_help_c">
+                                <ul>
+
+                                    <li>
+                                        <a href="/newses/show?id=922">如何登录子贵网</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/newses/show?id=923">在“个人中心”中，我能进行哪些操作？ </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/newses/show?id=889">如何注册子贵网账号</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/newses/show?id=2087">用户充值</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/newses/show?id=2100">如何获取积分</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p_con_r">
+                    <div class="p_help_middle">
+                        <p><strong>网站公告</strong></p>
+                        <hr style="margin:8px;">
+                        <div class="p_help_c">
+                            <ul>
+
+                                <li>
+                                    <a href="/news/detail/890">子贵网2.0版上线试运营通知</a>
+                                </li>
+
+                                <li>
+                                    <a href="/news/detail/1294">关于子贵网客服QQ号的通知</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--middle E-->
+        </div>
+
+        <div class="clear"></div>
+
+        <!--footer B-->
+
+        <!--footer E-->
+
+        <script language="JavaScript">
+            var msg = '';
+        </script>
+
+
+
+        <!-- actionerror  -->
+
+
+        <!-- actionmessage  -->
+
+
+        <!-- 打印转换好格式的fielderror信息    -->
+        <script language="JavaScript">
+            if(msg != ''){
+                alert(msg);
+            }
+        </script>
+
+
+        <!-- fielderror  -->
+
+
+
+
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-29729795-1']);
+            _gaq.push(['_setDomainName', 'ziguiw.com']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </div>
+
+</div>
+

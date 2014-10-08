@@ -1,0 +1,170 @@
+#{extends 'main.html' /}
+#{set title:school.name + " - 学校照片"/}
+<!--中间部分开始-->
+<div class="middle center pt10">
+<div class="happy_c_m">
+<div class="position">
+    <p>您的位置：#{a @Schools.pshow().add("xxId",xxId)}学校主页#{/a}  &gt; 相片详情</p>
+</div>
+<div class="news_tit">
+    相片详情
+</div>
+
+<noscript>
+    <style>
+        .es-carousel ul{
+            display:block;
+            overflow:hidden;
+            zoom:1;
+
+        }
+    </style>
+</noscript>
+<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">
+    <div class="rg-image-wrapper">
+        {{if itemsCount > 1}}
+        <div class="rg-image-nav">
+            <a href="#" class="rg-image-nav-prev">Previous Image</a>
+            <a href="#" class="rg-image-nav-next">Next Image</a>
+        </div>
+        {{/if}}
+        <div class="rg-image"></div>
+        <div class="rg-loading"></div>
+        <div class="rg-caption-wrapper">
+            <div class="rg-caption" style="display:none;">
+                <p></p>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="content">
+<div id="rg-gallery" class="rg-gallery">
+    <div class="rg-thumbs">
+        <!-- Elastislide Carousel Thumbnail Viewer -->
+        <div class="es-carousel-wrapper">
+            <div class="es-nav">
+                <span class="es-nav-prev">Previous</span>
+                <span class="es-nav-next">Next</span>
+            </div>
+            <div class="es-carousel">
+                <ul>
+                    #{list schoolPhotos, as:'photo1'}
+                    <li>
+                        <p>
+                            <a href="#">
+                                <img width="125" height="90"
+                                     src="${photo1.url ==null ? photo1.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photo1.url,com.arj.ziguiw.common.ImageSize.SZX)}"
+                                     data-large="${photo1.url ==null ? photo1.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photo1.url,com.arj.ziguiw.common.ImageSize.SZD)}"
+                                     alt="${photo1.title}"
+                                     data-description="${photo1.title} 上传于${photo1.createTime.format("yyyy-MM-dd")}  ${photo1.describe}" />
+                            </a>
+                        </p>
+                        <p class="photo_na">${photo1.title}</p>
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+        <!-- End Elastislide Carousel Thumbnail Viewer -->
+    </div><!-- rg-thumbs -->
+</div><!-- rg-gallery -->
+
+<div class="p_other">
+    <p class="p_other_tit"><strong>其它相册</strong></p>
+    <ul>
+        #{list schoolAlbums,as:'ablum'}
+            #{if ablum.id != schoolAlbum.id}
+                <li>
+                    <p>
+                        #{a @SchoolPhotos.pshowPhoto(ablum.id)}
+                        <img width="140" height="110" src="${ablum.coverUrl ==null ? ablum.coverUrl : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(ablum.coverUrl,com.arj.ziguiw.common.ImageSize.SKL)}"/>
+                        #{/a}
+                    </p>
+                    <p>
+                        #{a @SchoolPhotos.pshowPhoto(ablum.id)}
+                        ${ablum.name}
+                        #{/a}
+                    </p>
+                </li>
+            #{/if}
+        #{/list}
+    </ul>
+</div>
+
+
+<div class="comment">
+<p class="p_other_tit"><strong>我要留言</strong></p>
+<form  action="/PhotoReplys/create" method="post">
+<p class="leave_text"><textarea name="content"></textarea></p>
+<p><input type="submit" value="提交" class="comm_creat_btn2"></p>
+<input type="hidden" name="xxId" value="${schoolAlbum.school?.xxId}"/>
+<input type="hidden" name="albumId" value="${schoolAlbum.id}"/>
+</form>
+<!--fr shuoshuo  B-->
+<div class="clear"></div>
+<div class="comm_shuoshuo">
+    <ul>
+        #{list page.data,as:'reply'}
+        <li>
+            <div class="comm_shuoshuo_l">
+                <p><img class="img_border" src="${ctx}/${reply.user?.photo}" height="45" width="45"/></p>
+                <p>(湖南)</p>
+            </div>
+            <div class="comm_shuoshuo_r">
+                <p><font class="color">${reply.user?.displayName}:</font>${reply.content}</p>
+                <p class="comm_line"><span class="comm_dt_time">[${reply.createTime?.format("yyyy-MM-dd HH:mm")}]</span></p>
+                *{<div class="dt_line">}*
+                    *{<div class="dt_huif">}*
+                        *{<div class="comm_dt_huif_img">}*
+                            *{<img class="img_border" src="../images/per_img.jpg" width="30" height="30"/>}*
+                        *{</div>}*
+                        *{<div class="comm_dt_huif_words">}*
+                            *{<p><font class="color">王一一:</font>很好哦！你呢？</p>}*
+                            *{<p><span class="dt_time">[2013-04-04 15:52]</span> <span><a href="" class="color">回复</a></span></p>}*
+                        *{</div>}*
+                    *{</div>}*
+                *{</div>}*
+
+                *{<div class="clear"></div>}*
+
+                *{<div class="comm_ss">说点什么吧</div>}*
+
+                *{<div class="sp_shuo" style="display:none;">}*
+                    *{<div class="comm_sp_ind_input"> </div>}*
+                    *{<div class="comm_sp_fun">}*
+                        *{<a href="#">表情</a>}*
+                    *{</div>}*
+                    *{<div class="comm_sp_shuo_submit">}*
+                        *{<a href="">发表</a>}*
+                    *{</div>}*
+                *{</div>}*
+
+            </div>
+        </li>
+        #{/list}
+    </ul>
+
+    <div class="pagenum">
+        <div style="text-align: center">
+        #{page page:page, url:"/SchoolPhotos/pshowPhoto?id=" + schoolAlbum.id + "&xxId=" + schoolAlbum.school?.xxId /}
+        </div>
+    </div>
+
+</div>
+<!--fr shuoshuo  B-->
+</div>
+
+
+</div><!-- content -->
+</div><!-- container -->
+    <script type="text/javascript" src="@{'public/javascripts/jquery.1.7.1.min.js'}"></script>
+    <script type="text/javascript" src="@{'public/javascripts/jquery.tmpl.min.js'}"></script>
+    <script type="text/javascript" src="@{'public/javascripts/jquery.easing.1.3.js'}"></script>
+    <script type="text/javascript" src="@{'public/javascripts/jquery.elastislide.js'}"></script>
+    <script type="text/javascript" src="@{'public/javascripts/gallery.js'}"></script>
+
+</div>
+
+
+<!--中间部分结束-->

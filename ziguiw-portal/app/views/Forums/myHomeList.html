@@ -1,0 +1,29 @@
+#{extends 'myhome_1.html'/}
+#{set 'title'}
+帖子
+#{/set}
+<div class="r w-770   hei-400">
+    <div class="my_home">
+        <div class="h3titb">
+            <h3 class="fyahei">我发表的帖子</h3>
+        </div>
+        <div class="bordb dygs mb10 my_art">
+            #{list page.data,as : 'forum'}
+                <div class="my_art_dy">
+                    <h4>
+                        <a class="red_f63" target="_blank" href="/Forums/show?id=${forum.id}">${forum.title}</a>
+                    </h4>
+                    <p></p>
+                    ${forum.content.raw()}
+                    <p class="c_666">
+                        阅读(${forum.clickCount})
+                        <a target="_blank" href="/Forums/show?id=${forum.id}">查看全文</a>
+                    </p>
+                </div>
+            #{/list}
+            <div style="text-align: center">
+                #{page page:page, url:"/Forums/myHomeList?userId=" + userId/}
+            </div>
+        </div>
+    </div>
+</div>

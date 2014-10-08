@@ -1,0 +1,51 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-相册列表
+#{/set}
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">我的相册</div>
+            <div class="album_t">
+                #{if userBase.id == user?.id}
+                    <span>
+                        #{a @PhotoAlbums.add(userBase.id)}创建相册#{/a}
+                    </span>
+                    <span class="my_album_upload">
+                        #{a @UserPhotos.uploadUI()}上传图片#{/a}
+                    </span>
+                #{/if}
+            </div>
+        </div>
+        <div class="album">
+            <ul>
+                #{list page.data,as:'photoAlbums'}
+                <li>
+                    <p>
+                        #{a @UserPhotos.list(photoAlbums.id)}
+                        #{if photoAlbums.cover == null}
+                        <img class="album_p" src="@{'public/images/per_img.jpg'}" height="160" width="160">
+                        #{/if}
+                        #{else }
+                        <img class="album_p" src="${photoAlbums.cover == null?"" : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photoAlbums.cover,com.arj.ziguiw.common.ImageSize.XINGCEFENGMIAN)}"
+                              />
+                        #{/else}
+                        #{/a}
+                    </p>
+                    <p><a href="">${photoAlbums.name}</a></p>
+                    #{if userBase.id == user?.id}
+                    <p>
+                        #{a @PhotoAlbums.delete(photoAlbums.id)}
+                            删除
+                        #{/a}
+                        #{a @PhotoAlbums.update(photoAlbums.id)}
+                            修改
+                        #{/a}
+                    </p>
+                    #{/if}
+                </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <!--main_right E-->

@@ -1,0 +1,54 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="/public/images/banner02.gif" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;
+        <a href="#">帮助中心</a>   &gt;
+        <a href="#"></a>   正文
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>•</em>帮助中心</p></div>
+
+            <div class="p_con">
+                <img src="/public/imagesp_first.gif">
+                <div class="p_helpcon_middle">
+                    <p><strong>用户如何登录？</strong></p>
+                    <hr style="margin:8px;">
+                    <div class="p_help_w">
+                        <p>访问http://www.ziguiw.com进入子贵网首页，在首页点击“我要登录”按钮进入登录页面如下图所示： <img width="474" height="386" alt="" src="/public/images/helpcon4_wps_clip_image-31880.png"></p>
+                        <p>根据显示，在输入框内输入的账户名、密码以及验证码，验证码若看不清楚可以点击看不清，换一张，最后点击立即登录即可登录子贵网。
+                            家长登录账号：手机号温馨提示，数字校园用户账号直接使用已有账号登录：
+                            学生登录账号：校徽卡号
+                            老师登录账号：驻校编辑统一分配</p>
+
+                    </div>
+                </div>
+                <img src="/public/images/p_last.gif">
+            </div>
+            <div class="p_con">
+                <div class="p_helpcon_middle">
+                    <p><a class="status_home" href="javascript:history.go(-1)">返回</a></p>
+
+                </div>
+            </div>
+        </div>
+        <!--middle E-->
+
+    </div>
+</div>

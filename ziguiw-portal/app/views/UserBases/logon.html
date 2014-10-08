@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    var top_loginBar;
+    try {
+        top_loginBar = parent.parent.document.getElementById("loginbar");
+    } catch (e) {
+        top_loginBar = parent.document.getElementById("loginbar");
+    }
+    if (top_loginBar) top_loginBar.innerHTML = "${toolBarBtn.raw()}";
+</script>

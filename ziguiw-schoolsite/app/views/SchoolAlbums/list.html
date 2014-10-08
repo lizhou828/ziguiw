@@ -1,0 +1,46 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.displayName) /}
+
+<div id="crudList" class="${type.name}">
+
+    <h2 id="crudListTitle">&{'crud.list.title', type.displayName}</h2>
+
+    <div id="crudListSearch">
+    #{crud.search /}
+    </div>
+
+<div id="crudListTable">
+    #{crud.table fields:[ 'id','name','createTime', 'coverUrl']}
+        #{crud.custom 'id'}
+            #{a @SchoolPhotos.list(com.arj.ziguiw.common.SchoolPhotoType.PHOTO, object.id).add("xxId",xxId)}
+            ${object.id}
+            #{/a}
+        #{/crud.custom}
+        #{crud.custom 'name'}
+            #{a @SchoolPhotos.list(com.arj.ziguiw.common.SchoolPhotoType.PHOTO, object.id).add("xxId",xxId)}
+            ${object.name?.length() > 20 ? object?.name[0..20] + '..' : object.name}
+            #{/a}
+        #{/crud.custom}
+        #{crud.custom 'createTime'}
+        ${object.createTime == null ? object.createTime : object.createTime.format("yyyy-MM-dd") }
+        #{/crud.custom}
+        #{crud.custom 'coverUrl'}
+            #{if object.coverUrl == null}
+                <img src="@{'public/images/noimg_120X155.jpg'}"  width="100px" height="100px">
+            #{/if}
+            #{else }
+                <img src="${object.coverUrl ==null ? object.coverUrl : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(object.coverUrl,com.arj.ziguiw.common.ImageSize.SKL)}" height="100px" width="100px">
+            #{/else}
+        #{/crud.custom}
+    #{/crud.table}
+</div>
+
+    <div id="crudListPagination">
+        #{crud.pagination /}
+    </div>
+
+    <p id="crudListAdd">
+        <a href="@{blank()}">新增相册</a>
+    </p>
+
+</div>

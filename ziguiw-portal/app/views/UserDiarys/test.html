@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+</head>
+
+<body>
+<form  enctype="multipart/form-data" name="form" action="/UserDiarys/mobileCreate" method="post">
+    <input type="text" name="title" ><br>
+    <textarea name="text" cols="10" rows="5"></textarea> <br>
+    <input type="file" name="file0"><br>
+    <input type="file" name="file1"><br>
+    <input type="hidden" name="userId" value="118375"><br>
+    <input type="hidden" name="type" value="1"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

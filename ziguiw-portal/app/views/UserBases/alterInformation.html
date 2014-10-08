@@ -1,0 +1,88 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-修改资料
+#{/set}
+    <!--main_right B-->
+    <div class="sp_main_right">
+        <div class="bobti">
+            <div class="diary_tit">设置个人资料</div>
+        </div>
+        <form action="/UserBases/updateInformation?userId=${userId}" method="post">
+        <div class="personal_modify">
+            <table>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>昵称：</span>
+                    </td>
+                    <td>
+                        <input type="text" name="displayName" value="${userBase.displayName}">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>性别：</span>
+                    </td>
+                    <td width="70%">
+                        <select id="sex" name="userSex">
+                            <option value="0" #{if userBase.sex == 0}selected="true" #{/if}>保密</option>
+                            <option value="1" #{if userBase.sex == 1}selected="true" #{/if}>男</option>
+                            <option value="2" #{if userBase.sex == 2}selected="true" #{/if}>女</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%">
+                        <span>地区：</span>
+                    </td>
+                    <td width="70%">
+                        <select id="province" name="userProvince">
+                            <option value="北京">北京</option>
+                            <option value="天津">天津</option>
+                            <option value="上海">上海</option>
+                            <option value="重庆">重庆</option>
+                            <option value="香港">香港</option>
+                            <option value="澳门">澳门</option>
+                            <option value="河北">河北</option>
+                            <option value="山西">山西</option>
+                            <option value="内蒙古">内蒙古</option>
+                            <option value="辽宁">辽宁</option>
+                            <option value="吉林">吉林</option>
+                            <option value="黑龙江">黑龙江</option>
+                            <option value="江苏">江苏</option>
+                            <option value="浙江">浙江</option>
+                            <option value="安徽">安徽 </option>
+                            <option value="福建">福建 </option>
+                            <option value="江西">江西</option>
+                            <option value="山东">山东</option>
+                            <option value="河南">河南</option>
+                            <option value="湖北">湖北</option>
+                            <option value="湖南">湖南</option>
+                            <option value="广东">广东</option>
+                            <option value="广西">广西</option>
+                            <option value="海南">海南</option>
+                            <option value="四川">四川</option>
+                            <option value="贵州">贵州</option>
+                            <option value="云南">云南</option>
+                            <option value="西藏">西藏</option>
+                            <option value="陕西">陕西 </option>
+                            <option value="甘肃">甘肃 </option>
+                            <option value="青海">青海</option>
+                            <option value="宁夏">宁夏</option>
+                            <option value="新疆">新疆</option>
+                            <option value="台湾">台湾</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%"><span>个性签名：</span></td>
+                    <td width="70%"><textarea class="area" rows="4" cols="50" name="userSignature">${userBase.signature}</textarea></td>
+                </tr>
+                <tr>
+                    <td align="right" width="15%"></td>
+                    <td width="70%"><input type="submit" value="提交" class="per_inf_btn"></td>
+                </tr>
+            </table>
+            <input type="hidden" name="userId" value="${userBase.id}">
+        </div>
+                    </form>
+    </div>

@@ -1,0 +1,38 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()).add("classId",classId).add("xxId",xxId), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','content']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content" ,value:object.content /}
+            #{/crud.custom }
+        #{/crud.form}
+        #{if object.status == com.arj.ziguiw.common.Status.FAIL}
+            <div class="crudField crud_text">
+                <label for="object_cause">审核失败原因:</label>
+                <div style="color: red;font-size:12px">${object.cause}</div>
+            </div>
+        #{/if}
+        <p class="crudButtons">
+            #{if object.state != com.arj.ziguiw.common.Status.OK}
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            #{/if}
+        </p>
+        <input type="hidden" name="object.id" value="${object.id}">
+    #{/form}
+    </div>
+
+#{if object.status != com.arj.ziguiw.common.Status.OK}
+    #{form @delete(object._key())}
+        <p class="crudDelete">
+            <input type="submit" value="&{'crud.delete', type.displayName}" />
+        </p>
+    #{/form}
+#{/if}
+</div>

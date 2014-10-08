@@ -1,0 +1,102 @@
+#{extends 'classmain.html' /}
+#{set title: classNew.title + "|" + school?.name + " - " + schoolClass?.name + "新闻，公告详细页"/}
+
+<div class="middle center pt10">
+
+
+    <div class="de_news_left">
+        <div class="position">
+            <p>您的位置：
+            #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                班级主页
+                #{/a}
+                &gt;
+                #{a @plist(classNew.type).add("xxId",xxId).add("classId",classId)}
+                    #{if classNew.type == com.arj.ziguiw.common.ClassNewType.NEWS}
+                        班级动态
+                    #{/if}
+                    #{else }
+                        班级公告
+                    #{/else}
+                #{/a}
+                &gt; ${classNew.title}</p>
+        </div>
+
+        <h1 class="fyahei">${classNew.title}</h1>
+        <p class="news_tip fb"><span>
+            时间： ${classNew.createTime == null ? classNew.createTime : classNew.createTime.format("yyyy-MM-dd")}
+        </span>
+            &nbsp;  <span>编辑： ${classNew.user?.nickName}</span>  &nbsp;  <span>浏览次数：${classNew.visitCount}</span></p>
+        </p>
+        <div class="newscots">
+
+           ${classNew.content.raw()}
+
+        </div>
+
+
+    </div>
+
+    <div class="de_news_right">
+
+        <div class="class_recommend">
+            <div class="study_title">
+                <div class="c_study_left">班级花絮</div>
+                <div class="dy_more">
+                    #{a @ClassPhotos.index().add("xxId",xxId).add("classId",classId)}
+                        更多&gt;&gt;
+                    #{/a}
+                </div>
+            </div>
+            <div class="recommend_con">
+                <ul>
+                    #{list classPhotos,as:'photos'}
+                    <li>
+                        #{a @ClassPhotos.pshow(photos.album?.id).add("xxId",xxId).add("classId",classId)}
+                            <img src="${photos.url ==null ? photos.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photos.url,com.arj.ziguiw.common.ImageSize.CZX)}" height="70" width="95">
+                        #{/a}
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+        <div class="study_recommend mt10">
+            <div class="study_title">
+                <div class="study_left">
+                    #{if classNew.type == com.arj.ziguiw.common.ClassNewType.NEWS}
+                        班级公告
+                    #{/if}
+                    #{else }
+                        班级动态
+                    #{/else}
+                </div>
+                <div class="dy_more">
+                    #{if classNew.type == com.arj.ziguiw.common.ClassNewType.NEWS}
+                        #{a @plist(com.arj.ziguiw.common.ClassNewType.BULLETIN).add("xxId",xxId).add("classId",classId)}
+                            更多 &gt;&gt;
+                        #{/a}
+                    #{/if}
+                    #{else }
+                        #{a @plist(com.arj.ziguiw.common.ClassNewType.NEWS).add("xxId",xxId).add("classId",classId)}
+                            更多 &gt;&gt;
+                        #{/a}
+                    #{/else}
+                </div>
+            </div>
+            <div class="study_con">
+                <ul>
+                    #{list classNews,as:'news'}
+                    <li>
+                        #{a @pshow(news.id)}
+                        ${news.title}
+                        #{/a}
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>

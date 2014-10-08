@@ -1,0 +1,132 @@
+#{extends 'CRUD/layout.html' /}
+#{set title: school.name + messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', com.arj.ziguiw.common.SchoolPhotoType.map.get(object.type)}</h2>
+
+    <div class="objectForm">
+
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{if object.type == com.arj.ziguiw.common.SchoolPhotoType.PHOTO}
+        #{crud.form fields:['title','url','status','describe','album']}
+            #{crud.custom 'url'}
+                <label for="object_url"> 图片 </label>
+                <input type="file" name="file" id="object_url">
+                <img src="${ctx}/${object.url}" width="100" height="100"/>
+            #{/crud.custom}
+            #{crud.custom 'album'}
+                <label for="object_album"> 相册 </label>
+                <select name="object.album.id" id="object_album">
+                    #{list schoolAlbums,as:'albums'}
+                          <option value="${albums.id}" #{if albums.id == object.album.id}selected="true" #{/if}>${albums.name}</option>
+                    #{/list}
+                </select>
+            #{/crud.custom}
+                #{crud.custom 'status'}
+                    <label for="object_status">状态</label>
+                    <input type="text"   value="${com.arj.ziguiw.common.Status.map.get(object.status)}" id="object_status" readonly="true">
+                #{/crud.custom}
+            #{crud.custom 'describe'}
+                <label for="object_describe">描述</label>
+                <textarea id="object_describe" name="object.describe" rows="5" cols="100">${object.describe}</textarea>
+            #{/crud.custom }
+        #{/crud.form}
+        #{/if}
+        #{else }
+            #{crud.form fields:['title','cover','url','describe','status']}
+                #{crud.custom 'url'}
+                    <label for="object_url"> 视频 </label>
+                    <input type="file" name="file" id="object_url">
+                        <script src="/public/flashplayer/flexpaper_flash.js"></script>
+                        <script src="/public/flashplayer/AC_RunActiveContent.js"></script>
+                        <script language="javascript">
+                            if (AC_FL_RunContent == 0) {
+                                alert("This page requires AC_RunActiveContent.js.");
+                            } else {
+                                AC_FL_RunContent(
+                                        'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                        'width', '465',
+                                        'height', '295',
+                                        'src', '/public/flashplayer/jcplayer',
+                                        'quality', 'high',
+                                        'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                        'align', 'middle',
+                                        'play', 'true',
+                                        'loop', 'true',
+                                        'scale', 'noScale',
+                                        'wmode', 'window',
+                                        'devicefont', 'false',
+                                        'id', 'jcplayer',
+                                        'bgcolor', '#ffffff',
+                                        'name', 'jcplayer',
+                                        'menu', 'true',
+                                        'allowFullScreen', 'true',
+                                        'allowScriptAccess','sameDomain',
+                                        'FlashVars','videoURL=${ctx}/${object.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222',
+                                        'movie', '/public/flashplayer/jcplayer',
+                                        'salign','TL'
+                                ); //end AC code
+                            }
+                            <!--Settable JCPlayer  params :startPhotoSource,videoURL,loop,autoPlay,scaleMode,volume,bufferTime,backgroundColor1,movieBackgroundColor,backgroundColor2,highlightColor,inkColor,playButton,timeBar,seekBar,volumeButton,fullScreenButton,skin,smoothing,autoHide,autoHideFullScreen,offsetY,offsetYFullScreen,margins,marginsFullScreen -->
+                        </script>
+                        <noscript>
+                            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="465" height="295" id="jcplayer" align="TL">
+                                <param name="allowScriptAccess" value="sameDomain" />
+                                <param name="FlashVars" value="videoURL=${ctx}/${object.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222"/>
+                                <param name="allowFullScreen" value="true" />
+                                <param name="salign" value="TL" />
+                                <param name="scale" value="noScale" />
+                                <param name="movie" value="/public/flashplayer/jcplayer.swf" />
+                                <param name="quality" value="high" />
+                                <param name="bgcolor" value="#ffffff" />
+                                <embed src="/public/flashplayer/jcplayer.swf" FlashVars="videoURL=${ctx}/${object.url}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222" quality="high" bgcolor="#ffffff" width="465" height="295" name="jcplayer" align="middle" salign="TL" scale="noScale" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                            </object>
+                        </noscript>
+                #{/crud.custom}
+                #{crud.custom 'cover'}
+                    <label for="object_cover"> 视频封面图 </label>
+                    <input type="file" name="cover" id="object_cover">
+                    #{if object.cover == null}
+                        <img src="@{'public/images/noimg_120X155.jpg'}"  width="100px" height="100px">
+                    #{/if}
+                    #{else }
+                        <img src="${ctx}/${object.cover}" width="100px" height="100px">
+                    #{/else}
+                #{/crud.custom}
+                #{crud.custom 'describe'}
+                    <label for="object_describe">描述</label>
+                    <textarea id="object_describe" name="object.describe" rows="5" cols="100">${object.describe}</textarea>
+                #{/crud.custom }
+                #{crud.custom 'status'}
+                    <label for="object_status">状态</label>
+                    <input type="text"  value="${com.arj.ziguiw.common.Status.map.get(object.status)}" id="object_status" readonly="true">
+                #{/crud.custom}
+            #{/crud.form}
+        #{/else}
+        #{if object.status == com.arj.ziguiw.common.Status.FAIL}
+            <div class="crudField crud_text">
+                <label for="object_cause">审核失败原因:</label>
+                <div style="color: red;font-size:12px">${object.cause}</div>
+            </div>
+        #{/if}
+        <input type="hidden" name="object.school.id" value="${object.school.id}" />
+        <p class="crudButtons">
+            #{if object.status != com.arj.ziguiw.common.Status.OK}
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            #{/if}
+        </p>
+
+    #{/form}
+    </div>
+
+
+#{if object.status != com.arj.ziguiw.common.Status.OK}
+    #{form @delete(object._key(),object.type)}
+        <p class="crudDelete">
+            <input type="submit" value="&{'crud.delete', com.arj.ziguiw.common.SchoolPhotoType.map.get(object.type)}" />
+        </p>
+    #{/form}
+#{/if}
+</div>

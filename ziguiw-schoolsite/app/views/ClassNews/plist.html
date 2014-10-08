@@ -1,0 +1,117 @@
+#{extends 'classmain.html' /}
+#{set title: school.name + " - " + schoolClazz.name + " - 公告，动态"/}
+
+<div class="middle center pt10">
+    <div class="news_left">
+        <div class="news_menu">
+            <div class="news_tit_n">
+                新闻栏
+            </div>
+            <div class="news_classify">
+                <ul>
+                    <li #{if type == com.arj.ziguiw.common.ClassNewType.NEWS}id="on"#{/if}>
+                    #{a @ClassNews.plist(com.arj.ziguiw.common.ClassNewType.NEWS).add("xxId", xxId).add("classId",classId)}班级动态#{/a}</li>
+                    <li #{if type == com.arj.ziguiw.common.ClassNewType.BULLETIN}id="on"#{/if}>
+                    #{a @ClassNews.plist(com.arj.ziguiw.common.ClassNewType.BULLETIN).add("xxId", xxId).add("classId",classId)}班级公告#{/a}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="class_recommend mt10">
+            <div class="study_title">
+                <div class="c_study_left">班级花絮</div>
+                <div class="dy_more">
+                    #{a @ClassPhotos.index().add("xxId",xxId).add("classId",classId)}
+                        更多&gt;&gt;
+                    #{/a}
+                </div>
+            </div>
+            <div class="recommend_con">
+                <ul>
+                    #{list classPhotos,as:'photos'}
+                    <li>
+                        #{a @ClassPhotos.pshow(photos.id).add("xxId",xxId).add("classId",classId)}
+                            <img src="${photos.url ==null ? photos.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photos.url,com.arj.ziguiw.common.ImageSize.CZX)}" height="70" width="95"/>
+                        #{/a}
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+        <div class="study_recommend mt10">
+            <div class="study_title">
+                <div class="study_left">学习园地</div>
+                <div class="dy_more">
+                    #{a @SchoolXxyds.pclist().add("xxId",xxId).add("classId",classId)}
+                        更多&gt;&gt;
+                    #{/a}
+                </div>
+            </div>
+            <div class="study_con">
+                <ul>
+                    #{list schoolXxyds,as:'xxyds'}
+                    <li>
+                        #{a @SchoolXxyds.pcshow(xxyds.id)}
+                            ${xxyds.title}
+                        #{/a}
+                    </li>
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="news_right">
+        <div class="position">
+            <p>
+                您的位置：
+                #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                    班级主页
+                #{/a}
+                &gt;
+            #{if type == com.arj.ziguiw.common.ClassNewType.NEWS}
+                班级动态
+            #{/if}
+            #{else }
+                班级公告
+            #{/else}
+            </p>
+        </div>
+
+        <div class="c_n_tit">
+            <div class="c_news_tit">
+                #{if type == com.arj.ziguiw.common.ClassNewType.NEWS}
+                    班级动态
+                #{/if}
+                #{else }
+                    班级公告
+                #{/else}
+            </div>
+            <div class="news_con_list">
+                <ul class="news_con_sp">
+                    #{list page.data,as:'page1'}
+                    <li><div class="news_sp_l">
+                    #{a @pshow(page1.id)}
+                            ${page1.title}
+                    #{/a}
+                    </div>
+                        <div class="time">
+                        ${page1.createTime == null ? page1.createTime : page1.createTime.format("yyyy-MM-dd")}
+                    </div></li>
+                        #{if page1_index % 5 == 0}
+                            <br />
+                            <br />
+                        #{/if}
+                    #{/list}
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center">
+        #{page page:page, url:"/ClassNews/plist?xxId=" + xxId + "&type=" + type + "&classId=" + classId /}
+        </div>
+    </div>
+
+</div>

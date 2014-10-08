@@ -1,0 +1,27 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-修改相册
+#{/set}
+
+<div class="sp_main_right">
+<div class="cont">
+    <h2 class="creat_tit">修改相册</h2>
+    <form action="/PhotoAlbums/create" method="post">
+        <div class="red">${flash.error}</div>
+        <ul class="padding-25">
+            <input type="hidden" value="${photoAlbum.id}" name="photoAlbumId">
+            <li>
+                <span>相册名称:</span>
+                <input type="text" class="inp_txt" name="name" value="${photoAlbum.name}"/>
+            </li>
+            <li>
+                <span>描述:</span>
+                <input type="text" class="inp_txt" name="describe" value="${photoAlbum.describe}">
+            </li>
+            <li>
+                <input type="submit" class="btn2" value="确认" name="Submit1">
+            </li>
+        </ul>
+    </form>
+</div>
+</div>

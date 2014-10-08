@@ -1,0 +1,45 @@
+<div class="col2 fl ml10">
+    <div class="hottj borda pr pt40 rdwd">
+        <div class="h3tita pa">
+            <h3 class="fyahei">热点推荐</h3>
+        </div>
+        <ul class="hottj_top">
+            %{
+                models.Recommend.findByArea("PORTAL_INDEX_RIGHT_HOT").each(){
+            }%
+                <li class="clearfix">
+
+                    <img src="${ctx}/${it.url}">
+                    <h4>
+                        <a href="@{Knowledges.show(it.objectId)}">${it.title}</a>
+                    </h4>
+                    <p>${it.description}</p>
+
+                </li>
+            %{
+                }
+            }%
+        </ul>
+        <ul class="hottj_bot">
+        </ul>
+    </div>
+    <div class="ad_col2_1 borda mt10"><a href="#"><img src="@{'public/images/img_268_88.jpg'}"></a></div>
+    <div class="ph mt10">
+        <div class="h3titb">
+            <h3 class="fyahei">人气排行</h3>
+        </div>
+        <div class="bordb">
+            <ul>
+                %{
+                    models.Newse.findHot().each(){
+                    }%
+                <li>
+                    <a href="@{Newses.show(it.id)}">${it.title}</a>
+                </li>
+                %{
+                    }
+                    }%
+            </ul>
+        </div>
+    </div>
+</div>

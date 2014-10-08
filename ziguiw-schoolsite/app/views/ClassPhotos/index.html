@@ -1,0 +1,74 @@
+#{extends 'classmain.html' /}
+#{set title:school.name + "-" + schoolClass.name + " - 班级图片，视频"/}
+
+<div class="middle center pt10">
+    <div class="happy_c_m">
+        <div class="position">
+            <p>您的位置：
+            #{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}
+                班级主页
+            #{/a}
+                &gt; 班级花絮</p>
+        </div>
+        <div class="news_tit">
+            相册展示
+            <div class="dy_more">
+            #{a @ClassPhotos.plist(com.arj.ziguiw.common.SchoolPhotoType.PHOTO).add("xxId",xxId).add("classId",classId)}更多 &gt;&gt;#{/a}
+            </div>
+        </div>
+        <div class="happy_c_img">
+            <ul>
+            #{list schoolAlbums,as:'album'}
+                <li>
+                    <div class="happy_c">
+                        #{a @ClassPhotos.pshow(album.id).add("xxId",xxId).add("classId",classId)}
+                            <img
+                                    src="${album.coverUrl ==null ? album.coverUrl : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(album.coverUrl,com.arj.ziguiw.common.ImageSize.SKL)}"
+                                    width="201" height="151"/>
+                        #{/a}
+                    </div>
+                    <div class="happy_time">上传时间：${album.createTime?.format("yyyy-MM-dd")}</div>
+                    <div class="clear"></div>
+                    <div class="happy_n">
+                        #{a @ClassPhotos.pshow(album.id).add("xxId",xxId).add("classId",classId)}
+                    ${album.name}
+                    #{/a}
+                    </div>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+        <div class="dashed">
+            <div class="news_tit">
+                视频展示
+                <div class="dy_more">
+                #{a @ClassPhotos.plist(com.arj.ziguiw.common.SchoolPhotoType.VIDEO).add("xxId",xxId).add("classId",classId)}更多 &gt;&gt;#{/a}
+                </div>
+            </div>
+
+        </div>
+        <div class="happy_c_img">
+            <ul>
+            #{list classVideos,as:'classVideo'}
+                <li>
+                    <div class="happy_c">
+                        #{a @ClassVideos.pshow(classVideo.id).add("xxId",xxId).add("classId",classId)}
+                            <img
+                                    src="${classVideo.cover ==null ? classVideo.cover : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(classVideo.cover,com.arj.ziguiw.common.ImageSize.SKL)}"
+                                    width="201" height="151"/>
+                        #{/a}
+                    </div>
+                    <div class="play"><img src="../images/play.gif"/></div>
+                    <div class="play_time">上传时间：${classVideo.createTime.format("yyyy-MM-dd")}</div>
+                    <div class="play_n">
+                        #{a @ClassVideos.pshow(classVideo.id).add("xxId",xxId).add("classId",classId)}
+                    ${classVideo.title}
+                    #{/a}
+                    </div>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+
+</div>

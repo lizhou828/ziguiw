@@ -1,0 +1,16 @@
+#{extends 'homemain.html'/}
+#{set 'moreScripts'}
+<script type="text/javascript" >
+    function iFrameHeight() {
+        var ifm= document.getElementById("iframepage");
+        var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
+        if(ifm != null && subWeb != null) {
+            ifm.height = subWeb.body.scrollHeight;
+        }
+    }
+</script>
+#{/set}
+#{set 'title'}
+上传资源
+#{/set}
+<iframe width="80%" scrolling="no"  height="800" onload="this.height=this.contentWindow.document.body.scrollHeight"  id="recommendIframe"  frameborder="0" src="${play.configuration['resources.domain']}/Resources/add"></iframe>

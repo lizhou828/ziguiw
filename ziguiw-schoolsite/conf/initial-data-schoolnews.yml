@@ -1,0 +1,43 @@
+# Test data
+
+SchoolNew(1):
+    title:  相依学校新闻1
+    type:   1
+    status: 2
+    school:   1
+    content:  放假啦
+
+SchoolNew(2):
+    title:  相依学校新闻2
+    type:   1
+    status: 2
+    school:   1
+    content:  放假啦
+
+SchoolNew(3):
+    title:  相依学校新闻3
+    type:   1
+    status: 2
+    school:   1
+    content:  放假啦
+
+SchoolNew(4):
+    title:  相依学校新闻4
+    type:   1
+    status: 1
+    school:   1
+    content:  放假啦
+
+SchoolNew(5):
+    title:  相依学校新闻5
+    type:   1
+    status: 1
+    school:   1
+    content:  放假啦
+
+SchoolNew(6):
+    title:  相依学校公告
+    type:   2
+    status: 1
+    school:   1
+    content:  放假啦

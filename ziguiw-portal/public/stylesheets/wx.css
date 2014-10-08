@@ -1,0 +1,48 @@
+body {
+	height: auto;
+	width: 100%;
+	margin:0 auto;
+	padding:0;
+	font-size:26px;
+	line-height:50px;
+	background-color:#fff;
+	
+}
+img { border:none;}
+a:link,a:visited {color: #fff; text-decoration:none;}
+a:hover {color: #fff;text-decoration: underline;}
+
+#center { width:100%; height:auto;margin:0 auto;}
+#bottom { width:100%; height:auto;margin:0 auto;}
+dl {padding-right:0px; padding-left:0px; padding-bottom:0px; margin:0px; padding-top:0px;}	
+dt {padding-right:0px; padding-left:0px; padding-bottom:0px; margin:0px; padding-top:0px;}
+dd {padding-right:0px; padding-left:0px; padding-bottom:0px; margin:0px; padding-top:0px;}
+.zi_h{ color:#FE7C28; font-weight:bold; font-size:28px;}
+.zi_h1{ color:#FE7C28;  font-size:26px;}
+	
+.wx{ width:100%; height:auto;}
+.wx_logo{
+	width:100%;
+	height:120px;
+	background-color:#FE7C28;
+	text-align: center;
+}
+.wx_kk{
+	width:100%;
+	height:auto;
+	text-align: center;
+	border:1px solid #FE7C28; margin-left:10px; margin-top:10px;
+}
+.wx_bt{ width:100%; height:80px; background-color:#FE7C28; color:#FFF;font-weight:bold; font-size:28px; padding-top:8px;}
+.wx_nr{
+	width:100%;
+	height:auto;
+	font-size:26px;
+	padding:10px 10px;
+	float:left;
+	text-align: left;
+	line-height:50px;
+}
+.wx_bz{ width:100%; height:auto; float:left; margin:10px 0 10px 5px;background-color:#FE7C28; padding:3px 3px; font-size:26px; color:#FFF;}
+.wx_bz1{ width:100%; height:auto; float:left; margin:2px 0 10px 5px;background-color:#FFF0E7; padding:3px 3px; font-size:26px; color:#FE7C28;}
+.wx_an{ width:100%; height:50px; float:left; margin:10px 0 10px 5px;background-color:#FE7C28; padding:2px 0px 0px 138px; font-size:30px; color:#FFF;font-weight:bold;}

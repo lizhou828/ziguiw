@@ -1,0 +1,47 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="@{'public/images/banner02.gif'}" />
+    </div>
+    <div class="mypos fsong">
+        <a href="/">首页</a>  &gt;联系我们
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+            #{render 'HelpCenters/menu.html'/}
+        </div>
+        <div class="p_middle_right">
+            <div class="p_title"><p><em>&#8226;</em>联系我们</p></div>
+            <div class="p_con">
+                <img src="/public/images/p_first.gif" />
+                <div class="p_con_middle">
+                    <p>如果您有任何想法，请第一时间联络我们！子贵网客户服务中心竭诚为您服务！ </p>
+                    <hr style="margin:8px;"/>
+                    <div class="p_con_w">
+                        <p style="font-size:16px;color:#F46622;font-weight:bold;height:35px;line-height:35px;">全国客户服务电话：<strong>952116</strong></p>
+                        <p>了解或加盟我们的数字化校园： dsis@ziguiw.com </p>
+                        <p>在子贵网投放广告： kf@ziguiw.com</p>
+                        <p>战略合作或多业务合作： marketing@ziguiw.com</p>
+
+                        <p>网站技术的相关问题：admin@ziguiw.com</p>
+                        <p>地址：长沙市雨花区万家丽路二段68号华晨双帆国际1206室</p>
+                        <p>邮政编码：410001 </p>
+                    </div>
+                </div>
+                <img src="/public/images/p_last.gif" />
+            </div>
+        </div>
+    </div>
+    <!--middle E-->
+
+</div>

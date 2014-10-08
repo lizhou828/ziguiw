@@ -1,0 +1,57 @@
+#{extends 'CRUD/classLayout.html' /}
+#{set title:messages.get('crud.show.title', type.displayName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'crud.show.title', type.displayName}</h2>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()).add("classId",classId).add("xxId",xxId), enctype:'multipart/form-data'}
+        #{crud.form fields:['title','url','description','content','reprinted']}
+            #{crud.custom 'content'}
+                #{editor id:"object_content", name:"object.content" ,value:object.content /}
+            #{/crud.custom }
+            #{crud.custom 'url'}
+                <label for="object.url">新闻封面图</label>
+                #{if object.url == null}
+                    <img src="@{'public/images/noimg_120X155.jpg'}"  width="100px" height="100px">
+                #{/if}
+                #{else }
+                    <img src="${ctx}/${object.url}" width="100px" height="100px">
+                #{/else}
+                <input type="file" name="file" id="object_url">
+            #{/crud.custom}
+            #{crud.custom 'reprinted'}
+                <label for="object_reprinted">是否转载</label>
+                <select name="object.reprinted" id="object_reprinted">
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.NO}" #{if com.arj.ziguiw.common.Boolean.NO == object.reprinted}selected="true" #{/if}>否</option>
+                    <option name="object.reprinted" value="${com.arj.ziguiw.common.Boolean.YES}" #{if com.arj.ziguiw.common.Boolean.YES == object.reprinted}selected="true" #{/if}>是</option>
+                </select>
+            #{/crud.custom}
+        #{/crud.form}
+        #{if object.state == com.arj.ziguiw.common.Status.FAIL}
+            <div class="crudField crud_text">
+                <label for="object_cause">审核失败原因:</label>
+                <div style="color: red;font-size:12px">${object.cause}</div>
+            </div>
+        #{/if}
+        <p class="crudButtons">
+            #{if object.state != com.arj.ziguiw.common.Status.OK}
+                <input type="submit" name="_save" value="&{'crud.save', type.displayName}" />
+                <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.displayName}" />
+            #{/if}
+        </p>
+            <input type="hidden" name="object.id" value="${object.id}">
+            <input type="hidden" name="object.type" value="${object.type}">
+    #{/form}
+    </div>
+
+#{if object.state != com.arj.ziguiw.common.Status.OK}
+    #{form @delete(object._key())}
+        <p class="crudDelete">
+            <input type="submit" value="&{'crud.delete', type.displayName}" />
+        </p>
+    #{/form}
+#{/if}
+
+</div>

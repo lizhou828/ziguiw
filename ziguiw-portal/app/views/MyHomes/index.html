@@ -1,0 +1,129 @@
+#{extends 'main.html'/}
+#{set 'title'}
+子贵网-我的小家
+#{/set}
+<div class="clearfix bg_f7 h-225">
+    <div class="l w-730 pr">
+        <ul class="picList02 clearfix">
+            #{list myhome_index_tuijianuser,as : 'recommend'}
+                <li>
+                    <a href="/MyHomes/list?userId=${recommend.objectId}">
+                        <img src="${ctx}/${recommend.url}" style="width:70px;height:70px">
+                    </a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="r w-210 start_home">
+        <a href="/MyHomes/goMyHome">
+            <img src="/public/images/go_myhome.png">
+        </a>
+    </div>
+</div>
+<div class="clearfix mt10">
+<div class="l w-730">
+
+    <div class="clearfix borda mt10 mb10 jyzx">
+        <div class="h3titc">
+            <h3 class="pr fyahei">日记精选</h3>
+        </div>
+        <div class="fl w-690">
+            <ul style="height:auto" class="xy_top clearfix">
+                #{list myhome_index_rijijingxuantop,as : 'recommend'}
+                    <li>
+                        <a href="/UserDiarys/show?userDiaryId=${recommend.objectId}">
+                            <img  src="${ctx}/${recommend.url}">
+                        </a>
+                        <h4>
+                            <a href="/UserDiarys/show?userDiaryId=${recommend.objectId}">${recommend.title}</a>
+                        </h4>
+                        <p>
+                            ${recommend.description}
+                            <a class="fsong" href="/UserDiarys/show?userDiaryId=${recommend.objectId}">[详细]</a>
+                        </p>
+                    </li>
+                #{/list}
+            </ul>
+            <ul class="xy_bot clearfix">
+                #{list myhome_index_rijijingxuanlist,as : 'recommend'}
+                    <li>
+                        <a target="_blank" title="" href="/UserDiarys/show?userDiaryId=${recommend.objectId}">${recommend.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+
+    </div>
+    <div class="ad_w730">
+        <a >
+            <img  src="/public/images/ad_730_1.jpg">
+        </a>
+    </div>
+    <div class="clearfix borda mt10 rjjx mb10">
+        <div class="h3titc">
+            <h3 class="pr fyahei">照片精选</h3>
+        </div>
+        <div class="p_list p_best">
+            <ul class="img_f mt10 clearfix">
+                #{list myhome_index_zhaopinjingxuan,as :'recommend'}
+                    <li style="height:120px;width:120px">
+                        <a href="/UserPhotos/detailList?userPhotoId=${recommend.objectId}" class="a-img1">
+                            <img  src="${ctx}/${recommend.url}">
+                        </a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="r w-240">
+    <div class="jyrqb">
+        <div class="box03_hd">
+            <h2>家园人气榜</h2>
+        </div>
+        <ul >
+            #{list userBases,as : 'userba'}
+                <li>
+                    <a href="/MyHomes/list?userId=${userba.id}">
+                    ${userba.nickName.length() > 6 ? userba.nickName[0..6] + ".." : userba.nickName}
+                    </a>
+                    <span>访问数:
+                        #{if userba.clickCount == null}0#{/if}
+                        #{else }${userba.clickCount}#{/else}
+                    </span>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+    <div class="djdzs mt10">
+        <div class="box03_hd">
+            <h2>大家都在说</h2>
+        </div>
+        <div class="box03_bd">
+            <div class="box_bd_son">
+                #{list userMoods,as : 'umd'}
+                    <dl class="f">
+                        <dt class="l">
+                            <a class="a-img1" href="/MyHomes/list?userId=${umd?.user?.id}">
+                                #{if umd?.user?.photo && !"".equals(umd?.user?.photo)}
+                                    <img width="48" height="48" src="${ctx}/${umd?.user?.photo}">
+                                #{/if}
+                                #{else}
+                                    <img src="/public/images/noimg_120X155.jpg" width="48" height="48" />
+                                #{/else}
+                            </a>
+                        </dt>
+                        <dd class="p-l60 mb5">
+                            <a href="/Myhomes/list?userId=${umd?.user.id}">
+                               ${umd?.user?.displayName}:
+                            </a>
+                        ${umd?.text?.length() > 18 ? umd?.text[0..22] + "..." : umd?.text}
+                        </dd>
+                        <dd>${umd?.createTime?.format("yyyy-MM-dd HH:mm")}&nbsp;</dd>
+                    </dl>
+                #{/list}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

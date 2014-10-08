@@ -1,0 +1,58 @@
+#{extends 'main.html'/}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/cz.css'}">
+<div class="czcenter1">
+
+    <div class="mypos fsong">
+        <a href="${play.configuration['portal.domain']}">子贵首页</a>&gt;
+        <a href="${play.configuration['portal.domain']}/myhomes/index">空间</a>&gt;
+        <a>充值中心</a>
+    </div>
+
+    <div class="cz_k">
+        <div class="cz_title">
+            <span style="color:#515151;font-size:28px;font-weight:bold;">子贵网-</span><span style="color:#c00202;font-size:28px;font-weight:bold;">充值中心</span>
+        </div>
+        <div class="cz_status2">
+            <span class="cz_status_num">1 充值类别</span>
+            <span class="cz_status_num" id="cz_curr">2 充值方式</span>
+            <span class="cz_status_num">3 充值操作</span>
+            <span class="cz_status_num">4 充值完成</span>
+        </div>
+        <div class="cz_bank">
+            <form action="/Orders/payment" method="get">
+                <input type="hidden" name="type" value="${type}"/>
+                <input type="hidden" name="amount" value="${amount}"/>
+                <table>
+                    <tr>
+                        <td align="right" rowspan="4" style="font-size:16px;font-weight:bold;">请选择其中一种支付方式：</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" checked="true" name="paymethod" value="${com.arj.ziguiw.common.PayMethod.ALIPAY}"/> &nbsp;<img src="/public/images/zfb.gif"/>
+                        </td>
+
+                    </tr>
+                    *{<tr>
+                        <td>
+                            <input type="radio" name="paymethod" value="3"/> &nbsp;<img src="${pageContext.request.contextPath }/images/kq.gif"/>
+                        </td>
+                    </tr>}*
+                    <tr>
+                        <td>
+                            <input type="radio" name="paymethod" value="${com.arj.ziguiw.common.PayMethod.TENPAY}"/> &nbsp;<img src="/public/images/cft.gif"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input type="submit" class="cz_next" value="确认"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+
+
+</div>

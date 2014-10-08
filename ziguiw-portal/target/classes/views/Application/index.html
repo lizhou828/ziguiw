@@ -1,0 +1,825 @@
+#{extends 'main.html' /}
+#{set 'title'}
+子贵网|全国大型的孩子成长信息和教育资源网站|子承厚望 贵修举国
+#{/set}
+
+<div class="mod01">
+    <!--focus01 B -->
+    <div class="sub_box_4">
+        <div id="p-select" class="sub_nav_4">
+            <div class="sub_no" id="bd1lfsj">
+                <ul>
+                    <li class="show">1</li>
+                    <li class="">2</li>
+                    <li class="">3</li>
+                    <li class="">4</li>
+                    <li class="">5</li>
+                </ul>
+            </div>
+        </div>
+        <div id="bd1lfimg_4">
+            <div>
+                <dl class="show"></dl>
+                #{list portal_index_hd,as : 'recommend'}
+                    <dl class="">
+                        <dt>
+                            <a href="${recommend.link("/newses/show?id="+recommend.objectId)}" title="" target="_blank">
+                                <img src="${ctx}/${recommend.url}">
+                            </a>
+                        </dt>
+                        <dd>
+                            <h4 class="fyahei">
+                                <a href="${recommend.link("/newses/show?id="+recommend.objectId)}" target="_blank">${recommend.title}</a>
+                            </h4>
+                        </dd>
+                        <dd class="bg_lunbo_4"></dd>
+                    </dl>
+                #{/list}
+            </div>
+        </div>
+        <script type="text/javascript">movec_4();</script>
+    </div>
+    <!--focus01 E -->
+
+    <!--toDayNew B -->
+    <div class="toDayNew">
+        <div class="toDayNewTit">
+            <h2><span>今日头条</span><img src="/public/images/todayNew.jpg" alt=""/></h2>
+        </div>
+        <div class="toDayNewCon">
+            <ul class="toDayNewConList">
+                #{list portal_index_jinritoutiao,as : 'recommend'}
+                    <li>
+                        <dl>
+                            <dt>
+                                <span>[<a href="/newses/list?id=${recommend.moduleId}" title="" >${recommend.moduleName}</a>] </span>
+                                    <a href="${recommend.link("/newses/show?id=" + recommend.objectId)}">${recommend.title}</a>
+                            </dt>
+                            <dd>
+                                    ${recommend.description?.length()>60 ? recommend.description[0..59] + '..' : recommend.description}
+                            </dd>
+                        </dl>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+    <!--toDayNew E -->
+
+    <!--allnews B -->
+    <div class="allNews">
+        <div class="logInWrap">
+            <a class="logIn" href="http://login.ziguiw.com/login" title="我要登录" ><span>我要登录</span></a>
+            <a class="reg" href="http://www.ziguiw.com/userbases/registerUI" title="我要注册" ><span>我要注册</span></a>
+        </div>
+        <ul class="newsBtn01">
+            <li class="cur"><a href="javascript:void(0);return false;">编辑推荐</a></li>
+        </ul>
+        <ul class="newList01">
+            #{list portal_index_bianjituijian,as:'recommend'}
+                <li>
+                    <a href="${recommend.link("/newses/show?id=" + recommend.objectId)}">
+                        ${recommend.title?.length()>16 ? recommend.title[0..15] + '..' : recommend.title}
+                    </a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+    <!--allnews B -->
+</div>
+<!--mod01 E -->
+
+<!--box07 B -->
+<div class="box07">
+    <div class="box07_hd">
+        <h2><span>教育在线</span><img src="/public/images/jyzx.png" alt=""/></h2>
+        <div class="pubMore07">
+            <a href="/newses/list?id=1" title="焦点话题" >焦点话题</a> |
+            <a href="/newses/list?id=2" title="校园新闻" >校园新闻</a> |
+            <a href="/newses/list?id=3" title="考试升学" >考试升学</a>
+        </div>
+    </div>
+    <!--box07_hd E -->
+    <!--box07_bd_l B -->
+    <div class="box07_bd">
+        <div class="box07_bd_l">
+            <!--box02 B -->
+            <div class="box02">
+                <div class="box02_hd">
+                    <h2>焦点话题</h2>
+                    <a class="pubMore02" href="/newses/list?id=1" title="更多 >" >更多 ></a>
+                </div>
+                <div class="box02_bd">
+                    <ul class="newList03">
+                        #{list portal_index_jiaodianhuati,as : 'recommend'}
+                            <li class="tri_icon">
+                                <a href="${recommend.link("/newses/show?id=" + recommend.objectId)}">
+                                ${recommend.title?.length() > 18? recommend.title[0..17] + '..' : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box02 E -->
+        </div>
+        <!--box07_bd_l E -->
+
+        <!--box07_bd_m B -->
+        <div class="box07_bd_m">
+            <!--box02 B -->
+            <div class="box02">
+                <div class="box02_hd">
+                    <h2>校园新闻</h2>
+                    <a class="pubMore02" href="/newses/list?id=2" title="更多 >" >更多 ></a>
+                </div>
+                <div class="box02_bd">
+                    <ul class="newList04">
+                        #{list portal_index_xiaoyuanxinwen,as : 'recommend'}
+                            <li>
+                                <div class="pic">
+                                    <a href="${recommend.link("/newses/show?id=" + recommend.objectId)}">
+                                        <img src="${ctx}/${recommend.url}" style="width:127px;height:94px"/>
+                                    </a>
+                                </div>
+                                <h3>
+                                    <a href="${recommend.link("/newses/show?id="+recommend.objectId)}">
+                                    ${recommend.title?.length() > 14 ? recommend.title[0..14] + "...": recommend.title}
+                                    </a>
+                                </h3>
+                                <p>
+                                    ${recommend.description?.length() > 90 ? recommend.description[0..90] : recommend.description}
+                                    <span>[<a href="${recommend.link("/newses/show?id=" + recommend.objectId)}" title="详细" >详细</a>]</span>
+                                </p>
+                            </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box02 E -->
+        </div>
+        <!--box07_bd_m E -->
+
+        <!--box07_bd_m B -->
+        <div class="box07_bd_r">
+            <!--box02 B -->
+            <div class="box02">
+                <div class="box02_hd">
+                    <h2>考试升学</h2>
+                    <a class="pubMore02" href="/newses/list?id=3" title="更多 >" >更多 ></a>
+                </div>
+                <div class="box02_bd">
+                    <ul class="newList02 f14">
+                        #{list portal_index_kaoshishengxue,as : 'recommend'}
+                            <li>
+                                <a href="${recommend.link("/newses/show?id=" + recommend.objectId)}">
+                                    ${recommend.title?.length() > 15 ? recommend.title[0..14] + '..' : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box02 E -->
+        </div>
+        <!--box07_bd_m E -->
+    </div>
+</div>
+<!--box07 E -->
+
+<div class="ad01">
+        <a href="http://res.ziguiw.com/" target="_blank"><img src="@{'public/images/adv01_101.jpg'}" alt=""/></a>
+</div>
+
+<div class="box07">
+<div class="box07_hd">
+    <h2><span>校园站内站</span><img src="@{'public/images/znz.png'}" alt=""/></h2>
+    <div class="pubMore07">
+        <a href="http://site.ziguiw.com" title="校园站内站首页" >校园站内站首页</a>
+    </div>
+</div>
+<!--box07_hd E -->
+<!--box07_bd_l B -->
+<div class="box07_bd">
+    <!--名校展示开始-->
+    <div class="box_schoolzs">
+        <div class="s_title">
+            <div class="t_img"><span>名校展示</span></div>
+        </div>
+
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301113000" target="_blank">
+                    <img src="@{'public/images/1363070612832.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301113000" target="_blank">
+                    地质中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301117006" target="_blank">
+                    <img src="http://static.ziguiw.com/upload/images/2013/0111/1357885399548.jpg" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301117006" target="_blank">
+                    长沙市第十五中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301048001" target="_blank">
+                    <img src="@{'public/images/1358324437109.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301048001" target="_blank">
+                    中南大学附属中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301047001" target="_blank">
+                    <img src="@{'public/images/1358324399474.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301047001" target="_blank">
+                    岳麓外国语实验中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301057000" target="_blank">
+                    <img src="@{'public/images/1358414197929.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301057000" target="_blank">
+                    长沙大学附属中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301046000" target="_blank">
+                    <img src="@{'public/images/1358324035222.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301046000" target="_blank">
+                    湘仪学校
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306021009" target="_blank">
+                    <img src="@{'public/images/zqxx.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306021009" target="_blank">
+                    岳阳市站前小学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306021005" target="_blank">
+                    <img src="@{'public/images/mz.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306021005" target="_blank">
+                    湖南民族学院附属小学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306023002" target="_blank">
+                    <img src="@{'public/images/jiu.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306023002" target="_blank">
+                    岳阳市第九中学
+                </a>
+            </div>
+        </div>
+        <div class="school_s">
+            <div class="ss_1">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306023001" target="_blank">
+                    <img src="@{'public/images/shier.jpg'}" width="121" height="90" />
+                </a>
+            </div>
+            <div class="ss_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4306023001" target="_blank">
+                    岳阳市第十二中学
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <!--名校展示结束-->
+
+    <!--最新加入学校开始-->
+
+    <div class="new_school">
+        <div class="n_title">
+            <span>&nbsp;&nbsp;最新加入学校</span>
+            <a class="n_more" href="http://site.ziguiw.com">
+                更多 >
+            </a>
+        </div>
+        <div class="ns_school">
+            <div class="ns_img">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301113000" target="_blank">
+                    <img src="@{'public/images/1363070612832.jpg'}" width="80" height="60" />
+                </a>
+            </div>
+            <div class="ns_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301113000" target="_blank">
+                    地质中学
+                </a>
+            </div>
+        </div>
+        <div class="ns_school">
+            <div class="ns_img">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301117006" target="_blank">
+                    <img src="http://static.ziguiw.com/upload/images/2013/0111/1357885399548.jpg" width="80" height="60" />
+                </a>
+            </div>
+            <div class="ns_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301117006" target="_blank">
+                    长沙市第十五中学
+                </a>
+            </div>
+        </div>
+        <div class="ns_school">
+            <div class="ns_img">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301048001" target="_blank">
+                    <img src="@{'public/images/1358324437109.jpg'}" width="80" height="60" />
+                </a>
+            </div>
+            <div class="ns_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301048001" target="_blank">
+                    中南大学附属中学
+                </a>
+            </div>
+        </div>
+        <div class="ns_school">
+            <div class="ns_img">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301047001" target="_blank">
+                    <img src="@{'public/images/1358324399474.jpg'}" width="80" height="60" />
+                </a>
+            </div>
+            <div class="ns_name">
+                <a href="http://site.ziguiw.com/schools/pshow?xxId=4301047001" target="_blank">
+                    岳麓外国语实验中学
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--最新加入学校结束-->
+</div>
+</div>
+<!--box07 E -->
+
+<!--ad01 B -->
+<div class="ad01">
+    <a  href="http://site.ziguiw.com"><img src="@{'public/images/znz_banner.jpg'}" alt=""/></a>
+</div>
+<!--ad01 E -->
+
+<!--box07 B -->
+<div class="box07">
+    <!--box07_hd B -->
+    <div class="box07_hd">
+        <h2><span>教育知识</span><img src="/public/images/jyzs.png" alt=""/></h2>
+        <div class="pubMore07">
+            <a href="/Knowledges/list?id=1" title="幼儿期" >幼儿期</a> |
+            <a href="/Knowledges/list?id=2" title="少儿期" >少儿期</a> |
+            <a href="/Knowledges/list?id=3" title="青年期" >青年期</a> |
+            <a href="/Questions/list?status=0" title="育儿问答" >育儿问答</a> |
+            <a href="/Debates/list" title="用户辩论" >用户辩论</a>
+        </div>
+    </div>
+    <!--box07_hd E -->
+
+    <div class="box07_bd">
+        <!--box07_bd_l02 B -->
+        <div class="box07_bd_l02">
+            <ul class="newList05 newList05_a">
+                <li>
+                    <div class="pic">
+                        <a href="/knowledges/list?id=1" title=""><img src="/public/images/182X137a.jpg" alt=""/></a>
+                    </div>
+                    #{list portal_index_youerqitop,as : 'recommend'}
+                        <h3>
+                            <a class="bg01" href="${recommend.link("/knowledges/show?id=" + recommend.objectId)}" >${recommend.title}</a>
+                        </h3>
+                        <p>${recommend.description?.length() > 120 ? recommend.description[0..120]+ '..' : recommend.description}<span>[<a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}" title="详细" >详细</a>]</span></p>
+                    #{/list}
+                    <ul class="newList02">
+                        #{list portal_index_youerqilist,as : 'recommend'}
+                            <li>
+                                <a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}">
+                                ${recommend.title?.length() > 13? recommend.title[0..12] + '..' : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="pic">
+                        <a href="/knowledges/list?id=2" title=""><img src="/public/images/182X137b.jpg" alt=""/></a>
+                    </div>
+                    #{list portal_index_shaoerqitop,as : 'recommend'}
+                        <h3>
+                            <a class="bg01" href="${recommend.link("/knowledges/show?id="+recommend.objectId)}" >${recommend.title}</a>
+                        </h3>
+                        <p>${recommend.description?.length() > 120 ? recommend.description[0..120]+ '..' : recommend.description}<span>[<a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}" title="详细" >详细</a>]</span></p>
+                    #{/list}
+                    <ul class="newList02">
+                        #{list portal_index_shaoerqilist,as : 'recommend'}
+                            <li>
+                                <a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}">
+                                ${recommend.title?.length() > 13? recommend.title[0..12] + '..' : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="pic">
+                        <a href="http://www.ziguiw.com/knowledges/list?id=3" title=""><img src="/public/images/182X137c.jpg" alt=""/></a>
+                    </div>
+                    #{list portal_index_qingnianqitop,as : 'recommend'}
+                        <h3>
+                            <a class="bg01" href="${recommend.link("/knowledges/show?id="+recommend.objectId)}" >${recommend.title}</a>
+                        </h3>
+                        <p>${recommend.description?.length() > 120 ? recommend.description[0..120]+ '..' : recommend.description}<span>[<a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}" title="详细" >详细</a>]</span></p>
+                    #{/list}
+                    <ul class="newList02">
+                        #{list portal_index_qingnianqilist,as : 'recommend'}
+                            <li>
+                                <a href="${recommend.link("/knowledges/show?id="+recommend.objectId)}">
+                                ${recommend.title?.length() > 13? recommend.title[0..12] + '..' : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--box07_bd_l02 E -->
+
+        <!--box07_bd_m B -->
+        <div class="box07_bd_r02">
+            <div class="bianLun">
+                <a class="pic"  title=""><img src="/public/images/238X177.jpg" alt=""/></a>
+                <p><a href="http://www.ziguiw.com/debates/show?id=44" title="" >辩论：参加课外辅导班好吗？</a></p>
+            </div>
+
+            <!--box03 B -->
+            <div class="box03">
+                <div class="box03_hd">
+                    <h2>育儿问答</h2>
+                    <a  title="更多 >" href="/Questions/list?status=0" class="pubMore03">更多 ></a>
+                </div>
+                <div class="box03_bd">
+                    <ul class="newList02 newList02_a f14">
+                        #{list questions,as:'question'}
+                            #{if question_index<8}
+                                <li>
+                                    <a href="${recommend.link("/Questions/show?id="+question.id)}">
+                                     ${question.title?.length()>13?question.title[0..12] : question.title}
+                                    </a>
+                                </li>
+                            #{/if}
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box03 E -->
+        </div>
+        <!--box07_bd_m E -->
+    </div>
+</div>
+<!--box07 E -->
+
+<!--ad01 B -->
+<div class="ad01">
+    <a  title=""><img src="/public/images/adv03.jpg" alt=""/></a>
+</div>
+<!--ad01 E -->
+
+<!--box07 B -->
+<div class="box07">
+    <div class="box07_hd">
+        <h2><span>教育在线</span><img src="/public/images/hdsq.png" alt=""/></h2>
+        <div class="pubMore07">
+            <a href="/Boards/list?parentBoardId=2" title="同龄圈" >同龄圈</a> |
+            <a href="/Boards/list?parentBoardId=3" title="同城圈" >同城圈</a>	|
+            <a href="/Boards/list?parentBoardId=4" title="学习交流" >学习交流</a> |
+            <a href="/Boards/list?parentBoardId=5" title="专家问答" >专家问答</a>	|
+        </div>
+    </div>
+    <!--box07_hd E -->
+    <div class="box07_bd">
+        <div class="box07_bd_l03">
+            <!-- bianLun B -->
+            <div class="bianLun">
+                <a title=""  class="pic"><img alt="" src="/public/images/238X177b.jpg"></a>
+            </div>
+            <!-- bianLun E -->
+
+            <!--box05 B -->
+            <div class="box05">
+                <!--box05_hd B -->
+                <div class="box05_hd">
+                    <h2>心理咨询</h2>
+                    <a  title="更多 >" href="http://www.ziguiw.com/knowledges/list?id=4" class="pubMore05">更多 ></a>
+                </div>
+                <!--box05_hd E -->
+
+                <!--box05_bd B -->
+                <div class="box05_bd">
+                    <ul class="newList06">
+                        #{list knowledges,as :'knowledge'}
+                            #{if knowledge_index < 8}
+                            <li>
+                                <a  href="${recommend.link("/Knowledges/show?id="+knowledge.id)}">
+                                   ${knowledge.title?.length()>13? knowledge.title[0..12] : knowledge.title}
+                                </a>
+                            </li>
+                            #{/if}
+                        #{/list}
+                    </ul>
+                </div>
+                <!--box05_bd E -->
+            </div>
+            <!--box05 E -->
+        </div>
+        <!--box07_bd_l E -->
+
+
+
+        <!--box07_bd_m B -->
+        <div class="box07_bd_m03">
+            <div class="box01 mb18">
+                <div class="box01_hd">
+                    <h2>同龄圈</h2>
+                    <a  title="更多 >" href="/Boards/list?parentBoardId=2" class="pubMore01">更多 ></a>
+                </div>
+                <div class="box01_bd">
+                    <div class="newTop01">
+                        #{list portal_index_tonglingquantop,as : 'recommend'}
+                            <h3>
+                                <a href="${recommend.link("/Forums/show?id="+recommend.objectId)}">
+                                ${recommend.title?.length() > 15 ? recommend.title[0..14] + ".." : recommend.title}
+                                </a>
+                            </h3>
+                            <p>
+                                ${recommend.description?.length() > 35 ? recommend.description[0..34] + ".." : recommend.description}
+                            </p>
+                        #{/list}
+                    </div>
+                    <div class="newBottom01">
+                        <div class="pic">
+                            <a href="/Boards/list?parentBoardId=2" title=""><img src="/public/images/127X94.jpg" alt=""/></a>
+                        </div>
+                        <ul class="newList02">
+                            #{list portal_index_tonglingquanlist,as : 'recommend'}
+                                <li>
+                                    <a  href="${recommend.link("/Forums/show?id=" + recommend.objectId)}">
+                                    ${recommend.title?.length() > 15 ? recommend.title[0..14] + ".." : recommend.title}
+                                    </a>
+                                </li>
+                            #{/list}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--box01 B -->
+            <div class="box01">
+                <div class="box01_hd">
+                    <h2>同城圈</h2>
+                    <a  title="更多 >" href="/Boards/list?parentBoardId=3" class="pubMore01">更多 ></a>
+                </div>
+                <div class="box01_bd">
+                    <div class="newTop01">
+                    #{list portal_index_tongchengquantop,as : 'recommend'}
+                        <h3>
+                            <a href="${recommend.link("/Forums/show?id="+recommend.objectId)}">
+                                ${recommend.title?.length() > 15 ? recommend.title[0..14] : recommend.title}
+                            </a>
+                        </h3>
+                        <p>
+                        ${recommend.description?.length() > 35 ? recommend.description[0..34] + ".." : recommend.description}
+                        </p>
+                    #{/list}
+                    </div>
+                    <div class="newBottom01">
+                        <div class="pic">
+                            <a href="/Boards/list?parentBoardId=3" title=""><img src="/public/images/127X94c.jpg" alt=""/></a>
+                        </div>
+                        <ul class="newList02">
+                        #{list portal_index_tongchengquanlist,as : 'recommend'}
+                            <li>
+                                <a  href="${recommend.link("/Forums/show?id="+recommend.objectId)}">
+                                    ${recommend.title?.length()>15? recommend.title[0..14] : recommend.title}
+                                </a>
+                            </li>
+                        #{/list}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--box01 E -->
+        </div>
+        <!--box07_bd_m E -->
+
+
+
+        <!--box07_bd_m B -->
+        <div class="box07_bd_r03">
+            <!--box04 B -->
+            <div class="box04">
+                <div class="box04_hd">
+                    <h2>学习交流</h2>
+                    <a  title="更多" href="/Boards/list?parentBoardId=4" class="pubMore04">更多 ></a>
+                </div>
+                <div class="box04_bd">
+                    <ul class="newList02 newList02_a f14">
+                    #{list portal_index_xuexijiaoliu,as : 'recommend'}
+                        <li>
+                            <a  href="${recommend.link("/Forums/show?id="+recommend.objectId)}">
+                            ${recommend.title?.length()>14? recommend.title[0..13] : recommend.title}
+                            </a>
+                        </li>
+                    #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box04 E -->
+
+            <!--box04 B -->
+            <div class="box04">
+                <div class="box04_hd">
+                    <h2>专家问答</h2>
+                    <a title="更多" href="/Boards/list?parentBoardId=5" class="pubMore04">更多 ></a>
+                </div>
+                <div class="box04_bd">
+                    <ul class="newList02 newList02_a f14">
+                    #{list portal_index_zhuanjiawenda,as : 'recommend'}
+                        <li>
+                            <a  href="${recommend.link("/Forums/show?id="+recommend.objectId)}">
+                            ${recommend.title?.length()>14? recommend.title[0..13] : recommend.title}
+                            </a>
+                        </li>
+                    #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box04 E -->
+
+        </div>
+        <!--box07_bd_m E -->
+    </div>
+</div>
+<!--box07 E -->
+<div class="ad01">
+    <a  title=""><img src="/public/images/adv04.jpg" alt=""/></a>
+</div>
+
+<!--box07 B -->
+<div class="box07">
+    <div class="box07_hd">
+        <h2><span>我的小家</span><img src="/public/images/wdxj.png" alt=""/></h2>
+        <div class="pubMore07">
+        </div>
+    </div>
+
+    <div class="box07_bd">
+        <div class="box07_bd_l02">
+            <div class="picListWrap01">
+                <h2>明<br />星<br />墙</h2>
+                <ul class="picList01 clearfix">
+                   #{list portal_index_mingxingqiang,as:'mingxingqiang'}
+                        <li>
+                           <a href="/myhomes/list?userId=${mingxingqiang.objectId}">
+                              <img src="${ctx}/${mingxingqiang.url}" width="105px" height="77px">
+                           </a>
+                        </li>
+                   #{/list}
+                </ul>
+                <div class="tips">
+                </div>
+            </div>
+
+            <div class="box01 addAtt01">
+                <div class="box01_hd">
+                    <h2>个人日记</h2>
+                </div>
+                <div class="box01_bd">
+                    <ul class="newList05 newList05_a">
+                        #{list portal_index_gerenriji,as:'gerenriji'}
+                        <li>
+                            <a href="/UserDiarys/show?userDiaryId=${gerenriji.objectId}" title="" >
+                                ${gerenriji.title}
+                            </a>
+                        </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+
+            <!--box01 B -->
+            <div class="box01">
+                <div class="box01_hd">
+                    <h2>照片</h2>
+                </div>
+
+                <div class="box01_bd">
+                    <ul class="newList07">
+                        #{list portal_index_zhaopian,as:'zhaopian'}
+                        <li>
+                            <div class="pic">
+                                <a href="/UserPhotos/detailList?userPhotoId=${zhaopian.objectId}" title="">
+                                    <img src="${ctx}/${zhaopian.url}" alt="" width=105 height=77/>
+                                </a>
+                            </div>
+                            <p><a href="/UserPhotos/detailList?userPhotoId=${zhaopian.objectId}" title="" ></a></p>
+                        </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+            <!--box01 E -->
+        </div>
+        <!--box07_bd_l E -->
+
+
+        <!--box07_bd_r B -->
+        <div class="box07_bd_r02">
+            <div class="topics">
+                <a  title=""><img src="/public/images/241X77.jpg" alt=""  height=128/></a>
+            </div>
+            <!--topics E -->
+            <div class="box06">
+                <div class="box06_hd">
+                    <h2>热门日记</h2>
+                </div>
+                <div class="box06_bd">
+                    <ul class="newList08">
+                        #{list portal_index_hotdiary,as:'hotdiary'}
+                        <li>
+                            <a href="/UserDiarys/show?userDiaryId=${hotdiary.objectId}" title="" >
+                               ${hotdiary.title}
+                            </a>
+                        </li>
+                        #{/list}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!--box07_bd_r E -->
+
+    </div>
+</div>
+<!--box07 E -->
+
+*{<script>}*
+    *{$(function(){}*
+        *{if ($('a').attr("target") != "_self") {}*
+            *{$('a').attr("target", "_blank");}*
+        *{}}*
+        *{//add tip png}*
+        *{var _top = $(".logInWrap").offset().top;}*
+        *{var _left = $(".logInWrap").offset().left;}*
+        *{$(".logInWrap").append("<span id='tipImg'><img src='/public/images/' /></span>");}*
+        *{$("#tipImg").css("position","absolute");}*
+        *{$("#tipImg").css("z-index", 100);}*
+        *{$("#tipImg").css("cursor", "pointer");}*
+        *{$("#tipImg").css("top", _top - 135);}*
+        *{$("#tipImg").css("left", _left-187);}*
+        *{$("#tipImg").bind("click", function(){}*
+            *{$(this).remove();}*
+        *{});}*
+    *{});}*
+*{</script>}*

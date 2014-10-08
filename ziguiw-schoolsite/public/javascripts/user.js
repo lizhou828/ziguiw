@@ -1,0 +1,1 @@
+setTimeout(function(){document.getElementById("loginbar").innerHTML += "<iframe id='loginbar_iframe' style='display:none;' width='0' height='0' src='/UserBases/logon?"+Math.random()*1000+"'>";}, 1000);

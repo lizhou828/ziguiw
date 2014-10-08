@@ -1,0 +1,54 @@
+#{extends 'main.html'/}
+#{set 'title'}
+联系我们
+#{/set}
+#{set 'moreStyles'}
+    #{stylesheet 'footer_css.css'/}
+#{/set}
+<div class="foot_content">
+    <!--banner B-->
+    <div class="f_banner">
+        <img src="/public/images/banner02.gif" />
+    </div>
+    <div class="mypos fsong">
+        <a href="#">子贵首页</a>  &gt;
+        <a href="#">帮助中心</a>   &gt;
+        <a href="#"></a>   正文
+    </div>
+    <!--banner E-->
+
+    <!--middle B-->
+    <div class="p_middle">
+        <div class="p_middle_left" id="knowqqleft">
+        #{render 'HelpCenters/menu.html'/}
+        </div>
+    <div class="p_middle_right">
+        <div class="p_title"><p><em>•</em>帮助中心</p></div>
+
+        <div class="p_con">
+            <img src="/public/images/p_first.gif">
+            <div class="p_helpcon_middle">
+                <p><strong>如何上传教育资源？	</strong></p>
+                <hr style="margin:8px;">
+                <div class="p_help_w">
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;子贵网老师用户，可以分享您的教育资源，系统支持Txt,doc,pdf,ppt,rar,exe,chm格式的文档及flv格式的视频文件，文件大小不超过1024M，上传成功的资源，需网站管理员审核通过后才能显示在“教育资源”页面。</p>
+                    <p>操作步骤：</p>
+                    <p>老师用户登录后，在我的空间点击“上传资源”打开资源上传页面；</p>
+                    <p><img width="534" height="475" alt="" src="/public/images/helpcon_wps_clip_image-25280.png"></p>
+                    <p>根据网页提示，填写资源说明信息，点击“提交”按钮上传资源。</p>
+                    <p>上传成功后等待管理员审核。</p>
+                </div>
+            </div>
+            <img src="/public/images/p_last.gif">
+        </div>
+        <div class="p_con">
+            <div class="p_helpcon_middle">
+                <p><a class="status_home" href="javascript:history.go(-1)">返回</a></p>
+
+            </div>
+        </div>
+    </div>
+    <!--middle E-->
+
+</div>
+</div>

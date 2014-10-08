@@ -1,0 +1,188 @@
+%{
+java.util.Calendar cal = java.util.Calendar.getInstance();
+cal.setTime(new java.util.Date());
+int w = cal.get(java.util.Calendar.DAY_OF_WEEK) - 1;
+if (w < 0)
+    w = 0;
+}%
+<div class="sp_r_r mb10">
+    <!--qidao B-->
+
+    <div class="calendar line">
+        <div class="cal_l">
+            <div class="cal_d">${new java.util.Date().format('MM-dd')}</div><div class="cal_d">
+            #{if w==0}周日#{/if}
+            #{if w==1}周一#{/if}
+            #{if w==2}周二#{/if}
+            #{if w==3}周三#{/if}
+            #{if w==4}周四#{/if}
+            #{if w==5}周五#{/if}
+            #{if w==6}周六#{/if}
+            </div>
+        </div>
+        <div class="cal_r">
+            <div class="cal_r_l">
+                #{if userBase?.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+                    <span><img src="@{'public/homeImages3/qd_mood.jpg'}"/></span>
+                    <span><a href="javascript:;" id="sign"><img src="@{'public/homeImages3/qd_btn.jpg'}"/></a></span>
+                #{/if}
+                #{elseif userBase?.type == com.arj.ziguiw.common.UserBaseType.STUDENT}
+                    <span><img src="@{'public/homeImages2/qd_mood.jpg'}"/></span>
+                    <span><a href="javascript:;" id="sign"><img src="@{'public/homeImages2/qd_btn.jpg'}"/></a></span>
+                #{/elseif}
+                #{else }
+                    <span><img src="@{'public/homeImages1/qd_mood.jpg'}"/></span>
+                    <span><a href="javascript:;" id="sign"><img src="@{'public/homeImages1/qd_btn.jpg'}"/></a></span>
+                #{/else}
+            </div>
+            <div class="cal_r_r">
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <div class="yc line mb10">
+        <img src="@{'public/images/ad_rig_101.jpg'}">
+    </div>
+    <!--qidao E-->
+    #{if userBase?.type == com.arj.ziguiw.common.UserBaseType.TEACHER}
+    <div class="yc line mb10">
+        <p class="r_tit">原创视频课件</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=52"target="_blank">《斑羚飞渡》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=30"target="_blank">《端午的鸭蛋》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=51"target="_blank">《三角形的内角和》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=63"target="_blank">《旋转》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=65"target="_blank">《名片制作》</a></li>
+        </ul>
+    </div>
+
+    <div class="yc line mb10">
+        <p class="r_tit">视频资源</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=61"target="_blank">《重叠问题》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=34"target="_blank">《羚羊木雕》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=403"target="_blank">《凉州词》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=141"target="_blank">《老人与海鸥》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=60"target="_blank">《抽屉原理》</a></li>
+        </ul>
+    </div>
+
+    <div class="yc line mb10">
+        <p class="r_tit">获奖课例</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=55"target="_blank">《剪剪拼拼--长方...</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=315"target="_blank">《有余数的除法》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=370"target="_blank">《信客》</a></li>
+        </ul>
+    </div>
+
+    <div class="yc line mb10">
+        <p class="r_tit">我的课程</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=317"target="_blank">《中国的经济与文化》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=309"target="_blank">《2012年中考数学...</a></li>
+        </ul>
+    </div>
+
+
+    <div class="yc line mb10">
+        <p class="r_tit">我的课堂</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=188"target="_blank">《初一数学知识点》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=418"target="_blank">《念如娇》</a></li>
+        </ul>
+    </div>
+
+
+    <div class="yc line mb10">
+        <p class="r_tit">我的教研</p>
+        <ul>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=179"target="_blank">《巴尔扎克葬词》</a></li>
+            <li><a href="${play.configuration['resources.domain']}/Resources/show?resourceId=176"target="_blank">《啊Q正传》</a></li>
+        </ul>
+    </div>
+    #{/if}
+
+    <div class="fw">
+        <p class="fw_tit">最近访问我的好友</p>
+        <ul>
+            #{list friendVisits,as:'friendvisits'}
+            <li>
+                <p>
+                    #{if friendvisits.fromUser?.photo != null}
+                        #{a @list(friendvisits.fromUser?.id)}
+                        <img class="img_border" width="45" height="45" src="${ctx}/${friendvisits.fromUser?.photo}"/>
+                        #{/a}
+                    #{/if}
+                    #{else }
+                        #{a @list(friendvisits.fromUser?.id)}
+                        <img class="img_border" width="45" height="45" src="@{'public/images/noimg_120X155.jpg'}"/>
+                        #{/a}
+                    #{/else}
+                </p>
+                <p>
+                    #{a @list(friendvisits.fromUser?.id)}
+                        ${friendvisits.fromUser?.displayName}
+                    #{/a}
+                </p>
+                <p>${friendvisits.createTime?.format("MM-dd")}</p>
+            </li>
+            #{/list}
+        </ul>
+    </div>
+
+    #{if userBase?.type != com.arj.ziguiw.common.UserBaseType.TEACHER}
+        <div class="s_img line">
+            <p class="s_img_tit">你可能感兴趣的照片</p>
+            <p>
+                <a href="${play.configuration['schoolsite.domain']}/SchoolPhotos/pshowPhoto?id=${schoolPhoto.album?.id}">
+                    <img src="${ctx}/${schoolPhoto.url}" width="200" height="140"/>
+                </a>
+            </p>
+            <p class="home_sch_bg"></p>
+            <p class="home_sch_wd">上传于 ${schoolPhoto.createTime?.format("yyyy-MM-dd")}</p>
+        </div>
+        <!--ziguiw_school_img E-->
+
+        <div class="s_news">
+            <p class="s_img_tit">校园动态</p>
+            <ul class="s_news_con">
+                    #{list schoolNews,as:'schoolNew'}
+                        #{if schoolNew_index % 3 == 1 || schoolNew_index == 1}
+                        <li>
+                            <div class="s_news_l">
+                                <a href="${play.configuration['schoolsite.domain']}/SchoolNews/pshow?newsId=${schoolNew.id}">
+                                    #{if schoolNew.url != null}
+                                        <img src="${ctx}/${com.arj.ziguiw.common.ImageSize.getImage(schoolNew.url,com.arj.ziguiw.common.ImageSize.SSL)}" width="64" height="55"/>
+                                    #{/if}
+                                    #{else }
+                                        <img src="@{'public/images/noimg_120X155.jpg'}" width="64" height="55"/>
+                                    #{/else}
+                                </a>
+                            </div>
+                            <div class="s_news_r">
+                                <p><strong>
+                                    <a href="${play.configuration['schoolsite.domain']}/SchoolNews/pshow?newsId=${schoolNew.id}">
+                                        ${schoolNew.title?.length() > 10 ? schoolNew.title[0..10] : schoolNew.title}
+                                    </a>
+                                </strong></p>
+                        #{/if}
+                        #{if schoolNew_index % 3 != 1 && schoolNew_index != 1}
+                                <p>
+                                    <a href="${play.configuration['schoolsite.domain']}/SchoolNews/pshow?newsId=${schoolNew.id}">
+                                        ${schoolNew.title?.length() > 10 ? schoolNew.title[0..10] : schoolNew.title}
+                                    </a>
+                                </p>
+                        #{/if}
+                        #{if schoolNew_index % 3 == 0}
+                            </div>
+                        </li>
+                        #{/if}
+                #{/list}
+            </ul>
+        </div>
+    #{/if}
+
+</div>
+

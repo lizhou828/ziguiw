@@ -1,0 +1,85 @@
+         <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/base.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/spacehome.css'}">
+    <script src="@{'/public/javascripts/jquery-1.7.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/image.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body class="w_home_body">
+    <div class=" w_home_toolbar">
+        <div class="tit x_head w_home_toolbar_title">
+            <a target="_blank" title="首   页" href="${play.configuration["portal.domain"]}">首   页</a>
+            <a target="_blank" title="教育在线" href="${play.configuration["portal.domain"]}/newses/index">教育在线</a>
+            <a target="_blank" title="教育知识" href="${play.configuration["portal.domain"]}/knowledges/index">教育知识</a>
+            <a target="_blank" title="互动社区" href="${play.configuration['portal.domain']}/boards/index">互动社区</a>
+            <a target="_blank" title="我的小家" href="${play.configuration['portal.domain']}/myhomes/index">我的小家</a>
+        </div>
+        <div id="loginbar" class="subNav">欢迎你来到子贵,
+            #{if !username}
+                <a href="/login">登录</a>
+                <a href="${play.configuration['portal.domain']}/UserBases/registerUI">注册</a>
+                <script src="@{'/public/javascripts/user.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+            #{/if}
+        </div>
+    </div>
+    <div class="w_home_header">
+        <div class="w_home_treenav">
+            <h1>${userBase.nickName}的个人空间</h1>
+            <div class="bloglink">
+                <br>欢迎光临我的小家
+            </div>
+        </div>
+        <ul class="w_home_nav">
+            <li class="active new"><a href="/MyHomes/list?userId=${userBase.id}"><span>小家主页</span></a></li>
+            <li><a href="/UserDiarys/list?userId=${userBase.id}"><span>日记</span></a></li>
+            <li><a href="/user/album_list.action?hostUserName=lala"><span>相册</span></a></li>
+            <li><a href="/UserMoods/list?userId=${userBase.id}"><span>心情</span></a></li>
+            <li><a href="/UserMessages/list?userId=${userBase.id}"><span>留言板</span></a></li>
+            <li><a href="/user/forum_list.jsp?hostUserName=lala"><span>帖子</span></a></li>
+            <li><a href="/user/getMyFriend.action?hostUserName=lala"><span>好友</span></a></li>
+            <li><a href="/user/point_history.jsp"><span>积分明细</span></a></li>
+
+            <li><a href="/user/mail.jsp?kind=1"><span>站内信</span></a></li>
+
+
+            <li><a href="/user/play_list.jsp?hostUserName=lala"><span>小游戏</span></a></li>
+
+        </ul>
+    </div>
+    #{doLayout /}
+    <div class="p_all">
+        <div class="p_flink">
+            <p>
+                <a href="/HelpCenters/aboutus" target="_blank">关于我们</a>|
+                <a href="/HelpCenters/contract" target="_blank">服务协议</a>|
+                <a href="/HelpCenters/service" target="_blank">客服中心</a>|
+                <a href="/HelpCenters/feedback" target="_blank">意见反馈</a>|
+                <a href="/HelpCenters/recruit" target="_blank">网站招聘</a>|
+                <a href="/HelpCenters/map" target="_blank">网站地图</a>|
+                <a href="/HelpCenters/contact" target="_blank">联系我们</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/index.jsp" target="_blank">数字校园云服务展会专题</a>|
+                <a href="http://dsis.ziguiw.com/topic/cloud/footmark_two.jsp" target="_blank">轨迹查询</a>|
+                <a href="/HelpCenters/copyright" target="_blank">版权所有</a>|
+                <a href="/HelpCenters/helpcenter" target="_blank">帮助中心</a>
+            </p>
+        </div>
+
+        <div class="p_logo">
+            <p>
+                Copyright  &copy;  2012 <a href="http://www.ziguiw.com">ziguiw.com</a> All Rights Reserved <a href="http://www.miibeian.gov.cn/">湘ICP备09002922号-3</a>
+            </p>
+            <p>
+                经营许可证编号：湘 B2-20120065 客服邮箱：<a href="mailto:kf@ziguiw.com">kf@ziguiw.com</a>
+                <!-- WPA Button Begin -->
+                <script type="text/javascript" src="http://static.b.qq.com/account/bizqq/js/wpa.js?wty=1&type=2&kfuin=4009952116&ws=www.ziguiw.com&btn1=%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8DQQ&aty=0&a=&key=Z3%076%036Rn%00%3DS0%013Q9U4Sa%0F6Q%3FTg%02lR4%06a%0Fc%044VjQb"></script>
+                <!-- WPA Button END -->
+            </p>
+            <img src="/public/images/logo.jpg" />
+        </div>
+    </div>
+</body>
+</html>

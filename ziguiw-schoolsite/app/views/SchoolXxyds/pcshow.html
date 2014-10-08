@@ -1,0 +1,145 @@
+#{extends 'classmain.html' /}
+#{set title: schoolXxyd.title + "|" + school?.name + " - " + schoolClass?.name + " -学习园地"/}
+
+<div class="middle center pt10" xmlns="http://www.w3.org/1999/html">
+
+
+    <div class="de_news_left">
+        <div class="position">
+        <p>您的位置：#{a @SchoolClazzs.pshow().add("xxId",xxId).add("classId",classId)}班级主页#{/a}  &gt;
+        #{if type == com.arj.ziguiw.common.SchoolXxydType.COMPOSITION}
+            #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.COMPOSITION)}优秀作文#{/a}  &gt; 优秀作文详细页</p>
+        #{/if}
+        #{if type == com.arj.ziguiw.common.SchoolXxydType.STRATEGY}
+            #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STRATEGY)}学习小攻略#{/a}  &gt; 攻略详细页</p>
+        #{/if}
+        #{if type == com.arj.ziguiw.common.SchoolXxydType.ANSWER}
+            #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.ANSWER)}重点难点解答#{/a}  &gt; 重点难点解答详细页</p>
+        #{/if}
+        #{if type == com.arj.ziguiw.common.SchoolXxydType.STUDY}
+            #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STUDY)}在线学习#{/a}  &gt; 在线学习详细页</p>
+        #{/if}
+        #{if type == com.arj.ziguiw.common.SchoolXxydType.RESOURCE}
+            #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.RESOURCE)}教育资源库#{/a}  &gt; 教育资源库详细页</p>
+        #{/if}
+        </div>
+
+        <h1 class="fyahei">${schoolXxyd.title}</h1>
+        <p class="news_tip fb"><span>时间：${schoolXxyd.createTime.format("yyyy-MM-dd")}</span>
+            &nbsp;  <span>编辑： ${schoolXxyd.user?.nickName}</span>  &nbsp;  <span>浏览次数：${schoolXxyd.visitCount}</span></p>
+        </p>
+        <div class="newscots">
+            <p>&nbsp;</p>
+            <p>
+        　       ${schoolXxyd.content.raw()}
+                 #{if schoolXxyd.videoUrl != null}
+                     <div style="text-align: center">
+                         <script src="/public/flashplayer/flexpaper_flash.js"></script>
+                         <script src="/public/flashplayer/AC_RunActiveContent.js"></script>
+                         <script language="javascript">
+                             if (AC_FL_RunContent == 0) {
+                                 alert("This page requires AC_RunActiveContent.js.");
+                             } else {
+                                 AC_FL_RunContent(
+                                         'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
+                                         'width', '465',
+                                         'height', '295',
+                                         'src', '/public/flashplayer/jcplayer',
+                                         'quality', 'high',
+                                         'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+                                         'align', 'middle',
+                                         'play', 'true',
+                                         'loop', 'true',
+                                         'scale', 'noScale',
+                                         'wmode', 'window',
+                                         'devicefont', 'false',
+                                         'id', 'jcplayer',
+                                         'bgcolor', '#ffffff',
+                                         'name', 'jcplayer',
+                                         'menu', 'true',
+                                         'allowFullScreen', 'true',
+                                         'allowScriptAccess','sameDomain',
+                                         'FlashVars', 'videoURL=${ctx}/${schoolXxyd.videoUrl}&autoPlay=false&backgroundColor1=0x333333&backgroundColor2=0x222222',
+                                         'movie', '/public/flashplayer/jcplayer',
+                                         'salign','TL'
+                                 );
+                             }
+                         </script>
+                         <noscript>
+                             <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="465" height="295" id="jcplayer" align="TL">
+                                 <param name="allowScriptAccess" value="sameDomain" />
+                                 <param name="FlashVars" value="videoURL=${ctx}/${schoolXxyd.videoUrl}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222"/>
+                                 <param name="allowFullScreen" value="true" />
+                                 <param name="salign" value="TL" />
+                                 <param name="scale" value="noScale" />
+                                 <param name="movie" value="/public/flashplayer/jcplayer.swf" />
+                                 <param name="quality" value="high" />
+                                 <param name="bgcolor" value="#ffffff" />
+                                 <embed src="/public/flashplayer/jcplayer.swf" FlashVars="videoURL=${ctx}/${schoolXxyd.videoUrl}&autoPlay=true&backgroundColor1=0x333333&backgroundColor2=0x222222" quality="high" bgcolor="#ffffff" width="465" height="295" name="jcplayer" align="middle" salign="TL" scale="noScale" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                             </object>
+                         </noscript>
+                     </div>
+                 #{/if}
+                 </p>
+        </div>
+    </div>
+    <div class="de_news_right">
+        <div class="news_menu">
+            <div class="news_tit">
+                学习园地
+            </div>
+            <div class="news_classify">
+                <ul>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.COMPOSITION}id="on"#{/if}>
+                    #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.COMPOSITION)}
+                        优秀作文展示
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.STRATEGY}id="on"#{/if}>
+                    #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STRATEGY)}
+                        学习小攻略
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.ANSWER}id="on"#{/if}>
+                    #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.ANSWER)}
+                        重点难点解答
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.STUDY}id="on"#{/if}>
+                    #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.STUDY)}
+                        在线学习
+                    #{/a}
+                    </li>
+                    <li #{if type == com.arj.ziguiw.common.SchoolXxydType.RESOURCE}id="on"#{/if}>
+                    #{a @SchoolXxyds.pclist().add("xxId", xxId).add("classId",classId).add("type",com.arj.ziguiw.common.SchoolXxydType.RESOURCE)}
+                        教育资源库
+                    #{/a}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="class_recommend mt10">
+            <div class="study_title">
+                <div class="c_study_left">班级花絮</div>
+                <div class="dy_more">
+                    #{a @ClassPhotos.index().add("xxId",xxId).add("classId",classId)}
+                        更多&gt;&gt;
+                    #{/a}
+                </div>
+            </div>
+            <div class="recommend_con">
+                <ul>
+                #{list classPhotos,as:'photos'}
+                    <li>
+                        #{a @ClassPhotos.pshow(photos.id).add("xxId",xxId).add("classId",classId)}
+                            <img src="${photos.url ==null ? photos.url : ctx + "/" + com.arj.ziguiw.common.ImageSize.getImage(photos.url,com.arj.ziguiw.common.ImageSize.CZX)}" height="70" width="95"/>
+                        #{/a}
+                    </li>
+                #{/list}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

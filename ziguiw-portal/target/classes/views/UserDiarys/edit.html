@@ -1,0 +1,42 @@
+#{extends 'homemain.html'/}
+#{set 'title'}
+我的空间-修改日志
+#{/set}
+<!--main_right B-->
+<div class="sp_main_right">
+    <div class="bobti">
+        <div class="diary_tit">修改日志</div>
+    </div>
+    <div class="diary_write">
+        <form enctype="multipart/form-data" name="form" action="/UserDiarys/save" method="post">
+            <div class="red">
+            ${flash.error}
+            </div>
+            <ul>
+                <li>
+                    <label>日志标题：</label>
+                    <input type="text" class="inp_txt" name="title" value="${userDiary.title}">
+                </li>
+                <li>
+                    <label>描述:</label>
+                    <input type="text" class="inp_txt" name="description" value="${userDiary.description}">
+                </li>
+                <li>
+                    <label>日志正文：</label>
+                    <!-- edit article B-->
+                    <div class="art_zw">
+                    #{editor id:"object_content", name:"content" ,value:userDiary.text/}
+                    </div>
+                    <!-- edit article E-->
+                </li>
+                <input type="hidden" value="${userDiary.id}" name="userDiaryId">
+                <li>
+                    <input type="submit" class="diary_btn" value="发表">
+                </li>
+
+            </ul>
+        </form>
+    </div>
+
+</div>
+<!--main_right E-->

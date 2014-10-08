@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>父亲节活动微信页</title>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/wx.css'}">
+    <script src="@{'/public/javascripts/easydialog.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/easydialog.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link href="@{'public/stylesheets/easydialog.css'}" type="text/css" rel="stylesheet" />
+
+#{if flag == -1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '上传失败，请尽量把信息填写完整！',
+                    yesFn : btnFn,
+                    noFn : true
+                }
+            });
+        };
+
+    </script>
+#{/if}
+
+#{if flag == 1}
+    <script type="text/javascript">
+        var btnFn = function(){
+            return true;
+        };
+
+        window.onload = function(){
+            easyDialog.open({
+                container : {
+                    header : '父亲节专题',
+                    content : '感谢您的参与，你的祝福我们将于6月16日父亲节当天送达。亲，记得多陪陪爸爸。父亲节' +
+                            '(6月16日)刚好是星期天，不如推掉朋友、女友/男友的聚会、约会，回家陪陪爸爸喝喝茶聊聊天吧！',
+                    yesFn : btnFn,
+                    noFn : true
+                }
+            });
+        };
+
+    </script>
+#{/if}
+</head>
+
+<body>
+<div class="wx">
+    <form enctype="multipart/form-data" name="form" action="/FatherMessages/mUpload" method="post">
+        <div class="wx_logo"><img src="@{'public/images/logo_03.png'}"/></div>
+        <div class="wx_kk">
+            <div class="wx_bt">活动二：爸爸，我想对您说</div>
+            <div class="wx_nr">微信用户：${userName}<br /><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align="right" valign="top">短信接收号码：<br />
+                        （父亲手机号）</td>
+                    <td valign="top">
+                        <input name="mobile" type="text" id="textfield" size="15" value="${mobile}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">短信内容：</td>
+                    <td>
+                        <label>
+                            <textarea name="content" id="textarea" cols="15" rows="5" value="${content}">*140字以内</textarea>
+                        </label></td>
+                </tr>
+                <tr>
+                    <td align="right">儿子/女儿：</td>
+                    <td>&nbsp;<input name="appellation" type="text" id="textfield3" size="15" value="${appellation}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">署名：</td>
+                    <td>&nbsp;<input name="signature" type="text" id="textfield4" size="15" value="${signature}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">有效联系方式:</td>
+                    <td>&nbsp;<input name="contact" type="text" id="textfield5" size="15" value="${contact}"/>&nbsp;*</td>
+                </tr>
+                <tr>
+                    <td align="right">常用邮箱</td>
+                    <td>&nbsp;<input name="email" type="text" id="textfield2" size="15" value="${email}"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><span class="zi_h1"><strong>你的祝福我们将于6月16日父亲节当天送达!:</strong></span><strong>&nbsp;</strong></td>
+                </tr>
+            </table>
+                <div class="wx_an"><input type="submit" value="提交" style="font-size: 28px"></div>
+                      <input type="hidden" name="userName" value="${userName}">
+                <div class="wx_bz1">亲,记得多陪陪爸爸,父亲节(6月16日）刚好
+                    是星期天,不如推掉朋友、女友/男友的聚会、
+                    约会,回家陪爸爸喝喝茶聊聊天吧！</div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

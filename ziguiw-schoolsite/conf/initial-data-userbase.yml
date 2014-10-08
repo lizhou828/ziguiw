@@ -1,0 +1,32 @@
+# Test data
+
+UserBase(a):
+    nickName:       430181
+    emain:         liz@952116.com
+    displayName:     李州
+    photo:          public/images/photo.gif
+    foreignKey:   1
+    type: 1
+
+UserBase(b):
+    nickName:       lmj
+    emain:         lmj@952116.com
+    displayName:     刘盟杰
+    photo:          public/images/photo.gif
+    foreignKey:   2
+
+UserBase(c):
+    nickName:      ljy
+    emain:         ljy@952116.com
+    displayName:     刘建于
+    photo:          public/images/photo.gif
+
+UserBase(d):
+    nickName:       yq
+    emain:         yq@952116.com
+    displayName:     叶强
+    photo:          public/images/photo.gif
+
+
+
+

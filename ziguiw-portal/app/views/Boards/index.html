@@ -1,0 +1,275 @@
+#{extends 'main.html'/}
+#{set 'title'}
+互动社区
+#{/set}
+<div class="l mod01 w-295">
+    <div class="lunbo pr lunbo_bbs sub_box_3">
+        <div id="p-select" class="sub_nav_3">
+            <div class="sub_no" id="bd1lfsj">
+                <ul>
+                    <li class="show">1</li><li class="">2</li><li class="">3</li><li class="">4</li><li class="">5</li>
+                </ul>
+            </div>
+        </div>
+        <div id="bd1lfimg_3">
+            <div>
+                <dl class="show"></dl>
+                #{list community_index_hd,as : 'recommend'}
+                    <dl class="">
+                        <dt>
+                            <a href="/Forums/show?id=${recommend.objectId}">
+                                <img style="width:300px;height:230px" src="${ctx}/${recommend.url}"/>
+                            </a>
+                        </dt>
+                        <dd>
+                            <h4 class="fyahei">
+                                <a href="/Forums/show?id=${recommend.objectId}">${recommend.title}</a>
+                            </h4>
+                        </dd>
+                        <dd class="bg_lunbo_3"></dd>
+                    </dl>
+                #{/list}
+            </div>
+        </div>
+
+        <script type="text/javascript">movec_3();</script>
+
+    </div>
+
+    <div class="sq_nav mt10">
+        <h2 class="sq_nav_h2"></h2>
+        <ul class="newList02 red_f63">
+            #{list map,as : "map"}
+                <li>
+                    <a target="_blank" title="" href="/Boards/list?parentBoardId=${map.key.id}" class="fb red_f63">${map.key.boardName}</a> -
+                    #{list map.value,as :'board'}
+                        <a target="_blank" title="" href="/Forums/list?boardId=${board.id}" class="m-l4">${board.boardName}</a>
+                    #{/list}
+                </li>
+            #{/list}
+        </ul>
+    </div>
+</div>
+
+<div class="r w-650 box09">
+<div class="box09_hd sq_dting">
+    <script language='javascript'>
+        var temp = "tabid2";
+        var temptabnav = "tab2";
+        function changeTab(n){
+            var tabnav = "tab"+n;
+            var tabid = "tabid"+n;
+            if(temp != tabid){
+                clearDislay(temp,temptabnav);
+                temp =tabid;
+                temptabnav = tabnav;
+            }
+            document.getElementById(tabid).style.display="block";
+            document.getElementById(tabnav).setAttribute('class','on');
+        };
+        function clearDislay(tab,tabnav){
+            var clearTabid = tab;
+            var clearTabnav = tabnav;
+            document.getElementById(clearTabid).style.display = "none";
+            document.getElementById(clearTabnav).removeAttribute('class');
+        }
+    </script>
+    <h2>社区大厅</h2>
+    <div class="pubMore07">
+        <a id="tab2" title="同龄圈" href="/Boards/list?parentBoardId=2" class="on" onmouseover='changeTab(2)'>同龄圈</a>
+
+        <a id="tab3" title="同城圈" href="/Boards/list?parentBoardId=3" onmouseover='changeTab(3)'>同城圈</a>
+
+        <a id="tab4" title="学习交流" href="/Boards/list?parentBoardId=4" onmouseover='changeTab(4)'>学习交流</a>
+
+        <a id="tab5" title="专家问答" href="/Boards/list?parentBoardId=5" onmouseover='changeTab(5)'>专家问答</a>
+
+    </div>
+</div>
+<div class="box09_bd" id='tabid2' >
+    <ul class="newList03">
+        #{list community_index_sqtonglingquan,as : 'recommend'}
+            <li>
+                <span>
+                    【<a href="/Forums/list?boardId=${recommend.moduleId}" target="_blank">${recommend.moduleName}</a>】
+                </span>
+                <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+            </li>
+        #{/list}
+    </ul>
+</div>
+
+<div class="box09_bd" id='tabid3' style='display:none;'>
+    <ul class="newList03">
+        #{list community_index_sqtongchengquan,as : 'recommend'}
+            <li>
+                    <span>
+                        【<a href="/Forums/list?boardId=${recommend.moduleId}" target="_blank">${recommend.moduleName}</a>】
+                    </span>
+                <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+            </li>
+        #{/list}
+    </ul>
+</div>
+
+<div class="box09_bd" id='tabid4' style='display:none;'>
+    <ul class="newList03">
+        #{list community_index_sqxuexijiaoliu,as : 'recommend'}
+            <li>
+                        <span>
+                            【<a href="/Forums/list?boardId=${recommend.moduleId}" target="_blank">${recommend.moduleName}</a>】
+                        </span>
+                <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+            </li>
+        #{/list}
+    </ul>
+</div>
+
+<div class="box09_bd" id='tabid5' style='display:none;'>
+    <ul class="newList03">
+        #{list community_index_sqzhuanjiawenda,as : 'recommend'}
+            <li>
+                            <span>
+                                【<a href="/Forums/list?boardId=${recommend.moduleId}" target="_blank">${recommend.moduleName}</a>】
+                            </span>
+                <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+            </li>
+        #{/list}
+    </ul>
+</div>
+</div>
+<!-- datingend -->
+
+<div class="ad01">
+    <a  title=""><img src="/public/images/adv03.jpg" alt=""/></a>
+</div>
+<div class="clearfix">
+<div class="l w-690">
+    <div class="l w-340">
+        <div class="h3titc">
+            <h3 class="pr fyahei">同龄圈</h3>
+            <ul>
+                <li class="bordno"><a href="/Forums/list?boardId=2">进入圈子</a></li>
+            </ul>
+        </div>
+        <div class="borda bbs_col">
+            <ul class="newList03">
+                #{list community_index_tonglingquan,as : 'recommend'}
+                    <li>
+                        <span>
+                            [<a target="_blank" title="" href="/Forums/list?boardId=${recommend.moduleId}">${recommend.moduleName}</a>]
+                        </span>
+                        <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+
+    <div class="r w-340">
+        <div class="h3titc">
+            <h3 class="pr fyahei">同城圈</h3>
+            <ul>
+                <li class="bordno"><a href="/Forums/list?boardId=3">进入圈子</a></li>
+            </ul>
+        </div>
+        <div class="borda bbs_col">
+            <ul class="newList03">
+                #{list community_index_tongchengquan,as : 'recommend'}
+                    <li>
+                            <span>
+                                [<a target="_blank" title="" href="/Forums/list?boardId=${recommend.moduleId}">${recommend.moduleName}</a>]
+                            </span>
+                        <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+
+    </div>
+    <div class="ad01 mt10 l">
+        <a  title=""><img src="/public/images/community_ad2.jpg" alt=""/></a>
+    </div>
+    <div class="l w-340">
+        <div class="h3titc">
+            <h3 class="pr fyahei">学习交流</h3>
+            <ul>
+                <li class="bordno"><a href="/Forums/list?boardId=4">进入圈子</a></li>
+            </ul>
+        </div>
+        <div class="borda bbs_col">
+            <ul class="newList03">
+                #{list community_index_xuexijiaoliu,as : 'recommend'}
+                    <li>
+                                <span>
+                                    [<a target="_blank" title="" href="/Forums/list?boardId=${recommend.moduleId}">${recommend.moduleName}</a>]
+                                </span>
+                        <a href="/Forums/show?id=${recommend.objectId}" target="_blank">${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}</a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="r w-340">
+        <div class="h3titc">
+            <h3 class="pr fyahei">专家问答</h3>
+            <ul>
+                <li class="bordno"><a href="/Forums/list?boardId=5">进入圈子</a></li>
+            </ul>
+        </div>
+        <div class="borda bbs_col">
+            <ul class="newList03">
+                #{list community_index_zhuanjiawenda,as : 'recommend'}
+                    <li>
+                        <span>
+                            [<a target="_blank" title="" href="/Forums/list?boardId=${recommend.moduleId}">${recommend.moduleName}</a>]
+                        </span>
+                        <a href="/Forums/show?id=${recommend.objectId}" target="_blank">
+                             ${recommend.title.length()>10? recommend.title[0..9] + "..." : recommend.title}
+                        </a>
+                    </li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="r  w-270">
+    <div class="h3titc2">
+        <h3 class="fyahei">最新话题</h3>
+    </div>
+    <div class="borda09">
+        <ul class="newList09">
+            #{list newForums,as : 'forum'}
+                <li>
+                    <span>
+                        [<a target="_blank" title="" href="/Forums/list?boardId=${forum.board.id}">${forum.board.boardName}</a>]
+                    </span>
+                    <a href="/Forums/show?id=${forum.id}" target="_blank">
+                         ${forum.title.length()>10? forum.title[0..9] + "..." : forum.title}
+                    </a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+
+
+    <div class="ad01 mt10">
+        <a href="#" title=""><img src="/public/images/community_ad.jpg" alt=""/></a>
+    </div>
+    <div class="h3titc2">
+        <h3 class="fyahei">话题排行</h3>
+    </div>
+    <div class="ph borda09">
+        <ul class="">
+            #{list hotForums,as : 'forum'}
+                <li>
+                    <a href="/Forums/show?id=${forum.id}" target="_blank">${forum.title}</a>
+                </li>
+            #{/list}
+        </ul>
+    </div>
+
+</div>
+</div>
