@@ -1,0 +1,92 @@
+%{
+    // Eval fields tags
+    def fieldsHandler = [:]
+    if(_body) {
+        _body.setProperty('fieldsHandler', fieldsHandler);
+}%
+        #{doBody as:'skip' /}
+%{
+    }
+}%
+
+<table>
+    <thead>
+        <tr>
+        %{ if(_fields) { }%
+            %{ 
+            	_fields.eachWithIndex() { itf, idx ->
+            		def displayField;
+                    _displayNames?.eachWithIndex() { fl, flidx->
+                        if (idx == flidx) {
+                            displayField = fl;
+                        }
+                     }
+                    if (!displayField && _caller.type.getField(itf)) displayField = _caller.type.getField(itf).displayName;
+                    if (!displayField) displayField = itf;
+            }%
+            <th>
+                %{ if(!_sort || _sort.contains(itf)) { }%
+                <a class="${_caller.orderBy == itf ? (_caller.order == 'DESC' ? 'crudSortedDesc' : 'crudSortedAsc') : ''}" href="@{list().remove('page').add('search', params.search).add('orderBy', itf).add('order', (_caller.orderBy == itf && _caller.order == 'ASC' ? 'DESC' : 'ASC'))}">
+                    &{displayField}
+                </a>
+                %{ } else { }%
+                    &{displayField}
+                %{ } }%
+            </th>
+            %{ } }%
+        %{ } else { }%
+            <th>
+                <a class="${_caller.order == 'DESC' ? 'crudSortedDesc' : 'crudSortedAsc'}" href="@{list().remove('page').add('search', params.search).add('order', (_caller.order == 'DESC' ? 'ASC' : 'DESC'))}">
+                    &{_caller.type.displayName}
+                </a>
+            </th>
+        %{ } }%
+        </tr>
+    </thead>
+    %{ _caller.objects.eachWithIndex() { object, k -> }%
+    <tr class="${k % 2 ? 'even' : 'odd'}">
+        %{ if(_fields) { }%
+            %{ _fields.eachWithIndex() { field, i -> }%
+            <td>
+                %{ if(fieldsHandler[field]) { }%
+                    %{
+                        def handler = fieldsHandler[field];
+                        handler.setProperty('object', object);
+                    }%
+                    #{doBody body:handler /}
+                    %{
+                        handler.setProperty('object', null);
+                    }%
+                %{ } else { }%
+                    %{ if(i == 0) { }%
+                        <a href="@{show(object._key())}">${object[field]?.toString()?.escape()?.raw() ?: '(no value)'}</a>
+                    %{ } else { }%
+                        %{ if(_caller.type.getField(field).type == 'file') { }%
+                            %{ if(object[field]) { }%
+                                <a class="currentAttachment" href="@{attachment(object.id, field)}">${object[field].filename} (${object[field].get().size().formatSize()})</a>
+                             %{ } else { }%
+                                
+                             %{ } }%
+                        %{ } else { }%
+                            ${object[field]?.escape()?.raw()}
+                        %{ } }%
+                    %{ } }%
+                %{ } }%
+            </td>
+            %{ } }%
+        %{ } else { }%
+            %{ if(fieldsHandler['default']) { }%
+                %{
+                    def handler = fieldsHandler['default'];
+                    handler.setProperty('object', object);
+                }%
+                #{doBody body:handler /}
+            %{ } else { }%
+                <td>
+                    <a href="@{show(object._key())}">${object.toString()?.escape()?.raw() ?: '(no value)'}</a>
+                </td>
+            %{ } }%
+        %{ } }%
+    </tr>
+    %{ } }%
+</table>
